@@ -1,3 +1,5 @@
+import CTASection from "@/src/client/page/components/CTASection";
+import Footer from "@/src/client/page/components/Footer";
 import Hero from "@/src/client/page/components/Hero";
 import IntegrationSection from "@/src/client/page/components/IntegrationSection";
 import Navbar from "@/src/client/page/components/Navbar";
@@ -11,6 +13,8 @@ export default function HomePage() {
       <Hero />
       <IntegrationSection />
       <UseCases />
+      <CTASection />
+      <Footer />
     </>
   );
 }

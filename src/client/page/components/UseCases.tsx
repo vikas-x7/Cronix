@@ -35,37 +35,30 @@ const UseCases = () => {
       <div className="container mx-auto max-w-6xl">
         <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-2xl">
-            <span className="inline-block rounded-full bg-gray-100 px-4 py-1 text-xs font-medium text-gray-600 mb-4">
+            <span className="inline-block  bg-gray-100 px-4 py-1 text-xs  text-black mb-4">
               Use cases
             </span>
-            <h2 className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">
+            <h2 className="text-[20px] font-[400] -tracking-[3px]  text-black md:text-[42px] leading-11">
               Imagine the AI you can <br /> build for your business
             </h2>
-            <p className="mt-6 text-lg text-gray-500">
+            <p className="mt-6 ">
               From creative tools to customer support, your AI chat can be
               trained, branded, and monetized for countless scenarios.
             </p>
           </div>
-          <button className="rounded-full bg-gray-100 px-6 py-2.5 text-sm font-semibold text-gray-900 transition-hover hover:bg-gray-200">
-            Explore more
-          </button>
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {cases.map((item, index) => (
             <div
               key={index}
-              className="group flex flex-col rounded-2xl bg-[#F6F6F6] p-8 transition-all hover:bg-[#efefef]"
+              className="group flex flex-col  bg-[#F6F6F6] p-8 transition-all hover:bg-[#efefef]"
             >
               <div className="mb-12 flex h-10 w-10 items-center justify-center rounded-full bg-transparent text-gray-900">
                 {item.icon}
               </div>
-              <h3 className="mb-4 text-xl font-bold leading-snug text-gray-900">
-                {item.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-gray-600">
-                {item.description}
-              </p>
+              <h3 className="mb-4 text-xl  text-black">{item.title}</h3>
+              <p className="text-sm  text-black">{item.description}</p>
             </div>
           ))}
         </div>

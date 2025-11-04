@@ -60,7 +60,7 @@ const Navbar = () => {
           {/* Right Side Actions */}
           <div className="hidden items-center gap-6 lg:flex">
             <Link
-              href="#"
+              href="/login"
               className=" bg-black px-5 py-1.5 text-sm font-medium text-white"
             >
               Get started

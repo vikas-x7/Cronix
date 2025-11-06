@@ -1,13 +1,13 @@
-import React from 'react';
+
 import Sidebar from './Sidebar';
-import '../styles/dashboard.css';
+
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="dashboard-layout">
+    <div className="flex bg-[#0F0F0F] text-white font-inter">
       <Sidebar />
-      <main className="dashboard-main">
-        <div className="dashboard-content">
+      <main  className='w-full'>
+        <div>
           {children}
         </div>
       </main>

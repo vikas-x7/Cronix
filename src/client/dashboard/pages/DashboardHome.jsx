@@ -1,41 +1,68 @@
-export default function DashboardHome() {
+import React from 'react';
+import { HiOutlineCode, HiOutlineBookOpen, HiOutlineCube, HiOutlineArrowRight } from "react-icons/hi";
+import { FiLock } from "react-icons/fi";
+import { Execution } from "./Execution"
+
+const OverviewSection = () => {
+  const quickActions = [
+    {
+      title: "Import API",
+      desc: "Host your OpenAPI Documents",
+      icon: <HiOutlineCode className="text-green-500/70" />,
+      link: "#",
+    },
+    {
+      title: "Create Documentation",
+      desc: "User Guides and API References",
+      icon: <HiOutlineBookOpen className="text-[#00B6F2]" />,
+      link: "#",
+    },
+    {
+      title: "Create SDKs",
+      desc: "Typescript, Java, Go, etc...",
+      icon: <HiOutlineCube className="text-purple-500" />,
+      link: "#",
+    },
+    {
+      title: "Create SDKs",
+      desc: "Typescript, Java, Go, etc...",
+      icon: <HiOutlineCube className="text-purple-500" />,
+      link: "#",
+    },
+  ];
+
   return (
-    <div className="dashboard-home">
-      <h1>Dashboard Home</h1>
-      <div className="dashboard-grid">
-        <div className="stat-card">
-          <div className="stat-icon">📊</div>
-          <div className="stat-content">
-            <h3>Total Users</h3>
-            <p className="stat-value">1,234</p>
-          </div>
+    <div className="min-h-screen  px-17 py-8 ">
+      <div className="">
+        <div className='flex items-center justify-between'>
+        <h1 className="mb-8 text-[20px] font-[500] -tracking-[30]  text-[#e7e7e7]">Overview</h1>
+        <button className='bg-white text-black px-3 py-1 text-[13px]'>create new cronjob</button>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon">💰</div>
-          <div className="stat-content">
-            <h3>Revenue</h3>
-            <p className="stat-value">$45,678</p>
-          </div>
+
+        
+        <div className="flex gap-3 justify-between">
+          {quickActions.map((action, i) => (
+            <div
+              key={i}
+              className="group relative cursor-pointer  border border-[#2b2b2b] p-3 transition-all  rounded-[4px] hover:bg-[#161616] w-67 "
+            >
+              <div className="mb-4 text-2xl ">{action.icon}</div>
+              <h3 className="text-[14px] font-[500] text-[#e7e7e7]">{action.title}</h3>
+              <p className="mt-1 text-[14px] font-[400]">{action.desc}</p>
+              <HiOutlineArrowRight className="absolute top-5 right-5  text-[#2b2b2b]" />
+            </div>
+          ))}
         </div>
-        <div className="stat-card">
-          <div className="stat-icon">📈</div>
-          <div className="stat-content">
-            <h3>Growth</h3>
-            <p className="stat-value">+12.5%</p>
-          </div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon">✅</div>
-          <div className="stat-content">
-            <h3>Tasks Complete</h3>
-            <p className="stat-value">89%</p>
-          </div>
-        </div>
-      </div>
-      <div className="dashboard-section">
-        <h2>Recent Activity</h2>
-        <p>Your dashboard is ready to use. Start exploring your data!</p>
+
+      
+
+ 
+        
+ <Execution />
+    
       </div>
     </div>
   );
-}
+};
+
+export default OverviewSection;

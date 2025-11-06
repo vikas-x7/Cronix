@@ -1,4 +1,4 @@
-import LoginPage from "@/src/client/page/Auth";
+import LoginPage from "@/src/client/markating/Auth";
 import React from "react";
 
 export default function login() {

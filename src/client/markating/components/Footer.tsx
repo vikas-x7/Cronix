@@ -62,7 +62,7 @@ const Footer = () => {
         </div>
 
         <div className="relative mt-10 select-none">
-          <h1 className="text-[5vw] font-bold leading-none tracking-tighter text-black text-center md:text-[22vw] lg:text-[5vw]">
+          <h1 className="text-[5vw] font-bold leading-none tracking-tighter text-black text-start md:text-[40vw] lg:text-[5vw]">
             Cronix
           </h1>
 

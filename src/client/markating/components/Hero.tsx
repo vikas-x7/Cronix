@@ -10,7 +10,7 @@ const Hero = () => {
           </p>
         </div>
 
-        <h1 className="mx-auto mb-6 max-w-4xl text-4xl -tracking-[5px]  md:text-[60px] leading-15">
+        <h1 className="mx-auto mb-6 max-w-4xl text-4xl -tracking-[5px]  md:text-[58px] leading-15">
           Better Way to Run Cron Jobs <br /> for Modern Applications
         </h1>
 

@@ -48,11 +48,11 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="h-screen w-78 border-r border-[#2b2b2b] flex flex-col justify-between">
+    <aside className="h-screen w-[240px] bg-[#FAFAFA] border-r border-[#cfcfcf] flex flex-col justify-between">
       {/* Top Section */}
       <div>
         {/* Logo */}
-        <div className="flex items-center py-3 px-3 border-b border-[#2b2b2b] gap-2">
+        <div className="flex items-center py-3 px-3  gap-2">
           <img
             src="https://i.pinimg.com/736x/e4/0e/00/e40e00f5f4b301901581046001bfbd61.jpg"
             alt=""

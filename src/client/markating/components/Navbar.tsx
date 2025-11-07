@@ -6,12 +6,14 @@ import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { HiMenuAlt3, HiOutlineX } from "react-icons/hi";
 import { FaSlack } from "react-icons/fa";
+import MarqueeSection from "@/src/client/markating/components/MarqueeSection";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-md">
+      <MarqueeSection />
       <div className="container mx-auto px-4 md:px-20">
         <div className="flex h-10 py-7 items-center justify-between">
           <div className="flex items-center gap-8">

@@ -32,7 +32,7 @@ const OverviewSection = () => {
   ];
 
   return (
-    <div className="min-h-screen  px-17 py-8 ">
+    <div className="min-h-screen  px-6 py-4 ">
       <div className="">
         <div className='flex items-center justify-between'>
         <h1 className="mb-8 text-[20px] font-[500] -tracking-[30]  text-[#e7e7e7]">Overview</h1>
@@ -44,7 +44,7 @@ const OverviewSection = () => {
           {quickActions.map((action, i) => (
             <div
               key={i}
-              className="group relative cursor-pointer  border border-[#2b2b2b] p-3 transition-all  rounded-[4px] hover:bg-[#161616] w-67 "
+              className="group relative cursor-pointer  border border-[#2b2b2b] p-3 transition-all  rounded-[4px] hover:bg-[#161616] w-73 "
             >
               <div className="mb-4 text-2xl ">{action.icon}</div>
               <h3 className="text-[14px] font-[500] text-[#e7e7e7]">{action.title}</h3>

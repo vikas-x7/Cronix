@@ -45,7 +45,7 @@ export const Execution = () => {
 
   return (
     <div className="w-full  mt-10">
-      <div className="mx-auto max-w-6xl">
+      <div className="">
         {/* Header Title */}
         <h2 className="my-10 text-[20px]  text-[#e7e7e7]">latest execution</h2>
 

@@ -1,10 +1,23 @@
+import { redirect } from "next/navigation";
 import LoginPage from "@/src/client/markating/Auth";
-import React from "react";
+import { getAuthSession } from "@/src/lib/auth";
 
-export default function login() {
-  return (
-    <div>
-      <LoginPage />
-    </div>
-  );
+type LoginProps = {
+  searchParams?: Promise<{
+    error?: string | string[] | undefined;
+  }>;
+};
+
+export default async function Login({ searchParams }: LoginProps) {
+  const session = await getAuthSession();
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const error = Array.isArray(resolvedSearchParams?.error)
+    ? resolvedSearchParams.error[0]
+    : resolvedSearchParams?.error;
+
+  if (session?.user) {
+    redirect("/dashboard");
+  }
+
+  return <LoginPage error={error} />;
 }

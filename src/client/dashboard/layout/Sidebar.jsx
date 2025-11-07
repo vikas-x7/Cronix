@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 import {
   FiHome,
   FiPlusSquare,
@@ -13,6 +14,10 @@ import {
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const user = session?.user;
+  const userName = user?.name ?? "Signed in user";
+  const userEmail = user?.email ?? "No email available";
 
   const menu = [
     {
@@ -96,20 +101,31 @@ export default function Sidebar() {
       </div>
 
       {/* Bottom Profile */}
-      <div className="border-t border-[#2b2b2b] p-3">
+      <div className="border-t border-[#d8d8d8] p-3">
         <div className="flex items-center gap-3">
-          <img
-            src="https://i.pravatar.cc/40"
-            className="w-8 h-8 rounded-[4px]"
-            alt=""
-          />
-          <div>
-            <p className="text-sm">Vikas Pal</p>
-            <p className="text-xs text-[#8a8a8a]">
-              vikas@email.com
-            </p>
+          {user?.image ? (
+            <img
+              src={user.image}
+              className="w-8 h-8 rounded-[4px] object-cover"
+              alt={userName}
+            />
+          ) : (
+            <div className="flex h-8 w-8 items-center justify-center rounded-[4px] bg-black text-xs text-white">
+              {userName.charAt(0).toUpperCase()}
+            </div>
+          )}
+          <div className="min-w-0">
+            <p className="truncate text-sm text-black">{userName}</p>
+            <p className="truncate text-xs text-[#8a8a8a]">{userEmail}</p>
           </div>
         </div>
+        <button
+          type="button"
+          onClick={() => signOut({ callbackUrl: "/login" })}
+          className="mt-3 w-full border border-[#d8d8d8] px-3 py-2 text-sm text-black transition hover:bg-black hover:text-white"
+        >
+          Sign out
+        </button>
       </div>
     </aside>
   );

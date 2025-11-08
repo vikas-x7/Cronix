@@ -1,9 +1,4 @@
 import React from "react";
-import {
-  HiOutlineLightBulb,
-  HiOutlineScale,
-  HiOutlineSparkles,
-} from "react-icons/hi";
 import { LuBrainCircuit } from "react-icons/lu";
 import { FiDollarSign } from "react-icons/fi";
 import { RiBankLine } from "react-icons/ri";

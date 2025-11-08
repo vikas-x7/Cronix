@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
-import { getAuthSession } from "@/src/lib/auth";
+import Sidebar from "@/client/dashboard/layout/Sidebar";
+import { getAuthSession } from "@/lib/auth";
 
 type DashboardRouteLayoutProps = {
   children: React.ReactNode;
@@ -14,5 +15,14 @@ export default async function DashboardRouteLayout({
     redirect("/login");
   }
 
-  return children;
+  return (
+    <div className="flex bg-white font-inter">
+      <div className="w-75">
+        <Sidebar />
+      </div>
+      <main className="h-screen w-full">
+        <div>{children}</div>
+      </main>
+    </div>
+  );
 }

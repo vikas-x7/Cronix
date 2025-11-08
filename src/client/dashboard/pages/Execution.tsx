@@ -1,13 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  HiOutlineClock,
-  HiDotsVertical,
-  HiChevronLeft,
-  HiChevronRight,
-} from "react-icons/hi";
-import { MdOutlineArrowDropDown } from "react-icons/md";
+import { HiDotsVertical } from "react-icons/hi";
 
 export const Execution = () => {
   const events = [

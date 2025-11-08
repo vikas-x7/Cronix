@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -8,16 +9,16 @@ import { FcGoogle } from "react-icons/fc";
 type ProviderMap = Awaited<ReturnType<typeof getProviders>>;
 
 const authErrors: Record<string, string> = {
-  AccessDenied: "Sign in cancel ho gaya ya access deny hua.",
-  Callback: "OAuth callback complete nahi ho paya. Provider settings check karo.",
+  AccessDenied: "Sign in was cancelled or access was denied.",
+  Callback: "OAuth callback could not be completed. Check provider settings.",
   OAuthAccountNotLinked:
-    "Ye email kisi aur sign-in method se linked hai. Wahi method try karo.",
-  OAuthCallback: "Provider callback fail hua. Client ID/secret aur callback URL check karo.",
-  OAuthCreateAccount:
-    "Account create nahi ho paya. Thodi der baad dobara try karo.",
+    "This email is linked with another sign-in method. Try that method instead.",
+  OAuthCallback:
+    "Provider callback failed. Check client ID, client secret, and callback URL.",
+  OAuthCreateAccount: "Could not create account. Please try again later.",
   Configuration:
-    "Auth providers configure nahi hue. Env variables add karne honge.",
-  Default: "Sign in nahi ho paya. Dobara try karo.",
+    "Auth providers are not configured. Add environment variables.",
+  Default: "Sign in failed. Please try again.",
 };
 
 type LoginPageProps = {
@@ -46,9 +47,8 @@ export default function LoginPage({ error }: LoginPageProps) {
     };
   }, []);
 
-  const errorMessage = error
-    ? authErrors[error] ?? authErrors.Default
-    : null;
+  const errorMessage = error ? (authErrors[error] ?? authErrors.Default) : null;
+
   const providersLoaded = providers !== null;
   const hasConfiguredProviders =
     !!providers && Object.keys(providers).length > 0;
@@ -88,8 +88,8 @@ export default function LoginPage({ error }: LoginPageProps) {
 
           {providersLoaded && !hasConfiguredProviders ? (
             <div className="mb-4 border border-amber-200 bg-amber-50 px-3 py-2 text-left text-xs text-amber-700">
-              Google aur GitHub auth enable karne ke liye `.env` me provider
-              credentials add karo.
+              To enable Google and GitHub authentication, add provider
+              credentials in your `.env` file.
             </div>
           ) : null}
 
@@ -103,7 +103,7 @@ export default function LoginPage({ error }: LoginPageProps) {
               <span className="flex items-center justify-center gap-2">
                 <FcGoogle size={18} />
                 {activeProvider === "google"
-                  ? "Redirecting..."
+                  ? "Continue with Google"
                   : "Continue with Google"}
               </span>
             </button>
@@ -117,7 +117,7 @@ export default function LoginPage({ error }: LoginPageProps) {
               <span className="flex items-center justify-center gap-2">
                 <BiLogoGithub size={18} />
                 {activeProvider === "github"
-                  ? "Redirecting..."
+                  ? "Continue with GitHub"
                   : "Continue with GitHub"}
               </span>
             </button>

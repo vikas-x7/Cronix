@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image"; // Next.js use kar rahe ho toh Image tag best hai
 
 const IntegrationSection = () => {
   // Random Tech Logos via API for demonstration

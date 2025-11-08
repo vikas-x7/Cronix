@@ -1,5 +1,4 @@
-import HomePage from "@/src/client/markating/Home";
-import Image from "next/image";
+import HomePage from "@/client/markating/Home";
 
 export default function Home() {
   return (

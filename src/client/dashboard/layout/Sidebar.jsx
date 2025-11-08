@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { IoAdd } from "react-icons/io5";
 import {
   FiHome,
   FiPlusSquare,
@@ -53,28 +55,30 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="h-screen w-[240px] bg-[#FAFAFA] border-r border-[#cfcfcf] flex flex-col justify-between">
-      {/* Top Section */}
+    <aside className="h-screen bg-[#FAFAFA] border-r border-[#E5E5E5] flex flex-col justify-between">
       <div>
-        {/* Logo */}
-        <div className="flex items-center py-3 px-3  gap-2">
+        <div className="flex items-center px-3 h-15  gap-2">
           <img
             src="https://i.pinimg.com/736x/e4/0e/00/e40e00f5f4b301901581046001bfbd61.jpg"
             alt=""
-            className="w-6 h-6 rounded-[4px]"
+            className="w-8 h-8 rounded-sm"
           />
           <Link href="/">
-            <span className="text-[18px] tracking-tight">Cronix</span>
+            <span className="text-[21px] tracking-tight">Cronix</span>
           </Link>
         </div>
 
-        {/* Navigation */}
         <nav>
+          <div className="flex justify-center items-center px-2 ">
+            <button
+              className="w-full h-8.25 bg-white border border-[#D9D9D9] border-dashed text-[13px] 
+            text-[#5a5959] font-medium flex items-center justify-center gap-1"
+            >
+              <IoAdd size={18} />
+              New cronjob
+            </button>
+          </div>
           <ul className="flex flex-col px-2 py-4">
-            <p className="text-[#797979] text-[13px] px-2 mb-2">
-              Product
-            </p>
-
             {menu.map((item) => {
               const Icon = item.icon;
               const active = pathname === item.href;
@@ -83,11 +87,11 @@ export default function Sidebar() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`flex items-center gap-3 px-3 py-2 text-[14px]  transition
+                    className={`flex items-center gap-2 px-3 py-2 text-[12px] rounded-[3px]  transition
                     ${
                       active
-                        ? "bg-[#1f1f1f] text-white"
-                        : "text-[#bdbdbd] hover:bg-[#1a1a1a] hover:text-white"
+                        ? "bg-[#E5E5E5] text-[#171717]"
+                        : "text-[#171717] hover:bg-[#F5F5F5] hover:text-[#171717]"
                     }`}
                   >
                     <Icon size={16} />
@@ -100,22 +104,21 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      {/* Bottom Profile */}
-      <div className="border-t border-[#d8d8d8] p-3">
+      <div className="border-t border-[#E5E5E5] p-3">
         <div className="flex items-center gap-3">
           {user?.image ? (
             <img
               src={user.image}
-              className="w-8 h-8 rounded-[4px] object-cover"
+              className="w-8 h-8 rounded-sm object-cover"
               alt={userName}
             />
           ) : (
-            <div className="flex h-8 w-8 items-center justify-center rounded-[4px] bg-black text-xs text-white">
+            <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-black text-xs text-white">
               {userName.charAt(0).toUpperCase()}
             </div>
           )}
           <div className="min-w-0">
-            <p className="truncate text-sm text-black">{userName}</p>
+            <p className="truncate text-[14px] text-black">{userName}</p>
             <p className="truncate text-xs text-[#8a8a8a]">{userEmail}</p>
           </div>
         </div>

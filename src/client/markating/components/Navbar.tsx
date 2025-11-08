@@ -3,10 +3,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-import { IoIosArrowDown } from "react-icons/io";
 import { HiMenuAlt3, HiOutlineX } from "react-icons/hi";
 import { FaSlack } from "react-icons/fa";
-import MarqueeSection from "@/src/client/markating/components/MarqueeSection";
+import MarqueeSection from "@/client/markating/components/MarqueeSection";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

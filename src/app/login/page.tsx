@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import LoginPage from "@/src/client/markating/Auth";
-import { getAuthSession } from "@/src/lib/auth";
+import LoginPage from "@/client/markating/Auth";
+import { getAuthSession } from "@/lib/auth";
 
 type LoginProps = {
   searchParams?: Promise<{

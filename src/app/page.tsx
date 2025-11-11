@@ -1,4 +1,4 @@
-import HomePage from "@/client/markating/Home";
+import HomePage from "@/app/(marketing)/Home";
 
 export default function Home() {
   return (

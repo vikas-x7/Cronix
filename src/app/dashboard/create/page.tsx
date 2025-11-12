@@ -1,5 +1,5 @@
-import Createjobs from "@/client/dashboard/pages/Createjobs";
+import CreateJobs from "@/client/dashboard/pages/Createjobs";
 
-export default function Page() {
-  return <Createjobs />;
+export default function CreatePage() {
+  return <CreateJobs />;
 }

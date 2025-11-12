@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Sidebar from "@/client/dashboard/layout/Sidebar";
+import ToastContainer from "@/client/dashboard/components/Toast";
 import { getAuthSession } from "@/lib/auth";
 
 type DashboardRouteLayoutProps = {
@@ -22,6 +23,7 @@ export default async function DashboardRouteLayout({
       </div>
       <main className="h-screen w-full">
         <div>{children}</div>
+        <ToastContainer />
       </main>
     </div>
   );

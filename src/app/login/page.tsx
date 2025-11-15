@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import LoginPage from "@/client/markating/Auth";
+import LoginPage from "@/app/(marketing)/Auth";
 import { getAuthSession } from "@/lib/auth";
 
 type LoginProps = {

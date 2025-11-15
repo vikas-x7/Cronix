@@ -11,7 +11,6 @@ import {
   FiClock,
   FiActivity,
   FiSettings,
-  FiBookOpen,
 } from "react-icons/fi";
 
 export default function Sidebar() {
@@ -38,26 +37,21 @@ export default function Sidebar() {
       icon: FiClock,
     },
     {
-      name: "Status",
-      href: "/dashboard/status",
+      name: "Analytics",
+      href: "/dashboard/analytics",
       icon: FiActivity,
     },
     {
-      name: "Setting",
+      name: "Settings",
       href: "/dashboard/settings",
       icon: FiSettings,
-    },
-    {
-      name: "Documentation",
-      href: "/dashboard/docs",
-      icon: FiBookOpen,
     },
   ];
 
   return (
     <aside className="h-screen bg-[#FAFAFA] border-r border-[#E5E5E5] flex flex-col justify-between">
       <div>
-        <div className="flex items-center px-3 h-15  gap-2">
+        <div className="flex items-center px-3 h-15 gap-2">
           <img
             src="https://i.pinimg.com/736x/e4/0e/00/e40e00f5f4b301901581046001bfbd61.jpg"
             alt=""
@@ -69,30 +63,34 @@ export default function Sidebar() {
         </div>
 
         <nav>
-          <div className="flex justify-center items-center px-2 ">
-            <button
-              className="w-full h-8.25 bg-white border border-[#D9D9D9] border-dashed text-[13px] 
-            text-[#5a5959] font-medium flex items-center justify-center gap-1"
-            >
-              <IoAdd size={18} />
-              New cronjob
-            </button>
+          <div className="flex justify-center items-center px-2">
+            <Link href="/dashboard/create" className="w-full">
+              <button
+                className="w-full h-8.25 bg-white border border-[#D9D9D9] border-dashed text-[13px]
+              text-[#5a5959] font-medium flex items-center justify-center gap-1 hover:border-[#171717] hover:text-[#171717] transition"
+              >
+                <IoAdd size={18} />
+                New cronjob
+              </button>
+            </Link>
           </div>
           <ul className="flex flex-col px-2 py-4">
             {menu.map((item) => {
               const Icon = item.icon;
-              const active = pathname === item.href;
+              const active =
+                item.href === "/dashboard"
+                  ? pathname === "/dashboard"
+                  : pathname.startsWith(item.href);
 
               return (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`flex items-center gap-2 px-3 py-2 text-[12px] rounded-[3px]  transition
-                    ${
-                      active
+                    className={`flex items-center gap-2 px-3 py-2 text-[12px] rounded-[3px] transition
+                    ${active
                         ? "bg-[#E5E5E5] text-[#171717]"
                         : "text-[#171717] hover:bg-[#F5F5F5] hover:text-[#171717]"
-                    }`}
+                      }`}
                   >
                     <Icon size={16} />
                     {item.name}

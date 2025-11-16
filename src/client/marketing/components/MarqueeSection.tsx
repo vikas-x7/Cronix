@@ -2,17 +2,17 @@
 
 const mindMapNodes = [
   {
-    name: "Better Way to Run Cron Jobs for Modern Applications",
+    name: "Automation infrastructure for modern developers",
   },
   {
-    name: "Manage scheduled jobs, automate workflows, trigger APIs, and monitor job runs, logs, and execution history from one powerful dashboard.",
+    name: "Run, monitor, and scale cron jobs with full visibility.",
   },
 ];
 
 export default function MarqueeSection() {
   return (
     <section className="w-full ">
-      <div className="flex bg-[#000000] text-white">
+      <div className="flex bg-[#171717]  text-white">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...mindMapNodes, ...mindMapNodes].map((node, i) => (
             <span

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { CRON_PRESETS } from "@/client/validation/cronjob.schema";
+import { CRON_PRESETS } from "@/client/dashboard/validation/cronjob.schema";
 
 interface CronExpressionInputProps {
     value: string;
@@ -36,8 +36,8 @@ export default function CronExpressionInput({
                         type="button"
                         onClick={() => onChange(preset.value)}
                         className={`border px-2 py-1 text-[10px] transition ${value === preset.value
-                                ? "border-[#171717] bg-[#171717] text-white"
-                                : "border-[#E5E5E5] bg-white text-neutral-500 hover:border-[#C5C5C5]"
+                            ? "border-[#171717] bg-[#171717] text-white"
+                            : "border-[#E5E5E5] bg-white text-neutral-500 hover:border-[#C5C5C5]"
                             }`}
                     >
                         {preset.label}

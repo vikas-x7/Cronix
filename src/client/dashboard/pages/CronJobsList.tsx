@@ -16,9 +16,9 @@ import {
     useDeleteCronJob,
     useUpdateCronJob,
     useTriggerCronJob,
-} from "@/client/hooks/useCronJobs";
-import { useJobStore } from "@/client/stores/jobStore";
-import { useUIStore } from "@/client/stores/uiStore";
+} from "@/client/dashboard/hooks/useCronJobs";
+import { useJobStore } from "@/client/dashboard/stores/jobStore";
+import { useUIStore } from "@/client/dashboard/stores/uiStore";
 import StatusBadge from "../components/StatusBadge";
 
 export default function CronJobsList() {
@@ -126,8 +126,8 @@ export default function CronJobsList() {
                             key={filter}
                             onClick={() => setStatusFilter(filter)}
                             className={`px-3 py-1 text-[11px] font-medium capitalize transition ${statusFilter === filter
-                                    ? "bg-[#171717] text-white"
-                                    : "bg-white border border-[#E5E5E5] text-neutral-500 hover:border-[#171717]"
+                                ? "bg-[#171717] text-white"
+                                : "bg-white border border-[#E5E5E5] text-neutral-500 hover:border-[#171717]"
                                 }`}
                         >
                             {filter}

@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { IoAdd } from "react-icons/io5";
 import { FiActivity, FiCheckCircle, FiXCircle, FiClock, FiPause } from "react-icons/fi";
-import { useDashboardStats } from "@/client/hooks/useDashboardStats";
+import { useDashboardStats } from "@/client/dashboard/hooks/useDashboardStats";
 import StatCard from "../components/StatCard";
 import StatusBadge from "../components/StatusBadge";
 

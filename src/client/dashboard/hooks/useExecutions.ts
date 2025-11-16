@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import api from "@/client/lib/axios";
+import api from "@/lib/axios";
 
 export interface Execution {
     id: string;

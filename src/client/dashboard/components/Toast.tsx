@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useUIStore, type Toast as ToastType } from "@/client/stores/uiStore";
+import { useUIStore, type Toast as ToastType } from "@/client/dashboard/stores/uiStore";
 import { FiCheck, FiX, FiInfo } from "react-icons/fi";
 
 function ToastItem({ toast }: { toast: ToastType }) {

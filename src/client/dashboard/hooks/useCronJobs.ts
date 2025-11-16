@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import api from "@/client/lib/axios";
+import api from "@/lib/axios";
 import type { CreateCronJobInput, UpdateCronJobInput } from "@/server/cronjob/cronjob.validation";
 
 export interface CronJob {

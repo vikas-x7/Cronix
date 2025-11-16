@@ -3,10 +3,10 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FiArrowLeft } from "react-icons/fi";
-import { useCreateCronJob } from "@/client/hooks/useCronJobs";
-import { cronJobFormSchema, HTTP_METHODS, TIMEZONES } from "@/client/validation/cronjob.schema";
+import { useCreateCronJob } from "@/client/dashboard/hooks/useCronJobs";
+import { cronJobFormSchema, HTTP_METHODS, TIMEZONES } from "@/client/dashboard/validation/cronjob.schema";
 import CronExpressionInput from "../components/CronExpressionInput";
-import { useUIStore } from "@/client/stores/uiStore";
+import { useUIStore } from "@/client/dashboard/stores/uiStore";
 
 export default function CreateJobs() {
   const router = useRouter();

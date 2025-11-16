@@ -2,8 +2,8 @@
 
 import React from "react";
 import { FiCheckCircle, FiXCircle, FiTrendingUp, FiClock } from "react-icons/fi";
-import { useDashboardStats } from "@/client/hooks/useDashboardStats";
-import { useCronJobs } from "@/client/hooks/useCronJobs";
+import { useDashboardStats } from "@/client/dashboard/hooks/useDashboardStats";
+import { useCronJobs } from "@/client/dashboard/hooks/useCronJobs";
 import StatCard from "../components/StatCard";
 
 export default function Analytics() {

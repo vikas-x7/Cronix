@@ -5,13 +5,13 @@ import Link from "next/link";
 
 import { HiMenuAlt3, HiOutlineX } from "react-icons/hi";
 import { FaSlack } from "react-icons/fa";
-import MarqueeSection from "@/app/(marketing)/components/MarqueeSection";
+import MarqueeSection from "@/client/marketing/components/MarqueeSection";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-black/5 bg-white/90 backdrop-blur-md">
       <MarqueeSection />
       <div className="container mx-auto px-4 md:px-20">
         <div className="flex h-10 py-7 items-center justify-between">
@@ -58,17 +58,17 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Right Side Actions */}
+         
           <div className="hidden items-center gap-6 lg:flex">
             <Link
               href="/login"
-              className=" bg-black px-5 py-1.5 text-sm font-medium text-white"
+              className=" bg-[#171717] px-5 py-1.5 text-sm font-medium text-white"
             >
               Get started
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+
           <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}

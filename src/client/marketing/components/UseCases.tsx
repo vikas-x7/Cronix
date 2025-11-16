@@ -35,10 +35,10 @@ const UseCases = () => {
             <span className="inline-block  bg-gray-100 px-4 py-1 text-xs  text-black mb-4">
               Use cases
             </span>
-            <h2 className="text-[20px] font-normal -tracking-[3px]  text-black md:text-[42px] leading-11">
+            <h2 className="text-[20px] font-normal -tracking-[2px]  text-black md:text-[42px] leading-11">
               Powerful Cron Job Solutions <br /> for Every Need
             </h2>
-            <p className="mt-6 ">
+            <p className="mt-6 text-[#737373] ">
               From automated backups to system maintenance, Cronix handles
               your scheduled tasks with precision and reliability.
             </p>

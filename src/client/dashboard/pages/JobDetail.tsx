@@ -9,9 +9,9 @@ import {
     FiTrash2,
     FiExternalLink,
 } from "react-icons/fi";
-import { useCronJob, useUpdateCronJob, useDeleteCronJob, useTriggerCronJob } from "@/client/hooks/useCronJobs";
-import { useExecutions } from "@/client/hooks/useExecutions";
-import { useUIStore } from "@/client/stores/uiStore";
+import { useCronJob, useUpdateCronJob, useDeleteCronJob, useTriggerCronJob } from "@/client/dashboard/hooks/useCronJobs";
+import { useExecutions } from "@/client/dashboard/hooks/useExecutions";
+import { useUIStore } from "@/client/dashboard/stores/uiStore";
 import StatusBadge from "../components/StatusBadge";
 
 export default function JobDetail({ jobId }: { jobId: string }) {

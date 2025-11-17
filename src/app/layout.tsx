@@ -11,6 +11,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Cronix",
   description: "Cron job application",
+  icons: {
+    icon: "/image/icon.jpg",
+  },
 };
 
 export default function RootLayout({

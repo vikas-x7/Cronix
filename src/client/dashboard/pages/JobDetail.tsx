@@ -85,12 +85,7 @@ export default function JobDetail({ jobId }: { jobId: string }) {
             {/* Header */}
             <div className="border-b px-4 py-4 border-[#E5E5E5] flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <button
-                        onClick={() => router.push("/dashboard/cronjobs")}
-                        className="text-neutral-400 hover:text-[#171717] transition"
-                    >
-                        <FiArrowLeft size={18} />
-                    </button>
+                
                     <div>
                         <h1 className="text-[20px] -tracking-[1px]">{job.title}</h1>
                         <p className="text-[11px] text-neutral-400 flex items-center gap-1 mt-0.5">

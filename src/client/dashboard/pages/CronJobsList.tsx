@@ -158,7 +158,7 @@ export default function CronJobsList() {
                 ) : (
                     <div className="border border-[#E5E5E5]">
                         {/* Table Header */}
-                        <div className="grid grid-cols-12 px-4 py-2.5 bg-[#FAFAFA] border-b border-[#E5E5E5] text-[10px] font-medium uppercase tracking-wider text-neutral-400">
+                        <div className="grid grid-cols-12 px-4 py-2.5 bg-[#FAFAFA] border-b border-[#E5E5E5] text-[10px] font-medium uppercase text-black/90">
                             <div className="col-span-3">Title</div>
                             <div className="col-span-3">URL</div>
                             <div className="col-span-1">Method</div>
@@ -168,11 +168,11 @@ export default function CronJobsList() {
                         </div>
 
                         {filteredJobs.map((job) => (
-                            <div
+                             <Link href={`/dashboard/cronjobs/${job.id}`}
                                 key={job.id}
-                                className="grid grid-cols-12 items-center px-4 py-3.5 border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition"
+                                className="grid grid-cols-12 items-center  px-4 py-3.5 border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition"
                             >
-                                <div className="col-span-3">
+                                <div className="col-span-3 ">
                                     <Link href={`/dashboard/cronjobs/${job.id}`}>
                                         <p className="text-[13px] font-medium text-[#171717] truncate hover:underline">
                                             {job.title}
@@ -183,10 +183,10 @@ export default function CronJobsList() {
                                     </p>
                                 </div>
                                 <div className="col-span-3">
-                                    <p className="text-[11px] text-blue-500 truncate flex items-center gap-1">
+                                    <a href={job.url}  className="text-[11px] text-blue-500 truncate flex items-center gap-1">
                                         {job.url}
                                         <FiExternalLink size={10} className="shrink-0" />
-                                    </p>
+                                    </a>
                                 </div>
                                 <div className="col-span-1">
                                     <span className="text-[11px] font-mono font-medium text-neutral-500 bg-[#F5F5F5] px-1.5 py-0.5">
@@ -207,34 +207,34 @@ export default function CronJobsList() {
                                         onClick={() => handleTrigger(job.id)}
                                         disabled={triggerJob.isPending}
                                         title="Trigger now"
-                                        className="p-1.5 border border-[#E5E5E5] text-neutral-400 hover:text-[#171717] hover:border-[#171717] transition disabled:opacity-50"
+                                        className="p-1.5 border border-[#E5E5E5] text-black/80 hover:text-[#171717] hover:border-[#171717] transition disabled:opacity-50"
                                     >
                                         <FiPlay size={12} />
                                     </button>
                                     <button
                                         onClick={() => handleToggle(job.id, job.status)}
                                         title={job.status === "active" ? "Pause" : "Resume"}
-                                        className="p-1.5 border border-[#E5E5E5] text-neutral-400 hover:text-amber-500 hover:border-amber-300 transition"
+                                        className="p-1.5 border border-[#E5E5E5] text-black/80 hover:text-amber-500 hover:border-amber-300 transition"
                                     >
                                         <FiPause size={12} />
                                     </button>
                                     <button
                                         onClick={() => handleDelete(job.id)}
                                         title="Delete"
-                                        className="p-1.5 border border-[#E5E5E5] text-neutral-400 hover:text-red-500 hover:border-red-300 transition"
+                                        className="p-1.5 border border-[#E5E5E5] text-black/80 hover:text-red-500 hover:border-red-300 transition"
                                     >
                                         <FiTrash2 size={12} />
                                     </button>
                                     <Link href={`/dashboard/cronjobs/${job.id}`}>
                                         <button
                                             title="Details"
-                                            className="p-1.5 border border-[#E5E5E5] text-neutral-400 hover:text-[#171717] hover:border-[#171717] transition"
+                                            className="p-1.5 border border-[#E5E5E5] text-black/80 hover:text-[#171717] hover:border-[#171717] transition"
                                         >
                                             <FiMoreVertical size={12} />
                                         </button>
                                     </Link>
                                 </div>
-                            </div>
+                             </Link>
                         ))}
                     </div>
                 )}

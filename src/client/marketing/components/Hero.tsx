@@ -13,7 +13,7 @@ const Hero = () => {
         </div>
 
         <h1 className="mx-auto mb-4 max-w-4xl text-4xl -tracking-[4px]  md:text-[58px] leading-15">
-          Better way to run schedule cron jobs  <br /> for Modern Applications
+          Better way to schedule cron jobs  <br /> for Modern Applications
         </h1>
 
         <p className="mx-auto mb-7 max-w-xl font-normal text-lg md:text-[16px] text-[#737373]">

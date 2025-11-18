@@ -1,6 +1,4 @@
 "use client";
-
-import React from "react";
 import Link from "next/link";
 import { IoAdd } from "react-icons/io5";
 import { FiActivity, FiCheckCircle, FiXCircle, FiClock, FiPause } from "react-icons/fi";
@@ -15,7 +13,7 @@ export default function DashboardHome() {
         return (
             <div className="w-full h-screen">
                 <div className="border-b px-4 py-4 border-[#E5E5E5] flex justify-between">
-                    <h1 className="text-[20px] -tracking-[1px]">Overview</h1>
+                    <h1 className="text-[20px] -tracking-[1px]">Overview </h1>
                 </div>
                 <div className="px-6 py-8">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -31,8 +29,8 @@ export default function DashboardHome() {
     if (error) {
         return (
             <div className="w-full h-screen">
-                <div className="border-b px-4 py-4 border-[#E5E5E5]">
-                    <h1 className="text-[20px] -tracking-[1px]">Overview</h1>
+                <div className="border-b px-4 py-4 border-[#737373]">
+                    <h1 className="text-[20px] -tracking-[1px]">Overview  </h1>
                 </div>
                 <div className="flex items-center justify-center h-64">
                     <p className="text-[13px] text-neutral-400">Failed to load dashboard data</p>
@@ -43,18 +41,18 @@ export default function DashboardHome() {
 
     return (
         <div className="w-full h-screen overflow-y-auto">
-            {/* Header */}
+            
             <div className="border-b px-4 py-4 border-[#E5E5E5] flex justify-between items-center">
                 <h1 className="text-[20px] -tracking-[1px]">Overview</h1>
                 <Link href="/dashboard/create">
                     <button className="bg-[#171717] text-[#fafafa] px-6 py-2 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-[#333] transition">
                         <IoAdd size={18} />
-                        Schedule New Job
+                        Schedule New Job 
                     </button>
                 </Link>
             </div>
 
-            {/* Stats Grid */}
+            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-6 py-6">
                 <StatCard
                     title="Total Jobs"
@@ -97,17 +95,17 @@ export default function DashboardHome() {
                 />
             </div>
 
-            {/* Quick Actions */}
+            
             <div className="px-6 pb-2">
                 <div className="flex gap-3">
                     <Link href="/dashboard/create">
-                        <button className="border border-dashed border-[#D9D9D9] px-4 py-2 text-[12px] text-neutral-500 hover:border-[#171717] hover:text-[#171717] transition flex items-center gap-1">
+                        <button className="border border-dashed border-[#D9D9D9] px-4 py-2 text-[12px] text-black/90 hover:border-[#171717] hover:text-[#171717] transition flex items-center gap-1">
                             <IoAdd size={16} />
                             New Cron Job
                         </button>
                     </Link>
                     <Link href="/dashboard/cronjobs">
-                        <button className="border border-[#E5E5E5] px-4 py-2 text-[12px] text-neutral-500 hover:border-[#171717] hover:text-[#171717] transition flex items-center gap-1">
+                        <button className="border border-[#E5E5E5] px-4 py-2 text-[12px] text-black/90 hover:border-[#171717] hover:text-[#171717] transition flex items-center gap-1">
                             <FiClock size={14} />
                             View All Jobs
                         </button>
@@ -115,23 +113,23 @@ export default function DashboardHome() {
                 </div>
             </div>
 
-            {/* Recent Executions */}
+          
             <div className="px-6 py-4">
                 <h2 className="text-[14px] font-medium text-[#171717] mb-4">
                     Recent Executions
                 </h2>
 
                 {!stats?.recentExecutions?.length ? (
-                    <div className="border border-dashed border-[#E5E5E5] py-12 flex flex-col items-center justify-center">
-                        <FiPause className="text-neutral-300 mb-2" size={24} />
-                        <p className="text-[13px] text-neutral-400">No executions yet</p>
-                        <p className="text-[11px] text-neutral-300 mt-1">
+                    <div className="border border-dashed border-[#D9D9D9] h-[40%] py-40 flex flex-col items-center justify-center">
+                        <FiPause className="text-black/70 mb-2" size={24} />
+                        <p className="text-[13px] text-black">No executions yet</p>
+                        <p className="text-[11px] text-black mt-1">
                             Create a cron job and trigger it to see results here
                         </p>
                     </div>
                 ) : (
                     <div className="border border-[#E5E5E5]">
-                        {/* Table Header */}
+                       
                         <div className="grid grid-cols-12 px-4 py-2.5 bg-[#FAFAFA] border-b border-[#E5E5E5] text-[10px] font-medium uppercase tracking-wider text-neutral-400">
                             <div className="col-span-3">Job</div>
                             <div className="col-span-3">URL</div>
@@ -140,7 +138,7 @@ export default function DashboardHome() {
                             <div className="col-span-2">Time</div>
                         </div>
 
-                        {/* Table Body */}
+                        
                         {stats.recentExecutions.map((exec) => (
                             <div
                                 key={exec.id}

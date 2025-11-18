@@ -75,12 +75,7 @@ export default function CreateJobs() {
     <div className="w-full h-screen overflow-y-auto">
       {/* Header */}
       <div className="border-b px-4 py-4 border-[#E5E5E5] flex items-center gap-3">
-        <button
-          onClick={() => router.back()}
-          className="text-neutral-400 hover:text-[#171717] transition"
-        >
-          <FiArrowLeft size={18} />
-        </button>
+      
         <h1 className="text-[20px] -tracking-[1px]">Schedule New Job</h1>
       </div>
 

@@ -13,6 +13,9 @@ import {
   FiSettings,
 } from "react-icons/fi";
 
+import { MdOutlineWebhook } from "react-icons/md";
+
+
 export default function Sidebar() {
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -41,11 +44,17 @@ export default function Sidebar() {
       href: "/dashboard/analytics",
       icon: FiActivity,
     },
+     {
+      name: "webhooks",
+      href: "/dashboard/webhooks",
+      icon: MdOutlineWebhook ,
+    },
     {
       name: "Settings",
       href: "/dashboard/settings",
       icon: FiSettings,
     },
+      
   ];
 
   return (
@@ -58,23 +67,16 @@ export default function Sidebar() {
             className="w-8 h-8 rounded-sm"
           />
           <Link href="/">
-            <span className="text-[21px] tracking-tight">Cronix</span>
+            <span className="text-[18px] tracking-tight">Cronix</span>
           </Link>
         </div>
 
         <nav>
-          <div className="flex justify-center items-center px-2">
-            <Link href="/dashboard/create" className="w-full">
-              <button
-                className="w-full h-8.25 bg-white border border-[#D9D9D9] border-dashed text-[13px]
-              text-[#5a5959] font-medium flex items-center justify-center gap-1 hover:border-[#171717] hover:text-[#171717] transition"
-              >
-                <IoAdd size={18} />
-                New cronjob
-              </button>
-            </Link>
-          </div>
-          <ul className="flex flex-col px-2 py-4">
+        
+
+           <p className="text-[13px] px-2 pt-3 py-2">Product</p>
+          <ul className="flex flex-col px-2 ">
+           
             {menu.map((item) => {
               const Icon = item.icon;
               const active =
@@ -83,10 +85,11 @@ export default function Sidebar() {
                   : pathname.startsWith(item.href);
 
               return (
+                
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`flex items-center gap-2 px-3 py-2 text-[12px] rounded-[3px] transition
+                    className={`flex items-center gap-2 px-3 py-2 text-[12px] rounded-[1px] transition
                     ${active
                         ? "bg-[#E5E5E5] text-[#171717]"
                         : "text-[#171717] hover:bg-[#F5F5F5] hover:text-[#171717]"
@@ -101,6 +104,18 @@ export default function Sidebar() {
           </ul>
         </nav>
       </div>
+
+        {/* <div className="flex justify-center items-center px-2">
+            <Link href="/dashboard/create" className="w-full">
+              <button
+                className="w-full h-8.25 bg-white border border-[#D9D9D9] border-dashed text-[13px]
+              text-[#5a5959] font-medium flex items-center justify-center gap-1 hover:border-[#171717] hover:text-[#171717] transition"
+              >
+                <IoAdd size={18} />
+                New cronjob
+              </button>
+            </Link>
+          </div> */}
 
       <div className="border-t border-[#E5E5E5] p-3">
         <div className="flex items-center gap-3">

@@ -15,7 +15,6 @@ import {
 
 import { MdOutlineWebhook } from "react-icons/md";
 
-
 export default function Sidebar() {
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -44,23 +43,22 @@ export default function Sidebar() {
       href: "/dashboard/analytics",
       icon: FiActivity,
     },
-     {
+    {
       name: "webhooks",
       href: "/dashboard/webhooks",
-      icon: MdOutlineWebhook ,
+      icon: MdOutlineWebhook,
     },
     {
       name: "Settings",
       href: "/dashboard/settings",
       icon: FiSettings,
     },
-      
   ];
 
   return (
     <aside className="h-screen bg-[#FAFAFA] border-r border-[#E5E5E5] flex flex-col justify-between">
       <div>
-        <div className="flex items-center px-3 h-15 gap-2">
+        <div className="flex items-center px-3 h-15 gap-2 border-b border-black/5">
           <img
             src="https://i.pinimg.com/736x/e4/0e/00/e40e00f5f4b301901581046001bfbd61.jpg"
             alt=""
@@ -72,11 +70,8 @@ export default function Sidebar() {
         </div>
 
         <nav>
-        
-
-           <p className="text-[13px] px-2 pt-3 py-2">Product</p>
+          <p className="text-[13px] px-2 pt-3 py-2">Product</p>
           <ul className="flex flex-col px-2 ">
-           
             {menu.map((item) => {
               const Icon = item.icon;
               const active =
@@ -85,15 +80,15 @@ export default function Sidebar() {
                   : pathname.startsWith(item.href);
 
               return (
-                
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     className={`flex items-center gap-2 px-3 py-2 text-[12px] rounded-[1px] transition
-                    ${active
+                    ${
+                      active
                         ? "bg-[#E5E5E5] text-[#171717]"
                         : "text-[#171717] hover:bg-[#F5F5F5] hover:text-[#171717]"
-                      }`}
+                    }`}
                   >
                     <Icon size={16} />
                     {item.name}
@@ -105,7 +100,7 @@ export default function Sidebar() {
         </nav>
       </div>
 
-        {/* <div className="flex justify-center items-center px-2">
+      {/* <div className="flex justify-center items-center px-2">
             <Link href="/dashboard/create" className="w-full">
               <button
                 className="w-full h-8.25 bg-white border border-[#D9D9D9] border-dashed text-[13px]

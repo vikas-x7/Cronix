@@ -57,7 +57,7 @@ export default function LoginPage({ error }: LoginPageProps) {
     if (!providers?.[providerId]) {
       return;
     }
- 
+
     setActiveProvider(providerId);
     void signIn(providerId, { callbackUrl: "/dashboard" });
   }
@@ -65,17 +65,20 @@ export default function LoginPage({ error }: LoginPageProps) {
   return (
     <div className="min-h-screen flex bg-white text-black font-inter ">
       <div className="w-full lg:w-1/2 flex items-center justify-center">
-        <div className="w-full max-w-sm px-6 text-center">
+        <div className="absolute top-0 left-0 flex items-center mt-3 ml-3">
+          <img
+            src="https://i.pinimg.com/736x/e4/0e/00/e40e00f5f4b301901581046001bfbd61.jpg"
+            alt=""
+            className="w-11 h-11"
+          />
+          <h1 className="text-[20px]">cronix</h1>
+        </div>
+        <div className="w-full max-w-md px-6 text-center ">
           <div className="mb-8 flex flex-col items-center justify-center ">
-            <img
-              src="https://i.pinimg.com/736x/e4/0e/00/e40e00f5f4b301901581046001bfbd61.jpg"
-              alt=""
-              className="w-15 h-15"
-            />
             <h1 className="text-[30px] flex items-center text-center gap-2 -tracking-[2px]">
               Continue to your account
             </h1>
-            <p className="text-sm text-neutral-500 mt-2">
+            <p className="text-sm text-neutral-500 mt-1">
               Sign in to manage your cron jobs and automation workflows.
             </p>
           </div>
@@ -93,7 +96,7 @@ export default function LoginPage({ error }: LoginPageProps) {
             </div>
           ) : null}
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
             <button
               type="button"
               onClick={() => handleSignIn("google")}

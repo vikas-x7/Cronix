@@ -51,6 +51,15 @@ export class CronJobRepository {
         return prisma.cronJob.delete({ where: { id } });
     }
 
+    async findDueJobs() {
+        return prisma.cronJob.findMany({
+            where: {
+                status: "active",
+                nextExecutionAt: { lte: new Date() },
+            },
+        });
+    }
+
     async countByUserId(userId: string) {
         return prisma.cronJob.groupBy({
             by: ["status"],

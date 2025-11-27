@@ -6,10 +6,12 @@ import { signOut, useSession } from 'next-auth/react';
 import { FiHome, FiPlusSquare, FiClock, FiActivity, FiSettings } from 'react-icons/fi';
 import { IoIosLogOut } from 'react-icons/io';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function Sidebar() {
   const pathname = usePathname();
   const { data: session } = useSession();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const user = session?.user;
   const userName = user?.name ?? 'Signed in user';
   const userEmail = user?.email ?? 'No email available';
@@ -89,10 +91,35 @@ export default function Sidebar() {
             <p className="truncate text-[9px] text-[#8a8a8a]">{userEmail}</p>
           </div>
         </div>
-        <button type="button" onClick={() => signOut({ callbackUrl: '/' })} className=" px-3 py-2 text-sm bg-[#FAFAFA] text-black transition hover:bg-[#E5E5E5] rounded-[3px] cursor-pointer">
+        <button type="button" onClick={() => setIsLogoutModalOpen(true)} className=" px-3 py-2 text-sm bg-[#FAFAFA] text-black transition hover:bg-[#E5E5E5] rounded-[3px] cursor-pointer">
           <IoIosLogOut />
         </button>
       </div>
+
+      {isLogoutModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white p-6 rounded-[3px] shadow-xl w-full max-w-sm border border-[#DDDDDD] animate-in zoom-in-95 duration-200">
+            <h2 className="text-lg  text-black mb-2">Confirm Logout</h2>
+            <p className="text-[12px] text-[#444444] mb-6">Are you sure you want to sign out? You will need to log in again to access your dashboard.</p>
+            <div className="flex justify-end gap-3 ">
+              <button
+                onClick={() => setIsLogoutModalOpen(false)}
+                className="px-4 py-2 text-[12px] text-[#171717] bg-[#F5F5F5] hover:bg-[#E5E5E5] rounded-[3px] transition  cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="px-4 py-2 text-[12px] text-white bg-black hover:bg-[#222222] rounded-[3px] transition cursor-pointer "
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      
     </aside>
   );
 }

@@ -99,7 +99,7 @@ export default function Sidebar() {
       {isLogoutModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
           <div className="bg-white p-6 rounded-[3px] shadow-xl w-full max-w-sm border border-[#DDDDDD] animate-in zoom-in-95 duration-200">
-            <h2 className="text-lg  text-black mb-2">Confirm Logout</h2>
+            <h2 className="text-lg  text-[#171717] font-medium mb-2">Confirm Logout</h2>
             <p className="text-[12px] text-[#444444] mb-6">Are you sure you want to sign out? You will need to log in again to access your dashboard.</p>
             <div className="flex justify-end gap-3 ">
               <button
@@ -119,7 +119,7 @@ export default function Sidebar() {
         </div>
       )}
 
-      
+
     </aside>
   );
 }

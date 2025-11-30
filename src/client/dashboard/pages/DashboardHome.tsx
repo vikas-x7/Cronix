@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useDashboardStats } from '@/client/dashboard/hooks/useDashboardStats';
 import StatCard from '../components/StatCard';
 import StatusBadge from '../components/StatusBadge';
+import PageLoader from '../components/PageLoader';
 
 export default function DashboardHome() {
   const [page, setPage] = useState(1);
@@ -13,20 +14,7 @@ export default function DashboardHome() {
   const { data: stats, isLoading, error } = useDashboardStats(page, limit);
 
   if (isLoading) {
-    return (
-      <div className="w-full h-screen">
-        <div className="border-b px-4 py-3 border-[#E5E5E5] flex justify-between">
-          <h1 className="text-[20px] -tracking-[1px]">Overview </h1>
-        </div>
-        <div className="px-6 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-28 animate-pulse border border-[#E5E5E5] bg-[#FAFAFA]" />
-            ))}
-          </div>
-        </div>
-      </div>
-    );
+    return <PageLoader />;
   }
 
   if (error) {
@@ -47,7 +35,7 @@ export default function DashboardHome() {
       <div className="border-b px-4 py-3 border-[#DDDDDD] flex justify-between items-center">
         <h1 className="text-[20px] -tracking-[1px]">Overview</h1>
         <Link href="/dashboard/create">
-          <button className="bg-[#171717] text-[#fafafa] px-6 py-2 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-[#333] transition">
+          <button className="bg-[#171717] text-[#fafafa] px-3 py-2 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-[#333] transition">
             <IoAdd size={18} />
             Schedule New Job
           </button>

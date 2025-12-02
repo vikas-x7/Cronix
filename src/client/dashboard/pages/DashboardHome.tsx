@@ -73,7 +73,7 @@ export default function DashboardHome() {
         </div>
       </div>
 
-      <div className="px-6 py-4 flex flex-col h-122">
+      <div className="px-6 py-4 flex flex-col h-121">
         <h2 className="text-[14px] font-medium text-[#171717] mb-4">Recent Executions</h2>
 
         {!stats?.recentExecutions?.length ? (
@@ -111,7 +111,7 @@ export default function DashboardHome() {
               ))}
             </div>
 
-            <div className="flex items-center justify-between px-4 py-3 bg-[#FAFAFA] border-t border-[#E5E5E5] sticky bottom-0 z-10">
+            <div className="flex items-center justify-between px-4 py-3  border-t border-[#E5E5E5] sticky bottom-0 z-10">
               <p className="text-[12px] text-neutral-500">
                 Page <span className="text-black font-medium">{page}</span>
               </p>

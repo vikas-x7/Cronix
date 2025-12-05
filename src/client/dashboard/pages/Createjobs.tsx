@@ -84,57 +84,53 @@ export default function CreateJobs() {
   const getMethodColor = (method: string) => {
     switch (method) {
       case 'GET':
-        return 'text-green-500';
+        return 'text-green-600';
       case 'POST':
-        return 'text-yellow-500';
+        return 'text-yellow-600';
       case 'PUT':
-        return 'text-blue-500';
+        return 'text-blue-600';
       case 'PATCH':
-        return 'text-purple-500';
+        return 'text-purple-600';
       case 'DELETE':
-        return 'text-red-500';
+        return 'text-red-600';
       default:
-        return 'text-neutral-400';
+        return 'text-neutral-500';
     }
   };
 
   return (
-    <div className="w-full h-full flex flex-col bg-[#1E1E1E] text-neutral-300 font-sans">
-      {/* Top Header Row */}
-      <div className="flex items-center justify-between px-4 py-2 bg-[#2D2D2D] border-b border-[#3E3E3E]">
-        <div className="flex items-center gap-2 flex-1">
-          <div className="flex items-center justify-center w-6 h-6 rounded bg-[#3E3E3E] text-white text-[10px] font-bold">CR</div>
+    <div className="w-full h-full flex flex-col bg-white text-[#171717] ">
+       <div className="border-b px-4 py-4 border-[#E5E5E5]">
+        <h1 className="text-[20px] -tracking-[1px]">Schedule New  Job</h1>
+      </div>
+    
+      <div className="flex items-center justify-between px-4 py-2  mt-3  p-3 ">
+        <div className="flex items-center gap-2 flex-1 ">
+         
           <input
             type="text"
             value={formData.title}
             onChange={(e) => updateField('title', e.target.value)}
-            placeholder="Untitled Request"
-            className="bg-transparent text-[14px] font-medium text-white outline-none placeholder:text-neutral-500 w-full max-w-sm"
+            placeholder="Untitled job"
+            className=" text-[14px] font-medium text-[#171717] outline-none placeholder:text-neutral-400 w-full border px-3 py-2 border-[#E5E5E5] "
           />
           {errors.title && <span className="text-[11px] text-red-500">{errors.title}</span>}
         </div>
 
-        <div className="flex items-center gap-2">
-          <button type="button" className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium text-neutral-300 hover:bg-[#3E3E3E] rounded transition">
-            <FiSave className="w-4 h-4" /> Save
-          </button>
-          <button type="button" className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium text-neutral-300 hover:bg-[#3E3E3E] rounded transition">
-            <FiShare2 className="w-4 h-4" /> Share
-          </button>
-        </div>
+
       </div>
 
-      {/* Main Request Bar */}
+   
       <div className="p-4 flex gap-2">
-        <div className="flex bg-[#2D2D2D] border border-[#3E3E3E] rounded-md overflow-hidden flex-1 group focus-within:border-[#5E5E5E] transition">
+        <div className="flex bg-white border border-[#E5E5E5] rounded-[1px] overflow-hidden flex-1">
           <div className="relative">
             <select
               value={formData.method}
               onChange={(e) => updateField('method', e.target.value)}
-              className={`appearance-none bg-transparent pl-4 pr-8 py-2.5 text-[13px] font-semibold outline-none cursor-pointer border-r border-[#3E3E3E] ${getMethodColor(formData.method)}`}
+              className={`appearance-none bg-transparent pl-4 pr-8 py-2 text-[13px] font-semibold outline-none cursor-pointer border-r border-[#E5E5E5] ${getMethodColor(formData.method)}`}
             >
               {HTTP_METHODS.map((m) => (
-                <option key={m} value={m} className="bg-[#2D2D2D] text-white">
+                <option key={m} value={m} className="bg-white text-[#171717]">
                   {m}
                 </option>
               ))}
@@ -147,19 +143,17 @@ export default function CreateJobs() {
             value={formData.url}
             onChange={(e) => updateField('url', e.target.value)}
             placeholder="Enter URL or paste text"
-            className="flex-1 bg-transparent px-4 py-2.5 text-[13px] text-white outline-none placeholder:text-neutral-500"
+            className="flex-1 bg-transparent px-4 text-[13px] text-[#171717] outline-none placeholder:text-neutral-400"
           />
         </div>
 
         <button
           onClick={() => handleSubmit()}
           disabled={createJob.isPending}
-          className="bg-[#007BFF] hover:bg-[#0069D9] text-white px-6 py-2.5 rounded-md text-[13px] font-medium transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-black text-white px-6  rounded-[1px] text-[13px] font-medium transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {createJob.isPending ? 'Sending...' : 'Send'}
-          <span className="border-l border-white/20 pl-2 ml-1">
-            <FiChevronDown className="w-4 h-4" />
-          </span>
+          {createJob.isPending ? 'Creating...' : 'Create'}
+        
         </button>
       </div>
       {errors.url && (
@@ -168,10 +162,9 @@ export default function CreateJobs() {
         </div>
       )}
 
-      {/* Configuration Tabs */}
-      <div className="flex px-4 border-b border-[#3E3E3E] gap-6 text-[13px] font-medium">
+      <div className="flex px-4 border-b border-[#E5E5E5] gap-6 text-[13px] font-medium">
         {(['Schedule', 'Headers', 'Body', 'Settings'] as Tab[]).map((tab) => (
-          <button key={tab} onClick={() => setActiveTab(tab)} className={`py-2 relative transition ${activeTab === tab ? 'text-white' : 'text-neutral-400 hover:text-neutral-300'}`}>
+          <button key={tab} onClick={() => setActiveTab(tab)} className={`py-2 relative transition ${activeTab === tab ? 'text-[#171717]' : 'text-neutral-500 hover:text-[#171717]'}`}>
             {tab}
             {tab === 'Headers' && formData.headers.length > 5 && <span className="ml-1.5 text-[10px] text-green-500">•</span>}
             {activeTab === tab && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#007BFF]" />}
@@ -179,13 +172,13 @@ export default function CreateJobs() {
         ))}
       </div>
 
-      {/* Tab Content Area */}
-      <div className="flex-1 p-4 overflow-y-auto">
+
+      <div className="flex-1 p-4 overflow-y-auto ">
         {/* SCHEDULE TAB */}
         {activeTab === 'Schedule' && (
-          <div className="max-w-2xl space-y-4">
-            <h3 className="text-[13px] font-medium text-white mb-2">Cron Schedule</h3>
-            <div className="bg-[#2D2D2D] border border-[#3E3E3E] rounded-md p-4">
+          <div className="space-y-4">
+            <h3 className="text-[13px] font-medium text-[#171717] mb-2">Cron Schedule</h3>
+            <div className="bg-white border border-[#E5E5E5]  p-4">
               <CronExpressionInput value={formData.cronExpression} onChange={(val) => updateField('cronExpression', val)} error={errors.cronExpression} />
             </div>
             {errors.cronExpression && <p className="mt-1 text-[12px] text-red-500">{errors.cronExpression}</p>}
@@ -194,13 +187,13 @@ export default function CreateJobs() {
 
         {/* HEADERS TAB */}
         {activeTab === 'Headers' && (
-          <div className="flex flex-col h-full max-w-3xl">
-            <h3 className="text-[13px] font-medium text-white mb-2">Request Headers (JSON)</h3>
+          <div className="flex flex-col h-full ">
+            <h3 className="text-[13px] font-medium text-[#171717] mb-2">Request Headers (JSON)</h3>
             <textarea
               value={formData.headers}
               onChange={(e) => updateField('headers', e.target.value)}
               placeholder='{\n  "Content-Type": "application/json",\n  "Authorization": "Bearer ..."\n}'
-              className="flex-1 min-h-[200px] w-full bg-[#2D2D2D] border border-[#3E3E3E] rounded-md p-4 font-mono text-[13px] text-white outline-none resize-none focus:border-[#5E5E5E] transition placeholder:text-neutral-600"
+              className="flex-1 min-h-[200px] w-full bg-white border border-[#E5E5E5]  p-4 font-mono text-[13px] text-[#171717] outline-none resize-none focus:border-[#171717] transition placeholder:text-neutral-400"
             />
             {errors.headers && <p className="mt-1 text-[12px] text-red-500">{errors.headers}</p>}
           </div>
@@ -208,15 +201,15 @@ export default function CreateJobs() {
 
         {/* BODY TAB */}
         {activeTab === 'Body' && (
-          <div className="flex flex-col h-full max-w-3xl">
+          <div className="flex flex-col h-full ">
             <div className="flex items-center gap-4 mb-3">
               <div className="flex items-center gap-1.5">
                 <input type="radio" id="raw" name="bodyType" checked readOnly className="accent-[#007BFF]" />
-                <label htmlFor="raw" className="text-[13px] cursor-pointer">
+                <label htmlFor="raw" className="text-[13px] cursor-pointer text-[#171717]">
                   raw
                 </label>
               </div>
-              <div className="text-[13px] text-[#007BFF] cursor-pointer px-2 py-0.5 rounded hover:bg-[#3E3E3E] transition">JSON</div>
+              <div className="text-[13px] text-[#007BFF] cursor-pointer px-2 py-0.5  hover:bg-neutral-100 transition">JSON</div>
             </div>
 
             <textarea
@@ -224,7 +217,7 @@ export default function CreateJobs() {
               onChange={(e) => updateField('body', e.target.value)}
               placeholder='{\n  "key": "value"\n}'
               disabled={['GET', 'DELETE'].includes(formData.method)}
-              className="flex-1 min-h-[200px] w-full bg-[#2D2D2D] border border-[#3E3E3E] rounded-md p-4 font-mono text-[13px] text-white outline-none resize-none focus:border-[#5E5E5E] transition disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-neutral-600"
+              className="flex-1 min-h-[200px] w-full bg-white border border-[#E5E5E5] p-4 font-mono text-[13px] text-[#171717] outline-none resize-none focus:border-[#171717] transition disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-neutral-400"
             />
             {['GET', 'DELETE'].includes(formData.method) && <p className="mt-2 text-[12px] text-neutral-500">Body is typically not sent with {formData.method} requests.</p>}
             {errors.body && <p className="mt-1 text-[12px] text-red-500">{errors.body}</p>}
@@ -234,16 +227,16 @@ export default function CreateJobs() {
         {/* SETTINGS TAB */}
         {activeTab === 'Settings' && (
           <div className="max-w-md">
-            <h3 className="text-[13px] font-medium text-white mb-3">Execution Settings</h3>
+            <h3 className="text-[13px] font-medium text-[#171717] mb-3">Execution Settings</h3>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-[12px] text-neutral-400 mb-1.5">Timezone</label>
+                <label className="block text-[12px] text-neutral-600 mb-1.5">Timezone</label>
                 <div className="relative">
                   <select
                     value={formData.timezone}
                     onChange={(e) => updateField('timezone', e.target.value)}
-                    className="w-full appearance-none bg-[#2D2D2D] border border-[#3E3E3E] rounded-md px-3 py-2.5 text-[13px] text-white outline-none focus:border-[#5E5E5E] transition"
+                    className="w-full appearance-none bg-white border border-[#E5E5E5]  px-3 py-2.5 text-[13px] text-[#171717] outline-none focus:border-[#171717] transition"
                   >
                     {TIMEZONES.map((tz) => (
                       <option key={tz} value={tz}>

@@ -12,14 +12,14 @@ interface CronExpressionInputProps {
 export default function CronExpressionInput({ value, onChange, error }: CronExpressionInputProps) {
   return (
     <div className="space-y-2">
-      <label className="block text-[12px] font-medium text-neutral-400">Cron Expression</label>
+      <label className="block text-[12px] font-medium text-neutral-600">Cron Expression</label>
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="* * * * *"
-        className={`w-full border bg-transparent px-3 py-2 text-[13px] font-mono text-white outline-none transition placeholder:text-neutral-500 rounded-md ${
-          error ? 'border-red-300' : 'border-[#3E3E3E] focus:border-[#5E5E5E]'
+        className={`w-full border bg-white px-3 py-2 text-[13px] font-mono text-[#171717] outline-none transition placeholder:text-neutral-300  ${
+          error ? 'border-red-300' : 'border-[#E5E5E5] focus:border-[#171717]'
         }`}
       />
       {error && <p className="text-[11px] text-red-500">{error}</p>}
@@ -30,8 +30,8 @@ export default function CronExpressionInput({ value, onChange, error }: CronExpr
             key={preset.value}
             type="button"
             onClick={() => onChange(preset.value)}
-            className={`border px-2 py-1 text-[10px] rounded transition ${
-              value === preset.value ? 'border-[#007BFF] bg-[#007BFF] text-white' : 'border-[#3E3E3E] bg-transparent text-neutral-400 hover:border-[#5E5E5E] hover:text-white'
+            className={`border px-2 py-1 text-[10px]  transition cursor-pointer ${
+              value === preset.value ? 'bg-black  text-white' : 'border-[#E5E5E5] bg-white text-neutral-600 hover:border-[#171717]'
             }`}
           >
             {preset.label}
@@ -40,7 +40,7 @@ export default function CronExpressionInput({ value, onChange, error }: CronExpr
       </div>
 
       <p className="text-[10px] text-neutral-500 mt-2">
-        Format: minute hour day month weekday — e.g. <span className="font-mono text-neutral-400">*/5 * * * *</span> = every 5 minutes
+        Format: minute hour day month weekday — e.g. <span className="font-mono text-neutral-600">*/5 * * * *</span> = every 5 minutes
       </p>
     </div>
   );

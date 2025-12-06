@@ -17,17 +17,14 @@ export default function Analytics() {
     return <PageLoader />;
   }
 
-  // Compute top failing jobs
   const jobsWithExecutions = jobs?.filter((j) => j._count.executions > 0) ?? [];
 
   return (
     <div className="w-full h-screen overflow-y-auto">
-      {/* Header */}
       <div className="border-b px-4 py-4 border-[#E5E5E5]">
         <h1 className="text-[20px] -tracking-[1px]">Analytics</h1>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-6 py-6">
         <StatCard title="Total Executions" value={stats?.executions.totalExecutions ?? 0} icon={<FiTrendingUp size={18} />} />
         <StatCard title="Successful" value={stats?.executions.successfulExecutions ?? 0} icon={<FiCheckCircle size={18} />} trend="up" trendValue={`${stats?.executions.successRate ?? 0}% rate`} />
@@ -47,41 +44,38 @@ export default function Analytics() {
         />
       </div>
 
-      {/* Job Breakdown */}
       <div className="px-6 py-4">
         <h2 className="text-[14px] font-medium text-[#171717] mb-4">Jobs Breakdown</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Active vs Paused */}
-          <div className="border border-[#E5E5E5] p-5">
-            <p className="text-[11px] font-medium uppercase tracking-wider text-neutral-400 mb-4">Job Status Distribution</p>
+          <div className="border border-[#E5E5E5] p-5 h-90">
+            <p className="text-[11px] font-medium uppercase  text-black mb-4">Job Status Distribution</p>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[12px] text-neutral-600">Active</span>
                 <div className="flex items-center gap-2">
-                  <div className="h-2 bg-emerald-500 rounded-full" style={{ width: `${Math.max(8, ((stats?.jobs.active ?? 0) / Math.max(stats?.jobs.total ?? 1, 1)) * 120)}px` }} />
+                  <div className="h-2 bg-emerald-500 " style={{ width: `${Math.max(8, ((stats?.jobs.active ?? 0) / Math.max(stats?.jobs.total ?? 1, 1)) * 120)}px` }} />
                   <span className="text-[13px] font-medium text-[#171717]">{stats?.jobs.active ?? 0}</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-[12px] text-neutral-600">Paused</span>
                 <div className="flex items-center gap-2">
-                  <div className="h-2 bg-amber-400 rounded-full" style={{ width: `${Math.max(8, ((stats?.jobs.paused ?? 0) / Math.max(stats?.jobs.total ?? 1, 1)) * 120)}px` }} />
+                  <div className="h-2 bg-amber-400 " style={{ width: `${Math.max(8, ((stats?.jobs.paused ?? 0) / Math.max(stats?.jobs.total ?? 1, 1)) * 120)}px` }} />
                   <span className="text-[13px] font-medium text-[#171717]">{stats?.jobs.paused ?? 0}</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Execution Breakdown */}
           <div className="border border-[#E5E5E5] p-5">
-            <p className="text-[11px] font-medium uppercase tracking-wider text-neutral-400 mb-4">Execution Results</p>
+            <p className="text-[11px] font-medium uppercase  text-black mb-4">Execution Results</p>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[12px] text-neutral-600">Successful</span>
                 <div className="flex items-center gap-2">
                   <div
-                    className="h-2 bg-emerald-500 rounded-full"
+                    className="h-2 bg-emerald-500 "
                     style={{ width: `${Math.max(8, ((stats?.executions.successfulExecutions ?? 0) / Math.max(stats?.executions.totalExecutions ?? 1, 1)) * 120)}px` }}
                   />
                   <span className="text-[13px] font-medium text-emerald-600">{stats?.executions.successfulExecutions ?? 0}</span>
@@ -90,19 +84,15 @@ export default function Analytics() {
               <div className="flex items-center justify-between">
                 <span className="text-[12px] text-neutral-600">Failed</span>
                 <div className="flex items-center gap-2">
-                  <div
-                    className="h-2 bg-red-400 rounded-full"
-                    style={{ width: `${Math.max(8, ((stats?.executions.failedExecutions ?? 0) / Math.max(stats?.executions.totalExecutions ?? 1, 1)) * 120)}px` }}
-                  />
+                  <div className="h-2 bg-red-400 " style={{ width: `${Math.max(8, ((stats?.executions.failedExecutions ?? 0) / Math.max(stats?.executions.totalExecutions ?? 1, 1)) * 120)}px` }} />
                   <span className="text-[13px] font-medium text-red-500">{stats?.executions.failedExecutions ?? 0}</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Jobs with executions */}
           <div className="border border-[#E5E5E5] p-5">
-            <p className="text-[11px] font-medium uppercase tracking-wider text-neutral-400 mb-4">Most Executed Jobs</p>
+            <p className="text-[11px] font-medium uppercase  text-black mb-4">Most Executed Jobs</p>
             {jobsWithExecutions.length === 0 ? (
               <p className="text-[12px] text-neutral-300">No data yet</p>
             ) : (

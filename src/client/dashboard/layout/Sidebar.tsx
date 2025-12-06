@@ -28,7 +28,7 @@ export default function Sidebar() {
       icon: FiPlusSquare,
     },
     {
-      name: 'Cronjobs',
+      name: 'Cron Jobs',
       href: '/dashboard/cronjobs',
       icon: FiClock,
     },

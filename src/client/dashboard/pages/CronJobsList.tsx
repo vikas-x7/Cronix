@@ -3,7 +3,23 @@
 import React from 'react';
 import Link from 'next/link';
 import { IoAdd } from 'react-icons/io5';
-import { FiPlay, FiPause, FiTrash2, FiExternalLink, FiMoreVertical, FiClock } from 'react-icons/fi';
+import {
+  FiPlay,
+  FiPause,
+  FiTrash2,
+  FiExternalLink,
+  FiMoreVertical,
+  FiClock,
+  FiLayout,
+  FiSearch,
+  FiList,
+  FiCheckSquare,
+  FiInfo,
+  FiChevronDown,
+  FiFilter,
+  FiRefreshCw,
+  FiPlusCircle,
+} from 'react-icons/fi';
 import { useCronJobs, useDeleteCronJob, useUpdateCronJob, useTriggerCronJob } from '@/client/dashboard/hooks/useCronJobs';
 import { useJobStore } from '@/client/dashboard/stores/jobStore';
 import { useUIStore } from '@/client/dashboard/stores/uiStore';
@@ -78,40 +94,86 @@ export default function CronJobsList() {
 
   return (
     <div className="w-full h-screen overflow-y-auto">
+
+        <div className="border-b px-4 py-4 border-[#E5E5E5]">
+        <h1 className="text-[20px] -tracking-[1px]">Cron Jobs </h1>
+      </div>
       {/* Header */}
-      <div className="border-b px-4 py-4 border-[#E5E5E5] flex justify-between items-center">
-        <h1 className="text-[20px] -tracking-[1px]">Cron Jobs</h1>
-        <Link href="/dashboard/create">
-          <button className="bg-[#171717] text-[#fafafa] px-6 py-2 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-[#333] transition">
-            <IoAdd size={18} />
-            New Job
-          </button>
-        </Link>
+      <div className="px-6 py-6 pb-4 border-b border-[#E5E5E5] bg-white">
+
+        
+        <div className="flex items-start justify-between">
+          {/* Left Column */}
+          <div className="flex flex-col gap-4">
+            
+
+            {/* Buttons Row */}
+            <div className="flex items-center gap-2">
+              <button className="flex items-center gap-2 px-3 py-1.5 bg-[#F4F4F5] border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#111827]">
+                <FiLayout className="text-[#52525b]" />
+                Overview
+              </button>
+
+              <div className="w-[1px] h-4 bg-[#E4E4E7] mx-1"></div>
+
+              <Link href="/dashboard/create">
+                <button className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#52525b] hover:bg-[#F4F4F5] transition-colors">
+                  <FiPlusCircle className="text-[#52525b]" size={14} />
+                  ADD
+                </button>
+              </Link>
+
+         
+    <div className="flex flex-col items-end gap-4">
+            {/* Date Dropdown */}
+            <button className="flex items-center gap-3 px-3 py-1.5 border border-[#E4E4E7]  rounded-[1px] text-[13px] font-medium text-[#111827] hover:bg-[#E4E4E7] transition-colors">
+              <span className="bg-[#E4E4E7] text-[#52525b] px-1 rounded-sm text-[11px]">90d</span>
+              Past 90 days
+              <FiChevronDown className="text-[#52525b]" />
+            </button>
+
+            {/* Right Buttons Row */}
+           
+          </div>
+           
+
+            <div className="flex items-center gap-2">
+              <button className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#52525b] hover:bg-[#F4F4F5] transition-colors">
+                <FiFilter className="text-[#52525b]" size={14} />
+                Filters
+              </button>
+              <button className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#52525b] hover:bg-[#F4F4F5] transition-colors">
+                <FiRefreshCw className="text-[#52525b]" size={14} />
+                Refresh
+              </button>
+            </div>
+
+            
+
+          
+
+          
+            </div>
+          </div>
+
+          {/* Right Column */}
+      
+        </div>
       </div>
 
-      {/* Filters */}
-      <div className="border-b border-[#E5E5E5] px-4 py-3 flex items-center gap-4">
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search jobs..."
-          className="border border-[#E5E5E5] bg-white px-3 py-1.5 text-[12px] text-[#171717] outline-none w-64 focus:border-[#171717] transition placeholder:text-neutral-300"
-        />
-        <div className="flex gap-1">
-          {(['all', 'active', 'paused'] as const).map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setStatusFilter(filter)}
-              className={`px-3 py-1 text-[11px] font-medium capitalize transition ${
-                statusFilter === filter ? 'bg-[#171717] text-white' : 'bg-white border border-[#E5E5E5] text-neutral-500 hover:border-[#171717]'
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+      {/* Filters (Existing functionality, slightly restyled to fit below) */}
+      <div className="border-b border-[#E5E5E5] px-6 py-3 flex items-center justify-between ">
+        <div className="flex items-center gap-4">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search jobs..."
+            className="border border-[#E5E5E5] bg-white px-3 py-1.5 text-[12px] text-[#171717] rounded-[1px] outline-none w-124  transition placeholder:text-neutral-400"
+          />
+      
         </div>
-        <span className="ml-auto text-[11px] text-neutral-400">
+        <span className="text-[12px] text-neutral-400 font-medium">
           {filteredJobs?.length ?? 0} job{(filteredJobs?.length ?? 0) !== 1 ? 's' : ''}
         </span>
       </div>
@@ -143,7 +205,7 @@ export default function CronJobsList() {
             </div>
 
             {filteredJobs.map((job) => (
-              <Link href={`/dashboard/cronjobs/${job.id}`} key={job.id} className="grid grid-cols-12 items-center  px-4 py-3.5 border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition">
+              <div  className="grid grid-cols-12 items-center  px-4 py-3.5 border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition">
                 <div className="col-span-3 ">
                   <Link href={`/dashboard/cronjobs/${job.id}`}>
                     <p className="text-[13px] font-medium text-[#171717] truncate hover:underline">{job.title}</p>
@@ -191,7 +253,7 @@ export default function CronJobsList() {
                     </button>
                   </Link>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         )}

@@ -101,7 +101,7 @@ export default function CreateJobs() {
   return (
     <div className="w-full h-full flex flex-col bg-white text-[#171717] ">
        <div className="border-b px-4 py-4 border-[#E5E5E5]">
-        <h1 className="text-[20px] -tracking-[1px]">Schedule New  Job</h1>
+        <h1 className="text-[20px] -tracking-[1px]">Schedule New Job </h1>
       </div>
     
       <div className="flex items-center justify-between px-4 py-2  mt-3  p-3 ">

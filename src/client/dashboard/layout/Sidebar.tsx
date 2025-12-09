@@ -48,7 +48,7 @@ export default function Sidebar() {
   return (
     <aside className="h-screen bg-[#FAFAFA] border-r border-[#DDDDDD] flex flex-col justify-between">
       <div>
-        <div className="flex items-center px-1 py-1 mt-3 ">
+        <div className="flex items-center px-1 py-1 mt-3 border-b  border-[#DDDDDD]">
           <Image src="/image/cronixlog.png" alt="" className="w-8 h-8 rounded-sm" width={200} height={200} />
           <Link href="/">
             <span className="text-[18px] tracking-tight">Cronix</span>
@@ -56,8 +56,8 @@ export default function Sidebar() {
         </div>
 
         <nav>
-          <p className="text-[13px] px-2 pt-3 py-2">Product</p>
-          <ul className="flex flex-col px-2 ">
+          <p className="text-[14px] px-2 pt-5 py-2 uppercase font-mono">Product</p>
+          <ul className="flex flex-col px-2 gap-y-1 ">
             {menu.map((item) => {
               const Icon = item.icon;
               const active = item.href === '/dashboard' ? pathname === '/dashboard' : pathname.startsWith(item.href);

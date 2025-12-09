@@ -94,19 +94,14 @@ export default function CronJobsList() {
 
   return (
     <div className="w-full h-screen overflow-y-auto">
-
-        <div className="border-b px-4 py-4 border-[#E5E5E5]">
+      <div className="border-b px-4 py-4 border-[#E5E5E5]">
         <h1 className="text-[20px] -tracking-[1px]">Cron Jobs </h1>
       </div>
       {/* Header */}
       <div className="px-6 py-6 pb-4 border-b border-[#E5E5E5] bg-white">
-
-        
         <div className="flex items-start justify-between">
           {/* Left Column */}
           <div className="flex flex-col gap-4">
-            
-
             {/* Buttons Row */}
             <div className="flex items-center gap-2">
               <button className="flex items-center gap-2 px-3 py-1.5 bg-[#F4F4F5] border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#111827]">
@@ -123,41 +118,31 @@ export default function CronJobsList() {
                 </button>
               </Link>
 
-         
-    <div className="flex flex-col items-end gap-4">
-            {/* Date Dropdown */}
-            <button className="flex items-center gap-3 px-3 py-1.5 border border-[#E4E4E7]  rounded-[1px] text-[13px] font-medium text-[#111827] hover:bg-[#E4E4E7] transition-colors">
-              <span className="bg-[#E4E4E7] text-[#52525b] px-1 rounded-sm text-[11px]">90d</span>
-              Past 90 days
-              <FiChevronDown className="text-[#52525b]" />
-            </button>
+              <div className="flex flex-col items-end gap-4">
+                {/* Date Dropdown */}
+                <button className="flex items-center gap-3 px-3 py-1.5 border border-[#E4E4E7]  rounded-[1px] text-[13px] font-medium text-[#111827] hover:bg-[#E4E4E7] transition-colors">
+                  <span className="bg-[#E4E4E7] text-[#52525b] px-1 rounded-sm text-[11px]">90d</span>
+                  Past 90 days
+                  <FiChevronDown className="text-[#52525b]" />
+                </button>
 
-            {/* Right Buttons Row */}
-           
-          </div>
-           
+                {/* Right Buttons Row */}
+              </div>
 
-            <div className="flex items-center gap-2">
-              <button className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#52525b] hover:bg-[#F4F4F5] transition-colors">
-                <FiFilter className="text-[#52525b]" size={14} />
-                Filters
-              </button>
-              <button className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#52525b] hover:bg-[#F4F4F5] transition-colors">
-                <FiRefreshCw className="text-[#52525b]" size={14} />
-                Refresh
-              </button>
-            </div>
-
-            
-
-          
-
-          
+              <div className="flex items-center gap-2">
+                <button className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#52525b] hover:bg-[#F4F4F5] transition-colors">
+                  <FiFilter className="text-[#52525b]" size={14} />
+                  Filters
+                </button>
+                <button className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#52525b] hover:bg-[#F4F4F5] transition-colors">
+                  <FiRefreshCw className="text-[#52525b]" size={14} />
+                  Refresh
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Right Column */}
-      
         </div>
       </div>
 
@@ -171,7 +156,6 @@ export default function CronJobsList() {
             placeholder="Search jobs..."
             className="border border-[#E5E5E5] bg-white px-3 py-1.5 text-[12px] text-[#171717] rounded-[1px] outline-none w-124  transition placeholder:text-neutral-400"
           />
-      
         </div>
         <span className="text-[12px] text-neutral-400 font-medium">
           {filteredJobs?.length ?? 0} job{(filteredJobs?.length ?? 0) !== 1 ? 's' : ''}
@@ -205,7 +189,7 @@ export default function CronJobsList() {
             </div>
 
             {filteredJobs.map((job) => (
-              <div  className="grid grid-cols-12 items-center  px-4 py-3.5 border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition">
+              <div className="grid grid-cols-12 items-center  px-4 py-3.5 border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition">
                 <div className="col-span-3 ">
                   <Link href={`/dashboard/cronjobs/${job.id}`}>
                     <p className="text-[13px] font-medium text-[#171717] truncate hover:underline">{job.title}</p>

@@ -94,8 +94,9 @@ export default function CronJobsList() {
 
   return (
     <div className="w-full h-screen overflow-y-auto">
-      <div className="border-b px-4 py-4 border-[#E5E5E5]">
-        <h1 className="text-[20px] -tracking-[1px]">Cron Jobs </h1>
+      <div className="border-b px-4 py-3 mt-1 bg-[#FAFAFA] border-[#DDDDDD] flex justify-between items-center">
+        <h1 className="text-[20px] -tracking-[1px]">Cron jobs</h1>
+      
       </div>
       {/* Header */}
       <div className="px-6 py-6 pb-4 border-b border-[#E5E5E5] bg-white">

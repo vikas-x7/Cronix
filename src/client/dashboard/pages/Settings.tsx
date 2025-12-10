@@ -13,7 +13,7 @@ export default function Settings({ user }: { user: any }) {
       <div className="">
         
         <div className="bg-white  text-sm   overflow-hidden shadow-sm">
-          <div className="h-32 bg-[#E5E5E5] w-full" />
+          <div className="h-32 bg-[#FAFAFA] border-b border-[#DDDDDD] w-full" />
           <div className="px-6 pb-6 relative">
             <div className="relative -mt-12 h-24 w-24">
               {user.image ? (
@@ -25,8 +25,8 @@ export default function Settings({ user }: { user: any }) {
               )}
             </div>
             <div className="mt-4 pb-2">
-              <h1 className="text-[20px] font-semibold text-[#111111]">{user.name || 'Vikas Pal'}</h1>
-              <p className="text-[13px] text-gray-500 mt-0.5">{user.email}</p>
+              <h1 className="text-[20px]  text-[#111111]">{user.name || 'Vikas Pal'}</h1>
+              <p className="text-[11px] text-gray-500 mt-0.5">{user.email}</p>
               <div className="mt-4 flex items-center space-x-3">
                 <span className="inline-flex items-center space-x-1.5  bg-green-50 px-2.5 py-1 text-[11px] font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                   <MdVerified className="text-green-600" size={14} />
@@ -50,19 +50,19 @@ export default function Settings({ user }: { user: any }) {
             <ul className="text-[13px] divide-y divide-gray-100">
               <li className="flex justify-between py-4">
                 <span className="text-gray-500">Full name</span>
-                <span className="text-[#111111] font-medium">{user.name || 'Vikas Pal'}</span>
+                <span className="text-[#111111] ">{user.name || 'Vikas Pal'}</span>
               </li>
               <li className="flex justify-between py-4">
                 <span className="text-gray-500">Email address</span>
-                <span className="text-[#111111] font-medium">{user.email}</span>
+                <span className="text-[#111111] ">{user.email}</span>
               </li>
               <li className="flex justify-between py-4">
                 <span className="text-gray-500">Member since</span>
-                <span className="text-[#111111] font-medium">{displayMemberSince}</span>
+                <span className="text-[#111111] ">{displayMemberSince}</span>
               </li>
               <li className="flex justify-between py-4">
                 <span className="text-gray-500">Jobs created</span>
-                <span className="text-[#111111] font-medium">{jobsCreatedCount}</span>
+                <span className="text-[#111111] ">{jobsCreatedCount}</span>
               </li>
             </ul>
           </div>

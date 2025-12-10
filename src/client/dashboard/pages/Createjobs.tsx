@@ -100,13 +100,12 @@ export default function CreateJobs() {
 
   return (
     <div className="w-full h-full flex flex-col bg-white text-[#171717] ">
-       <div className="border-b px-4 py-4 border-[#E5E5E5]">
+      <div className="border-b px-4 py-3 mt-1 bg-[#FAFAFA] border-[#DDDDDD] flex justify-between items-center">
         <h1 className="text-[20px] -tracking-[1px]">Schedule New Job </h1>
       </div>
-    
+
       <div className="flex items-center justify-between px-4 py-2  mt-3  p-3 ">
         <div className="flex items-center gap-2 flex-1 ">
-         
           <input
             type="text"
             value={formData.title}
@@ -116,11 +115,8 @@ export default function CreateJobs() {
           />
           {errors.title && <span className="text-[11px] text-red-500">{errors.title}</span>}
         </div>
-
-
       </div>
 
-   
       <div className="p-4 flex gap-2">
         <div className="flex bg-white border border-[#E5E5E5] rounded-[1px] overflow-hidden flex-1">
           <div className="relative">
@@ -153,7 +149,6 @@ export default function CreateJobs() {
           className="bg-black text-white px-6  rounded-[1px] text-[13px] font-medium transition flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {createJob.isPending ? 'Creating...' : 'Create'}
-        
         </button>
       </div>
       {errors.url && (
@@ -171,7 +166,6 @@ export default function CreateJobs() {
           </button>
         ))}
       </div>
-
 
       <div className="flex-1 p-4 overflow-y-auto ">
         {/* SCHEDULE TAB */}

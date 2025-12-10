@@ -18,10 +18,11 @@ export default async function DashboardRouteLayout({
 
   return (
     <div className="flex bg-white font-inter">
-      <div className="w-75">
+      <div className="w-75 ">
+        
         <Sidebar />
       </div>
-      <main className="h-screen w-full">
+      <main className="h-screen w-full overflow-y-scroll slim-scrollbar">
         <div>{children}</div>
         <ToastContainer />
       </main>

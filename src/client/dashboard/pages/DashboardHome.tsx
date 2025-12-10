@@ -32,7 +32,7 @@ export default function DashboardHome() {
 
   return (
     <div className="w-full h-screen overflow-y-auto">
-      <div className="border-b px-4 py-3 border-[#DDDDDD] flex justify-between items-center">
+      <div className="border-b px-4 py-3 bg-[#FAFAFA] border-[#DDDDDD] flex justify-between items-center">
         <h1 className="text-[20px] -tracking-[1px]">Overview</h1>
         <Link href="/dashboard/create">
           <button className="bg-[#171717] text-[#fafafa] px-3 py-2 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-[#333] transition">

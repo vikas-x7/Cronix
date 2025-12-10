@@ -48,7 +48,7 @@ export default function Sidebar() {
   return (
     <aside className="h-screen bg-[#FAFAFA] border-r border-[#DDDDDD] flex flex-col justify-between">
       <div>
-        <div className="flex items-center px-1 py-1 mt-3 border-b  border-[#DDDDDD]">
+        <div className="flex items-center px-1 py-3 mt-0.5 border-b  border-[#DDDDDD]">
           <Image src="/image/cronixlog.png" alt="" className="w-8 h-8 rounded-sm" width={200} height={200} />
           <Link href="/">
             <span className="text-[18px] tracking-tight">Cronix</span>

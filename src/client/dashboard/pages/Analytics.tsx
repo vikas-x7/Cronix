@@ -21,8 +21,10 @@ export default function Analytics() {
 
   return (
     <div className="w-full h-screen overflow-y-auto">
-      <div className="border-b px-4 py-4 border-[#E5E5E5]">
-        <h1 className="text-[20px] -tracking-[1px]">Analytics</h1>
+   
+
+        <div className="border-b px-4 py-3 mt-1 bg-[#FAFAFA] border-[#DDDDDD] flex justify-between items-center">
+        <h1 className="text-[20px] -tracking-[1px]">Analytics </h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-6 py-6">

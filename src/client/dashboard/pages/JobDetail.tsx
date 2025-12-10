@@ -76,6 +76,8 @@ export default function JobDetail({ jobId }: { jobId: string }) {
             </p>
           </div>
         </div>
+
+        
         <div className="flex gap-2">
           <button
             onClick={handleTrigger}

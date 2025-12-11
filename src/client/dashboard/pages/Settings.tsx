@@ -4,14 +4,12 @@ import { FcGoogle } from 'react-icons/fc';
 import { MdVerified } from 'react-icons/md';
 
 export default function Settings({ user }: { user: any }) {
-  const jobsCreatedCount = user.cronJobs.length;
-  const displayMemberSince = 'April 11, 2026';
+  const jobsCreatedCount = user?.cronJobs?.length || 0;
+  const displayMemberSince = user?.createdAt ? new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Unknown Date';
 
   return (
     <div className="h-full w-full">
-  
       <div className="">
-        
         <div className="bg-white  text-sm   overflow-hidden shadow-sm">
           <div className="h-32 bg-[#FAFAFA] border-b border-[#DDDDDD] w-full" />
           <div className="px-6 pb-6 relative">
@@ -41,7 +39,6 @@ export default function Settings({ user }: { user: any }) {
           </div>
         </div>
 
-       
         <div className="  bg-white shadow-sm overflow-hidden">
           <div className="px-6 py-5 border-b border-gray-100">
             <h3 className="text-[14px] font-semibold text-[#111111]">Account Details</h3>
@@ -68,7 +65,6 @@ export default function Settings({ user }: { user: any }) {
           </div>
         </div>
 
-        
         <div className=" bg-white shadow-sm overflow-hidden mb-8">
           <div className="px-6 py-5 border-b border-gray-100">
             <h3 className="text-[14px] font-semibold text-[#111111]">Account Actions</h3>

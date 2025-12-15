@@ -51,12 +51,10 @@ const Navbar = () => {
               <button onClick={() => handleSmoothScroll('use-cases')} className="text-[13px] font-medium text-gray-600 hover:text-black transition-colors cursor-pointer">
                 Use Cases
               </button>
-              <Link href="#" className="text-[13px] font-medium text-gray-600 hover:text-black">
-                Pricing
-              </Link>
-              <Link href="#" className="text-[13px] font-medium text-gray-600 hover:text-black">
-                About
-              </Link>
+              <button onClick={() => handleSmoothScroll('faq')} className="text-[13px] font-medium text-gray-600 hover:text-black transition-colors cursor-pointer">
+                FAQ
+              </button>
+           
             </div>
           </div>
 
@@ -87,12 +85,10 @@ const Navbar = () => {
             <button onClick={() => handleSmoothScroll('use-cases')} className="text-left text-lg font-medium text-gray-800">
               Use Cases
             </button>
-            <Link href="#" className="text-lg font-medium text-gray-800">
-              Pricing
-            </Link>
-            <Link href="#" className="text-lg font-medium text-gray-800">
-              Blog
-            </Link>
+            <button onClick={() => handleSmoothScroll('faq')} className="text-left text-lg font-medium text-gray-800">
+              FAQ
+            </button>
+          
             <hr />
             <Link href="#" className="flex items-center gap-3 text-lg font-medium text-gray-800">
               <FaSlack className="text-[#4A154B]" /> Slack Community

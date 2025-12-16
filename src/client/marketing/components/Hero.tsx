@@ -26,8 +26,8 @@ const Hero = () => {
   return (
     <section className="relative w-full overflow-hidden bg-whtie text-black pt-20 pb-10 md:pt-32">
       <div className="container mx-auto px-4 text-center ">
-        <div className="mb-6 inline-block rounded-full border border-[#ECECEC] px-4 py-1 ">
-          <p className="text-[12px] font-normal text-[#525252] md:text-[11px]">Schedule, automate, and never miss a job</p>
+        <div className="mb-6 inline-block rounded-full border border-[#ECECEC] px-4 py-0.5 ">
+          <p className="text-[12px] font-normal text-[#0e0e0e] md:text-[11px]">Schedule, automate, and never miss a job</p>
         </div>
 
         <h1 className="mx-auto mb-4 max-w-4xl text-4xl -tracking-[4px]  md:text-[58px] leading-15">
@@ -43,7 +43,7 @@ const Hero = () => {
             onClick={handleSeeDemo}
             className="flex w-full items-center justify-center gap-2 border border-gray-300 px-3 py-2 transition-all hover:bg-gray-50 sm:w-auto text-[12px] font-medium cursor-pointer"
           >
-            Book a demo <GoArrowRight />
+            See a demo <GoArrowRight />
           </button>
           <button
             onClick={handleGetStarted}
@@ -59,7 +59,7 @@ const Hero = () => {
 
             <div className="absolute inset-0 flex items-center justify-center p-15">
               <img
-                src="https://res.cloudinary.com/dyv9kenuj/image/upload/q_auto/f_auto/v1775595036/Screenshot_from_2026-04-08_02-19-31_wsbnty.png"
+                src="https://res.cloudinary.com/dyv9kenuj/image/upload/q_auto/f_auto/v1776047742/Screenshot_from_2026-04-13_08-04-05_pxglzw.png"
                 alt=""
                 className="w-full rounded-[5px] relative z-10 border-12 border-white/30"
               />

@@ -7,6 +7,7 @@ import IntegrationSection from "@/client/marketing/components/IntegrationSection
 import Navbar from "@/client/marketing/components/Navbar";
 import UseCases from "@/client/marketing/components/UseCases";
 import React from "react";
+import FAQ from "./components/Faq";
 
 export default function HomePage() {
   return (
@@ -15,7 +16,9 @@ export default function HomePage() {
       <Hero />
       <IntegrationSection />
       <UseCases />
+      <FAQ />
       <CTASection />
+
       <Footer />
     </>
   );

@@ -25,6 +25,7 @@ import { useJobStore } from '@/client/dashboard/stores/jobStore';
 import { useUIStore } from '@/client/dashboard/stores/uiStore';
 import StatusBadge from '../components/StatusBadge';
 import PageLoader from '../components/PageLoader';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 export default function CronJobsList() {
   const { data: jobs, isLoading, error } = useCronJobs();
@@ -34,6 +35,23 @@ export default function CronJobsList() {
   const addToast = useUIStore((s) => s.addToast);
   const { statusFilter, setStatusFilter, searchQuery, setSearchQuery } = useJobStore();
 
+  const [confirmConfig, setConfirmConfig] = React.useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    confirmText: string;
+    confirmButtonClass?: string;
+    action: () => void;
+  }>({
+    isOpen: false,
+    title: '',
+    message: '',
+    confirmText: 'Confirm',
+    action: () => {},
+  });
+
+  const closeConfirm = () => setConfirmConfig((prev) => ({ ...prev, isOpen: false }));
+
   const filteredJobs = jobs?.filter((job) => {
     if (statusFilter !== 'all' && job.status !== statusFilter) return false;
     if (searchQuery && !job.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
@@ -41,38 +59,46 @@ export default function CronJobsList() {
   });
 
   async function handleToggle(id: string, currentStatus: string) {
-    try {
-      await updateJob.mutateAsync({
-        id,
-        status: currentStatus === 'active' ? 'paused' : 'active',
-      });
-      addToast({
-        type: 'success',
-        message: `Job ${currentStatus === 'active' ? 'paused' : 'activated'}`,
-      });
-    } catch {
-      addToast({ type: 'error', message: 'Failed to update job status' });
-    }
+    const newStatus = currentStatus === 'active' ? 'paused' : 'active';
+    setConfirmConfig({
+      isOpen: true,
+      title: currentStatus === 'active' ? 'Pause Cron Job' : 'Resume Cron Job',
+      message: `Are you sure you want to ${newStatus} this job?`,
+      confirmText: currentStatus === 'active' ? 'Pause' : 'Resume',
+      confirmButtonClass: 'bg-black hover:bg-[#222222]',
+      action: async () => {
+        try {
+          await updateJob.mutateAsync({
+            id,
+            status: newStatus,
+          });
+          addToast({
+            type: 'success',
+            message: `Job ${newStatus === 'active' ? 'activated' : 'paused'}`,
+          });
+        } catch {
+          addToast({ type: 'error', message: 'Failed to update job status' });
+        }
+      },
+    });
   }
 
   async function handleDelete(id: string) {
-    if (!confirm('Are you sure you want to delete this cron job?')) return;
-    try {
-      await deleteJob.mutateAsync(id);
-      addToast({ type: 'success', message: 'Job deleted' });
-    } catch {
-      addToast({ type: 'error', message: 'Failed to delete job' });
-    }
-  }
-
-  async function handleTrigger(id: string) {
-    try {
-      addToast({ type: 'info', message: 'Triggering job...' });
-      await triggerJob.mutateAsync(id);
-      addToast({ type: 'success', message: 'Job triggered successfully!' });
-    } catch {
-      addToast({ type: 'error', message: 'Failed to trigger job' });
-    }
+    setConfirmConfig({
+      isOpen: true,
+      title: 'Delete Cron Job',
+      message: 'Are you sure you want to delete this cron job? This action cannot be undone.',
+      confirmText: 'Delete',
+      confirmButtonClass: 'bg-red-600 hover:bg-red-700',
+      action: async () => {
+        try {
+          await deleteJob.mutateAsync(id);
+          addToast({ type: 'success', message: 'Job deleted' });
+        } catch {
+          addToast({ type: 'error', message: 'Failed to delete job' });
+        }
+      },
+    });
   }
 
   if (isLoading) {
@@ -96,7 +122,6 @@ export default function CronJobsList() {
     <div className="w-full h-screen overflow-y-auto">
       <div className="border-b px-4 py-3 mt-1 bg-[#FAFAFA] border-[#DDDDDD] flex justify-between items-center">
         <h1 className="text-[20px] -tracking-[1px]">Cron jobs</h1>
-      
       </div>
       {/* Header */}
       <div className="px-6 py-6 pb-4 border-b border-[#E5E5E5] bg-white">
@@ -119,16 +144,7 @@ export default function CronJobsList() {
                 </button>
               </Link>
 
-              <div className="flex flex-col items-end gap-4">
-                {/* Date Dropdown */}
-                <button className="flex items-center gap-3 px-3 py-1.5 border border-[#E4E4E7]  rounded-[1px] text-[13px] font-medium text-[#111827] hover:bg-[#E4E4E7] transition-colors">
-                  <span className="bg-[#E4E4E7] text-[#52525b] px-1 rounded-sm text-[11px]">90d</span>
-                  Past 90 days
-                  <FiChevronDown className="text-[#52525b]" />
-                </button>
-
-                {/* Right Buttons Row */}
-              </div>
+              <div className="flex flex-col items-end gap-4"></div>
 
               <div className="flex items-center gap-2">
                 <button className="flex items-center gap-2 px-3 py-1.5 border border-[#E4E4E7] rounded-[1px] text-[13px] font-medium text-[#52525b] hover:bg-[#F4F4F5] transition-colors">
@@ -139,28 +155,23 @@ export default function CronJobsList() {
                   <FiRefreshCw className="text-[#52525b]" size={14} />
                   Refresh
                 </button>
+
+                <span className="text-[12px] text-[#52525b] font-medium  border border-[#E4E4E7] px-3 py-1.5">
+                  Totol job {filteredJobs?.length ?? 0} {(filteredJobs?.length ?? 0) !== 1 ? 's' : ''}
+                </span>
               </div>
             </div>
           </div>
-
-          {/* Right Column */}
+          <div className="flex items-center justify-between  gap-4 border border-[#E5E5E5] bg-white px-3 py-2">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search jobs..."
+              className=" text-[12px] text-[#171717] rounded-[1px] outline-none w-124  transition placeholder:text-neutral-400"
+            />
+          </div>
         </div>
-      </div>
-
-      {/* Filters (Existing functionality, slightly restyled to fit below) */}
-      <div className="border-b border-[#E5E5E5] px-6 py-3 flex items-center justify-between ">
-        <div className="flex items-center gap-4">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search jobs..."
-            className="border border-[#E5E5E5] bg-white px-3 py-1.5 text-[12px] text-[#171717] rounded-[1px] outline-none w-124  transition placeholder:text-neutral-400"
-          />
-        </div>
-        <span className="text-[12px] text-neutral-400 font-medium">
-          {filteredJobs?.length ?? 0} job{(filteredJobs?.length ?? 0) !== 1 ? 's' : ''}
-        </span>
       </div>
 
       {/* Jobs List */}
@@ -180,7 +191,7 @@ export default function CronJobsList() {
         ) : (
           <div className="border border-[#E5E5E5]">
             {/* Table Header */}
-            <div className="grid grid-cols-12 px-4 py-2.5 bg-[#FAFAFA] border-b border-[#E5E5E5] text-[10px] font-medium uppercase text-black/90">
+            <div className="grid grid-cols-12 px-4 py-2.5 bg-[#FAFAFA] border-b border-[#E5E5E5] text-[12px] font-medium  text-black/90">
               <div className="col-span-3">Title</div>
               <div className="col-span-3">URL</div>
               <div className="col-span-1">Method</div>
@@ -215,19 +226,11 @@ export default function CronJobsList() {
                 </div>
                 <div className="col-span-2 flex justify-end gap-1">
                   <button
-                    onClick={() => handleTrigger(job.id)}
-                    disabled={triggerJob.isPending}
-                    title="Trigger now"
-                    className="p-1.5 border border-[#E5E5E5] text-black/80 hover:text-[#171717] hover:border-[#171717] transition disabled:opacity-50"
-                  >
-                    <FiPlay size={12} />
-                  </button>
-                  <button
                     onClick={() => handleToggle(job.id, job.status)}
                     title={job.status === 'active' ? 'Pause' : 'Resume'}
-                    className="p-1.5 border border-[#E5E5E5] text-black/80 hover:text-amber-500 hover:border-amber-300 transition"
+                    className={`p-1.5 border border-[#E5E5E5] transition ${job.status === 'active' ? 'text-black/80 hover:text-amber-500 hover:border-amber-300' : 'text-black/80 hover:text-emerald-500 hover:border-emerald-300'}`}
                   >
-                    <FiPause size={12} />
+                    {job.status === 'active' ? <FiPause size={12} /> : <FiPlay size={12} />}
                   </button>
                   <button onClick={() => handleDelete(job.id)} title="Delete" className="p-1.5 border border-[#E5E5E5] text-black/80 hover:text-red-500 hover:border-red-300 transition">
                     <FiTrash2 size={12} />
@@ -243,6 +246,16 @@ export default function CronJobsList() {
           </div>
         )}
       </div>
+
+      <ConfirmationModal
+        isOpen={confirmConfig.isOpen}
+        title={confirmConfig.title}
+        message={confirmConfig.message}
+        confirmText={confirmConfig.confirmText}
+        confirmButtonClass={confirmConfig.confirmButtonClass}
+        onConfirm={confirmConfig.action}
+        onCancel={closeConfirm}
+      />
     </div>
   );
 }

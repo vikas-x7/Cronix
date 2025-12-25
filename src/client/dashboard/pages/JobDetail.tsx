@@ -3,11 +3,12 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { FiArrowLeft, FiPlay, FiPause, FiTrash2, FiExternalLink } from 'react-icons/fi';
-import { useCronJob, useUpdateCronJob, useDeleteCronJob, useTriggerCronJob } from '@/client/dashboard/hooks/useCronJobs';
+import { useCronJob, useUpdateCronJob, useDeleteCronJob } from '@/client/dashboard/hooks/useCronJobs';
 import { useExecutions } from '@/client/dashboard/hooks/useExecutions';
 import { useUIStore } from '@/client/dashboard/stores/uiStore';
 import StatusBadge from '../components/StatusBadge';
 import PageLoader from '../components/PageLoader';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 export default function JobDetail({ jobId }: { jobId: string }) {
   const router = useRouter();
@@ -15,41 +16,65 @@ export default function JobDetail({ jobId }: { jobId: string }) {
   const { data: executions, isLoading: execLoading } = useExecutions(jobId);
   const updateJob = useUpdateCronJob();
   const deleteJob = useDeleteCronJob();
-  const triggerJob = useTriggerCronJob();
   const addToast = useUIStore((s) => s.addToast);
+
+  const [confirmConfig, setConfirmConfig] = React.useState<{
+    isOpen: boolean;
+    title: string;
+    message: string;
+    confirmText: string;
+    confirmButtonClass?: string;
+    action: () => void;
+  }>({
+    isOpen: false,
+    title: '',
+    message: '',
+    confirmText: 'Confirm',
+    action: () => {},
+  });
+
+  const closeConfirm = () => setConfirmConfig((prev) => ({ ...prev, isOpen: false }));
 
   async function handleToggle() {
     if (!job) return;
-    try {
-      await updateJob.mutateAsync({
-        id: job.id,
-        status: job.status === 'active' ? 'paused' : 'active',
-      });
-      addToast({ type: 'success', message: `Job ${job.status === 'active' ? 'paused' : 'activated'}` });
-    } catch {
-      addToast({ type: 'error', message: 'Failed to update' });
-    }
+    const newStatus = job.status === 'active' ? 'paused' : 'active';
+    setConfirmConfig({
+      isOpen: true,
+      title: job.status === 'active' ? 'Pause Cron Job' : 'Resume Cron Job',
+      message: `Are you sure you want to ${newStatus} this job?`,
+      confirmText: job.status === 'active' ? 'Pause' : 'Resume',
+      confirmButtonClass: 'bg-black hover:bg-[#222222]',
+      action: async () => {
+        try {
+          await updateJob.mutateAsync({
+            id: job.id,
+            status: newStatus,
+          });
+          addToast({ type: 'success', message: `Job ${newStatus === 'active' ? 'activated' : 'paused'}` });
+        } catch {
+          addToast({ type: 'error', message: 'Failed to update' });
+        }
+      },
+    });
   }
 
   async function handleDelete() {
-    if (!confirm('Delete this cron job?')) return;
-    try {
-      await deleteJob.mutateAsync(jobId);
-      addToast({ type: 'success', message: 'Job deleted' });
-      router.push('/dashboard/cronjobs');
-    } catch {
-      addToast({ type: 'error', message: 'Failed to delete' });
-    }
-  }
-
-  async function handleTrigger() {
-    try {
-      addToast({ type: 'info', message: 'Triggering...' });
-      await triggerJob.mutateAsync(jobId);
-      addToast({ type: 'success', message: 'Triggered!' });
-    } catch {
-      addToast({ type: 'error', message: 'Failed to trigger' });
-    }
+    setConfirmConfig({
+      isOpen: true,
+      title: 'Delete Cron Job',
+      message: 'Are you sure you want to delete this cron job? This action cannot be undone.',
+      confirmText: 'Delete',
+      confirmButtonClass: 'bg-red-600 hover:bg-red-700',
+      action: async () => {
+        try {
+          await deleteJob.mutateAsync(jobId);
+          addToast({ type: 'success', message: 'Job deleted' });
+          router.push('/dashboard/cronjobs');
+        } catch {
+          addToast({ type: 'error', message: 'Failed to delete' });
+        }
+      },
+    });
   }
 
   if (jobLoading) {
@@ -77,20 +102,12 @@ export default function JobDetail({ jobId }: { jobId: string }) {
           </div>
         </div>
 
-        
         <div className="flex gap-2">
           <button
-            onClick={handleTrigger}
-            disabled={triggerJob.isPending}
-            className="flex items-center gap-1 border border-[#E5E5E5] px-3 py-1.5 text-[11px] font-medium text-neutral-500 hover:border-emerald-300 hover:text-emerald-600 transition disabled:opacity-50"
-          >
-            <FiPlay size={12} /> Trigger
-          </button>
-          <button
             onClick={handleToggle}
-            className="flex items-center gap-1 border border-[#E5E5E5] px-3 py-1.5 text-[11px] font-medium text-neutral-500 hover:border-amber-300 hover:text-amber-600 transition"
+            className={`flex items-center gap-1 border border-[#E5E5E5] px-3 py-1.5 text-[11px] font-medium transition ${job.status === 'active' ? 'text-neutral-500 hover:border-amber-300 hover:text-amber-600' : 'text-neutral-500 hover:border-emerald-300 hover:text-emerald-600'}`}
           >
-            <FiPause size={12} />
+            {job.status === 'active' ? <FiPause size={12} /> : <FiPlay size={12} />}
             {job.status === 'active' ? 'Pause' : 'Resume'}
           </button>
           <button
@@ -140,9 +157,6 @@ export default function JobDetail({ jobId }: { jobId: string }) {
         ) : !executions?.length ? (
           <div className="border border-dashed border-[#E5E5E5] py-12 flex flex-col items-center">
             <p className="text-[13px] text-neutral-400">No executions yet</p>
-            <button onClick={handleTrigger} className="mt-3 border border-[#171717] px-4 py-2 text-[12px] text-[#171717] hover:bg-[#171717] hover:text-white transition flex items-center gap-1">
-              <FiPlay size={14} /> Trigger first execution
-            </button>
           </div>
         ) : (
           <div className="border border-[#E5E5E5]">
@@ -168,6 +182,16 @@ export default function JobDetail({ jobId }: { jobId: string }) {
           </div>
         )}
       </div>
+
+      <ConfirmationModal
+        isOpen={confirmConfig.isOpen}
+        title={confirmConfig.title}
+        message={confirmConfig.message}
+        confirmText={confirmConfig.confirmText}
+        confirmButtonClass={confirmConfig.confirmButtonClass}
+        onConfirm={confirmConfig.action}
+        onCancel={closeConfirm}
+      />
     </div>
   );
 }

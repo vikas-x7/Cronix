@@ -2,8 +2,12 @@
 
 import { FcGoogle } from 'react-icons/fc';
 import { MdVerified } from 'react-icons/md';
+import { useState } from 'react';
+import { signOut } from 'next-auth/react';
+import { IoIosLogOut } from 'react-icons/io';
 
 export default function Settings({ user }: { user: any }) {
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const jobsCreatedCount = user?.cronJobs?.length || 0;
   const displayMemberSince = user?.createdAt ? new Date(user.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Unknown Date';
 
@@ -78,6 +82,19 @@ export default function Settings({ user }: { user: any }) {
                 </div>
                 <span className="inline-flex items-center rounded-md bg-gray-50 px-2.5 py-1 text-[11px] font-medium text-gray-400 ring-1 ring-inset ring-gray-200">Coming Soon</span>
               </li>
+              <li className="flex items-center justify-between px-6 py-5">
+                <div>
+                  <p className="font-medium text-[#111111]">Log Out</p>
+                  <p className="text-[12px] text-gray-500 mt-1">Sign out of your account on this device</p>
+                </div>
+                <button
+                  onClick={() => setIsLogoutModalOpen(true)}
+                  className="bg-white border border-[#DDDDDD] text-[#111111] hover:bg-[#F5F5F5] transition px-4 py-1.5 rounded-[3px] text-[12px] font-medium cursor-pointer flex items-center gap-2"
+                >
+                  <IoIosLogOut size={16} />
+                  Log Out
+                </button>
+              </li>
               <li className="flex items-center justify-between px-6 py-5 bg-[#fff8f8]">
                 <div>
                   <p className="font-medium text-[#dc2626]">Delete Account</p>
@@ -89,6 +106,22 @@ export default function Settings({ user }: { user: any }) {
           </div>
         </div>
       </div>
+      {isLogoutModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white p-6 rounded-[3px] shadow-xl w-full max-w-sm border border-[#DDDDDD] animate-in zoom-in-95 duration-200">
+            <h2 className="text-lg  text-[#171717] font-medium mb-2">Confirm Logout</h2>
+            <p className="text-[12px] text-[#444444] mb-6">Are you sure you want to sign out? You will need to log in again to access your dashboard.</p>
+            <div className="flex justify-end gap-3 ">
+              <button onClick={() => setIsLogoutModalOpen(false)} className="px-4 py-2 text-[12px] text-[#171717] bg-[#F5F5F5] hover:bg-[#E5E5E5] rounded-[3px] transition  cursor-pointer">
+                Cancel
+              </button>
+              <button onClick={() => signOut({ callbackUrl: '/' })} className="px-4 py-2 text-[12px] text-white bg-black hover:bg-[#222222] rounded-[3px] transition cursor-pointer ">
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

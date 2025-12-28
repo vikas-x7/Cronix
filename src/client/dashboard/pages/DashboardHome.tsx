@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { IoAdd } from 'react-icons/io5';
-import { FiActivity, FiCheckCircle, FiXCircle, FiClock, FiPause, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiActivity, FiCheckCircle, FiXCircle, FiClock, FiPause, FiChevronLeft, FiChevronRight, FiRefreshCw } from 'react-icons/fi';
 import { useState } from 'react';
 import { useDashboardStats } from '@/client/dashboard/hooks/useDashboardStats';
 import StatCard from '../components/StatCard';
@@ -11,7 +11,7 @@ import PageLoader from '../components/PageLoader';
 export default function DashboardHome() {
   const [page, setPage] = useState(1);
   const limit = 10;
-  const { data: stats, isLoading, error } = useDashboardStats(page, limit);
+  const { data: stats, isLoading, isFetching, error, refetch } = useDashboardStats(page, limit);
 
   if (isLoading) {
     return <PageLoader />;
@@ -70,6 +70,14 @@ export default function DashboardHome() {
               View All Jobs
             </button>
           </Link>
+          <button
+            onClick={() => refetch()}
+            disabled={isFetching}
+            className="border border-[#E5E5E5] px-4 py-2 text-[12px] text-black/90 hover:border-[#171717] hover:text-[#171717] transition flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <FiRefreshCw size={14} className={isFetching ? 'animate-spin' : ''} />
+            Refresh
+          </button>
         </div>
       </div>
 
@@ -92,7 +100,12 @@ export default function DashboardHome() {
               <div className="col-span-2">Time</div>
             </div>
 
-            <div className="flex-1 overflow-y-auto slim-scrollbar">
+            <div className="flex-1 overflow-y-auto slim-scrollbar relative">
+              {isFetching && (
+                <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px] flex items-center justify-center z-10 transition-all">
+                  <div className="w-5 h-5 border-2 border-[#171717] border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
               {stats.recentExecutions.map((exec) => (
                 <div key={exec.id} className="grid grid-cols-12 items-center px-4 py-2.5 border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition">
                   <div className="col-span-3">

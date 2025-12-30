@@ -3,12 +3,12 @@ import { executionRepository } from '../execution/execution.repository';
 import { executionService } from '../execution/execution.service';
 
 export class DashboardService {
-  async getStats(userId: string, executionsPage = 1, executionsLimit = 10) {
+  async getStats(userId: string, executionsPage = 1, executionsLimit = 10, statusFilter?: string, search?: string) {
     const executionsOffset = (executionsPage - 1) * executionsLimit;
     const [jobCounts, executionStats, recentExecutions] = await Promise.all([
       cronJobRepository.countByUserId(userId),
       executionRepository.getStatsByUserId(userId),
-      executionService.getRecentByUser(userId, executionsLimit, executionsOffset),
+      executionService.getRecentByUser(userId, executionsLimit, executionsOffset, statusFilter, search),
     ]);
 
     let totalJobs = 0;

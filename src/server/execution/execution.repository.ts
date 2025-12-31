@@ -11,11 +11,22 @@ export class ExecutionRepository {
     });
   }
 
-  async findRecentByUserId(userId: string, limit = 10, offset = 0) {
-    return prisma.execution.findMany({
-      where: {
-        cronJob: { userId },
+  async findRecentByUserId(userId: string, limit = 10, offset = 0, statusFilter?: string, search?: string) {
+    const where: Prisma.ExecutionWhereInput = {
+      cronJob: {
+        userId,
+        ...(search
+          ? {
+              OR: [{ title: { contains: search, mode: 'insensitive' as const } }, { url: { contains: search, mode: 'insensitive' as const } }],
+            }
+          : {}),
       },
+      ...(statusFilter === 'success' ? { success: true } : {}),
+      ...(statusFilter === 'failed' ? { success: false } : {}),
+    };
+
+    return prisma.execution.findMany({
+      where,
       include: {
         cronJob: {
           select: { id: true, title: true, url: true },

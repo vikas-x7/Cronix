@@ -5,8 +5,8 @@ export class ExecutionService {
     return executionRepository.findByCronJobId(cronJobId, limit, offset);
   }
 
-  async getRecentByUser(userId: string, limit = 10, offset = 0) {
-    return executionRepository.findRecentByUserId(userId, limit, offset);
+  async getRecentByUser(userId: string, limit = 10, offset = 0, statusFilter?: string, search?: string) {
+    return executionRepository.findRecentByUserId(userId, limit, offset, statusFilter, search);
   }
 
   async getJobStats(cronJobId: string) {

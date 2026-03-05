@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
-import { FiHome, FiPlusSquare, FiClock, FiActivity, FiSettings } from 'react-icons/fi';
+import { FiHome, FiPlusSquare, FiClock, FiActivity, FiSettings, FiList, FiLink } from 'react-icons/fi';
 import { IoIosLogOut } from 'react-icons/io';
 import Image from 'next/image';
 import { useState } from 'react';
+import { MdOutlineWebhook } from 'react-icons/md';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -33,6 +34,16 @@ export default function Sidebar() {
       icon: FiClock,
     },
     {
+      name: 'Executions',
+      href: '/dashboard/executions',
+      icon: FiList,
+    },
+    {
+      name: 'Webhooks',
+      href: '/dashboard/webhooks',
+      icon: MdOutlineWebhook,
+    },
+    {
       name: 'Analytics',
       href: '/dashboard/analytics',
       icon: FiActivity,
@@ -57,7 +68,7 @@ export default function Sidebar() {
 
         <nav>
           <p className="text-[14px] px-2 pt-5 py-2 uppercase font-mono">Product</p>
-          <ul className="flex flex-col px-2 gap-y-1 ">
+          <ul className="flex flex-col px-2 gap-y-0.5 ">
             {menu.map((item) => {
               const Icon = item.icon;
               const active = item.href === '/dashboard' ? pathname === '/dashboard' : pathname.startsWith(item.href);
@@ -102,24 +113,16 @@ export default function Sidebar() {
             <h2 className="text-lg  text-[#171717] font-medium mb-2">Confirm Logout</h2>
             <p className="text-[12px] text-[#444444] mb-6">Are you sure you want to sign out? You will need to log in again to access your dashboard.</p>
             <div className="flex justify-end gap-3 ">
-              <button
-                onClick={() => setIsLogoutModalOpen(false)}
-                className="px-4 py-2 text-[12px] text-[#171717] bg-[#F5F5F5] hover:bg-[#E5E5E5] rounded-[3px] transition  cursor-pointer"
-              >
+              <button onClick={() => setIsLogoutModalOpen(false)} className="px-4 py-2 text-[12px] text-[#171717] bg-[#F5F5F5] hover:bg-[#E5E5E5] rounded-[3px] transition  cursor-pointer">
                 Cancel
               </button>
-              <button
-                onClick={() => signOut({ callbackUrl: '/' })}
-                className="px-4 py-2 text-[12px] text-white bg-black hover:bg-[#222222] rounded-[3px] transition cursor-pointer "
-              >
+              <button onClick={() => signOut({ callbackUrl: '/' })} className="px-4 py-2 text-[12px] text-white bg-black hover:bg-[#222222] rounded-[3px] transition cursor-pointer ">
                 Logout
               </button>
             </div>
           </div>
         </div>
       )}
-
-
     </aside>
   );
 }

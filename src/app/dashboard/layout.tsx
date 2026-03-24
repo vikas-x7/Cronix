@@ -18,7 +18,7 @@ export default async function DashboardRouteLayout({
 
   return (
     <div className="flex bg-white font-inter">
-      <div className="w-75 ">
+      <div className="w-70 ">
         
         <Sidebar />
       </div>

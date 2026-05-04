@@ -7,18 +7,141 @@ datasource db {
   provider = "postgresql"
 }
 
+enum JobType {
+  CRON
+  EVENT
+}
 
-model User { 
-  id    Int     @id @default(autoincrement()) 
-  email String  @unique
-  name  String?
-  posts Post[]
-} 
-model Post { 
-  id        Int     @id @default(autoincrement()) 
-  title     String
-  content   String?
-  published Boolean @default(false) 
-  author    User    @relation(fields: [authorId], references: [id]) 
-  authorId  Int
-} 
+enum JobStatus {
+  ACTIVE
+  PAUSED
+  DELETED
+}
+
+enum HttpMethod {
+  GET
+  POST
+  PUT
+  PATCH
+  DELETE
+}
+
+enum ExecutionStatus {
+  RUNNING
+  SUCCESS
+  FAILED
+  RETRYING
+}
+
+enum TriggerType {
+  SCHEDULED
+  MANUAL
+  WEBHOOK
+}
+
+enum LogLevel {
+  INFO
+  WARN
+  ERROR
+}
+
+enum OAuthProvider {
+  GOOGLE
+  GITHUB
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  avatar    String?
+  accounts  Account[]
+  spaces    Space[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Account {
+  id                String        @id @default(cuid())
+  provider          OAuthProvider
+  providerAccountId String
+  accessToken       String?
+  refreshToken      String?
+  expiresAt         Int?
+  userId            String
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Space {
+  id        String   @id @default(cuid())
+  name      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobs      Job[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Job {
+  id           String      @id @default(cuid())
+  name         String
+  type         JobType
+  status       JobStatus   @default(ACTIVE)
+  endpoint     String
+  method       HttpMethod
+  headers      Json?
+  body         Json?
+  schedule     String?
+  webhookToken String?     @unique
+  retryCount   Int         @default(3)
+  retryDelay   Int         @default(30)
+  timeout      Int         @default(30)
+  failureEmail Boolean     @default(false)
+  spaceId    String
+  space      Space     @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  executions Execution[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([spaceId])
+  @@index([status])
+  @@index([webhookToken])
+}
+
+model Execution {
+  id         String          @id @default(cuid())
+  status     ExecutionStatus @default(RUNNING)
+  trigger    TriggerType
+  attempt    Int             @default(1)
+  httpStatus Int?
+  response   Json?
+  error      String?
+  startedAt  DateTime        @default(now())
+  finishedAt DateTime?
+  duration   Int?
+  jobId      String
+  job        Job             @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  logs       Log[]
+
+  @@index([jobId])
+  @@index([status])
+  @@index([startedAt])
+}
+
+model Log {
+  id          String    @id @default(cuid())
+  message     String
+  level       LogLevel  @default(INFO)
+  timestamp   DateTime  @default(now())
+  executionId String
+  execution   Execution @relation(fields: [executionId], references: [id], onDelete: Cascade)
+
+  @@index([executionId])
+}

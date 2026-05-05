@@ -1,0 +1,17 @@
+import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { json, urlencoded } from 'express';
+
+export function setupApp(app: INestApplication): void {
+  app.use(json({ limit: '100kb' }));
+  app.use(urlencoded({ limit: '100kb', extended: true }));
+  app.setGlobalPrefix('api/v1');
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
+  app.enableShutdownHooks();
+}

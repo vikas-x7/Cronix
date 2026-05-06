@@ -1,5 +1,6 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { json, urlencoded } from 'express';
+import { GlobalExceptionFilter } from '../src/common/filters/http-exception.filter';
 
 export function setupApp(app: INestApplication): void {
   app.use(json({ limit: '100kb' }));
@@ -14,4 +15,5 @@ export function setupApp(app: INestApplication): void {
     }),
   );
   app.enableShutdownHooks();
+  app.useGlobalFilters(new GlobalExceptionFilter());
 }

@@ -93,3 +93,78 @@ server:dev: Invalid `prisma.account.findFirst()` invocation:
 server:dev: 
 server:dev: 
 server:dev: The table `public.Account` does not exist in the current database.
+server:dev: [2J[3J[H[[90m6:32:42 AM[0m] File change detected. Starting incremental compilation...
+server:dev: 
+server:dev: [[90m6:32:43 AM[0m] Found 0 errors. Watching for file changes.
+server:dev: 
+server:dev: ◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +15ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +3ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/api/v1}:[39m[38;5;3m +32ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1, GET} route[39m[38;5;3m +4ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/api/v1/auth}:[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/google, GET} route[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/google/callback, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/github, GET} route[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/github/callback, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/refresh, POST} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/logout, POST} route[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:44 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/me, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23706  - [39m07/02/2026, 6:32:45 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +120ms[39m
+server:dev: [2J[3J[H[[90m6:32:48 AM[0m] File change detected. Starting incremental compilation...
+server:dev: 
+server:dev: [[90m6:32:48 AM[0m] Found 0 errors. Watching for file changes.
+server:dev: 
+server:dev: ◇ injected env (0) from .env // tip: ◈ encrypted .env [www.dotenvx.com]
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +12ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +2ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/api/v1}:[39m[38;5;3m +23ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1, GET} route[39m[38;5;3m +3ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/api/v1/auth}:[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/google, GET} route[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/google/callback, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/github, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/github/callback, GET} route[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/refresh, POST} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/logout, POST} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/me, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23818  - [39m07/02/2026, 6:32:49 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +72ms[39m
+server:dev: [2J[3J[H[[90m6:32:56 AM[0m] File change detected. Starting incremental compilation...
+server:dev: 
+server:dev: [[90m6:32:56 AM[0m] Found 0 errors. Watching for file changes.
+server:dev: 
+server:dev: ◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +13ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +3ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/api/v1}:[39m[38;5;3m +25ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1, GET} route[39m[38;5;3m +2ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/api/v1/auth}:[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/google, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/google/callback, GET} route[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/github, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/github/callback, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/refresh, POST} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/logout, POST} route[39m[38;5;3m +1ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/me, GET} route[39m[38;5;3m +0ms[39m
+server:dev: [32m[Nest] 23978  - [39m07/02/2026, 6:32:57 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +90ms[39m

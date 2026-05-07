@@ -1,5 +1,5 @@
 import { INestApplication } from '@nestjs/common';
-import { env } from 'config/env.validation';
+import { env } from './env.validation';
 import helmet from 'helmet';
 
 export function setupSecurity(app: INestApplication): void {

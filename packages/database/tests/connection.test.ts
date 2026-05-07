@@ -1,4 +1,4 @@
-import { prisma, disconnectDatabase } from '../src/prisma';
+import { prisma, disconnectDatabase } from '../src/prisma.js';
 
 afterAll(async () => {
   await disconnectDatabase();

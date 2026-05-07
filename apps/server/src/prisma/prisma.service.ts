@@ -1,18 +1,12 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { PrismaClient } from '../../../../packages/database/generated/prisma/client.js';
+import { PrismaClient, prisma } from 'database';
 
 @Injectable()
 export class PrismaService implements OnModuleInit, OnModuleDestroy {
   public prisma: PrismaClient;
 
   constructor() {
-    this.prisma = new PrismaClient({
-      errorFormat: 'minimal',
-      log:
-        process.env.NODE_ENV === 'production'
-          ? ['warn', 'error']
-          : ['query', 'info', 'warn', 'error'],
-    });
+    this.prisma = prisma;
   }
 
   async onModuleInit() {
@@ -23,31 +17,31 @@ export class PrismaService implements OnModuleInit, OnModuleDestroy {
     await this.prisma.$disconnect();
   }
 
-  get user() {
+  get user(): PrismaClient['user'] {
     return this.prisma.user;
   }
 
-  get account() {
+  get account(): PrismaClient['account'] {
     return this.prisma.account;
   }
 
-  get space() {
+  get space(): PrismaClient['space'] {
     return this.prisma.space;
   }
 
-  get job() {
+  get job(): PrismaClient['job'] {
     return this.prisma.job;
   }
 
-  get execution() {
+  get execution(): PrismaClient['execution'] {
     return this.prisma.execution;
   }
 
-  get log() {
+  get log(): PrismaClient['log'] {
     return this.prisma.log;
   }
 
-  get $transaction() {
+  get $transaction(): PrismaClient['$transaction'] {
     return this.prisma.$transaction.bind(this.prisma);
   }
 }

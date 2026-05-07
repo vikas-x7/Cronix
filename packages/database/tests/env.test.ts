@@ -1,4 +1,4 @@
-import { envSchema } from '../src/schema';
+import { envSchema } from '../src/schema.js';
 
 const validEnv = {
   DATABASE_URL: 'postgresql://user:password@localhost:5432/db?sslmode=require',

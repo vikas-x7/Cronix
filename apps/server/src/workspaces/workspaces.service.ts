@@ -102,7 +102,7 @@ export class WorkspacesService {
     return { id };
   }
 
-  private async checkOwnership(workspaceId: string, userId: string) {
+  async checkOwnership(workspaceId: string, userId: string) {
     const workspace = await this.prisma.space.findUnique({
       where: { id: workspaceId },
       include: { _count: { select: { jobs: true } } },

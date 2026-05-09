@@ -12,6 +12,7 @@ import { SchedulerModule } from './modules/scheduler/scheduler.module';
 import { WebhooksModule } from './modules/webhooks/webhooks.module';
 import { CacheModule } from './modules/cache/cache.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     WebhooksModule,
     CacheModule,
     DashboardModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

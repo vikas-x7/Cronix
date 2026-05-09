@@ -2,12 +2,14 @@ import { Processor, WorkerHost } from '@nestjs/bullmq';
 import { Job } from 'bullmq';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { CacheService } from '../../cache/cache.service';
+import { NotificationsService } from '../../notifications/notifications.service';
 
 @Processor('job-execution')
 export class JobProcessor extends WorkerHost {
   constructor(
     private prisma: PrismaService,
     private cache: CacheService,
+    private notifications: NotificationsService,
   ) {
     super();
   }
@@ -92,7 +94,7 @@ export class JobProcessor extends WorkerHost {
       });
 
       if (attempt >= jobData.retryCount && jobData.failureEmail) {
-        console.log(`[EMAIL] Job ${jobId} failed after ${attempt} attempts`);
+        await this.notifications.sendJobFailureEmail(jobId, error.message);
       }
 
       await this.invalidateCache(jobData.spaceId);

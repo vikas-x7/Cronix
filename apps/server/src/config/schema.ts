@@ -24,6 +24,9 @@ export const envSchema = z.object({
     .string()
     .url()
     .default('http://localhost:3001/api/v1/auth/github/callback'),
+
+  UPSTASH_REDIS_HOST: z.string().min(1, 'UPSTASH_REDIS_HOST required'),
+  UPSTASH_REDIS_TOKEN: z.string().min(1, 'UPSTASH_REDIS_TOKEN required'),
 });
 
 export type EnvSchema = z.infer<typeof envSchema>;

@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { JobsController } from './jobs.controller';
 import { JobsService } from './jobs.service';
 import { WorkspacesModule } from '../workspaces/workspaces.module';
+import { QueueModule } from '../modules/queue/queue.module';
+import { SchedulerModule } from '../modules/scheduler/scheduler.module';
 
 @Module({
-  imports: [WorkspacesModule],
+  imports: [WorkspacesModule, QueueModule, SchedulerModule],
   controllers: [JobsController],
   providers: [JobsService],
 })

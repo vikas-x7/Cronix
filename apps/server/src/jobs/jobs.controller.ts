@@ -96,7 +96,6 @@ export class JobsController {
 
   @Post(':id/run')
   async runNow(@Param('id') id: string, @CurrentUser('id') userId: string) {
-    const data = await this.jobsService.runNow(id, userId);
-    return { __message: 'Job queued', ...data };
+    return await this.jobsService.runNow(id, userId);
   }
 }

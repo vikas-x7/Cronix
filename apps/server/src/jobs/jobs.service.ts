@@ -8,6 +8,9 @@ import { randomUUID } from 'crypto';
 import { isValidCron } from 'cron-validator';
 import { PrismaService } from '../prisma/prisma.service';
 import { WorkspacesService } from '../workspaces/workspaces.service';
+import { JobProducer } from '../modules/queue/producers/job.producer';
+import { SchedulerService } from '../modules/scheduler/scheduler.service';
+import { CacheService } from '../modules/cache/cache.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 
@@ -16,6 +19,9 @@ export class JobsService {
   constructor(
     private prisma: PrismaService,
     private workspacesService: WorkspacesService,
+    private jobProducer: JobProducer,
+    private schedulerService: SchedulerService,
+    private cache: CacheService,
   ) {}
 
   async create(dto: CreateJobDto, userId: string) {
@@ -54,6 +60,12 @@ export class JobsService {
         spaceId: dto.workspaceId,
       },
     });
+
+    if (dto.type === 'CRON' && job.schedule) {
+      await this.schedulerService.addRepeatableJob(job.id, job.schedule);
+    }
+
+    await this.cache.del(`stats:${userId}`);
 
     return {
       id: job.id,
@@ -185,39 +197,63 @@ export class JobsService {
       data: dto,
     });
 
+    if (
+      updated.type === 'CRON' &&
+      updated.status === 'ACTIVE' &&
+      dto.schedule
+    ) {
+      await this.schedulerService.removeRepeatableJob(updated.id);
+      await this.schedulerService.addRepeatableJob(updated.id, dto.schedule);
+    }
+
+    await this.cache.del(`stats:${userId}`);
+
     return { id: updated.id, name: updated.name, status: updated.status };
   }
 
   async pause(id: string, userId: string) {
-    await this.verifyOwnership(id, userId);
+    const jobData = await this.verifyOwnership(id, userId);
     const job = await this.prisma.job.update({
       where: { id },
       data: { status: 'PAUSED' },
     });
+    if (jobData.type === 'CRON') {
+      await this.schedulerService.removeRepeatableJob(id);
+    }
+    await this.cache.del(`stats:${userId}`);
     return { id: job.id, name: job.name, status: job.status };
   }
 
   async resume(id: string, userId: string) {
-    await this.verifyOwnership(id, userId);
+    const jobData = await this.verifyOwnership(id, userId);
     const job = await this.prisma.job.update({
       where: { id },
       data: { status: 'ACTIVE' },
     });
+    if (jobData.type === 'CRON' && jobData.schedule) {
+      await this.schedulerService.addRepeatableJob(id, jobData.schedule);
+    }
+    await this.cache.del(`stats:${userId}`);
     return { id: job.id, name: job.name, status: job.status };
   }
 
   async delete(id: string, userId: string) {
-    await this.verifyOwnership(id, userId);
+    const jobData = await this.verifyOwnership(id, userId);
     const job = await this.prisma.job.update({
       where: { id },
       data: { status: 'DELETED' },
     });
+    if (jobData.type === 'CRON') {
+      await this.schedulerService.removeRepeatableJob(id);
+    }
+    await this.cache.del(`stats:${userId}`);
     return { id: job.id, name: job.name, status: job.status };
   }
 
   async runNow(id: string, userId: string) {
     await this.verifyOwnership(id, userId);
-    return { message: 'Job queued' };
+    await this.jobProducer.addJob(id, 'MANUAL');
+    return { __message: 'Job queued successfully' };
   }
 
   private async verifyOwnership(jobId: string, userId: string) {

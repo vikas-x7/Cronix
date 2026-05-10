@@ -4,7 +4,7 @@ import {
   ForbiddenException,
   ConflictException,
 } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { CreateWorkspaceDto } from './dto/create-workspace.dto';
 import { UpdateWorkspaceDto } from './dto/update-workspace.dto';
 

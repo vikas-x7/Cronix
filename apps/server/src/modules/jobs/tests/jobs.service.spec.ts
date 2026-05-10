@@ -20,7 +20,7 @@ const mockWorkspacesService = {
   checkOwnership: jest.fn(),
 };
 
-jest.mock('../../prisma/prisma.service', () => ({
+jest.mock('../../../prisma/prisma.service', () => ({
   PrismaService: jest.fn().mockImplementation(() => mockPrisma),
 }));
 
@@ -28,7 +28,7 @@ jest.mock('../../workspaces/workspaces.service', () => ({
   WorkspacesService: jest.fn().mockImplementation(() => mockWorkspacesService),
 }));
 
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../../../prisma/prisma.service';
 import { WorkspacesService } from '../../workspaces/workspaces.service';
 
 describe('JobsService', () => {

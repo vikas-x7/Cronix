@@ -18,11 +18,11 @@ const mockPrisma = {
   },
 };
 
-jest.mock('../../prisma/prisma.service', () => ({
+jest.mock('../../../prisma/prisma.service', () => ({
   PrismaService: jest.fn().mockImplementation(() => mockPrisma),
 }));
 
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from '../../../prisma/prisma.service';
 
 describe('WorkspacesService', () => {
   let service: WorkspacesService;

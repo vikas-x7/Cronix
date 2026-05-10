@@ -6,11 +6,11 @@ import {
 } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { isValidCron } from 'cron-validator';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { WorkspacesService } from '../workspaces/workspaces.service';
-import { JobProducer } from '../modules/queue/producers/job.producer';
-import { SchedulerService } from '../modules/scheduler/scheduler.service';
-import { CacheService } from '../modules/cache/cache.service';
+import { JobProducer } from '../queue/producers/job.producer';
+import { SchedulerService } from '../scheduler/scheduler.service';
+import { CacheService } from '../cache/cache.service';
 import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 

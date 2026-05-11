@@ -10,6 +10,7 @@ import {
   UseGuards,
   Req,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { Request } from 'express';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
@@ -95,6 +96,7 @@ export class JobsController {
   }
 
   @Post(':id/run')
+  @Throttle({ default: { ttl: 60000, limit: 10 } })
   async runNow(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return await this.jobsService.runNow(id, userId);
   }

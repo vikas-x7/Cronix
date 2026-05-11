@@ -1,8 +1,10 @@
 import { Controller, Post, Param, Body, HttpCode } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { PrismaService } from '../../prisma/prisma.service';
 import { JobProducer } from '../queue/producers/job.producer';
 
 @Controller('webhooks')
+@Throttle({ default: { ttl: 60000, limit: 30 } })
 export class WebhooksController {
   constructor(
     private prisma: PrismaService,

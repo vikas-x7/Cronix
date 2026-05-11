@@ -7,6 +7,7 @@ import {
   UseGuards,
   UnauthorizedException,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { Response, Request } from 'express';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import {
@@ -21,6 +22,7 @@ import { AuthService, TokenPair } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 
 @Controller('auth')
+@Throttle({ default: { ttl: 900000, limit: 10 } })
 export class AuthController {
   constructor(private authService: AuthService) {}
 

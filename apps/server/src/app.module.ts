@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { BullModule } from '@nestjs/bullmq';
 import { ScheduleModule } from '@nestjs/schedule';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { ThrottlerStorageRedisService } from '@nest-lab/throttler-storage-redis';
+import Redis from 'ioredis';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
@@ -29,6 +33,17 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
         tls: {},
       },
     }),
+    ThrottlerModule.forRoot({
+      throttlers: [{ ttl: 60000, limit: 100 }],
+      storage: new ThrottlerStorageRedisService(
+        new Redis({
+          host: process.env.UPSTASH_REDIS_HOST,
+          port: 6379,
+          password: process.env.UPSTASH_REDIS_TOKEN,
+          tls: {},
+        }),
+      ),
+    }),
     ScheduleModule.forRoot(),
     PrismaModule,
     AuthModule,
@@ -42,6 +57,12 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
     NotificationsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}

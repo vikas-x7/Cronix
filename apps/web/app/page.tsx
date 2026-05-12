@@ -1,8 +1,9 @@
+import Landing from '../src/modules/landing/Landing';
 
 export default function Home() {
   return (
     <div>
-      <h1>hello world</h1>
+      <Landing />
     </div>
   );
 }

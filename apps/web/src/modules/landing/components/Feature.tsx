@@ -48,7 +48,7 @@ export default function Feature() {
 
   return (
     <section className="bg-transparent ">
-      <div className="px-4 sm:px-6 md:px-10 lg:px-15 mt-30">
+      <div className="px-4 sm:px-6 md:px-6 mt-30">
         <div className="mt-10 sm:mt-14 md:mt-20 grid grid-cols-1 border border-zinc-200 md:grid-cols-3">
           {cards.map((card, index) => (
             <div

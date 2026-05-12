@@ -22,7 +22,7 @@ const Hero = () => {
               id="hero-heading"
               className="font-inter text-center  md:text-end text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-7px] leading-20 uppercase"
             >
-              Better way <br /> schedule
+              Your cron <br /> tasks
             </h1>
           </div>
         </div>

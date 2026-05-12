@@ -39,7 +39,7 @@ export default function TrafficChart() {
 
       <section
         id="observe"
-        className="relative overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl bg-transparent p-4 sm:p-6 md:p-10 mx-4 sm:mx-6 md:mx-10 lg:mx-15 mt-16 sm:mt-20 md:mt-30"
+        className="relative overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl bg-transparent p-4 sm:p-6 md:p-10 mx-4 sm:mx-6 md:mx-10 lg:mx-6 mt-16 sm:mt-20 md:mt-30"
       >
         {/* Grid lines */}
         <div className="absolute inset-0 pointer-events-none">

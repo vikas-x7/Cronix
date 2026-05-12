@@ -2,7 +2,7 @@ import React from 'react';
 
 const UseCases = () => {
   return (
-    <section id="use-cases" className="px-4 sm:px-6 md:px-10 lg:px-15">
+    <section id="use-cases" className="px-4 sm:px-6 md:px-10 lg:px-6">
       <div className="mx-auto mb-12 md:mb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mt-12 md:mt-20 items-start">
           <div>
@@ -36,7 +36,7 @@ const UseCases = () => {
         </div>
       </div>
 
-      <div className="p-4 sm:p-6 md:p-10 bg-[#84d2e5] rounded-lg">
+      <div className="p-4 sm:p-6 md:p-10 bg-[#84d2e5] ">
         <img
           src="https://res.cloudinary.com/dyv9kenuj/image/upload/v1776047742/Screenshot_from_2026-04-13_08-04-05_pxglzw.png"
           alt="Erica AI data automation dashboard"

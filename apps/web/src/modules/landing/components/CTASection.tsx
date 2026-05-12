@@ -28,7 +28,7 @@ const CTASection = () => {
             className="flex-1 bg-transparent px-4 py-2 text-sm outline-none"
           />
           <button className="flex items-center gap-2 bg-black text-white px-5 py-2 text-sm rounded transition-transform hover:opacity-80">
-            Subscribe
+            Get started
             <HiArrowRight />
           </button>
         </div>

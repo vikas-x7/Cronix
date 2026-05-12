@@ -5,29 +5,29 @@ import { useState } from 'react';
 
 const faqs = [
   {
-    question: 'What is Erica AI?',
+    question: 'What is Cronix?',
     answer:
-      'Erica AI is an intelligent data automation platform that automates operational workflows - handling intake, cleaning, enrichment, routing, and syncs with reliable AI agents.',
+      'Cronix is a fully managed job scheduler that lets you automate workflows, trigger APIs, and monitor job runs from one powerful dashboard.',
   },
   {
-    question: 'How does Erica handle data?',
+    question: 'How do I schedule a new job?',
     answer:
-      'Erica uses advanced AI models and workflow rules to understand data context, clean messy fields, flag anomalies, and route exceptions to human teams when needed.',
+      'You can schedule a new job directly from the dashboard or by using our flexible API to define cron expressions and dynamic payloads.',
   },
   {
-    question: 'Can Erica integrate with my CRM?',
+    question: 'Does Cronix support webhooks?',
     answer:
-      'Yes! Erica integrates seamlessly with Salesforce, HubSpot, Zoho, and other popular CRMs. Clean data, status changes, and record updates sync automatically after every workflow.',
+      'Yes! Cronix seamlessly integrates with webhooks so you can trigger HTTP endpoints securely and connect with any system.',
   },
   {
-    question: 'Does Erica support multiple sources?',
+    question: 'Can I monitor execution history?',
     answer:
-      'Absolutely. Erica supports multiple apps and data sources, allowing you to unify spreadsheets, CRMs, warehouses, forms, and internal tools across each team.',
+      'Absolutely. Cronix provides real-time execution logs where you can view console outputs, track uptime, and debug failures instantly.',
   },
   {
-    question: 'Is there a free plan to get started?',
+    question: 'Is there a limit on jobs?',
     answer:
-      'Yes, our starter plan lets you test Erica with a limited number of jobs per month. Check our pricing section for higher volume plans and enterprise features.',
+      'Our platform is built for scale and precision, easily handling over 20k+ jobs executed with 99.9% uptime guaranteed. Check out our pricing for specific tier limits.',
   },
 ];
 

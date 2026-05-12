@@ -55,9 +55,9 @@ export default function TrafficChart() {
         {/* Content */}
         <div className="relative z-10">
           <h2 className="max-w-5xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl -tracking-[1.5px] font-medium md:-tracking-[4px] text-black bg-transparent">
-            Monitor every data workflow in real time.{' '}
-            <br className="hidden md:block" /> Every job is logged. Every
-            insight is actionable.
+            Stay in sync with your traffic in real time.{' '}
+            <br className="hidden md:block" /> Every request is logged. Every
+            decision is visible.
           </h2>
 
           {/* Chart */}

@@ -7,29 +7,29 @@ const UseCases = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mt-12 md:mt-20 items-start">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-[44px] leading-tight md:leading-10  font-medium -tracking-[1px] md:-tracking-[2px]">
-              Built for every <br /> workflow
+              Built for scale <br /> and precision
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
             <div className="border-l border-black/30 pl-4">
-              <p className="font-medium">Data intake</p>
+              <p className="font-medium">API &amp; Webhooks</p>
               <p className="text-sm text-black/50 mt-2">
-                Validate incoming records instantly
+                Trigger HTTP endpoints securely
               </p>
             </div>
 
             <div className="border-l border-black/30 pl-4">
-              <p className="font-medium">Data enrichment</p>
+              <p className="font-medium">Real-time logs</p>
               <p className="text-sm text-black/50 mt-2">
-                Clean fields and enrich profiles
+                Monitor executions and failures
               </p>
             </div>
 
             <div className="border-l border-black/30 pl-4">
-              <p className="font-medium">Live analytics</p>
+              <p className="font-medium">Smart retries</p>
               <p className="text-sm text-black/50 mt-2">
-                Track quality and job outcomes
+                Automatic exponential backoffs
               </p>
             </div>
           </div>

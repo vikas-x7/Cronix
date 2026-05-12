@@ -6,11 +6,10 @@ import { HiMenuAlt3, HiOutlineX } from 'react-icons/hi';
 import { DiYii } from 'react-icons/di';
 
 const NAV_LINKS = [
-  { name: 'Features', id: 'features' },
+  { name: 'See Demo', id: 'features' },
   { name: 'Use Cases', id: 'use-cases' },
-  { name: 'Integration', id: 'integration' },
+  { name: 'Pricing', id: 'pricing' },
   { name: 'Observe', id: 'observe' },
-
   { name: 'FAQ', id: 'faq' },
 ];
 

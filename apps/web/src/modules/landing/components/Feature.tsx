@@ -6,28 +6,28 @@ export default function Feature() {
     {
       image:
         'https://i.pinimg.com/originals/af/7d/5c/af7d5c0f37153e44a27a34879b2d98db.gif',
-      title: 'Self-healing pipelines.',
+      title: 'Zero infrastructure needed.',
       description:
-        'Erica detects anomalies, fixes broken flows, and keeps data moving ',
+        'A fully managed job scheduler. No servers to provision, no daemon processes to maintain.',
     },
     {
       image:
         'https://i.pinimg.com/originals/03/16/7b/03167b386a144c804490935b3906cbbb.gif',
-      title: 'Real-time data analytics.',
+      title: 'Real-time execution logs.',
       description:
-        'Monitor live jobs, track quality scores, and review pipeline events instantly from your dashboard.',
+        'Monitor every scheduled run, view console outputs, and debug failures instantly from the dashboard.',
     },
     {
       image:
         'https://i.pinimg.com/originals/80/72/20/8072208f034d8042ef4aa5065d46928b.gif',
-      title: 'Seamless stack integration.',
+      title: 'Flexible API triggers.',
       description:
-        'Automatically clean records, update field status, and sync business data with your existing apps and tools.',
+        'Trigger jobs manually, pass dynamic payloads, or update cron expressions on the fly using our API.',
     },
   ];
 
   const text =
-    'Intelligent Data Agents for Every Business. Automate data operations instantly without hiring ops teams or building complex pipeline systems.';
+    'Powerful Cron Job Solutions for Every Developer. Scale your background tasks instantly without managing infrastructure or complex server setups.';
   const words = text.split(' ');
   const [progress, setProgress] = useState(0);
   const textRef = useRef<HTMLHeadingElement>(null);

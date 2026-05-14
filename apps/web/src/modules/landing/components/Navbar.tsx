@@ -3,14 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { HiMenuAlt3, HiOutlineX } from 'react-icons/hi';
-import { DiYii } from 'react-icons/di';
+import { TbMenu } from 'react-icons/tb';
+import { MdOutlineMenu } from 'react-icons/md';
 
 const NAV_LINKS = [
-  { name: 'See Demo', id: 'features' },
-  { name: 'Use Cases', id: 'use-cases' },
-  { name: 'Pricing', id: 'pricing' },
-  { name: 'Observe', id: 'observe' },
-  { name: 'FAQ', id: 'faq' },
+  { name: 'Works', id: 'works' },
+  { name: 'About', id: 'about' },
+  { name: 'Labs', id: 'labs' },
+  { name: 'Contact', id: 'contact' },
 ];
 
 const Navbar = () => {
@@ -37,9 +37,6 @@ const Navbar = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const isOnDarkBackground = !isScrolled || isOverFooter;
-
-  // Reusable Link Component
   const NavItem = ({
     name,
     id,
@@ -57,50 +54,69 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-5 py-2 [font-family:var(--font-inter)]">
       <div className="container mx-auto">
-        <div className="flex h-10 py-7 items-center justify-between">
-          <div className="hidden lg:flex items-center gap-5 backdrop-blur-md px-5 py-4 rounded-[7px] transition-colors duration-300 bg-[#F0F0F0]">
-            <Link href="/">
-              <DiYii className="text-[20px] text-[#DF71D0]" />
+        <div className="flex h-10 mt-2 items-center justify-between">
+          <div className="hidden lg:flex items-center gap-5 backdrop-blur-md px-5 py-2 rounded-[3px] transition-colors duration-300 bg-[#F0F0F0]">
+            <Link href="/" className="flex items-center ">
+              <img
+                src="https://res.cloudinary.com/dyv9kenuj/image/upload/v1783138178/cronixlogo-removebg-preview_l87ist.png"
+                alt="Cronix Logo"
+                className="w-8 ml-[-14px]"
+              />
+              <h1 className="text-[17px] font-bold">Cronix</h1>
             </Link>
             {NAV_LINKS.map((link) => (
               <NavItem
                 key={link.id}
                 {...link}
-                className="text-[14px] hover:opacity-70 font-semibold transition-opacity"
+                className="text-[14px] hover:opacity-70 transition-opacity"
               />
             ))}
           </div>
 
-          <button
-            className={`hidden lg:block rounded-[7px] px-5 py-3 text-sm transition-colors ${isOnDarkBackground ? 'bg-[#F0F0F0] text-black' : 'bg-black text-white'}`}
-          >
-            Get started
-          </button>
+          <div className="relative">
+            <button
+              className="text-sm flex items-center gap-2 uppercase tracking-widest"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <HiOutlineX size={30} /> : <MdOutlineMenu size={30} />}
+            </button>
 
-          <button
-            className="lg:hidden text-2xl"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <HiOutlineX /> : <HiMenuAlt3 />}
-          </button>
+            <div
+              className={`absolute right-0 top-10 mt-2 w-94 bg-black text-white p-6 shadow-2xl rounded-[1px] border border-black/5 transition-transform duration-500 ease-out ${
+                isOpen
+                  ? 'translate-x-0 pointer-events-auto'
+                  : 'translate-x-[200%] pointer-events-none'
+              }`}
+            >
+              <div className="flex flex-col gap-4 mb-8">
+                {NAV_LINKS.map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => handleSmoothScroll(link.id)}
+                    className="text-lg font-medium text-left text-white/90 hover:text-gray-400 transition-colors"
+                  >
+                    {link.name}
+                  </button>
+                ))}
+              </div>
+
+              <div className="border-t border-white/10 pt-4 flex justify-between text-[15px] text-white">
+                <div className="flex gap-4">
+                  <Link href="#" className="hover:text-gray-400">
+                    LinkedIn
+                  </Link>
+                  <Link href="#" className="hover:text-gray-400">
+                    X
+                  </Link>
+                </div>
+                <Link href="#" className="hover:text-gray-400">
+                  Privacy policy
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="absolute inset-x-0 top-16 bg-white p-6 shadow-xl lg:hidden flex flex-col gap-5">
-          {NAV_LINKS.map((link) => (
-            <NavItem
-              key={link.id}
-              {...link}
-              className="text-left text-lg font-medium text-gray-800"
-            />
-          ))}
-          <button className="w-full rounded-lg bg-black py-4 text-white">
-            Get started
-          </button>
-        </div>
-      )}
     </nav>
   );
 };

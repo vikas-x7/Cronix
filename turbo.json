@@ -1,6 +1,6 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
-  "ui": "tui",
+  "ui": "stream",
   "globalEnv": ["NODE_ENV", "PORT", "ALLOWED_ORIGINS"],
   "tasks": {
     "build": {
@@ -16,7 +16,8 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "interruptible": true
     }
   }
 }

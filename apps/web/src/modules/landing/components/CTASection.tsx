@@ -7,20 +7,15 @@ const CTASection = () => {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="container mx-auto max-w-3xl text-center">
-        {/* Label */}
-
-        {/* Heading */}
         <h2 className="mb-6 text-5xl md:text-6xl font-medium tracking-[-5px] text-black leading-[1.1]">
           Schedule Your First Cron Job in Minutes
         </h2>
 
-        {/* Subtext */}
         <p className="mb-10 text-lg text-gray-600 ">
           Set up your first automated task today and let Cronix handle the heavy
           lifting for you.
         </p>
 
-        {/* Input/CTA Group */}
         <div className="flex w-full  bg-gray-50 border border-gray-200 p-1 rounded-md">
           <input
             type="email"

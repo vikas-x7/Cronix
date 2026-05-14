@@ -64,14 +64,14 @@ const Integration = () => {
       className="bg-transparent py-12 sm:py-16 md:py-20 px-4 sm:px-6 min-h-[60vh] md:min-h-screen flex items-center"
     >
       <div className="container mx-auto max-w-7xl text-center">
-        <h2 className="mt-4 text-xl sm:text-3xl md:text-4xl font-medium lg:text-[59px] -tracking-[0.5px] md:-tracking-[4px]">
+        <h2 className="mt-4 text-xl sm:text-3xl md:text-4xl font-medium lg:text-[53px] -tracking-[0.5px] md:-tracking-[4px]">
           Seamlessly Connect Your Workflows
         </h2>
 
-        <p className="mx-auto mt-2 text-sm sm:text-base md:text-lg text-[#737373] max-w-2xl -tracking-[0.5px]">
-          Connect Cronix to your favorite tools. Trigger workflows, send alerts
-          to Slack or Discord, and integrate with any system via Webhooks for
-          automated cron jobs.
+        <p className="mx-auto mt-2 text-sm sm:text-base md:text-lg text-black/70 max-w-2xl -tracking-[0.5px]">
+          Connect Cronix to your deployment platforms. Trigger automated
+          deployments, send requests to Render or other cloud providers, and
+          seamlessly integrate with any system via Webhooks for your cron jobs.
         </p>
 
         <div className="mt-10 sm:mt-14 md:mt-20 flex flex-col items-center justify-center gap-4 md:flex-row md:gap-0">
@@ -82,7 +82,7 @@ const Integration = () => {
           </div>
 
           <div className="z-10 flex h-16 w-30 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-15 lg:w-35 items-center justify-center bg-black text-white shadow-xl md:-mx-4">
-            <h3 className="text-sm sm:text-base md:text-lg lg:text-2xl md:tracking-[-2px] font-medium">
+            <h3 className="text-sm sm:text-base md:text-lg lg:text-2xl md:tracking-[-1px] font-medium">
               Cronix
             </h3>
           </div>

@@ -2,83 +2,77 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
+import { FiArrowUpRight } from 'react-icons/fi';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <>
-      <footer className="w-full bg-white pt-20 overflow-hidden border-t border-black/5  px-15">
-        <div className="container mx-auto ">
-          <div className="flex justify-between">
-            <div className="relative mt-10 select-none">
-              <h1 className="text-[5vw] font-normal leading-none tracking-tighter text-black text-start md:text-[40vw] lg:text-[5vw]">
-                Cronix
-              </h1>
+    <footer className="w-full bg-[#1C1A16] text-white pt-20 pb-10 ">
+      <div className="container mx-auto">
+        <div className="mb-20">
+          <div className="px-8">
+            <p className="text-sm text-white mb-2 tracking-[-0.75px] leading-0">
+              As Vanilla Ice Once Said,
+            </p>
+            <h2 className="text-xl md:text-2xl font-medium mb-10 tracking-[-1px]">
+              Anything less than the best is a felony.
+            </h2>
+          </div>
+          <h1 className="text-[20vw] text-[#FAFAFA] font-extrabold overflow-hidden tracking-[-30px]  ml-[-10px] leading-[300px]">
+            Cronixforyou
+          </h1>
+        </div>
 
-              <div className="absolute inset-0 bg-linear-to-t from-white/30 to-transparent pointer-events-none" />
-            </div>
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 py-8 border-t border-gray-100">
-              <Link
-                href="#"
-                className="text-sm font-medium text-gray-600 hover:text-black transition-colors"
-              >
-                Use cases
-              </Link>
-              <Link
-                href="#"
-                className="text-sm font-medium text-gray-600 hover:text-black transition-colors"
-              >
-                Pricing
-              </Link>
-              <Link
-                href="#"
-                className="text-sm font-medium text-gray-600 hover:text-black transition-colors"
-              >
-                Blog
-              </Link>
+        <div className=" px-7 mx-auto">
+          <div className="flex flex-wrap items-center gap-6 mb-12">
+            <Link
+              href="mailto:hey@cronix.com"
+              className="flex items-center gap-2 bg-[#FAFAFA] text-black px-4 py-1 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+            >
+              hey@cronix.com <FiArrowUpRight size={18} />
+            </Link>
 
-              <Link
-                href="#"
-                className="text-sm font-medium text-gray-600 hover:text-black transition-colors"
-              >
-                About
+            <div className="flex gap-4 text-white/30">
+              <Link href="#" className="hover:text-white transition-colors">
+                <FaXTwitter size={20} />
               </Link>
-              <Link
-                href="#"
-                className="text-sm font-medium text-gray-600 hover:text-black transition-colors"
-              >
-                Help center
+              <Link href="#" className="hover:text-white transition-colors">
+                <FaLinkedinIn size={20} />
               </Link>
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center py-10 gap-4 ">
-            <p className="text-xs text-black/80">
-              © {currentYear} Cronix. All rights reserved.
-            </p>
-            <div className="flex gap-6">
-              <Link href="#" className="text-xs">
-                Terms of Service
+          <div className="flex justify-between items-start mb-12">
+            <div className="flex items-center gap-3">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg"
+                alt=""
+                className="w-10"
+              />
+              <div className="text-xs text-white/30">
+                <p>Based In The Beautiful</p>
+                <p>India & Online Worldwide</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-end gap-3 text-sm text-white/30">
+              <Link href="#" className="hover:text-white transition-colors">
+                Home
               </Link>
-              <Link href="#" className="text-xs ">
-                Privacy Policy
+              <Link href="#" className="hover:text-white transition-colors">
+                Set Cron now
               </Link>
             </div>
+          </div>
+
+          <div className="text-xs text-white/30 border-t border-white/10 pt-8">
+            <p>Cronix © {currentYear} All Rights Reserved</p>
           </div>
         </div>
-      </footer>
-
-      <div className="relative flex justify-center items-center w-full">
-        {/* Top to bottom white gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/5 to-transparent pointer-events-none w-full h-full"></div>
-        <img
-          src="https://i.pinimg.com/1200x/01/fb/fe/01fbfebf98664750ef1fe1cdb478df50.jpg"
-          alt=""
-          className="w-full h-[60vh] object-cover object-top"
-        />
       </div>
-    </>
+    </footer>
   );
 };
 

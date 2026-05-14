@@ -5,24 +5,24 @@ const Hero = () => {
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative  w-full overflow-hidden bg-[#ffffff] px-4 sm:px-6 md:px-1 font-inter"
+      className="relative  w-full overflow-hidden bg-[#ffffff] px-4 sm:px-6 md:px-1"
     >
       <div className="relative z-10 flex  flex-col justify-start px-2 sm:px-5">
-        <div className="flex items-center justify-between  pt-20 sm:pt-24 md:mt-2">
+        <div className="flex items-center justify-between  pt-20 sm:pt-24 md:mt-[-10px]">
           <div className="text-black max-w-4xl flex flex-col items-center md:items-start">
             <h1
               id="hero-heading"
-              className="font-inter text-center  md:text-start text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-7px] leading-20 uppercase"
+              className="font-inter text-center  md:text-start text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-7px] leading-17 uppercase"
             >
-              Better way <br /> schedule
+              THE ONLY ASYNC JOBS MANAGER
             </h1>
           </div>
           <div className="text-black max-w-4xl flex flex-col items-center md:items-start">
             <h1
               id="hero-heading"
-              className="font-inter text-center  md:text-end text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-7px] leading-20 uppercase"
+              className="font-inter text-center  md:text-end text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-8px] leading-17 uppercase"
             >
-              Your cron <br /> tasks
+              TO LET YOU SHIP CODE FAST
             </h1>
           </div>
         </div>
@@ -30,22 +30,22 @@ const Hero = () => {
         <div className="flex w-full flex-col items-start justify-between gap-6 py-6 sm:py-8 md:flex-row md:items-end">
           <div className="flex flex-row gap-8 sm:gap-16">
             <div>
-              <p className="text-[10px] sm:text-xs uppercase tracking-[-0.05px] text-black/80">
+              <p className="text-[10px] sm:text-[15px] uppercase tracking-[-0.05px] text-black/80">
                 Rows processed
               </p>
             </div>
             <div>
-              <p className="text-[10px] sm:text-xs uppercase tracking-[-0.05px] text-black/80">
+              <p className="text-[10px] sm:text-[15px] uppercase tracking-[-0.05px] text-black/80">
                 Automation
               </p>
             </div>
           </div>
         </div>
         <div>
-          <div className="flex justify-between mt-34">
-            <h1>357% average client value growth</h1>
-            <h1>7 unicorns and counting</h1>
-            <h1>$10B+ raised by TinyWins portfolio companies</h1>
+          <div className="flex flex-col md:flex-row justify-between mt-34 gap-4 text-black/80 font-medium uppercase tracking-[-0.5px]">
+            <h1>10k+ jobs processed daily</h1>
+            <h1>99.99% execution uptime</h1>
+            <h1>Seamless full-stack integrations</h1>
           </div>
 
           <div className="relative">
@@ -61,12 +61,12 @@ const Hero = () => {
                 Cronix
               </div>
 
-              <h2 className="max-w-5xl text-xl sm:text-2xl md:text-3xl lg:text-4xl md:-tracking-[2px] font-medium">
-                Enterprise-grade data AI for your business.
+              <h2 className="max-w-5xl text-xl sm:text-2xl md:text-3xl lg:text-4xl md:-tracking-[3px] font-medium">
+                Enterprise-grade background jobs for your application.
               </h2>
 
               <h2 className="mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl md:-tracking-[2px] font-medium">
-                Clean records, smart routing, and deep integrations.
+                Reliable scheduling, seamless monitoring, and deep integrations.
               </h2>
             </div>
           </div>

@@ -24,7 +24,7 @@
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
     "test:env": "NODE_OPTIONS='--experimental-vm-modules' jest tests/env",
     "test:connection": "NODE_OPTIONS='--experimental-vm-modules' jest tests/connection",
-    "dev": "prisma generate --watch"
+    "dev": "prisma generate"
   },
   "keywords": [],
   "author": "",

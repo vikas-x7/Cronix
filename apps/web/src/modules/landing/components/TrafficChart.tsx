@@ -17,7 +17,6 @@ export default function TrafficChart() {
     { base: 25, top: 0 },
   ];
 
-  // Scale multiplier per breakpoint: 2px mobile, 3px sm, 4px md+
   const heightStyle = (val: number) =>
     ({
       '--h-mobile': `${val * 2}px`,
@@ -39,28 +38,25 @@ export default function TrafficChart() {
 
       <section
         id="observe"
-        className="relative overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl bg-transparent p-4 sm:p-6 md:p-10 mx-4 sm:mx-6 md:mx-10 lg:mx-6 mt-16 sm:mt-20 md:mt-30"
+        className="relative overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl bg-transparent p-4 sm:p-6 md:p-10 mx-4 sm:mx-6 md:mx-10 lg:mx-5 mt-16 sm:mt-20 md:mt-30"
       >
-        {/* Grid lines */}
         <div className="absolute inset-0 pointer-events-none">
           {Array.from({ length: 20 }).map((_, i) => (
             <div
               key={i}
-              className="border-b border-black/10"
+              className="border-b border-black/20"
               style={{ height: '4%' }}
             />
           ))}
         </div>
 
-        {/* Content */}
         <div className="relative z-10">
-          <h2 className="max-w-5xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl -tracking-[1.5px] font-medium md:-tracking-[4px] text-black bg-transparent">
+          <h2 className="max-w-6xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl -tracking-[1.5px] font-medium md:-tracking-[4px] text-black bg-transparent bg-white">
             Stay in sync with your traffic in real time.{' '}
             <br className="hidden md:block" /> Every request is logged. Every
             decision is visible.
           </h2>
 
-          {/* Chart */}
           <div className="mt-10 sm:mt-14 md:mt-20 flex h-[200px] sm:h-[300px] md:h-[420px] items-end justify-between gap-[3px] sm:gap-1.5 md:gap-3">
             {bars.map((bar, index) => {
               const total =
@@ -75,7 +71,6 @@ export default function TrafficChart() {
                   key={index}
                   className="group relative flex w-full flex-col justify-end cursor-pointer"
                 >
-                  {/* Tooltip — anchored above the bar column, never touches heading */}
                   <div
                     className="
                     absolute bottom-full mb-2 left-1/2 -translate-x-1/2
@@ -90,13 +85,11 @@ export default function TrafficChart() {
                     {total * 12}
                   </div>
 
-                  {/* Bar segments */}
                   <div className="relative flex w-full flex-col justify-end overflow-hidden rounded-t-[2px]">
-                    {/* Hover overlay */}
                     <div className="absolute bottom-0 left-0 w-full bg-[#DF71D0] h-0 group-hover:h-full transition-all duration-500 ease-out z-10 pointer-events-none" />
 
                     <div
-                      className="bar-seg bg-black/90 w-full relative z-0"
+                      className="bar-seg bg-[#191919] w-full relative z-0"
                       style={heightStyle(bar.base)}
                     />
                     {bar.middle ? (

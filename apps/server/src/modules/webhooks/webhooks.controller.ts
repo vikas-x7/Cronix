@@ -1,4 +1,12 @@
-import { Controller, Post, Param, Body, HttpCode } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Param,
+  Body,
+  HttpCode,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
 import { PrismaService } from '../../prisma/prisma.service';
 import { JobProducer } from '../queue/producers/job.producer';
@@ -19,11 +27,11 @@ export class WebhooksController {
     });
 
     if (!job) {
-      return { __message: 'Not found', statusCode: 404 };
+      throw new NotFoundException('Not found');
     }
 
     if (job.status === 'PAUSED' || job.status === 'DELETED') {
-      return { __message: 'Job is not active', statusCode: 400 };
+      throw new BadRequestException('Job is not active');
     }
 
     await this.jobProducer.addJob(job.id, 'WEBHOOK');

@@ -37,7 +37,6 @@ describe('GlobalExceptionFilter', () => {
     jest.clearAllMocks();
   });
 
-  // Helper to extract the JSON argument passed to response.status().json()
   function getJsonArg(): any {
     return mockJson.mock.calls[0][0];
   }

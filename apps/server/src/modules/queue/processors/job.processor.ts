@@ -51,12 +51,17 @@ export class JobProcessor extends WorkerHost {
         validateStatus: () => true,
       });
 
+      const isSuccess = response.status >= 200 && response.status < 300;
+
       await this.prisma.execution.update({
         where: { id: execution.id },
         data: {
-          status: 'SUCCESS',
+          status: isSuccess ? 'SUCCESS' : 'FAILED',
           httpStatus: response.status,
-          response: response.data ?? null,
+          response: isSuccess ? (response.data ?? null) : null,
+          error: isSuccess
+            ? null
+            : `HTTP ${response.status}: ${JSON.stringify(response.data ?? '')}`,
           duration: Date.now() - startTime,
           finishedAt: new Date(),
         },
@@ -65,12 +70,18 @@ export class JobProcessor extends WorkerHost {
       await this.prisma.log.create({
         data: {
           executionId: execution.id,
-          message: 'Job completed successfully',
-          level: 'INFO',
+          message: isSuccess
+            ? 'Job completed successfully'
+            : `Job failed with HTTP ${response.status}`,
+          level: isSuccess ? 'INFO' : 'ERROR',
         },
       });
 
       await this.invalidateCache(jobData.spaceId);
+
+      if (!isSuccess) {
+        throw new Error(`HTTP ${response.status}`);
+      }
     } catch (error: any) {
       await this.prisma.execution.update({
         where: { id: execution.id },
@@ -108,8 +119,6 @@ export class JobProcessor extends WorkerHost {
       if (space) {
         await this.cache.del(`stats:${space.userId}`);
       }
-    } catch {
-      // silent fail for cache invalidation
-    }
+    } catch {}
   }
 }

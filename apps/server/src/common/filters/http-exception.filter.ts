@@ -17,7 +17,6 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
     let message = 'Something went wrong';
 
-    // HTTP errors — NestJS ke built-in errors
     if (exception instanceof HttpException) {
       status = exception.getStatus();
       const exceptionResponse = exception.getResponse();
@@ -25,16 +24,10 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         typeof exceptionResponse === 'string'
           ? exceptionResponse
           : (exceptionResponse as any).message || exception.message;
-    }
-
-    // Prisma errors
-    else if ((exception as any)?.code?.startsWith('P')) {
+    } else if ((exception as any)?.code?.startsWith('P')) {
       status = HttpStatus.BAD_REQUEST;
       message = this.handlePrismaError(exception as any);
-    }
-
-    // Unknown errors
-    else if (exception instanceof Error) {
+    } else if (exception instanceof Error) {
       message =
         process.env.NODE_ENV === 'development'
           ? exception.message
@@ -47,7 +40,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       message: Array.isArray(message) ? message.join(', ') : message,
       timestamp: new Date().toISOString(),
       path: request.url,
-      // sirf development mein stack trace dikhao
+
       ...(process.env.NODE_ENV === 'development' && {
         stack: (exception as any)?.stack,
       }),

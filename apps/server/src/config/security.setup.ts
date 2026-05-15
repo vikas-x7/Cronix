@@ -36,6 +36,6 @@ export function setupSecurity(app: INestApplication): void {
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
-    maxAge: 86400, // 24 hours — browser preflight cache
+    maxAge: 86400,
   });
 }

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { HiMenuAlt3, HiOutlineX } from 'react-icons/hi';
 import { TbMenu } from 'react-icons/tb';
 import { MdOutlineMenu } from 'react-icons/md';
-import { FaGripLines } from 'react-icons/fa6';
+import { FaCircle, FaGripLines } from 'react-icons/fa6';
 import { LiaGripLinesSolid } from 'react-icons/lia';
 
 const NAV_LINKS = [
@@ -59,11 +59,7 @@ const Navbar = () => {
         <div className="flex h-10 mt-2 items-center justify-between">
           <div className="hidden lg:flex items-center gap-5 backdrop-blur-md px-5 py-2 rounded-[3px] transition-colors duration-300 bg-[#F0F0F0]">
             <Link href="/" className="flex items-center ">
-              <img
-                src="https://res.cloudinary.com/dyv9kenuj/image/upload/v1783138178/cronixlogo-removebg-preview_l87ist.png"
-                alt="Cronix Logo"
-                className="w-8 ml-[-14px]"
-              />
+              <FaCircle size={20} className=" ml-[-10px] mb-0.75 mr-2 " />
               <h1 className="text-[17px] font-bold">Cronix</h1>
             </Link>
             {NAV_LINKS.map((link) => (

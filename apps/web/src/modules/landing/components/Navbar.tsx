@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { HiMenuAlt3, HiOutlineX } from 'react-icons/hi';
 import { TbMenu } from 'react-icons/tb';
 import { MdOutlineMenu } from 'react-icons/md';
+import { FaGripLines } from 'react-icons/fa6';
+import { LiaGripLinesSolid } from 'react-icons/lia';
 
 const NAV_LINKS = [
   { name: 'Works', id: 'works' },
@@ -75,25 +77,30 @@ const Navbar = () => {
 
           <div className="relative">
             <button
-              className="text-sm flex items-center gap-2 uppercase tracking-widest"
+              className="text-sm flex items-center gap-2  tracking-[-1px] cursor-pointer"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? <HiOutlineX size={30} /> : <MdOutlineMenu size={30} />}
+              Menu
+              {isOpen ? (
+                <HiOutlineX size={30} />
+              ) : (
+                <LiaGripLinesSolid size={30} />
+              )}
             </button>
 
             <div
-              className={`absolute right-0 top-10 mt-2 w-94 bg-black text-white p-6 shadow-2xl rounded-[1px] border border-black/5 transition-transform duration-500 ease-out ${
+              className={`absolute right-0 top-10 mt-2 w-94 bg-[#1F1F1F] text-white p-6 shadow-2xl rounded-[1px] border border-black/5 transition-transform duration-500 ease-out ${
                 isOpen
                   ? 'translate-x-0 pointer-events-auto'
                   : 'translate-x-[200%] pointer-events-none'
               }`}
             >
-              <div className="flex flex-col gap-4 mb-8">
+              <div className="flex flex-col gap-1 mb-1">
                 {NAV_LINKS.map((link) => (
                   <button
                     key={link.id}
                     onClick={() => handleSmoothScroll(link.id)}
-                    className="text-lg font-medium text-left text-white/90 hover:text-gray-400 transition-colors"
+                    className="text-[25px]   font-light tracking-[-1px] text-left text-white/80 hover:text-gray-400 transition-colors"
                   >
                     {link.name}
                   </button>
@@ -101,15 +108,18 @@ const Navbar = () => {
               </div>
 
               <div className="border-t border-white/10 pt-4 flex justify-between text-[15px] text-white">
-                <div className="flex gap-4">
+                <div className="flex gap-4 font-light text-white/80">
                   <Link href="#" className="hover:text-gray-400">
                     LinkedIn
                   </Link>
                   <Link href="#" className="hover:text-gray-400">
-                    X
+                    Twitter
                   </Link>
                 </div>
-                <Link href="#" className="hover:text-gray-400">
+                <Link
+                  href="#"
+                  className="hover:text-gray-400 font-light text-white/80"
+                >
                   Privacy policy
                 </Link>
               </div>

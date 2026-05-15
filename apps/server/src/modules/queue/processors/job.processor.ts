@@ -1,5 +1,6 @@
 import { Processor, WorkerHost } from '@nestjs/bullmq';
 import { Job } from 'bullmq';
+import axios from 'axios';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { CacheService } from '../../cache/cache.service';
 import { NotificationsService } from '../../notifications/notifications.service';
@@ -41,26 +42,21 @@ export class JobProcessor extends WorkerHost {
     const startTime = Date.now();
 
     try {
-      const response = await fetch(jobData.endpoint, {
-        method: jobData.method,
+      const response = await axios({
+        method: jobData.method as any,
+        url: jobData.endpoint,
         headers: (jobData.headers as Record<string, string>) || {},
-        body: jobData.body ? JSON.stringify(jobData.body) : undefined,
-        signal: AbortSignal.timeout(jobData.timeout * 1000),
+        data: jobData.body ?? undefined,
+        timeout: jobData.timeout * 1000,
+        validateStatus: () => true,
       });
-
-      let responseBody: any = null;
-      try {
-        responseBody = await response.json();
-      } catch {
-        responseBody = await response.text();
-      }
 
       await this.prisma.execution.update({
         where: { id: execution.id },
         data: {
           status: 'SUCCESS',
           httpStatus: response.status,
-          response: responseBody,
+          response: response.data ?? null,
           duration: Date.now() - startTime,
           finishedAt: new Date(),
         },

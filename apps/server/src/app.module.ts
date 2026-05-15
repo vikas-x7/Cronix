@@ -18,6 +18,7 @@ import { WebhooksModule } from './modules/webhooks/webhooks.module';
 import { CacheModule } from './modules/cache/cache.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
+import { ExecutionsModule } from './modules/executions/executions.module';
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
     CacheModule,
     DashboardModule,
     NotificationsModule,
+    ExecutionsModule,
   ],
   controllers: [AppController],
   providers: [

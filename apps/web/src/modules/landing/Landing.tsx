@@ -18,9 +18,11 @@ export default function Landing() {
       <Feature />
       <Integration />
       <UseCases />
-
-      <TrafficChart />
       <AnimatedText />
+      <TrafficChart />
+
+      {/* <FAQ /> */}
+      <CTASection />
       <Footer />
     </>
   );

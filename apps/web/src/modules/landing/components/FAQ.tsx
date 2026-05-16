@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 
 const faqs = [
   {
@@ -58,18 +59,7 @@ export default function FAQ() {
                   >
                     {f.question}
                   </span>
-                  <Image
-                    src={
-                      activeIndex === i
-                        ? '/image/SVGs/chevron-up.svg'
-                        : '/image/SVGs/chevron-down.svg'
-                    }
-                    alt=""
-                    aria-hidden="true"
-                    width={20}
-                    height={20}
-                    className="h-5 w-5 shrink-0 opacity-40 transition-transform duration-300"
-                  />
+                  <IoIosArrowDown />
                 </div>
 
                 <div

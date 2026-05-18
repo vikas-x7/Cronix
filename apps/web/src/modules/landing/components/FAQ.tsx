@@ -43,7 +43,7 @@ export default function FAQ() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-start">
         <div className="flex flex-col gap-1 w-full">
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] text-black -tracking-[1px] md:-tracking-[3px] mb-8 sm:mb-10">
-            Frequently Asked <br className="hidden sm:block" /> Questions
+            Frequently Asked Questions
           </h2>
 
           <div className="border-t border-gray-200 mt-2 w-full">

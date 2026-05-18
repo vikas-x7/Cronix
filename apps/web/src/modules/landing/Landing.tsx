@@ -21,8 +21,8 @@ export default function Landing() {
       <AnimatedText />
       <TrafficChart />
 
-      {/* <FAQ /> */}
       <CTASection />
+      <FAQ />
       <Footer />
     </>
   );

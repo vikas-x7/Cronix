@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
   useJobs,
@@ -13,7 +13,7 @@ import {
 import { useWorkspaces } from '@/modules/workspaces';
 import PageHeader from '@/shared/layout/page-header';
 
-export default function JobsPage() {
+function JobsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [workspaceFilter, setWorkspaceFilter] = useState(
@@ -160,5 +160,22 @@ export default function JobsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function JobsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div>
+          <PageHeader title="Jobs">
+            <div className="h-9 w-24 animate-pulse rounded-lg bg-gray-100" />
+          </PageHeader>
+          <div className="h-64 animate-pulse rounded-xl bg-gray-100" />
+        </div>
+      }
+    >
+      <JobsPageContent />
+    </Suspense>
   );
 }

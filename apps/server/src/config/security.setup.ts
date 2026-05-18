@@ -34,7 +34,7 @@ export function setupSecurity(app: INestApplication): void {
   app.enableCors({
     origin: env.ALLOWED_ORIGINS.split(','),
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
     credentials: true,
     maxAge: 86400,
   });

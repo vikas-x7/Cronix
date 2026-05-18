@@ -7,6 +7,7 @@ import {
   UseGuards,
   UnauthorizedException,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Throttle } from '@nestjs/throttler';
 import { Response, Request } from 'express';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -24,15 +25,31 @@ import { CurrentUser } from './decorators/current-user.decorator';
 @Controller('auth')
 @Throttle({ default: { ttl: 900000, limit: 10 } })
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  private readonly frontendUrl: string;
+
+  constructor(
+    private authService: AuthService,
+    private configService: ConfigService,
+  ) {
+    this.frontendUrl = this.configService.get<string>(
+      'FRONTEND_URL',
+      'http://localhost:3000',
+    );
+  }
 
   private setAuthCookies(res: Response, tokens: TokenPair) {
+    const isProduction = process.env.NODE_ENV === 'production';
     const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProduction,
       sameSite: 'lax' as const,
+      path: '/',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     };
-    res.cookie('access_token', tokens.accessToken, cookieOptions);
+    res.cookie('access_token', tokens.accessToken, {
+      ...cookieOptions,
+      maxAge: 15 * 60 * 1000,
+    });
     res.cookie('refresh_token', tokens.refreshToken, cookieOptions);
   }
 
@@ -42,13 +59,14 @@ export class AuthController {
 
   @Get('google/callback')
   @UseGuards(GoogleAuthCallbackGuard)
-  async googleCallback(
-    @Req() req: any,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    const tokens = await this.authService.login(req.user);
-    this.setAuthCookies(res, tokens);
-    return { __message: 'Login successful' };
+  async googleCallback(@Req() req: any, @Res() res: Response) {
+    try {
+      const tokens = await this.authService.login(req.user);
+      this.setAuthCookies(res, tokens);
+      res.redirect(`${this.frontendUrl}/auth/callback?status=success`);
+    } catch {
+      res.redirect(`${this.frontendUrl}/login?error=auth_failed`);
+    }
   }
 
   @Get('github')
@@ -57,13 +75,14 @@ export class AuthController {
 
   @Get('github/callback')
   @UseGuards(GitHubAuthCallbackGuard)
-  async githubCallback(
-    @Req() req: any,
-    @Res({ passthrough: true }) res: Response,
-  ) {
-    const tokens = await this.authService.login(req.user);
-    this.setAuthCookies(res, tokens);
-    return { __message: 'Login successful' };
+  async githubCallback(@Req() req: any, @Res() res: Response) {
+    try {
+      const tokens = await this.authService.login(req.user);
+      this.setAuthCookies(res, tokens);
+      res.redirect(`${this.frontendUrl}/auth/callback?status=success`);
+    } catch {
+      res.redirect(`${this.frontendUrl}/login?error=auth_failed`);
+    }
   }
 
   @Post('refresh')
@@ -83,8 +102,12 @@ export class AuthController {
   @Post('logout')
   @UseGuards(JwtAuthGuard)
   logout(@Res({ passthrough: true }) res: Response): Record<string, string> {
-    res.clearCookie('access_token');
-    res.clearCookie('refresh_token');
+    const cookieOptions = {
+      httpOnly: true,
+      path: '/',
+    };
+    res.clearCookie('access_token', cookieOptions);
+    res.clearCookie('refresh_token', cookieOptions);
     return {
       __message: 'Logged out successfully',
     };

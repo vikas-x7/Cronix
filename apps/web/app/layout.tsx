@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Inter } from 'next/font/google';
-
+import QueryProvider from '@/shared/providers/query-provider';
+import { ToastProvider } from '@/shared/lib/toast';
 import './globals.css';
 
 const dmSans = DM_Sans({
@@ -14,8 +15,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Cronix ',
-  description: 'Crono job platform',
+  title: 'Cronix',
+  description: 'Cron job & event automation platform',
 };
 
 export default function RootLayout({
@@ -25,7 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${inter.variable}`}>{children}</body>
+      <body className={`${dmSans.variable} ${inter.variable} antialiased`}>
+        <QueryProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </QueryProvider>
+      </body>
     </html>
   );
 }

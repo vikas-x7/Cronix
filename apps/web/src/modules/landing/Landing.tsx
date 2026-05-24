@@ -20,7 +20,6 @@ export default function Landing() {
       <UseCases />
       <AnimatedText />
       <TrafficChart />
-
       <CTASection />
       <FAQ />
       <Footer />

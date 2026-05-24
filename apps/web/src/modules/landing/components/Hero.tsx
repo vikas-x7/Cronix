@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Hero = () => {
   return (
@@ -35,9 +36,12 @@ const Hero = () => {
               </p>
             </div>
             <div>
-              <p className="text-[10px] sm:text-[15px] uppercase tracking-[-0.05px] text-black/80">
-                Automation
-              </p>
+              <Link
+                href="/login"
+                className="text-[10px] sm:text-[15px] uppercase tracking-[-0.05px] text-black/80"
+              >
+                Get start{' '}
+              </Link>
             </div>
           </div>
         </div>
@@ -50,7 +54,7 @@ const Hero = () => {
 
           <div className="relative">
             <img
-              className="h-full w-full object-cover object-[25%_center]"
+              className="h-full w-full object-cover object-[25%_center] "
               src="https://res.cloudinary.com/dyv9kenuj/image/upload/v1782243146/bgimageforcronixc_jsovlx.avif"
               alt="Erica AI data automation background"
             />

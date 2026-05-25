@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { TfiArrowTopRight } from 'react-icons/tfi';
+import { VscArrowLeft, VscArrowRight } from 'react-icons/vsc';
 
 const Hero = () => {
   return (
@@ -30,18 +32,16 @@ const Hero = () => {
 
         <div className="flex w-full flex-col items-start justify-between gap-6 py-6 sm:py-8 md:flex-row md:items-end">
           <div className="flex flex-row gap-8 sm:gap-16">
-            <div>
-              <p className="text-[10px] sm:text-[15px] uppercase tracking-[-0.05px] text-black/80">
-                Rows processed
-              </p>
-            </div>
-            <div>
+            <div className="bg-black flex items-center px-1 pl-1  gap-1">
               <Link
                 href="/login"
-                className="text-[10px] sm:text-[15px] uppercase tracking-[-0.05px] text-black/80"
+                className="text-[10px]  sm:text-[15px] uppercase tracking-[-0.05px] text-white bg-black"
               >
-                Get start{' '}
+                Get start
               </Link>
+              <p className="text-white">
+                <TfiArrowTopRight />
+              </p>
             </div>
           </div>
         </div>

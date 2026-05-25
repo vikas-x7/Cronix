@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FaGoogle, FaGithub } from 'react-icons/fa6';
 import { useAuthStore } from '../store/auth.store';
+import { FcGoogle } from 'react-icons/fc';
 
 const authErrors: Record<string, string> = {
   AccessDenied: 'Sign in was cancelled or access was denied.',
@@ -49,10 +50,10 @@ export default function LoginCard() {
         </div>
         <div className="w-full max-w-md px-6 text-center">
           <div className="mb-8 flex flex-col items-center justify-center">
-            <h1 className="text-[30px] flex items-center text-center gap-2 font-semibold tracking-[-1.5px] text-black/80 ">
+            <h1 className="text-[30px] flex items-center text-center gap-2 font-semibold tracking-[-1.5px] ">
               Welcome to cronix
             </h1>
-            <p className="text-sm text-neutral-500 mt-1">
+            <p className="text-sm text-black/80 mt-1">
               Sign in to manage your cron jobs and automation workflows.
             </p>
           </div>
@@ -74,7 +75,7 @@ export default function LoginCard() {
                 {isRedirecting ? (
                   <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-gray-600" />
                 ) : (
-                  <FaGoogle className="h-5 w-5" />
+                  <FcGoogle className="h-5 w-5" />
                 )}
                 Continue with Google
               </span>

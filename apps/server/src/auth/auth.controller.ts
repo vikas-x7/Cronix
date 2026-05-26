@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Logger,
   Post,
   Req,
   Res,
@@ -8,7 +9,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Throttle } from '@nestjs/throttler';
+import { Throttle, SkipThrottle } from '@nestjs/throttler';
 import { Response, Request } from 'express';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import {
@@ -23,8 +24,8 @@ import { AuthService, TokenPair } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 
 @Controller('auth')
-@Throttle({ default: { ttl: 900000, limit: 10 } })
 export class AuthController {
+  private readonly logger = new Logger(AuthController.name);
   private readonly frontendUrl: string;
 
   constructor(
@@ -54,38 +55,45 @@ export class AuthController {
   }
 
   @Get('google')
+  @Throttle({ default: { ttl: 900000, limit: 10 } })
   @UseGuards(GoogleAuthGuard)
   googleLogin(): void {}
 
   @Get('google/callback')
+  @SkipThrottle()
   @UseGuards(GoogleAuthCallbackGuard)
   async googleCallback(@Req() req: any, @Res() res: Response) {
     try {
       const tokens = await this.authService.login(req.user);
       this.setAuthCookies(res, tokens);
       res.redirect(`${this.frontendUrl}/auth/callback?status=success`);
-    } catch {
+    } catch (error) {
+      this.logger.error('Google OAuth callback failed', error);
       res.redirect(`${this.frontendUrl}/login?error=auth_failed`);
     }
   }
 
   @Get('github')
+  @Throttle({ default: { ttl: 900000, limit: 10 } })
   @UseGuards(GitHubAuthGuard)
   githubLogin(): void {}
 
   @Get('github/callback')
+  @SkipThrottle()
   @UseGuards(GitHubAuthCallbackGuard)
   async githubCallback(@Req() req: any, @Res() res: Response) {
     try {
       const tokens = await this.authService.login(req.user);
       this.setAuthCookies(res, tokens);
       res.redirect(`${this.frontendUrl}/auth/callback?status=success`);
-    } catch {
+    } catch (error) {
+      this.logger.error('GitHub OAuth callback failed', error);
       res.redirect(`${this.frontendUrl}/login?error=auth_failed`);
     }
   }
 
   @Post('refresh')
+  @SkipThrottle()
   async refresh(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
@@ -100,6 +108,7 @@ export class AuthController {
   }
 
   @Post('logout')
+  @SkipThrottle()
   @UseGuards(JwtAuthGuard)
   logout(@Res({ passthrough: true }) res: Response): Record<string, string> {
     const cookieOptions = {
@@ -114,6 +123,7 @@ export class AuthController {
   }
 
   @Get('me')
+  @SkipThrottle()
   @UseGuards(JwtAuthGuard)
   getProfile(@CurrentUser() user: any): Record<string, any> {
     return {

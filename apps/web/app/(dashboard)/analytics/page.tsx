@@ -15,21 +15,16 @@ export default function Analytics() {
   const { data: stats, isLoading: statsLoading } = useDashboard();
   const { data: jobs, isLoading: jobsLoading } = useJobs();
 
-  const isLoading = statsLoading || jobsLoading;
-
-  if (isLoading) {
-    return <PageLoader />;
-  }
+  if (statsLoading || jobsLoading) return <PageLoader />;
 
   const jobsWithExecutions =
     jobs?.filter((j: any) => (j._count?.executions ?? 0) > 0) ?? [];
 
   return (
-    <div className="w-full h-screen overflow-y-auto">
-      <div className="border-b px-4 py-3 bg-[#FAFAFA] border-[#DDDDDD] flex justify-between items-center">
-        <h1 className="text-[20px] -tracking-[1px]">Analytics</h1>
+    <div className="w-full h-screen overflow-y-auto bg-neutral-950">
+      <div className="border-b px-4 py-3 bg-neutral-900/50 border-neutral-800 flex justify-between items-center">
+        <h1 className="text-[20px] -tracking-[1px] text-white">Analytics</h1>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-6 py-6">
         <StatCard
           title="Total Executions"
@@ -72,20 +67,18 @@ export default function Analytics() {
           }
         />
       </div>
-
       <div className="px-6 py-4">
-        <h2 className="text-[14px] font-medium text-[#171717] mb-4">
+        <h2 className="text-[14px] font-medium text-white mb-4">
           Jobs Breakdown
         </h2>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="border border-[#E5E5E5] p-5 h-90">
-            <p className="text-[11px] font-medium uppercase text-black mb-4">
+          <div className="border border-neutral-800 bg-neutral-900/30 p-5 h-90">
+            <p className="text-[11px] font-medium uppercase text-neutral-400 mb-4">
               Job Status Distribution
             </p>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-[12px] text-neutral-600">Active</span>
+                <span className="text-[12px] text-neutral-400">Active</span>
                 <div className="flex items-center gap-2">
                   <div
                     className="h-2 bg-emerald-500"
@@ -93,13 +86,13 @@ export default function Analytics() {
                       width: `${Math.max(8, ((stats?.jobs.active ?? 0) / Math.max(stats?.jobs.total ?? 1, 1)) * 120)}px`,
                     }}
                   />
-                  <span className="text-[13px] font-medium text-[#171717]">
+                  <span className="text-[13px] font-medium text-white">
                     {stats?.jobs.active ?? 0}
                   </span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[12px] text-neutral-600">Paused</span>
+                <span className="text-[12px] text-neutral-400">Paused</span>
                 <div className="flex items-center gap-2">
                   <div
                     className="h-2 bg-amber-400"
@@ -107,21 +100,20 @@ export default function Analytics() {
                       width: `${Math.max(8, ((stats?.jobs.paused ?? 0) / Math.max(stats?.jobs.total ?? 1, 1)) * 120)}px`,
                     }}
                   />
-                  <span className="text-[13px] font-medium text-[#171717]">
+                  <span className="text-[13px] font-medium text-white">
                     {stats?.jobs.paused ?? 0}
                   </span>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className="border border-[#E5E5E5] p-5">
-            <p className="text-[11px] font-medium uppercase text-black mb-4">
+          <div className="border border-neutral-800 bg-neutral-900/30 p-5">
+            <p className="text-[11px] font-medium uppercase text-neutral-400 mb-4">
               Execution Results
             </p>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-[12px] text-neutral-600">Successful</span>
+                <span className="text-[12px] text-neutral-400">Successful</span>
                 <div className="flex items-center gap-2">
                   <div
                     className="h-2 bg-emerald-500"
@@ -129,13 +121,13 @@ export default function Analytics() {
                       width: `${Math.max(8, ((stats?.executions.success ?? 0) / Math.max(stats?.executions.total ?? 1, 1)) * 120)}px`,
                     }}
                   />
-                  <span className="text-[13px] font-medium text-emerald-600">
+                  <span className="text-[13px] font-medium text-emerald-400">
                     {stats?.executions.success ?? 0}
                   </span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[12px] text-neutral-600">Failed</span>
+                <span className="text-[12px] text-neutral-400">Failed</span>
                 <div className="flex items-center gap-2">
                   <div
                     className="h-2 bg-red-400"
@@ -143,20 +135,19 @@ export default function Analytics() {
                       width: `${Math.max(8, ((stats?.executions.failed ?? 0) / Math.max(stats?.executions.total ?? 1, 1)) * 120)}px`,
                     }}
                   />
-                  <span className="text-[13px] font-medium text-red-500">
+                  <span className="text-[13px] font-medium text-red-400">
                     {stats?.executions.failed ?? 0}
                   </span>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className="border border-[#E5E5E5] p-5">
-            <p className="text-[11px] font-medium uppercase text-black mb-4">
+          <div className="border border-neutral-800 bg-neutral-900/30 p-5">
+            <p className="text-[11px] font-medium uppercase text-neutral-400 mb-4">
               Most Executed Jobs
             </p>
             {jobsWithExecutions.length === 0 ? (
-              <p className="text-[12px] text-neutral-300">No data yet</p>
+              <p className="text-[12px] text-neutral-600">No data yet</p>
             ) : (
               <div className="space-y-2">
                 {jobsWithExecutions
@@ -170,10 +161,10 @@ export default function Analytics() {
                       key={job.id}
                       className="flex items-center justify-between"
                     >
-                      <span className="text-[12px] text-neutral-600 truncate max-w-[140px]">
+                      <span className="text-[12px] text-neutral-400 truncate max-w-[140px]">
                         {job.name}
                       </span>
-                      <span className="text-[12px] font-mono text-neutral-400">
+                      <span className="text-[12px] font-mono text-neutral-500">
                         {job._count?.executions ?? 0}
                       </span>
                     </div>

@@ -4,7 +4,8 @@ import type { User } from '../types/auth.types';
 
 export async function getMe(): Promise<User> {
   const response = await api.get(API_ROUTES.AUTH.ME);
-  return response.data.data;
+  const { __message, ...user } = response.data;
+  return user as User;
 }
 
 export async function logout(): Promise<void> {

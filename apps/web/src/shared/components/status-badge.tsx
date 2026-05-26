@@ -14,21 +14,22 @@ interface StatusBadgeProps {
 }
 
 const STYLES: Record<string, string> = {
-  active: 'bg-emerald-50 text-emerald-700',
-  success: 'bg-emerald-50 text-emerald-700',
-  paused: 'bg-amber-50 text-amber-700',
-  failed: 'bg-red-50 text-red-700',
-  error: 'bg-red-50 text-red-700',
+  active: 'bg-emerald-500/10 text-emerald-400 ring-emerald-500/20',
+  success: 'bg-emerald-500/10 text-emerald-400 ring-emerald-500/20',
+  paused: 'bg-amber-500/10 text-amber-400 ring-amber-500/20',
+  failed: 'bg-red-500/10 text-red-400 ring-red-500/20',
+  error: 'bg-red-500/10 text-red-400 ring-red-500/20',
 };
 
 export default function StatusBadge({ status, size = 'sm' }: StatusBadgeProps) {
   const normalized = status?.toLowerCase() ?? 'unknown';
-  const style = STYLES[normalized] || 'bg-neutral-100 text-neutral-600';
+  const style =
+    STYLES[normalized] || 'bg-neutral-800 text-neutral-400 ring-neutral-700';
 
   return (
     <span
       className={cn(
-        'inline-flex items-center font-medium capitalize',
+        'inline-flex items-center font-medium capitalize ring-1 ring-inset',
         style,
         size === 'sm' ? 'text-[11px] px-2 py-0.5' : 'text-[12px] px-2.5 py-1',
       )}

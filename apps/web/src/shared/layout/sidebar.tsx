@@ -3,13 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import {
-  HiOutlineHome,
-  HiOutlineCog6Tooth,
-  HiOutlinePlayCircle,
-  HiOutlineXMark,
-  HiBars3,
-} from 'react-icons/hi2';
+import { HiOutlineXMark, HiBars3 } from 'react-icons/hi2';
 import {
   FiLayout,
   FiClock,
@@ -20,6 +14,7 @@ import {
   FiTrendingUp,
 } from 'react-icons/fi';
 import { cn } from '@/shared/lib/utils';
+import { useAuthStore } from '@/modules/auth';
 
 const NAV_ITEMS = [
   { label: 'Overview', href: '/dashboard', icon: FiLayout },
@@ -34,43 +29,41 @@ const NAV_ITEMS = [
 export default function Sidebar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const user = useAuthStore((s) => s.user);
 
   return (
     <>
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="fixed top-4 left-4 z-50 block cursor-pointer border border-[#E5E5E5] bg-white p-2 lg:hidden"
+        className="fixed top-4 left-4 z-50 block cursor-pointer border border-neutral-700 bg-neutral-900 p-2 lg:hidden"
       >
         {mobileOpen ? (
-          <HiOutlineXMark className="h-5 w-5" />
+          <HiOutlineXMark className="h-5 w-5 text-white" />
         ) : (
-          <HiBars3 className="h-5 w-5" />
+          <HiBars3 className="h-5 w-5 text-white" />
         )}
       </button>
 
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/30 lg:hidden"
+          className="fixed inset-0 z-30 bg-black/50 lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-[#E5E5E5] bg-white transition-transform duration-200 lg:translate-x-0',
+          'fixed inset-y-0 left-0 z-40 flex w-[240px] flex-col border-r border-neutral-800 bg-[#0a0a0a] transition-transform duration-200 lg:translate-x-0',
           mobileOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >
-        <div className="flex h-14 items-center gap-2 border-b border-[#E5E5E5] px-5">
-          <div className="flex h-8 w-8 items-center justify-center bg-[#171717] text-[13px] font-bold text-white">
-            C
-          </div>
-          <span className="text-[15px] font-semibold text-[#171717]">
-            cronix
-          </span>
+        <div className="flex h-14 items-center gap-2 border-b border-neutral-800 px-2">
+          <div className="flex h-8 w-8 items-center justify-center bg-white text-[13px] font-bold text-black"></div>
+          <span className="text-[15px] font-semibold text-white">cronix</span>
+          <span className="text-[10px] text-neutral-500 ml-auto">v0.1.0</span>
         </div>
 
-        <nav className="flex-1 p-3 space-y-0.5">
+        <nav className="flex-1 px-2 space-y-0.5">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive =
@@ -83,21 +76,45 @@ export default function Sidebar() {
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
-                  'flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium transition-colors',
+                  'flex items-center gap-2.5 px-3 py-2 text-[13px] font-medium transition-colors rounded-[3px]',
+
                   isActive
-                    ? 'bg-[#F4F4F5] text-[#171717]'
-                    : 'text-[#52525B] hover:bg-[#FAFAFA] hover:text-[#171717]',
+                    ? 'bg-neutral-800 text-white'
+                    : 'text-neutral-400 hover:bg-neutral-800/50 hover:text-white',
                 )}
               >
-                <Icon size={16} />
+                <Icon size={14} />
                 {item.label}
               </Link>
             );
           })}
         </nav>
 
-        <div className="border-t border-[#E5E5E5] p-4">
-          <p className="text-[11px] text-neutral-400">cronix v0.1.0</p>
+        <div className="p-3 space-y-2 border-t border-neutral-800">
+          <Link
+            href="/settings"
+            className="flex items-center gap-3 px-2 py-2 hover:bg-neutral-800/50 transition-colors rounded-md"
+          >
+            {user?.avatar ? (
+              <img
+                src={user.avatar}
+                alt={user.name || 'User'}
+                className="h-8 w-8 rounded-full object-cover"
+              />
+            ) : (
+              <div className="h-8 w-8 rounded-full bg-neutral-700 flex items-center justify-center text-[12px] font-medium text-white shrink-0">
+                {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+              </div>
+            )}
+            <div className="min-w-0 flex-1">
+              <p className="text-[13px] font-medium text-white truncate">
+                {user?.name || 'User'}
+              </p>
+              <p className="text-[11px] text-neutral-500 truncate">
+                {user?.email || ''}
+              </p>
+            </div>
+          </Link>
         </div>
       </aside>
     </>

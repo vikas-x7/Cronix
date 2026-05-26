@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Sidebar from '@/shared/layout/sidebar';
 import { useAuth } from '@/modules/auth';
-import ToastContainer from '@/shared/components/toast-container';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();
@@ -18,10 +17,10 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-neutral-950">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-[#171717]" />
-          <p className="text-[13px] text-neutral-400">Loading...</p>
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-white" />
+          <p className="text-[13px] text-neutral-500">Loading...</p>
         </div>
       </div>
     );
@@ -39,13 +38,12 @@ export default function DashboardLayout({
 }) {
   return (
     <ProtectedRoute>
-      <div className="flex bg-white font-inter">
+      <div className="flex bg-neutral-950 font-inter">
         <div className="w-64 shrink-0">
           <Sidebar />
         </div>
         <main className="h-screen w-full overflow-y-auto slim-scrollbar">
           {children}
-          <ToastContainer />
         </main>
       </div>
     </ProtectedRoute>

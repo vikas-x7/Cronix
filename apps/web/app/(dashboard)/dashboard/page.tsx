@@ -31,12 +31,12 @@ export default function DashboardHome() {
 
   if (error) {
     return (
-      <div className="w-full h-screen">
-        <div className="border-b px-4 py-3 border-[#737373]">
-          <h1 className="text-[20px] -tracking-[1px]">Overview</h1>
+      <div className="w-full h-screen bg-neutral-950">
+        <div className="border-b px-4 py-3 border-neutral-800">
+          <h1 className="text-[20px] -tracking-[1px] text-white">Overview</h1>
         </div>
         <div className="flex items-center justify-center h-64">
-          <p className="text-[13px] text-neutral-400">
+          <p className="text-[13px] text-neutral-500">
             Failed to load dashboard data
           </p>
         </div>
@@ -47,11 +47,11 @@ export default function DashboardHome() {
   const recentExecs = stats?.recentExecutions ?? [];
 
   return (
-    <div className="w-full h-screen overflow-y-auto">
-      <div className="border-b px-4 py-3 bg-[#FAFAFA] border-[#DDDDDD] flex justify-between items-center">
-        <h1 className="text-[20px] -tracking-[1px]">Overview</h1>
+    <div className="w-full h-screen overflow-y-auto bg-neutral-950">
+      <div className="border-b px-4 py-3 bg-neutral-900/50 border-neutral-800 flex justify-between items-center">
+        <h1 className="text-[20px] -tracking-[1px] text-white">Overview</h1>
         <Link href="/jobs/new">
-          <button className="bg-[#171717] text-[#fafafa] px-3 py-2 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-[#333] transition">
+          <button className="bg-white text-black px-3 py-2 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-neutral-200 transition">
             <IoAdd size={18} />
             Schedule New Job
           </button>
@@ -103,13 +103,13 @@ export default function DashboardHome() {
       <div className="px-6 pb-2">
         <div className="flex gap-3">
           <Link href="/jobs/new">
-            <button className="border border-dashed border-[#D9D9D9] px-4 py-2 text-[12px] text-black/90 hover:border-[#171717] hover:text-[#171717] transition flex items-center gap-1">
+            <button className="border border-dashed border-neutral-700 px-4 py-2 text-[12px] text-neutral-300 hover:border-white hover:text-white transition flex items-center gap-1">
               <IoAdd size={16} />
               New Cron Job
             </button>
           </Link>
           <Link href="/jobs">
-            <button className="border border-[#E5E5E5] px-4 py-2 text-[12px] text-black/90 hover:border-[#171717] hover:text-[#171717] transition flex items-center gap-1">
+            <button className="border border-neutral-700 px-4 py-2 text-[12px] text-neutral-300 hover:border-white hover:text-white transition flex items-center gap-1">
               <FiClock size={14} />
               View All Jobs
             </button>
@@ -117,7 +117,7 @@ export default function DashboardHome() {
           <button
             onClick={() => refetch()}
             disabled={isFetching}
-            className="border border-[#E5E5E5] px-4 py-2 text-[12px] text-black/90 hover:border-[#171717] hover:text-[#171717] transition flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="border border-neutral-700 px-4 py-2 text-[12px] text-neutral-300 hover:border-white hover:text-white transition flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <FiRefreshCw
               size={14}
@@ -129,23 +129,23 @@ export default function DashboardHome() {
       </div>
 
       <div className="px-6 py-4 flex flex-col h-[calc(100vh-400px)] min-h-[400px]">
-        <h2 className="text-[14px] font-medium text-[#171717] mb-4">
+        <h2 className="text-[14px] font-medium text-white mb-4">
           Recent Executions
         </h2>
 
         {!recentExecs.length ? (
-          <div className="border border-dashed border-[#D9D9D9] flex-1 py-20 flex flex-col items-center justify-center">
-            <FiPause className="text-black/70 mb-2" size={24} />
-            <p className="text-[16px] tracking-normal text-black">
+          <div className="border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center">
+            <FiPause className="text-neutral-500 mb-2" size={24} />
+            <p className="text-[16px] tracking-normal text-white">
               No executions yet
             </p>
-            <p className="text-[12px] text-[#383838] mt-1">
+            <p className="text-[12px] text-neutral-500 mt-1">
               Create a cron job and trigger it to see results here
             </p>
           </div>
         ) : (
-          <div className="border border-[#E5E5E5] flex flex-col flex-1 overflow-hidden">
-            <div className="grid grid-cols-12 px-4 py-2.5 bg-[#FAFAFA] border-b border-[#E5E5E5] text-[12px] font-medium text-black sticky top-0 z-10">
+          <div className="border border-neutral-800 flex flex-col flex-1 overflow-hidden">
+            <div className="grid grid-cols-12 px-4 py-2.5 bg-neutral-900/50 border-b border-neutral-800 text-[12px] font-medium text-neutral-400 sticky top-0 z-10">
               <div className="col-span-3">Job</div>
               <div className="col-span-3">Status</div>
               <div className="col-span-2">Trigger</div>
@@ -155,17 +155,17 @@ export default function DashboardHome() {
 
             <div className="flex-1 overflow-y-auto slim-scrollbar relative">
               {isFetching && (
-                <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px] flex items-center justify-center z-10">
-                  <div className="w-5 h-5 border-2 border-[#171717] border-t-transparent rounded-full animate-spin" />
+                <div className="absolute inset-0 bg-neutral-950/60 backdrop-blur-[1px] flex items-center justify-center z-10">
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 </div>
               )}
               {recentExecs.map((exec) => (
                 <div
                   key={exec.id}
-                  className="grid grid-cols-12 items-center px-4 py-2.5 border-b border-[#F5F5F5] last:border-0 hover:bg-[#FAFAFA] transition"
+                  className="grid grid-cols-12 items-center px-4 py-2.5 border-b border-neutral-800/50 last:border-0 hover:bg-neutral-900/30 transition"
                 >
                   <div className="col-span-3">
-                    <p className="text-[13px] font-medium text-[#171717] truncate">
+                    <p className="text-[13px] font-medium text-white truncate">
                       {exec.jobName ?? '—'}
                     </p>
                   </div>
@@ -174,28 +174,28 @@ export default function DashboardHome() {
                       status={exec.status === 'SUCCESS' ? 'success' : 'failed'}
                     />
                   </div>
-                  <div className="col-span-2 text-[12px] text-neutral-500 capitalize">
+                  <div className="col-span-2 text-[12px] text-neutral-400 capitalize">
                     {exec.trigger?.toLowerCase() ?? '—'}
                   </div>
-                  <div className="col-span-2 text-[12px] text-neutral-500">
+                  <div className="col-span-2 text-[12px] text-neutral-400">
                     {exec.duration}ms
                   </div>
-                  <div className="col-span-2 text-[11px] text-neutral-400">
+                  <div className="col-span-2 text-[11px] text-neutral-500">
                     {new Date(exec.startedAt).toLocaleString()}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex items-center justify-between px-4 py-3 border-t border-[#E5E5E5] sticky bottom-0 z-10">
+            <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-800 sticky bottom-0 z-10 bg-neutral-950">
               <p className="text-[12px] text-neutral-500">
-                Page <span className="text-black font-medium">{page}</span>
+                Page <span className="text-white font-medium">{page}</span>
               </p>
               <div className="flex gap-2">
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="px-3 py-1 text-[12px] border border-[#E5E5E5] bg-white text-black disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-50 transition flex items-center gap-1 cursor-pointer"
+                  className="px-3 py-1 text-[12px] border border-neutral-700 bg-neutral-900 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
                 >
                   <FiChevronLeft size={14} />
                   Previous
@@ -203,7 +203,7 @@ export default function DashboardHome() {
                 <button
                   onClick={() => setPage((p) => p + 1)}
                   disabled={!recentExecs.length || recentExecs.length < limit}
-                  className="px-3 py-1 text-[12px] border border-[#E5E5E5] bg-white text-black disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-50 transition flex items-center gap-1 cursor-pointer"
+                  className="px-3 py-1 text-[12px] border border-neutral-700 bg-neutral-900 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
                 >
                   Next
                   <FiChevronRight size={14} />

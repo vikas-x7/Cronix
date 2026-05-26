@@ -9,11 +9,11 @@ interface CronExpressionInputProps {
 }
 
 const CRON_FIELDS = [
-  { label: 'Minute', placeholder: '*', max: 59 },
-  { label: 'Hour', placeholder: '*', max: 23 },
-  { label: 'Day', placeholder: '*', max: 31 },
-  { label: 'Month', placeholder: '*', max: 12 },
-  { label: 'Weekday', placeholder: '*', max: 6 },
+  { label: 'Minute', placeholder: '*' },
+  { label: 'Hour', placeholder: '*' },
+  { label: 'Day', placeholder: '*' },
+  { label: 'Month', placeholder: '*' },
+  { label: 'Weekday', placeholder: '*' },
 ];
 
 const PRESETS = [
@@ -31,10 +31,9 @@ export default function CronExpressionInput({
   error,
 }: CronExpressionInputProps) {
   const parts = (value || '').split(' ');
-  const [fields, setFields] = useState<string[]>(() => {
-    if (parts.length === 5) return parts;
-    return ['', '', '', '', ''];
-  });
+  const [fields, setFields] = useState<string[]>(() =>
+    parts.length === 5 ? parts : ['', '', '', '', ''],
+  );
 
   function updateField(index: number, val: string) {
     const next = [...fields];
@@ -48,7 +47,7 @@ export default function CronExpressionInput({
       <div className="grid grid-cols-5 gap-2">
         {CRON_FIELDS.map((field, i) => (
           <div key={field.label}>
-            <label className="block text-[10px] uppercase tracking-wider text-neutral-400 mb-1">
+            <label className="block text-[10px] uppercase tracking-wider text-neutral-500 mb-1">
               {field.label}
             </label>
             <input
@@ -56,16 +55,14 @@ export default function CronExpressionInput({
               value={fields[i]}
               onChange={(e) => updateField(i, e.target.value)}
               placeholder={field.placeholder}
-              className="w-full border border-[#E5E5E5] px-2 py-1.5 text-[12px] font-mono text-[#171717] outline-none focus:border-[#171717] transition placeholder:text-neutral-300"
+              className="w-full border border-neutral-700 bg-neutral-800 px-2 py-1.5 text-[12px] font-mono text-white outline-none focus:border-neutral-500 transition placeholder:text-neutral-600"
             />
           </div>
         ))}
       </div>
-
-      {error && <p className="text-[12px] text-red-500">{error}</p>}
-
+      {error && <p className="text-[12px] text-red-400">{error}</p>}
       <div>
-        <p className="text-[11px] text-neutral-400 mb-2">Quick presets</p>
+        <p className="text-[11px] text-neutral-500 mb-2">Quick presets</p>
         <div className="flex flex-wrap gap-1.5">
           {PRESETS.map((preset) => (
             <button
@@ -76,18 +73,17 @@ export default function CronExpressionInput({
                 setFields(p);
                 onChange(preset.value);
               }}
-              className="border border-[#E5E5E5] px-2.5 py-1 text-[11px] text-neutral-600 hover:border-[#171717] hover:text-[#171717] transition cursor-pointer"
+              className="border border-neutral-700 px-2.5 py-1 text-[11px] text-neutral-400 hover:border-white hover:text-white transition cursor-pointer"
             >
               {preset.label}
             </button>
           ))}
         </div>
       </div>
-
       {value && (
-        <div className="bg-[#FAFAFA] border border-[#E5E5E5] p-3">
-          <p className="text-[10px] uppercase text-neutral-400 mb-1">Preview</p>
-          <p className="text-[12px] font-mono text-[#171717]">{value}</p>
+        <div className="bg-neutral-800/50 border border-neutral-700 p-3">
+          <p className="text-[10px] uppercase text-neutral-500 mb-1">Preview</p>
+          <p className="text-[12px] font-mono text-white">{value}</p>
         </div>
       )}
     </div>

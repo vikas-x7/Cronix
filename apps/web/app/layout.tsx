@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Inter } from 'next/font/google';
 import QueryProvider from '@/shared/providers/query-provider';
+import ThemeProvider from '@/shared/providers/theme-provider';
 import { ToastProvider } from '@/shared/lib/toast';
 import './globals.css';
 
@@ -25,11 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${inter.variable} antialiased`}>
-        <QueryProvider>
-          <ToastProvider>{children}</ToastProvider>
-        </QueryProvider>
+        <ThemeProvider>
+          <QueryProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

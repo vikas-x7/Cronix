@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Inter } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
 import QueryProvider from '@/shared/providers/query-provider';
 import ThemeProvider from '@/shared/providers/theme-provider';
 import { ToastProvider } from '@/shared/lib/toast';
@@ -27,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${dmSans.variable} ${inter.variable} antialiased`}>
+      <body
+        className={`${dmSans.variable} ${inter.variable} ${GeistSans.variable} antialiased`}
+      >
         <ThemeProvider>
           <QueryProvider>
             <ToastProvider>{children}</ToastProvider>

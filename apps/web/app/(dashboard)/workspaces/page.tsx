@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { IoAdd } from 'react-icons/io5';
 import {
   useWorkspaces,
   useCreateWorkspace,
@@ -8,7 +9,8 @@ import {
   WorkspaceCard,
   CreateWorkspaceModal,
 } from '@/modules/workspaces';
-import PageHeader from '@/shared/layout/page-header';
+import PageLoader from '@/shared/components/page-loader';
+import ConfirmationModal from '@/shared/components/confirmation-modal';
 import type { CreateWorkspaceFormData } from '@/modules/workspaces/schemas/workspace.schema';
 
 export default function WorkspacesPage() {
@@ -22,33 +24,21 @@ export default function WorkspacesPage() {
     createMutation.mutate(data, { onSuccess: () => setModalOpen(false) });
   };
 
-  if (isLoading) {
-    return (
-      <div>
-        <PageHeader title="Workspaces">
-          <div className="h-9 w-32 animate-pulse rounded-lg bg-gray-100" />
-        </PageHeader>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-40 animate-pulse rounded-xl bg-gray-100"
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
+  if (isLoading) return <PageLoader />;
 
   if (isError) {
     return (
-      <div>
-        <PageHeader title="Workspaces" />
-        <div className="flex flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-12">
-          <p className="text-sm text-gray-500">Failed to load workspaces</p>
+      <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
+        <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
+          <h1 className="text-[20px] -tracking-[1px] text-white">Workspaces</h1>
+        </div>
+        <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh] flex flex-col items-center justify-center">
+          <p className="text-[13px] text-neutral-500">
+            Failed to load workspaces
+          </p>
           <button
             onClick={() => refetch()}
-            className="mt-3 cursor-pointer rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+            className="mt-3 cursor-pointer border border-neutral-700 px-4 py-2 text-[12px] font-medium text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
           >
             Retry
           </button>
@@ -58,35 +48,38 @@ export default function WorkspacesPage() {
   }
 
   return (
-    <div>
-      <PageHeader title="Workspaces">
+    <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
+      <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
+        <h1 className="text-[20px] -tracking-[1px] text-white">Workspaces</h1>
         <button
           onClick={() => setModalOpen(true)}
-          className="cursor-pointer rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+          className="bg-[#252525] border border-white/5 rounded-[2px] text-white/90 px-2 py-1.5 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-neutral-200 transition"
         >
+          <IoAdd size={18} />
           New Workspace
         </button>
-      </PageHeader>
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {workspaces?.map((ws) => (
-          <WorkspaceCard
-            key={ws.id}
-            workspace={ws}
-            onDelete={(id) => setConfirmDelete(id)}
-          />
-        ))}
-        {(!workspaces || workspaces.length === 0) && (
-          <div className="col-span-full flex flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 bg-white p-12">
-            <p className="text-sm text-gray-500">No workspaces yet</p>
-            <button
-              onClick={() => setModalOpen(true)}
-              className="mt-3 cursor-pointer rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
-            >
-              Create your first workspace
-            </button>
-          </div>
-        )}
+      </div>
+      <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh] overflow-y-auto">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 p-6">
+          {workspaces?.map((ws) => (
+            <WorkspaceCard
+              key={ws.id}
+              workspace={ws}
+              onDelete={(id) => setConfirmDelete(id)}
+            />
+          ))}
+          {(!workspaces || workspaces.length === 0) && (
+            <div className="col-span-full border border-dashed border-neutral-700 flex flex-col items-center justify-center p-12">
+              <p className="text-[13px] text-neutral-500">No workspaces yet</p>
+              <button
+                onClick={() => setModalOpen(true)}
+                className="mt-3 cursor-pointer border border-white px-4 py-2 text-[12px] font-medium text-white transition-colors hover:bg-white hover:text-black"
+              >
+                Create your first workspace
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       <CreateWorkspaceModal
@@ -97,40 +90,20 @@ export default function WorkspacesPage() {
       />
 
       {confirmDelete && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 p-4"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setConfirmDelete(null);
+        <ConfirmationModal
+          isOpen={!!confirmDelete}
+          title="Delete Workspace"
+          message="This action cannot be undone. The workspace and all its jobs will be permanently deleted."
+          confirmText="Delete"
+          confirmButtonClass="bg-red-600 hover:bg-red-700"
+          onConfirm={() => {
+            if (confirmDelete) {
+              deleteMutation.mutate(confirmDelete);
+              setConfirmDelete(null);
+            }
           }}
-        >
-          <div className="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Are you sure?
-            </h2>
-            <p className="mt-2 text-sm text-gray-500">
-              This action cannot be undone. The workspace and all its jobs will
-              be permanently deleted.
-            </p>
-            <div className="mt-4 flex justify-end gap-3">
-              <button
-                onClick={() => setConfirmDelete(null)}
-                className="cursor-pointer rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  deleteMutation.mutate(confirmDelete);
-                  setConfirmDelete(null);
-                }}
-                disabled={deleteMutation.isPending}
-                className="cursor-pointer rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-700 disabled:opacity-50"
-              >
-                {deleteMutation.isPending ? 'Deleting...' : 'Delete'}
-              </button>
-            </div>
-          </div>
-        </div>
+          onCancel={() => setConfirmDelete(null)}
+        />
       )}
     </div>
   );

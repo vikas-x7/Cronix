@@ -24,15 +24,15 @@ export default function StatCard({
   trendValue,
 }: StatCardProps) {
   return (
-    <div className="border border-neutral-800 bg-neutral-900/30 p-5">
+    <div className="rounded-[5px] bg-[#2A2A2A] p-5">
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <p className="text-[11px] font-medium uppercase text-neutral-500">
+          <p className="text-[12px] font-medium uppercase text-white">
             {title}
           </p>
           <p className="text-[22px] font-semibold text-white mt-1">{value}</p>
           {subtitle && (
-            <p className="text-[11px] text-neutral-500 mt-1">{subtitle}</p>
+            <p className="text-[11px] text-white/50 mt-1">{subtitle}</p>
           )}
         </div>
         <div className="text-neutral-500">{icon}</div>

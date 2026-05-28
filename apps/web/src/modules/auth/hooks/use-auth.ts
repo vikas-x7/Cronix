@@ -54,7 +54,7 @@ export function useLogout() {
     onSuccess: () => {
       clearUser();
       queryClient.clear();
-      router.push('/login');
+      router.push('/');
     },
     onError: () => {
       clearUser();

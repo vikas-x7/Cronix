@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { HiOutlineXMark, HiBars3 } from 'react-icons/hi2';
 import {
@@ -64,8 +64,8 @@ export default function Sidebar() {
           <BiSolidSquare size={25} className="text-[#DF5BCC]" />
           <span className="text-[20px] font-semibold tracking-[-1px] text-white">
             Cronix
+            <span className="text-[10px] ml-2 text-neutral-500">v2.0.0</span>
           </span>
-          <span className="text-[10px] text-neutral-500 ml-auto">v1.0.0</span>
         </div>
 
         <nav
@@ -85,14 +85,21 @@ export default function Sidebar() {
             const targetIndex =
               hoveredIndex !== -1 ? hoveredIndex : activeIndex;
 
+            const getSliderY = (index: number) => {
+              let y = index * 40;
+              if (index > 1) y += 4;
+              if (index > 4) y += 4;
+              return y;
+            };
+
             return (
               <>
-                {targetIndex !== -1 && (
+                {hoveredIndex !== -1 && hoveredIndex !== activeIndex && (
                   <motion.div
-                    className="absolute left-2 right-2 h-[36px] bg-[#202020] rounded-[3px] z-0"
+                    className="absolute left-2 right-2 h-[36px] bg-white/5 rounded-[3px] z-0"
                     initial={false}
                     animate={{
-                      y: targetIndex * 40,
+                      y: getSliderY(hoveredIndex),
                     }}
                     transition={{
                       type: 'spring',
@@ -108,37 +115,56 @@ export default function Sidebar() {
                   const isHovered = idx === hoveredIndex;
 
                   return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      onMouseEnter={() => setHoveredPath(item.href)}
-                      className={cn(
-                        'relative flex items-center h-[36px] gap-2 px-2 text-[13px] tracking-[-0.25px] transition-colors rounded-[3px] z-10',
-                        isActive
-                          ? 'bg-[#202020] text-white'
-                          : isHovered
-                            ? 'text-white'
-                            : 'text-white/80',
-                      )}
-                    >
-                      <Icon
-                        size={14}
+                    <React.Fragment key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={() => setMobileOpen(false)}
+                        onMouseEnter={() => setHoveredPath(item.href)}
                         className={cn(
-                          'transition-colors',
-                          isActive || isHovered
-                            ? 'text-white/90'
-                            : 'text-white/60',
+                          'relative flex items-center h-[36px] gap-2 px-2 text-[13px] tracking-[-0.25px] transition-colors rounded-[3px] z-10 ',
+                          isActive
+                            ? 'bg-[#202020] text-white'
+                            : isHovered
+                              ? 'text-white'
+                              : 'text-white/90',
                         )}
-                      />
-                      <span>{item.label}</span>
-                    </Link>
+                      >
+                        <Icon
+                          size={14}
+                          className={cn(
+                            'transition-colors',
+                            isActive || isHovered
+                              ? 'text-white/90'
+                              : 'text-white/60',
+                          )}
+                        />
+                        <span>{item.label}</span>
+                      </Link>
+                      {(idx === 1 || idx === 4) && (
+                        <div className=" border-b  border-white/20 border-dashed  mx-1 z-10" />
+                      )}
+                    </React.Fragment>
                   );
                 })}
               </>
             );
           })()}
         </nav>
+
+        <div className="px-2 pt-1">
+          <div className="bg-[#F5F5F5] rounded-[5px] p-2 text-left border border-neutral-200/80 shadow-sm">
+            <h4 className="text-[13px] tracking-[-1px] font-semibold text-neutral-900 leading-tight">
+              Get more on{' '}
+              <span className="text-[#DF5BCC] font-bold">Cronix</span>
+            </h4>
+            <p className="text-[11px] text-black/70 mt-0.5 tracking-[-0.5px]">
+              Your trial has expired
+            </p>
+            <button className="w-full mt-3.5 bg-[#1E1E1F] hover:bg-neutral-800 text-white text-[12px] font-medium py-1.5 rounded-[3px] transition-colors duration-200 cursor-pointer">
+              Upgrade
+            </button>
+          </div>
+        </div>
 
         <div className=" space-y-1 p-2 ">
           <div className="flex items-center gap-2  p-1 rounded-[3px] transition-colors bg-[#1B1B1B] ">

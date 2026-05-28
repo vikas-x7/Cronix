@@ -10,10 +10,7 @@ import {
   FiExternalLink,
   FiMoreVertical,
   FiClock,
-  FiLayout,
-  FiFilter,
   FiRefreshCw,
-  FiPlusCircle,
 } from 'react-icons/fi';
 import { useJobs, useDeleteJob, useUpdateJob } from '@/modules/jobs';
 import { useJobStore } from '@/shared/stores/jobStore';
@@ -23,7 +20,7 @@ import PageLoader from '@/shared/components/page-loader';
 import ConfirmationModal from '@/shared/components/confirmation-modal';
 
 function JobsPageContent() {
-  const { data: jobs, isLoading, error, refetch } = useJobs();
+  const { data: jobs, isLoading, isFetching, error, refetch } = useJobs();
   const deleteJob = useDeleteJob();
   const updateJob = useUpdateJob();
   const addToast = useUIStore((s) => s.addToast);
@@ -117,160 +114,152 @@ function JobsPageContent() {
   }
 
   return (
-    <div className="w-full h-screen overflow-y-auto bg-neutral-950">
-      <div className="border-b px-4 py-3 bg-neutral-900/50 border-neutral-800 flex justify-between items-center">
-        <h1 className="text-[20px] -tracking-[1px] text-white">Cron jobs</h1>
+    <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
+      <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
+        <h1 className="text-[20px] -tracking-[1px] text-white">Cron Jobs</h1>
+        <Link href="/jobs/new">
+          <button className="bg-[#252525] border border-white/5 rounded-[2px] text-white/90 px-2 py-1.5 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-neutral-200 transition">
+            <IoAdd size={18} />
+            New Cron Job
+          </button>
+        </Link>
       </div>
-
-      <div className="px-6 py-6 pb-4 border-b border-neutral-800">
-        <div className="flex items-start justify-between">
-          <div className="flex flex-col gap-4">
+      <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh]">
+        <div className="px-6 py-6 pb-4 border-b border-neutral-800">
+          <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <button className="flex items-center gap-2 px-3 py-1.5 bg-neutral-800 border border-neutral-700 text-[13px] font-medium text-white">
-                <FiLayout size={14} />
-                Overview
+              <button
+                onClick={() => refetch()}
+                disabled={isFetching}
+                className="flex items-center gap-2 px-3 py-1.5 border border-neutral-700 text-[13px] font-medium text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors disabled:opacity-50"
+              >
+                <FiRefreshCw
+                  size={14}
+                  className={isFetching ? 'animate-spin' : ''}
+                />
+                Refresh
               </button>
-              <div className="w-[1px] h-4 bg-neutral-700 mx-1" />
-              <Link href="/jobs/new">
-                <button className="flex items-center gap-2 px-3 py-1.5 border border-neutral-700 text-[13px] font-medium text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                  <FiPlusCircle size={14} />
-                  ADD
-                </button>
-              </Link>
-              <div className="flex items-center gap-2">
-                <button className="flex items-center gap-2 px-3 py-1.5 border border-neutral-700 text-[13px] font-medium text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                  <FiFilter size={14} />
-                  Filters
-                </button>
-                <button
-                  onClick={() => refetch()}
-                  className="flex items-center gap-2 px-3 py-1.5 border border-neutral-700 text-[13px] font-medium text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors"
-                >
-                  <FiRefreshCw size={14} />
-                  Refresh
-                </button>
-                <span className="text-[12px] text-neutral-400 font-medium border border-neutral-700 px-3 py-1.5">
-                  Total job {filteredJobs?.length ?? 0}{' '}
-                  {(filteredJobs?.length ?? 0) !== 1 ? 's' : ''}
-                </span>
-              </div>
+              <span className="text-[12px] text-neutral-400 font-medium border border-neutral-700 px-3 py-1.5">
+                Total {filteredJobs?.length ?? 0} job
+                {(filteredJobs?.length ?? 0) !== 1 ? 's' : ''}
+              </span>
             </div>
-          </div>
-          <div className="flex items-center gap-4 border border-neutral-700 bg-neutral-900 px-3 py-2">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search jobs..."
-              className="text-[12px] text-white outline-none w-64 transition placeholder:text-neutral-500"
-            />
+            <div className="flex items-center gap-4 border border-neutral-700 bg-neutral-900 px-3 py-2 ml-auto">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search jobs..."
+                className="text-[12px] text-white outline-none w-64 transition placeholder:text-neutral-500"
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="px-4 py-4">
-        {!filteredJobs?.length ? (
-          <div className="border border-dashed border-neutral-700 py-16 flex flex-col items-center justify-center">
-            <FiClock className="text-neutral-600 mb-3" size={28} />
-            <p className="text-[14px] text-neutral-500">No cron jobs found</p>
-            <p className="text-[12px] text-neutral-600 mt-1">
-              Create your first job to get started
-            </p>
-            <Link href="/jobs/new">
-              <button className="mt-4 border border-white px-4 py-2 text-[12px] text-white hover:bg-white hover:text-black transition flex items-center gap-1">
-                <IoAdd size={16} />
-                Create job
-              </button>
-            </Link>
-          </div>
-        ) : (
-          <div className="border border-neutral-800">
-            <div className="grid grid-cols-12 px-4 py-2.5 bg-neutral-900/50 border-b border-neutral-800 text-[12px] font-medium text-neutral-400">
-              <div className="col-span-3">Title</div>
-              <div className="col-span-3">URL</div>
-              <div className="col-span-1">Method</div>
-              <div className="col-span-2">Schedule</div>
-              <div className="col-span-1">Status</div>
-              <div className="col-span-2 text-right">Actions</div>
+        <div className="px-6 py-4">
+          {!filteredJobs?.length ? (
+            <div className="border border-dashed border-neutral-700 py-16 flex flex-col items-center justify-center">
+              <FiClock className="text-neutral-600 mb-3" size={28} />
+              <p className="text-[14px] text-neutral-500">No cron jobs found</p>
+              <p className="text-[12px] text-neutral-600 mt-1">
+                Create your first job to get started
+              </p>
+              <Link href="/jobs/new">
+                <button className="mt-4 border border-white px-4 py-2 text-[12px] text-white hover:bg-white hover:text-black transition flex items-center gap-1">
+                  <IoAdd size={16} />
+                  Create job
+                </button>
+              </Link>
             </div>
-
-            {filteredJobs.map((job) => (
-              <div
-                key={job.id}
-                className="grid grid-cols-12 items-center px-4 py-3.5 border-b border-neutral-800/50 last:border-0 hover:bg-neutral-900/30 transition"
-              >
-                <div className="col-span-3">
-                  <Link href={`/jobs/${job.id}`}>
-                    <p className="text-[13px] font-medium text-white truncate hover:underline">
-                      {job.name}
-                    </p>
-                  </Link>
-                  <p className="text-[10px] text-neutral-500 mt-0.5">
-                    {job.type}
-                  </p>
-                </div>
-                <div className="col-span-3">
-                  <a
-                    href={job.endpoint}
-                    className="text-[11px] text-blue-400 truncate flex items-center gap-1"
-                  >
-                    {job.endpoint}
-                    <FiExternalLink size={10} className="shrink-0" />
-                  </a>
-                </div>
-                <div className="col-span-1">
-                  <span className="text-[11px] font-mono font-medium text-neutral-400 bg-neutral-800 px-1.5 py-0.5">
-                    {job.method}
-                  </span>
-                </div>
-                <div className="col-span-2">
-                  <p className="text-[11px] font-mono text-neutral-400">
-                    {job.schedule || '—'}
-                  </p>
-                </div>
-                <div className="col-span-1">
-                  <StatusBadge
-                    status={
-                      job.status === 'ACTIVE'
-                        ? 'active'
-                        : job.status === 'PAUSED'
-                          ? 'paused'
-                          : 'failed'
-                    }
-                  />
-                </div>
-                <div className="col-span-2 flex justify-end gap-1">
-                  <button
-                    onClick={() => handleToggle(job.id, job.status)}
-                    title={job.status === 'ACTIVE' ? 'Pause' : 'Resume'}
-                    className={`p-1.5 border transition ${job.status === 'ACTIVE' ? 'border-neutral-700 text-neutral-400 hover:text-amber-400 hover:border-amber-500/50' : 'border-neutral-700 text-neutral-400 hover:text-emerald-400 hover:border-emerald-500/50'}`}
-                  >
-                    {job.status === 'ACTIVE' ? (
-                      <FiPause size={12} />
-                    ) : (
-                      <FiPlay size={12} />
-                    )}
-                  </button>
-                  <button
-                    onClick={() => handleDelete(job.id)}
-                    title="Delete"
-                    className="p-1.5 border border-neutral-700 text-neutral-400 hover:text-red-400 hover:border-red-500/50 transition"
-                  >
-                    <FiTrash2 size={12} />
-                  </button>
-                  <Link href={`/jobs/${job.id}`}>
-                    <button
-                      title="Details"
-                      className="p-1.5 border border-neutral-700 text-neutral-400 hover:text-white hover:border-white/50 transition"
-                    >
-                      <FiMoreVertical size={12} />
-                    </button>
-                  </Link>
-                </div>
+          ) : (
+            <div className="border border-neutral-800">
+              <div className="grid grid-cols-12 px-4 py-2.5 bg-neutral-900/50 border-b border-neutral-800 text-[12px] font-medium text-neutral-400">
+                <div className="col-span-3">Title</div>
+                <div className="col-span-3">URL</div>
+                <div className="col-span-1">Method</div>
+                <div className="col-span-2">Schedule</div>
+                <div className="col-span-1">Status</div>
+                <div className="col-span-2 text-right">Actions</div>
               </div>
-            ))}
-          </div>
-        )}
+
+              {filteredJobs.map((job) => (
+                <div
+                  key={job.id}
+                  className="grid grid-cols-12 items-center px-4 py-3.5 border-b border-neutral-800/50 last:border-0 hover:bg-neutral-900/30 transition"
+                >
+                  <div className="col-span-3">
+                    <Link href={`/jobs/${job.id}`}>
+                      <p className="text-[13px] font-medium text-white truncate hover:underline">
+                        {job.name}
+                      </p>
+                    </Link>
+                    <p className="text-[10px] text-neutral-500 mt-0.5">
+                      {job.type}
+                    </p>
+                  </div>
+                  <div className="col-span-3">
+                    <a
+                      href={job.endpoint}
+                      className="text-[11px] text-blue-400 truncate flex items-center gap-1"
+                    >
+                      {job.endpoint}
+                      <FiExternalLink size={10} className="shrink-0" />
+                    </a>
+                  </div>
+                  <div className="col-span-1">
+                    <span className="text-[11px] font-mono font-medium text-neutral-400 bg-neutral-800 px-1.5 py-0.5">
+                      {job.method}
+                    </span>
+                  </div>
+                  <div className="col-span-2">
+                    <p className="text-[11px] font-mono text-neutral-400">
+                      {job.schedule || '—'}
+                    </p>
+                  </div>
+                  <div className="col-span-1">
+                    <StatusBadge
+                      status={
+                        job.status === 'ACTIVE'
+                          ? 'active'
+                          : job.status === 'PAUSED'
+                            ? 'paused'
+                            : 'failed'
+                      }
+                    />
+                  </div>
+                  <div className="col-span-2 flex justify-end gap-1">
+                    <button
+                      onClick={() => handleToggle(job.id, job.status)}
+                      title={job.status === 'ACTIVE' ? 'Pause' : 'Resume'}
+                      className={`p-1.5 border transition ${job.status === 'ACTIVE' ? 'border-neutral-700 text-neutral-400 hover:text-amber-400 hover:border-amber-500/50' : 'border-neutral-700 text-neutral-400 hover:text-emerald-400 hover:border-emerald-500/50'}`}
+                    >
+                      {job.status === 'ACTIVE' ? (
+                        <FiPause size={12} />
+                      ) : (
+                        <FiPlay size={12} />
+                      )}
+                    </button>
+                    <button
+                      onClick={() => handleDelete(job.id)}
+                      title="Delete"
+                      className="p-1.5 border border-neutral-700 text-neutral-400 hover:text-red-400 hover:border-red-500/50 transition"
+                    >
+                      <FiTrash2 size={12} />
+                    </button>
+                    <Link href={`/jobs/${job.id}`}>
+                      <button
+                        title="Details"
+                        className="p-1.5 border border-neutral-700 text-neutral-400 hover:text-white hover:border-white/50 transition"
+                      >
+                        <FiMoreVertical size={12} />
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <ConfirmationModal

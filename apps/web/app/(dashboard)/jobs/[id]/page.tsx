@@ -88,7 +88,7 @@ export default function JobDetailPage() {
   if (jobLoading) return <PageLoader />;
   if (!job)
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-neutral-950">
+      <div className="w-full h-screen flex items-center justify-center bg-[#0D0D0D]">
         <p className="text-[13px] text-neutral-500">Job not found</p>
       </div>
     );
@@ -96,8 +96,8 @@ export default function JobDetailPage() {
   const jobExecutions = executions ?? [];
 
   return (
-    <div className="w-full h-screen overflow-y-auto bg-neutral-950">
-      <div className="border-b px-4 py-4 border-neutral-800 flex items-center justify-between">
+    <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
+      <div className="py-3 bg-[#0D0D0D] flex items-center justify-between">
         <div>
           <h1 className="text-[20px] -tracking-[1px] text-white">{job.name}</h1>
           <p className="text-[11px] text-neutral-500 flex items-center gap-1 mt-0.5">
@@ -124,99 +124,102 @@ export default function JobDetailPage() {
           </button>
         </div>
       </div>
-
-      <div className="px-6 py-5 border-b border-neutral-800">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div>
-            <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium">
-              Status
-            </p>
-            <div className="mt-1">
-              <StatusBadge
-                status={
-                  job.status === 'ACTIVE'
-                    ? 'active'
-                    : job.status === 'PAUSED'
-                      ? 'paused'
-                      : 'failed'
-                }
-                size="md"
-              />
+      <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh] overflow-y-auto">
+        <div className="px-6 py-5 border-b border-neutral-800">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium">
+                Status
+              </p>
+              <div className="mt-1">
+                <StatusBadge
+                  status={
+                    job.status === 'ACTIVE'
+                      ? 'active'
+                      : job.status === 'PAUSED'
+                        ? 'paused'
+                        : 'failed'
+                  }
+                  size="md"
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium">
-              Method
-            </p>
-            <p className="mt-1 text-[13px] font-mono font-medium">
-              {job.method}
-            </p>
-          </div>
-          <div>
-            <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium">
-              Schedule
-            </p>
-            <p className="mt-1 text-[13px] font-mono">{job.schedule || '—'}</p>
-          </div>
-          <div>
-            <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium">
-              Type
-            </p>
-            <p className="mt-1 text-[13px]">{job.type}</p>
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium">
+                Method
+              </p>
+              <p className="mt-1 text-[13px] font-mono font-medium">
+                {job.method}
+              </p>
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium">
+                Schedule
+              </p>
+              <p className="mt-1 text-[13px] font-mono">
+                {job.schedule || '—'}
+              </p>
+            </div>
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium">
+                Type
+              </p>
+              <p className="mt-1 text-[13px]">{job.type}</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="px-6 py-5">
-        <h2 className="text-[14px] font-medium text-white mb-4">
-          Execution History{' '}
-          <span className="ml-2 text-[11px] text-neutral-500 font-normal">
-            ({jobExecutions.length} total)
-          </span>
-        </h2>
-        {execLoading ? (
-          <div className="py-20 flex justify-center">
-            <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : !jobExecutions.length ? (
-          <div className="border border-dashed border-neutral-700 py-12 flex flex-col items-center">
-            <p className="text-[13px] text-neutral-500">No executions yet</p>
-          </div>
-        ) : (
-          <div className="border border-neutral-800">
-            <div className="grid grid-cols-12 px-4 py-2.5 bg-neutral-900/50 border-b border-neutral-800 text-[10px] font-medium uppercase tracking-wider text-neutral-500">
-              <div className="col-span-2">Status</div>
-              <div className="col-span-2">Code</div>
-              <div className="col-span-2">Duration</div>
-              <div className="col-span-3">Time</div>
-              <div className="col-span-3">Error</div>
+        <div className="px-6 py-5">
+          <h2 className="text-[14px] font-medium text-white mb-4">
+            Execution History{' '}
+            <span className="ml-2 text-[11px] text-neutral-500 font-normal">
+              ({jobExecutions.length} total)
+            </span>
+          </h2>
+          {execLoading ? (
+            <div className="py-20 flex justify-center">
+              <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
             </div>
-            {jobExecutions.map((exec) => (
-              <div
-                key={exec.id}
-                className="grid grid-cols-12 items-center px-4 py-3 border-b border-neutral-800/50 last:border-0 hover:bg-neutral-900/30 transition"
-              >
-                <div className="col-span-2">
-                  <StatusBadge
-                    status={exec.status === 'SUCCESS' ? 'success' : 'failed'}
-                  />
-                </div>
-                <div className="col-span-2 text-[13px] font-mono text-neutral-400">
-                  {exec.httpStatus ?? '—'}
-                </div>
-                <div className="col-span-2 text-[12px] text-neutral-400">
-                  {exec.duration}ms
-                </div>
-                <div className="col-span-3 text-[11px] text-neutral-500">
-                  {new Date(exec.startedAt).toLocaleString()}
-                </div>
-                <div className="col-span-3 text-[11px] text-red-400 truncate">
-                  {exec.error ?? '—'}
-                </div>
+          ) : !jobExecutions.length ? (
+            <div className="border border-dashed border-neutral-700 py-12 flex flex-col items-center">
+              <p className="text-[13px] text-neutral-500">No executions yet</p>
+            </div>
+          ) : (
+            <div className="border border-neutral-800">
+              <div className="grid grid-cols-12 px-4 py-2.5 bg-neutral-900/50 border-b border-neutral-800 text-[10px] font-medium uppercase tracking-wider text-neutral-500">
+                <div className="col-span-2">Status</div>
+                <div className="col-span-2">Code</div>
+                <div className="col-span-2">Duration</div>
+                <div className="col-span-3">Time</div>
+                <div className="col-span-3">Error</div>
               </div>
-            ))}
-          </div>
-        )}
+              {jobExecutions.map((exec) => (
+                <div
+                  key={exec.id}
+                  className="grid grid-cols-12 items-center px-4 py-3 border-b border-neutral-800/50 last:border-0 hover:bg-neutral-900/30 transition"
+                >
+                  <div className="col-span-2">
+                    <StatusBadge
+                      status={exec.status === 'SUCCESS' ? 'success' : 'failed'}
+                    />
+                  </div>
+                  <div className="col-span-2 text-[13px] font-mono text-neutral-400">
+                    {exec.httpStatus ?? '—'}
+                  </div>
+                  <div className="col-span-2 text-[12px] text-neutral-400">
+                    {exec.duration}ms
+                  </div>
+                  <div className="col-span-3 text-[11px] text-neutral-500">
+                    {new Date(exec.startedAt).toLocaleString()}
+                  </div>
+                  <div className="col-span-3 text-[11px] text-red-400 truncate">
+                    {exec.error ?? '—'}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <ConfirmationModal

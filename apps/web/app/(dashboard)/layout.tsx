@@ -39,10 +39,12 @@ export default function DashboardLayout({
   return (
     <ProtectedRoute>
       <div className="flex font-geist-sans">
-        <div className="w-64 ">
+        <div className="w-[210px] shrink-0">
           <Sidebar />
         </div>
-        <main className="h-screen w-full  ">{children}</main>
+        <main className="h-screen w-full overflow-y-auto slim-scrollbar">
+          {children}
+        </main>
       </div>
     </ProtectedRoute>
   );

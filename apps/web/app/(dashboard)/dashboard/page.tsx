@@ -47,171 +47,175 @@ export default function DashboardHome() {
   const recentExecs = stats?.recentExecutions ?? [];
 
   return (
-    <div className="w-full h-screen overflow-y-auto bg-neutral-950">
-      <div className="border-b px-4 py-3 bg-neutral-900/50 border-neutral-800 flex justify-between items-center">
+    <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
+      <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
         <h1 className="text-[20px] -tracking-[1px] text-white">Overview</h1>
         <Link href="/jobs/new">
-          <button className="bg-white text-black px-3 py-2 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-neutral-200 transition">
+          <button className="bg-[#252525] border border-white/5 rounded-[2px] text-white/90 px-2 py-1.5 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-neutral-200 transition">
             <IoAdd size={18} />
             Schedule New Job
           </button>
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-6 py-6">
-        <StatCard
-          title="Jobs Registered"
-          value={stats?.jobs.total ?? 0}
-          subtitle={`${stats?.jobs.active ?? 0} active · ${stats?.jobs.paused ?? 0} paused`}
-          icon={<FiClock size={18} />}
-        />
-        <StatCard
-          title="Currently Running"
-          value={stats?.jobs.active ?? 0}
-          icon={<FiActivity size={18} />}
-          trend="up"
-          trendValue="Running"
-        />
-        <StatCard
-          title="Total Executions"
-          value={stats?.executions.total ?? 0}
-          subtitle={`${stats?.executions.failed ?? 0} failed`}
-          icon={<FiCheckCircle size={18} />}
-        />
-        <StatCard
-          title="Performance Score"
-          value={`${stats?.executions.successRate ?? 0}%`}
-          subtitle={`${stats?.executions.success ?? 0} / ${stats?.executions.total ?? 0}`}
-          icon={<FiXCircle size={18} />}
-          trend={
-            (stats?.executions.successRate ?? 0) >= 90
-              ? 'up'
-              : (stats?.executions.successRate ?? 0) >= 50
-                ? 'neutral'
-                : 'down'
-          }
-          trendValue={
-            (stats?.executions.successRate ?? 0) >= 90
-              ? 'Healthy'
-              : (stats?.executions.successRate ?? 0) >= 50
-                ? 'Moderate'
-                : 'Needs attention'
-          }
-        />
-      </div>
-
-      <div className="px-6 pb-2">
-        <div className="flex gap-3">
-          <Link href="/jobs/new">
-            <button className="border border-dashed border-neutral-700 px-4 py-2 text-[12px] text-neutral-300 hover:border-white hover:text-white transition flex items-center gap-1">
-              <IoAdd size={16} />
-              New Cron Job
-            </button>
-          </Link>
-          <Link href="/jobs">
-            <button className="border border-neutral-700 px-4 py-2 text-[12px] text-neutral-300 hover:border-white hover:text-white transition flex items-center gap-1">
-              <FiClock size={14} />
-              View All Jobs
-            </button>
-          </Link>
-          <button
-            onClick={() => refetch()}
-            disabled={isFetching}
-            className="border border-neutral-700 px-4 py-2 text-[12px] text-neutral-300 hover:border-white hover:text-white transition flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <FiRefreshCw
-              size={14}
-              className={isFetching ? 'animate-spin' : ''}
-            />
-            Refresh
-          </button>
+      <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh] overflow-y-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-6 py-6">
+          <StatCard
+            title="Jobs Registered"
+            value={stats?.jobs.total ?? 0}
+            subtitle={`${stats?.jobs.active ?? 0} active · ${stats?.jobs.paused ?? 0} paused`}
+            icon={<FiClock size={18} />}
+          />
+          <StatCard
+            title="Currently Running"
+            value={stats?.jobs.active ?? 0}
+            icon={<FiActivity size={18} />}
+            trend="up"
+            trendValue="Running"
+          />
+          <StatCard
+            title="Total Executions"
+            value={stats?.executions.total ?? 0}
+            subtitle={`${stats?.executions.failed ?? 0} failed`}
+            icon={<FiCheckCircle size={18} />}
+          />
+          <StatCard
+            title="Performance Score"
+            value={`${stats?.executions.successRate ?? 0}%`}
+            subtitle={`${stats?.executions.success ?? 0} / ${stats?.executions.total ?? 0}`}
+            icon={<FiXCircle size={18} />}
+            trend={
+              (stats?.executions.successRate ?? 0) >= 90
+                ? 'up'
+                : (stats?.executions.successRate ?? 0) >= 50
+                  ? 'neutral'
+                  : 'down'
+            }
+            trendValue={
+              (stats?.executions.successRate ?? 0) >= 90
+                ? 'Healthy'
+                : (stats?.executions.successRate ?? 0) >= 50
+                  ? 'Moderate'
+                  : 'Needs attention'
+            }
+          />
         </div>
-      </div>
 
-      <div className="px-6 py-4 flex flex-col h-[calc(100vh-400px)] min-h-[400px]">
-        <h2 className="text-[14px] font-medium text-white mb-4">
-          Recent Executions
-        </h2>
-
-        {!recentExecs.length ? (
-          <div className="border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center">
-            <FiPause className="text-neutral-500 mb-2" size={24} />
-            <p className="text-[16px] tracking-normal text-white">
-              No executions yet
-            </p>
-            <p className="text-[12px] text-neutral-500 mt-1">
-              Create a cron job and trigger it to see results here
-            </p>
+        <div className="px-6 pb-2">
+          <div className="flex gap-3">
+            <Link href="/jobs/new">
+              <button className="border border-dashed border-neutral-700 px-4 py-2 text-[12px] text-neutral-300 hover:border-white hover:text-white transition flex items-center gap-1">
+                <IoAdd size={16} />
+                New Cron Job
+              </button>
+            </Link>
+            <Link href="/jobs">
+              <button className="border border-neutral-700 px-4 py-2 text-[12px] text-neutral-300 hover:border-white hover:text-white transition flex items-center gap-1">
+                <FiClock size={14} />
+                View All Jobs
+              </button>
+            </Link>
+            <button
+              onClick={() => refetch()}
+              disabled={isFetching}
+              className="border border-neutral-700 px-4 py-2 text-[12px] text-neutral-300 hover:border-white hover:text-white transition flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <FiRefreshCw
+                size={14}
+                className={isFetching ? 'animate-spin' : ''}
+              />
+              Refresh
+            </button>
           </div>
-        ) : (
-          <div className="border border-neutral-800 flex flex-col flex-1 overflow-hidden">
-            <div className="grid grid-cols-12 px-4 py-2.5 bg-neutral-900/50 border-b border-neutral-800 text-[12px] font-medium text-neutral-400 sticky top-0 z-10">
-              <div className="col-span-3">Job</div>
-              <div className="col-span-3">Status</div>
-              <div className="col-span-2">Trigger</div>
-              <div className="col-span-2">Duration</div>
-              <div className="col-span-2">Time</div>
-            </div>
+        </div>
 
-            <div className="flex-1 overflow-y-auto slim-scrollbar relative">
-              {isFetching && (
-                <div className="absolute inset-0 bg-neutral-950/60 backdrop-blur-[1px] flex items-center justify-center z-10">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                </div>
-              )}
-              {recentExecs.map((exec) => (
-                <div
-                  key={exec.id}
-                  className="grid grid-cols-12 items-center px-4 py-2.5 border-b border-neutral-800/50 last:border-0 hover:bg-neutral-900/30 transition"
-                >
-                  <div className="col-span-3">
-                    <p className="text-[13px] font-medium text-white truncate">
-                      {exec.jobName ?? '—'}
-                    </p>
-                  </div>
-                  <div className="col-span-3">
-                    <StatusBadge
-                      status={exec.status === 'SUCCESS' ? 'success' : 'failed'}
-                    />
-                  </div>
-                  <div className="col-span-2 text-[12px] text-neutral-400 capitalize">
-                    {exec.trigger?.toLowerCase() ?? '—'}
-                  </div>
-                  <div className="col-span-2 text-[12px] text-neutral-400">
-                    {exec.duration}ms
-                  </div>
-                  <div className="col-span-2 text-[11px] text-neutral-500">
-                    {new Date(exec.startedAt).toLocaleString()}
-                  </div>
-                </div>
-              ))}
-            </div>
+        <div className="px-6 py-4 flex flex-col h-[calc(100vh-400px)] min-h-[400px]">
+          <h2 className="text-[14px] font-medium text-white mb-4">
+            Recent Executions
+          </h2>
 
-            <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-800 sticky bottom-0 z-10 bg-neutral-950">
-              <p className="text-[12px] text-neutral-500">
-                Page <span className="text-white font-medium">{page}</span>
+          {!recentExecs.length ? (
+            <div className="border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center">
+              <FiPause className="text-neutral-500 mb-2" size={24} />
+              <p className="text-[16px] tracking-normal text-white">
+                No executions yet
               </p>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
-                  disabled={page === 1}
-                  className="px-3 py-1 text-[12px] border border-neutral-700 bg-neutral-900 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
-                >
-                  <FiChevronLeft size={14} />
-                  Previous
-                </button>
-                <button
-                  onClick={() => setPage((p) => p + 1)}
-                  disabled={!recentExecs.length || recentExecs.length < limit}
-                  className="px-3 py-1 text-[12px] border border-neutral-700 bg-neutral-900 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
-                >
-                  Next
-                  <FiChevronRight size={14} />
-                </button>
+              <p className="text-[12px] text-neutral-500 mt-1">
+                Create a cron job and trigger it to see results here
+              </p>
+            </div>
+          ) : (
+            <div className="border border-neutral-800 flex flex-col flex-1 overflow-hidden">
+              <div className="grid grid-cols-12 px-4 py-2.5 bg-[#171717] border-b border-neutral-800 text-[12px] font-medium text-neutral-400 sticky top-0 z-10">
+                <div className="col-span-3">Job</div>
+                <div className="col-span-3">Status</div>
+                <div className="col-span-2">Trigger</div>
+                <div className="col-span-2">Duration</div>
+                <div className="col-span-2">Time</div>
+              </div>
+
+              <div className="flex-1 overflow-y-auto slim-scrollbar relative">
+                {isFetching && (
+                  <div className="absolute inset-0 bg-neutral-950/60 backdrop-blur-[1px] flex items-center justify-center z-10">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+                {recentExecs.map((exec) => (
+                  <div
+                    key={exec.id}
+                    className="grid grid-cols-12 items-center px-4 py-2.5 border-b border-neutral-800/50 last:border-0 hover:bg-neutral-900/30 transition"
+                  >
+                    <div className="col-span-3">
+                      <p className="text-[13px] font-medium text-white truncate">
+                        {exec.jobName ?? '—'}
+                      </p>
+                    </div>
+                    <div className="col-span-3">
+                      <StatusBadge
+                        status={
+                          exec.status === 'SUCCESS' ? 'success' : 'failed'
+                        }
+                      />
+                    </div>
+                    <div className="col-span-2 text-[12px] text-neutral-400 capitalize">
+                      {exec.trigger?.toLowerCase() ?? '—'}
+                    </div>
+                    <div className="col-span-2 text-[12px] text-neutral-400">
+                      {exec.duration}ms
+                    </div>
+                    <div className="col-span-2 text-[11px] text-neutral-500">
+                      {new Date(exec.startedAt).toLocaleString()}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-800 sticky bottom-0 z-10 bg-[#171717]">
+                <p className="text-[12px] text-neutral-500">
+                  Page <span className="text-white font-medium">{page}</span>
+                </p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    disabled={page === 1}
+                    className="px-3 py-1 text-[12px] border border-neutral-700 bg-neutral-900 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
+                  >
+                    <FiChevronLeft size={14} />
+                    Previous
+                  </button>
+                  <button
+                    onClick={() => setPage((p) => p + 1)}
+                    disabled={!recentExecs.length || recentExecs.length < limit}
+                    className="px-3 py-1 text-[12px] border border-neutral-700 bg-neutral-900 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
+                  >
+                    Next
+                    <FiChevronRight size={14} />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

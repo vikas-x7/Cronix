@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { BiSolidSquare } from 'react-icons/bi';
 import Sidebar from '@/shared/layout/sidebar';
 import { useAuth } from '@/modules/auth';
 
@@ -19,7 +20,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-neutral-950">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-neutral-700 border-t-white" />
+          <BiSolidSquare size={32} className="text-[#DF5BCC] animate-pulse" />
           <p className="text-[13px] text-neutral-500">Loading...</p>
         </div>
       </div>

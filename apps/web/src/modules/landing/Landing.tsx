@@ -9,13 +9,16 @@ import AnimatedText from './components/AnimatedText';
 import FAQ from './components/FAQ';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
+import MovingHeading from './components/MovingHeading';
 
 export default function Landing() {
   return (
     <>
       <Navbar />
       <Hero />
+      <MovingHeading />
       <Feature />
+
       <Integration />
       <UseCases />
       <AnimatedText />

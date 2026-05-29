@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { HiMenuAlt3, HiOutlineX } from 'react-icons/hi';
 import { TbMenu } from 'react-icons/tb';
-import { MdOutlineMenu } from 'react-icons/md';
+import { MdArrowForward, MdOutlineMenu } from 'react-icons/md';
 import { FaCircle, FaGripLines } from 'react-icons/fa6';
 import { LiaGripLinesSolid } from 'react-icons/lia';
+import { BiSolidSquare } from 'react-icons/bi';
 
 const NAV_LINKS = [
   { name: 'Works', id: 'works' },
@@ -54,19 +55,24 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-5 py-2 [font-family:var(--font-inter)]">
+    <nav className="fixed top-0 left-0 right-0 z-50 px-5   ">
+      <div className="bg-[#F0F0F0] rounded-[2px] text-black w-full h-8 text-center flex items-center justify-center mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+        <p className="tracking-[-1px] flex items-center gap-2">
+          Cronix version v2 is live now <MdArrowForward />
+        </p>
+      </div>
       <div className="container mx-auto">
         <div className="flex h-10 mt-2 items-center justify-between">
-          <div className="hidden lg:flex items-center gap-5 backdrop-blur-md px-5 py-2 rounded-[3px] transition-colors duration-300 bg-[#F0F0F0]">
+          <div className="hidden lg:flex items-center gap-5 backdrop-blur-md px-3 py-2 rounded-[3px] transition-colors duration-300 bg-[#F0F0F0]">
             <Link href="/" className="flex items-center ">
-              <FaCircle size={20} className=" ml-[-10px] mb-0.75 mr-2 " />
-              <h1 className="text-[17px] font-bold">Cronix</h1>
+              <BiSolidSquare size={25} className="text-[#DF5BCC]" />
+              <h1 className="text-[19px] font-bold tracking-[-1px]">Cronix</h1>
             </Link>
             {NAV_LINKS.map((link) => (
               <NavItem
                 key={link.id}
                 {...link}
-                className="text-[14px] hover:opacity-70 transition-opacity"
+                className="text-[14px] hover:opacity-70 font-medium mt-1 transition-opacity tracking-[-0.75px]"
               />
             ))}
           </div>

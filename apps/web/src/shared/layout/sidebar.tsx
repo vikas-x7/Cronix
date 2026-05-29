@@ -13,6 +13,7 @@ import {
   FiLink,
   FiActivity,
   FiTrendingUp,
+  FiBook,
 } from 'react-icons/fi';
 import { cn } from '@/shared/lib/utils';
 import { useAuthStore } from '@/modules/auth';
@@ -25,6 +26,7 @@ const NAV_ITEMS = [
   { label: 'Analytics', href: '/analytics', icon: FiTrendingUp },
   { label: 'Workspaces', href: '/workspaces', icon: FiGrid },
   { label: 'Webhooks', href: '/webhooks', icon: FiLink },
+  { label: 'Documentation', href: '/documentation', icon: FiBook },
   { label: 'Settings', href: '/settings', icon: FiSettings },
 ];
 
@@ -140,7 +142,7 @@ export default function Sidebar() {
                         />
                         <span>{item.label}</span>
                       </Link>
-                      {(idx === 1 || idx === 4) && (
+                      {(idx === 1 || idx === 4 || idx === 6) && (
                         <div className=" border-b  border-white/20 border-dashed  mx-1 z-10" />
                       )}
                     </React.Fragment>

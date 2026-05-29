@@ -33,7 +33,7 @@ export default function DashboardHome() {
     return (
       <div className="w-full h-screen bg-neutral-950">
         <div className="border-b px-4 py-3 border-neutral-800">
-          <h1 className="text-[20px] -tracking-[1px] text-white">Overview</h1>
+          <h1 className="text-[20px] tracking-[-1px] text-white">Overview</h1>
         </div>
         <div className="flex items-center justify-center h-64">
           <p className="text-[13px] text-neutral-500">

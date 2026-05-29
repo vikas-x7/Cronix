@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { FaGoogle, FaGithub } from 'react-icons/fa6';
 import { useAuthStore } from '../store/auth.store';
 import { FcGoogle } from 'react-icons/fc';
+import { BiSolidSquare } from 'react-icons/bi';
 
 const authErrors: Record<string, string> = {
   AccessDenied: 'Sign in was cancelled or access was denied.',
@@ -46,12 +47,15 @@ export default function LoginCard() {
     <div className="min-h-screen flex bg-white text-black tracking-[-0.25px]">
       <div className="w-full lg:w-1/2 flex items-center justify-center">
         <div className="absolute top-0 left-0 flex items-center mt-3 ml-3">
-          {/* <h1 className="text-[20px] font-semibold">cronix</h1> */}
+          <BiSolidSquare size={25} className="text-[#DF5BCC]" />
+          <h1 className="text-[20px] font-semibold tracking-[-1.5px] ">
+            Cronix
+          </h1>
         </div>
         <div className="w-full max-w-md px-6 text-center">
           <div className="mb-8 flex flex-col items-center justify-center">
-            <h1 className="text-[30px] flex items-center text-center gap-2 font-semibold tracking-[-1.5px] ">
-              Welcome to cronix
+            <h1 className="text-[25px] flex items-center  gap-2 font-semibold tracking-[-2px] ">
+              Welcome to <span className="text-[#DF5BCC]">cronix </span>
             </h1>
             <p className="text-sm text-black/80 mt-1">
               Sign in to manage your cron jobs and automation workflows.

@@ -104,7 +104,7 @@ function JobsPageContent() {
     return (
       <div className="w-full h-screen bg-neutral-950">
         <div className="border-b px-4 py-4 border-neutral-800">
-          <h1 className="text-[20px] -tracking-[1px] text-white">Cron Jobs</h1>
+          <h1 className="text-[20px] tracking-[1px] text-white">Cron Jobs</h1>
         </div>
         <div className="flex items-center justify-center h-64">
           <p className="text-[13px] text-neutral-500">Failed to load jobs</p>

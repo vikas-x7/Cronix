@@ -20,22 +20,22 @@ export default function SettingsPage() {
   return (
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2 slim-scrollbar">
       <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
-        <h1 className="text-[20px] -tracking-[1px] text-white">Settings</h1>
+        <h1 className="text-[20px] tracking-[-1px] text-white">Settings</h1>
       </div>
       <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh] overflow-y-auto slim-scrollbar">
-        <div className="p-6">
-          <div className="bg-neutral-900/50 border border-neutral-800 overflow-hidden">
-            <div className="h-32 bg-neutral-900 border-b border-neutral-800 w-full" />
+        <div className="">
+          <div className="bg-neutral-900/50 overflow-hidden">
+            <div className="h-32 bg-neutral-900 w-full" />
             <div className="px-6 pb-6 relative">
               <div className="relative -mt-12 h-24 w-24">
                 {user?.avatar ? (
                   <img
                     src={user.avatar}
                     alt={user.name || 'User'}
-                    className="h-24 w-24 rounded object-cover border-4 border-neutral-900"
+                    className="h-24 w-24 rounded object-cover "
                   />
                 ) : (
-                  <div className="h-24 w-24 rounded-2xl bg-neutral-800 border-4 border-neutral-900 flex items-center justify-center text-4xl font-semibold text-neutral-400">
+                  <div className="h-24 w-24 rounded-2xl bg-neutral-800  flex items-center justify-center text-4xl font-semibold text-neutral-400">
                     {user?.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
                 )}
@@ -61,11 +61,9 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="bg-neutral-900/50 border border-neutral-800 overflow-hidden mt-4">
+          <div className="bg-neutral-900/50  overflow-hidden">
             <div className="px-6 py-5 border-b border-neutral-800">
-              <h3 className="text-[14px] font-semibold text-white">
-                Account Details
-              </h3>
+              <h3 className="text-[14px]  text-white">Account Details</h3>
             </div>
             <div className="px-6 py-2">
               <ul className="text-[13px] divide-y divide-neutral-800">
@@ -85,38 +83,7 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          <div className="bg-neutral-900/50 border border-neutral-800 overflow-hidden mb-8 mt-4">
-            <div className="px-6 py-5 border-b border-neutral-800">
-              <h3 className="text-[14px] font-semibold text-white">
-                Preferences
-              </h3>
-            </div>
-            <div>
-              <ul className="text-[13px] divide-y divide-neutral-800">
-                <li className="flex items-center justify-between px-6 py-5">
-                  <div>
-                    <p className="font-medium text-white">Appearance</p>
-                    <p className="text-[12px] text-neutral-500 mt-1">
-                      Switch between dark and light mode
-                    </p>
-                  </div>
-                  <button
-                    onClick={toggleTheme}
-                    className="bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition px-4 py-1.5 text-[12px] font-medium cursor-pointer flex items-center gap-2"
-                  >
-                    {theme === 'dark' ? (
-                      <FiSun size={14} />
-                    ) : (
-                      <FiMoon size={14} />
-                    )}
-                    {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="bg-neutral-900/50 border border-neutral-800 overflow-hidden mb-8">
+          <div className="bg-neutral-900/50 overflow-hidden ">
             <div className="px-6 py-5 border-b border-neutral-800">
               <h3 className="text-[14px] font-semibold text-white">
                 Account Actions
@@ -126,7 +93,22 @@ export default function SettingsPage() {
               <ul className="text-[13px] divide-y divide-neutral-800">
                 <li className="flex items-center justify-between px-6 py-5">
                   <div>
-                    <p className="font-medium text-white">Export Data</p>
+                    <p className="font-medium text-neutral-400">Log Out</p>
+                    <p className="text-[12px] text-neutral-500 mt-1">
+                      Sign out of your account on this device
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setIsLogoutModalOpen(true)}
+                    className="bg-white/90  text-black hover:bg-neutral-700 hover:text-white transition px-3 rounded-[3px] py-1 text-[12px] font-medium cursor-pointer flex items-center gap-2"
+                  >
+                    <IoIosLogOut size={16} />
+                    Log Out
+                  </button>
+                </li>
+                <li className="flex items-center justify-between px-6 py-5">
+                  <div>
+                    <p className="font-medium text-neutral-400">Export Data</p>
                     <p className="text-[12px] text-neutral-500 mt-1">
                       Download all your cron jobs and execution logs
                     </p>
@@ -135,21 +117,7 @@ export default function SettingsPage() {
                     Coming Soon
                   </span>
                 </li>
-                <li className="flex items-center justify-between px-6 py-5">
-                  <div>
-                    <p className="font-medium text-white">Log Out</p>
-                    <p className="text-[12px] text-neutral-500 mt-1">
-                      Sign out of your account on this device
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setIsLogoutModalOpen(true)}
-                    className="bg-neutral-800 border border-neutral-700 text-white hover:bg-neutral-700 transition px-4 py-1.5 text-[12px] font-medium cursor-pointer flex items-center gap-2"
-                  >
-                    <IoIosLogOut size={16} />
-                    Log Out
-                  </button>
-                </li>
+
                 <li className="flex items-center justify-between px-6 py-5 bg-red-500/5">
                   <div>
                     <p className="font-medium text-red-400">Delete Account</p>

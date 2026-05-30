@@ -1,26 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  FiBook,
-  FiClock,
-  FiLink,
-  FiPlay,
-  FiActivity,
-  FiGrid,
-  FiMail,
-  FiShield,
-  FiCopy,
-  FiCheck,
-  FiSettings,
-  FiUser,
-} from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { FiCopy, FiCheck } from 'react-icons/fi';
 import { cn } from '@/shared/lib/utils';
+
+interface DocSubSection {
+  id: string;
+  title: string;
+}
 
 interface DocSection {
   id: string;
   title: string;
-  icon: React.ReactNode;
+  subSections: DocSubSection[];
   content: React.ReactNode;
 }
 
@@ -91,81 +84,51 @@ function TableWrapper({
 
 const sections: DocSection[] = [
   {
-    id: 'login',
-    title: 'Signing In',
-    icon: <FiUser size={16} />,
-    content: (
-      <div className="space-y-6">
-        <p className="text-[15px] text-neutral-300 leading-relaxed">
-          Cronix uses OAuth to sign you in — no need to remember a password. You
-          can use your Google or GitHub account.
-        </p>
-
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          Steps to Sign In
-        </h3>
-        <ol className="space-y-3 text-[15px] text-neutral-300 list-decimal list-inside">
-          <li>
-            Go to the <strong className="text-white">Login</strong> page.
-          </li>
-          <li>
-            Click on{' '}
-            <strong className="text-white">Continue with Google</strong> or{' '}
-            <strong className="text-white">Continue with GitHub</strong>.
-          </li>
-          <li>Authorize Cronix on the provider&apos;s page.</li>
-          <li>
-            You&apos;ll be redirected to the{' '}
-            <strong className="text-white">Dashboard</strong> automatically.
-          </li>
-        </ol>
-
-        <div className="border border-neutral-800 bg-neutral-900/50 p-4 rounded-[4px]">
-          <p className="text-[14px] text-neutral-300 leading-relaxed">
-            <strong className="text-white">Note:</strong> Your account is linked
-            to the email from your OAuth provider. Each time you sign in with
-            the same provider, you&apos;ll access the same workspace and jobs.
-          </p>
-        </div>
-      </div>
-    ),
-  },
-  {
     id: 'dashboard',
     title: 'Understanding the Dashboard',
-    icon: <FiBook size={16} />,
+    subSections: [
+      { id: 'dash-what', title: "What You'll See" },
+      { id: 'dash-actions', title: 'Quick Actions' },
+      { id: 'dash-recent', title: 'Recent Executions' },
+    ],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
           After signing in, you land on the Dashboard. This is your main control
-          panel — it shows everything at a glance.
+          panel - it shows everything at a glance.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3
+          id="dash-what"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
           What You&apos;ll See
         </h3>
         <ul className="space-y-3 text-[15px] text-neutral-300 list-disc list-inside">
           <li>
-            <strong className="text-white">Jobs Registered</strong> — Total
+            <strong className="text-white">Jobs Registered</strong> - Total
             number of jobs you&apos;ve created, along with how many are active
             and how many are paused.
           </li>
           <li>
-            <strong className="text-white">Currently Running</strong> — How many
+            <strong className="text-white">Currently Running</strong> - How many
             jobs are active right now.
           </li>
           <li>
-            <strong className="text-white">Total Executions</strong> — All job
+            <strong className="text-white">Total Executions</strong> - All job
             runs in the last 24 hours, including how many failed.
           </li>
           <li>
-            <strong className="text-white">Performance Score</strong> — Your
+            <strong className="text-white">Performance Score</strong> - Your
             overall success rate. Green means healthy, yellow means some
             failures, red means things need attention.
           </li>
         </ul>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3
+          id="dash-actions"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
           Quick Actions
         </h3>
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -186,7 +149,10 @@ const sections: DocSection[] = [
           </li>
         </ul>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3
+          id="dash-recent"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
           Recent Executions
         </h3>
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -200,7 +166,11 @@ const sections: DocSection[] = [
   {
     id: 'cron-jobs',
     title: 'Creating a Cron Job',
-    icon: <FiClock size={16} />,
+    subSections: [
+      { id: 'cron-steps', title: 'Step by Step' },
+      { id: 'cron-fields', title: 'Form Fields' },
+      { id: 'cron-schedule', title: 'Schedule Guide' },
+    ],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -209,8 +179,11 @@ const sections: DocSection[] = [
           every morning at 9 AM.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          How to Create One
+        <h3
+          id="cron-steps"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
+          Step by Step
         </h3>
         <ol className="space-y-3 text-[15px] text-neutral-300 list-decimal list-inside">
           <li>
@@ -223,13 +196,16 @@ const sections: DocSection[] = [
           </li>
           <li>Fill in the form with the details below.</li>
           <li>
-            Click <strong className="text-white">Create</strong> — your job is
+            Click <strong className="text-white">Create</strong> - your job is
             now live and will run on schedule.
           </li>
         </ol>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          Job Form Fields
+        <h3
+          id="cron-fields"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
+          Form Fields
         </h3>
         <TableWrapper
           headers={['Field', 'What to Enter', 'Example']}
@@ -259,8 +235,11 @@ const sections: DocSection[] = [
           ]}
         />
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          Schedule Quick Guide
+        <h3
+          id="cron-schedule"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
+          Schedule Guide
         </h3>
         <p className="text-[15px] text-neutral-300 leading-relaxed">
           Not sure about cron syntax? Here are some common patterns:
@@ -291,7 +270,10 @@ const sections: DocSection[] = [
   {
     id: 'webhooks',
     title: 'Using Webhook Jobs',
-    icon: <FiLink size={16} />,
+    subSections: [
+      { id: 'wh-when', title: 'When to Use' },
+      { id: 'wh-setup', title: 'How to Set Up' },
+    ],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -300,8 +282,8 @@ const sections: DocSection[] = [
           happens, Cronix triggers the job immediately.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          When to Use Webhooks
+        <h3 id="wh-when" className="text-[18px] font-semibold text-white pt-2">
+          When to Use
         </h3>
         <ul className="space-y-3 text-[15px] text-neutral-300 list-disc list-inside">
           <li>Trigger a deployment when you push code to GitHub.</li>
@@ -309,8 +291,8 @@ const sections: DocSection[] = [
           <li>Ping an API from another tool or automation.</li>
         </ul>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          How to Set One Up
+        <h3 id="wh-setup" className="text-[18px] font-semibold text-white pt-2">
+          How to Set Up
         </h3>
         <ol className="space-y-3 text-[15px] text-neutral-300 list-decimal list-inside">
           <li>
@@ -328,7 +310,7 @@ const sections: DocSection[] = [
           </li>
           <li>
             You&apos;ll see a unique{' '}
-            <strong className="text-white">Webhook URL</strong> for your job —
+            <strong className="text-white">Webhook URL</strong> for your job -
             copy it.
           </li>
           <li>
@@ -349,16 +331,19 @@ const sections: DocSection[] = [
   {
     id: 'workspaces',
     title: 'Managing Workspaces',
-    icon: <FiGrid size={16} />,
+    subSections: [
+      { id: 'ws-first', title: 'Your First Workspace' },
+      { id: 'ws-what', title: 'What You Can Do' },
+    ],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
           Workspaces are folders for your jobs. They help you keep things
-          organized — for example, you might have one workspace for monitoring
+          organized - for example, you might have one workspace for monitoring
           scripts and another for scheduled reports.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3 id="ws-first" className="text-[18px] font-semibold text-white pt-2">
           Your First Workspace
         </h3>
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -369,7 +354,7 @@ const sections: DocSection[] = [
           . You can rename it or create new ones.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3 id="ws-what" className="text-[18px] font-semibold text-white pt-2">
           What You Can Do
         </h3>
         <ul className="space-y-3 text-[15px] text-neutral-300 list-disc list-inside">
@@ -382,7 +367,7 @@ const sections: DocSection[] = [
             clicking on it.
           </li>
           <li>
-            <strong className="text-white">Delete</strong> a workspace — all
+            <strong className="text-white">Delete</strong> a workspace - all
             jobs inside it will also be removed.
           </li>
           <li>
@@ -404,7 +389,11 @@ const sections: DocSection[] = [
   {
     id: 'executions',
     title: 'Checking Execution History',
-    icon: <FiActivity size={16} />,
+    subSections: [
+      { id: 'ex-how', title: 'How to View' },
+      { id: 'ex-status', title: 'Status Meanings' },
+      { id: 'ex-details', title: 'What Details Are Shown' },
+    ],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -412,8 +401,8 @@ const sections: DocSection[] = [
           happened, whether it succeeded or failed, and how long it took.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          How to View Executions
+        <h3 id="ex-how" className="text-[18px] font-semibold text-white pt-2">
+          How to View
         </h3>
         <ol className="space-y-3 text-[15px] text-neutral-300 list-decimal list-inside">
           <li>
@@ -428,8 +417,11 @@ const sections: DocSection[] = [
           <li>Click on any row to see full details and logs.</li>
         </ol>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          Understanding the Status
+        <h3
+          id="ex-status"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
+          Status Meanings
         </h3>
         <TableWrapper
           headers={['Status', 'What It Means']}
@@ -441,7 +433,7 @@ const sections: DocSection[] = [
             ],
             [
               'FAILED',
-              'The job failed — either the endpoint returned an error or timed out.',
+              'The job failed - either the endpoint returned an error or timed out.',
             ],
             [
               'RETRYING',
@@ -450,30 +442,33 @@ const sections: DocSection[] = [
           ]}
         />
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3
+          id="ex-details"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
           What Details Are Shown
         </h3>
         <ul className="space-y-3 text-[15px] text-neutral-300 list-disc list-inside">
           <li>
-            <strong className="text-white">Trigger</strong> — How it was
+            <strong className="text-white">Trigger</strong> - How it was
             started: SCHEDULED (automatic), MANUAL (you clicked Run Now), or
             WEBHOOK.
           </li>
           <li>
-            <strong className="text-white">Attempt</strong> — Which attempt
+            <strong className="text-white">Attempt</strong> - Which attempt
             number this was (1 of 4 means it succeeded on the first try with 3
             retries available).
           </li>
           <li>
-            <strong className="text-white">HTTP Status</strong> — The response
+            <strong className="text-white">HTTP Status</strong> - The response
             code from the endpoint (200 means OK, 500 means server error).
           </li>
           <li>
-            <strong className="text-white">Duration</strong> — How long the
+            <strong className="text-white">Duration</strong> - How long the
             request took in milliseconds.
           </li>
           <li>
-            <strong className="text-white">Logs</strong> — Detailed step-by-step
+            <strong className="text-white">Logs</strong> - Detailed step-by-step
             log of what happened during execution.
           </li>
         </ul>
@@ -483,17 +478,20 @@ const sections: DocSection[] = [
   {
     id: 'pause-resume',
     title: 'Pausing & Resuming Jobs',
-    icon: <FiPlay size={16} />,
+    subSections: [
+      { id: 'pr-pause', title: 'How to Pause' },
+      { id: 'pr-resume', title: 'How to Resume' },
+    ],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
           You don&apos;t have to delete a job to stop it. Pausing a job keeps
-          everything intact — the schedule, the endpoint, the settings — it just
+          everything intact - the schedule, the endpoint, the settings - it just
           stops running until you resume it.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          How to Pause a Job
+        <h3 id="pr-pause" className="text-[18px] font-semibold text-white pt-2">
+          How to Pause
         </h3>
         <ol className="space-y-3 text-[15px] text-neutral-300 list-decimal list-inside">
           <li>
@@ -505,12 +503,15 @@ const sections: DocSection[] = [
             square button) in the Actions column.
           </li>
           <li>
-            Confirm in the popup — the job status will change to{' '}
+            Confirm in the popup - the job status will change to{' '}
             <strong className="text-white">PAUSED</strong>.
           </li>
         </ol>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3
+          id="pr-resume"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
           How to Resume
         </h3>
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -523,7 +524,10 @@ const sections: DocSection[] = [
   {
     id: 'run-now',
     title: 'Running a Job Manually',
-    icon: <FiPlay size={16} />,
+    subSections: [
+      { id: 'rn-how', title: 'How to Run Now' },
+      { id: 'rn-limit', title: 'Rate Limit' },
+    ],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -532,8 +536,8 @@ const sections: DocSection[] = [
           immediately.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
-          How to Run a Job Now
+        <h3 id="rn-how" className="text-[18px] font-semibold text-white pt-2">
+          How to Run Now
         </h3>
         <ol className="space-y-3 text-[15px] text-neutral-300 list-decimal list-inside">
           <li>
@@ -550,11 +554,14 @@ const sections: DocSection[] = [
           </li>
         </ol>
 
+        <h3 id="rn-limit" className="text-[18px] font-semibold text-white pt-2">
+          Rate Limit
+        </h3>
         <div className="border border-neutral-800 bg-neutral-900/50 p-4 rounded-[4px]">
           <p className="text-[14px] text-neutral-300 leading-relaxed">
-            <strong className="text-white">Limit:</strong> You can trigger
-            manual runs up to 10 times per minute. If you hit the limit, wait a
-            moment and try again.
+            You can trigger manual runs up to{' '}
+            <strong className="text-white">10 times per minute</strong>. If you
+            hit the limit, wait a moment and try again.
           </p>
         </div>
       </div>
@@ -563,7 +570,10 @@ const sections: DocSection[] = [
   {
     id: 'notifications',
     title: 'Email Notifications',
-    icon: <FiMail size={16} />,
+    subSections: [
+      { id: 'en-enable', title: 'How to Enable' },
+      { id: 'en-content', title: 'What the Email Contains' },
+    ],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -571,7 +581,10 @@ const sections: DocSection[] = [
           jobs where you need to know immediately if something goes wrong.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3
+          id="en-enable"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
           How to Enable
         </h3>
         <ol className="space-y-3 text-[15px] text-neutral-300 list-decimal list-inside">
@@ -580,12 +593,15 @@ const sections: DocSection[] = [
             <strong className="text-white">Failure Email</strong> toggle.
           </li>
           <li>
-            That&apos;s it — if the job fails after all retry attempts,
+            That&apos;s it - if the job fails after all retry attempts,
             you&apos;ll get an email.
           </li>
         </ol>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3
+          id="en-content"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
           What the Email Contains
         </h3>
         <ul className="space-y-3 text-[15px] text-neutral-300 list-disc list-inside">
@@ -609,7 +625,10 @@ const sections: DocSection[] = [
   {
     id: 'security',
     title: 'Your Account & Security',
-    icon: <FiShield size={16} />,
+    subSections: [
+      { id: 'sec-private', title: 'Your Data Is Private' },
+      { id: 'sec-auth', title: 'How Authentication Works' },
+    ],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -617,7 +636,10 @@ const sections: DocSection[] = [
           data are protected.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3
+          id="sec-private"
+          className="text-[18px] font-semibold text-white pt-2"
+        >
           Your Data Is Private
         </h3>
         <ul className="space-y-3 text-[15px] text-neutral-300 list-disc list-inside">
@@ -625,7 +647,7 @@ const sections: DocSection[] = [
             Each user can only see their own workspaces, jobs, and executions.
           </li>
           <li>
-            No one else — not even other Cronix users — can access your data.
+            No one else - not even other Cronix users - can access your data.
           </li>
           <li>
             Your session is secured with encrypted tokens stored in httpOnly
@@ -633,21 +655,21 @@ const sections: DocSection[] = [
           </li>
         </ul>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3 id="sec-auth" className="text-[18px] font-semibold text-white pt-2">
           How Authentication Works
         </h3>
         <ul className="space-y-3 text-[15px] text-neutral-300 list-disc list-inside">
           <li>
-            <strong className="text-white">OAuth Login</strong> — You sign in
+            <strong className="text-white">OAuth Login</strong> - You sign in
             through Google or GitHub. Cronix never sees or stores your password.
           </li>
           <li>
-            <strong className="text-white">Auto Refresh</strong> — Your session
+            <strong className="text-white">Auto Refresh</strong> - Your session
             stays active for 7 days. After that, you&apos;ll need to sign in
             again.
           </li>
           <li>
-            <strong className="text-white">Logout</strong> — Click your profile
+            <strong className="text-white">Logout</strong> - Click your profile
             in the sidebar and select Logout to end your session immediately.
           </li>
         </ul>
@@ -657,15 +679,15 @@ const sections: DocSection[] = [
   {
     id: 'delete-job',
     title: 'Deleting a Job',
-    icon: <FiSettings size={16} />,
+    subSections: [{ id: 'dj-how', title: 'How to Delete' }],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
           If you no longer need a job, you can delete it. This is a soft delete
-          — the job stops running immediately and is removed from your list.
+          - the job stops running immediately and is removed from your list.
         </p>
 
-        <h3 className="text-[18px] font-semibold text-white pt-2">
+        <h3 id="dj-how" className="text-[18px] font-semibold text-white pt-2">
           How to Delete
         </h3>
         <ol className="space-y-3 text-[15px] text-neutral-300 list-decimal list-inside">
@@ -677,7 +699,7 @@ const sections: DocSection[] = [
             Click the <strong className="text-white">trash icon</strong> in the
             Actions column.
           </li>
-          <li>Confirm in the popup — the job is now deleted.</li>
+          <li>Confirm in the popup - the job is now deleted.</li>
         </ol>
 
         <div className="border border-neutral-800 bg-neutral-900/50 p-4 rounded-[4px]">
@@ -693,7 +715,7 @@ const sections: DocSection[] = [
   {
     id: 'cleanup',
     title: 'Automatic Data Cleanup',
-    icon: <FiActivity size={16} />,
+    subSections: [],
     content: (
       <div className="space-y-6">
         <p className="text-[15px] text-neutral-300 leading-relaxed">
@@ -714,7 +736,7 @@ const sections: DocSection[] = [
         />
 
         <p className="text-[15px] text-neutral-300 leading-relaxed">
-          This happens in the background — you don&apos;t need to do anything.
+          This happens in the background - you don&apos;t need to do anything.
           Just keep in mind that if you want to review old executions, check
           them within 30 days.
         </p>
@@ -724,7 +746,16 @@ const sections: DocSection[] = [
 ];
 
 export default function DocumentationPage() {
-  const [activeSection, setActiveSection] = useState('login');
+  const [activeSection, setActiveSection] = useState('dashboard');
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [hoveredSub, setHoveredSub] = useState<string | null>(null);
+
+  function handleSubClick(subId: string) {
+    const el = document.getElementById(subId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 
   return (
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
@@ -740,8 +771,7 @@ export default function DocumentationPage() {
           {sections.map((section) =>
             section.id === activeSection ? (
               <div key={section.id} className="max-w-3xl">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-[#DF5BCC]">{section.icon}</span>
+                <div className="mb-6">
                   <h2 className="text-[22px] font-semibold text-white tracking-[-0.5px]">
                     {section.title}
                   </h2>
@@ -755,26 +785,128 @@ export default function DocumentationPage() {
         </div>
 
         {/* Table of Contents */}
-        <div className="w-[240px] shrink-0 border-l border-neutral-800 overflow-y-auto slim-scrollbar p-4">
+        <div
+          className="w-[260px] shrink-0 border-l border-neutral-800 overflow-y-auto slim-scrollbar p-4"
+          onMouseLeave={() => setHoveredItem(null)}
+        >
           <p className="text-[12px] font-medium text-neutral-500 uppercase tracking-wider mb-4 px-2">
             On This Page
           </p>
-          <nav className="flex flex-col gap-1">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => setActiveSection(section.id)}
-                className={cn(
-                  'flex items-center gap-2.5 px-3 py-2 text-[13px] text-left rounded-[4px] transition cursor-pointer',
-                  activeSection === section.id
-                    ? 'bg-[#202020] text-white'
-                    : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50',
-                )}
-              >
-                {section.icon}
-                <span>{section.title}</span>
-              </button>
-            ))}
+          <nav className="relative flex flex-col gap-0.5 overflow-hidden">
+            {(() => {
+              const activeIndex = sections.findIndex(
+                (s) => s.id === activeSection,
+              );
+              const hoveredIndex = hoveredItem
+                ? sections.findIndex((s) => s.id === hoveredItem)
+                : -1;
+
+              const getSliderY = (index: number) => {
+                let y = 0;
+                for (let i = 0; i < index; i++) {
+                  y += 34;
+                  const s = sections[i];
+                  if (i === activeIndex && s && s.subSections.length > 0) {
+                    y += s.subSections.length * 30 + 6;
+                  }
+                }
+                return y;
+              };
+
+              return (
+                <>
+                  {hoveredIndex !== -1 && hoveredIndex !== activeIndex && (
+                    <motion.div
+                      className="absolute inset-x-0 h-[32px] bg-white/[0.07] rounded-[4px] z-0"
+                      initial={false}
+                      animate={{ y: getSliderY(hoveredIndex) }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 400,
+                        damping: 35,
+                        mass: 0.8,
+                      }}
+                    />
+                  )}
+                  {sections.map((section, idx) => {
+                    const isActive = activeSection === section.id;
+                    const isHovered = hoveredItem === section.id;
+
+                    return (
+                      <div key={section.id}>
+                        <button
+                          onClick={() => setActiveSection(section.id)}
+                          onMouseEnter={() => setHoveredItem(section.id)}
+                          className={cn(
+                            'relative z-10 flex items-center h-[32px] w-full px-3 text-[13px] text-left rounded-[4px] transition cursor-pointer',
+                            isActive
+                              ? 'bg-[#202020] text-white'
+                              : isHovered
+                                ? 'text-white'
+                                : 'text-neutral-400',
+                          )}
+                        >
+                          {section.title}
+                        </button>
+
+                        {isActive && section.subSections.length > 0 && (
+                          <div
+                            className="relative ml-4 flex flex-col gap-[2px] mt-0.5 mb-1"
+                            onMouseLeave={() => setHoveredSub(null)}
+                          >
+                            {(() => {
+                              const subHoverIdx = hoveredSub
+                                ? section.subSections.findIndex(
+                                    (s) => s.id === hoveredSub,
+                                  )
+                                : -1;
+
+                              return (
+                                <>
+                                  {subHoverIdx !== -1 && (
+                                    <motion.div
+                                      className="absolute inset-x-0 h-[28px] bg-white/[0.07] rounded-[3px] z-0"
+                                      initial={false}
+                                      animate={{ y: subHoverIdx * 30 }}
+                                      transition={{
+                                        type: 'spring',
+                                        stiffness: 400,
+                                        damping: 35,
+                                        mass: 0.8,
+                                      }}
+                                    />
+                                  )}
+                                  {section.subSections.map((sub) => {
+                                    const isSubHovered = hoveredSub === sub.id;
+                                    return (
+                                      <button
+                                        key={sub.id}
+                                        onClick={() => handleSubClick(sub.id)}
+                                        onMouseEnter={() =>
+                                          setHoveredSub(sub.id)
+                                        }
+                                        className={cn(
+                                          'relative z-10 flex items-center h-[28px] px-3 text-[12px] transition cursor-pointer text-left rounded-[3px]',
+                                          isSubHovered
+                                            ? 'text-white'
+                                            : 'text-neutral-500',
+                                        )}
+                                      >
+                                        {sub.title}
+                                      </button>
+                                    );
+                                  })}
+                                </>
+                              );
+                            })()}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </>
+              );
+            })()}
           </nav>
         </div>
       </div>

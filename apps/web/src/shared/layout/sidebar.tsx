@@ -154,15 +154,15 @@ export default function Sidebar() {
         </nav>
 
         <div className="px-2 pt-1">
-          <div className="bg-[#F5F5F5] rounded-[5px] p-2 text-left border border-neutral-200/80 shadow-sm">
-            <h4 className="text-[13px] tracking-[-1px] font-semibold text-neutral-900 leading-tight">
+          <div className="bg-[#1F1F1F] rounded-[5px] p-2 text-left shadow-sm">
+            <h4 className="text-[13px] tracking-[-1px] font-semibold text-white leading-tight">
               Get more on{' '}
               <span className="text-[#DF5BCC] font-bold">Cronix</span>
             </h4>
-            <p className="text-[11px] text-black/70 mt-0.5 tracking-[-0.5px]">
+            <p className="text-[11px] text-white/70 mt-0.5 tracking-[-0.5px]">
               Your trial has expired
             </p>
-            <button className="w-full mt-3.5 bg-[#1E1E1F] hover:bg-neutral-800 text-white text-[12px] font-medium py-1.5 rounded-[3px] transition-colors duration-200 cursor-pointer">
+            <button className="w-full mt-3.5 bg-white/90 hover:bg-white text-black text-[12px] font-medium py-1.5 rounded-[3px] transition-colors duration-200 cursor-pointer">
               Upgrade
             </button>
           </div>

@@ -24,7 +24,9 @@ export default function LoginCard() {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [loadingProvider, setLoadingProvider] = useState<
+    'google' | 'github' | null
+  >(null);
   const errorParam = searchParams.get('error');
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function LoginCard() {
   }, [isAuthenticated, router]);
 
   const handleOAuth = (provider: 'google' | 'github') => {
-    setIsRedirecting(true);
+    setLoadingProvider(provider);
     const baseUrl =
       process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1';
     const path = provider === 'google' ? '/auth/google' : '/auth/github';
@@ -72,11 +74,11 @@ export default function LoginCard() {
             <button
               type="button"
               onClick={() => handleOAuth('google')}
-              disabled={isRedirecting}
+              disabled={loadingProvider !== null}
               className="w-full py-2 border border-neutral-300 text-[13px] text-black transition disabled:cursor-not-allowed disabled:opacity-60"
             >
               <span className="flex items-center justify-center gap-2">
-                {isRedirecting ? (
+                {loadingProvider === 'google' ? (
                   <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-gray-600" />
                 ) : (
                   <FcGoogle className="h-5 w-5" />
@@ -88,11 +90,11 @@ export default function LoginCard() {
             <button
               type="button"
               onClick={() => handleOAuth('github')}
-              disabled={isRedirecting}
+              disabled={loadingProvider !== null}
               className="w-full py-2 border border-neutral-300 text-[13px] text-black transition disabled:cursor-not-allowed disabled:opacity-60"
             >
               <span className="flex items-center justify-center gap-2">
-                {isRedirecting ? (
+                {loadingProvider === 'github' ? (
                   <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-gray-600" />
                 ) : (
                   <FaGithub className="h-5 w-5" />

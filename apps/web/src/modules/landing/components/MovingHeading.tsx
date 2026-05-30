@@ -4,35 +4,35 @@ import { PiDotOutlineFill } from 'react-icons/pi';
 
 const marqueeItemsData = [
   {
-    name: 'Explore complex ideas on an infinite canvas  ',
+    name: 'Schedule HTTP requests with cron expressions  ',
     src: 'https://thesvg.org/icons/gemini/default.svg',
   },
   {
-    name: 'Branch any conversation without losing parent context ',
+    name: 'Trigger jobs instantly via webhook URLs ',
     src: 'https://thesvg.org/icons/gemini/default.svg',
   },
   {
-    name: 'Build connected knowledge graphs of your thoughts ',
+    name: 'Track every execution with detailed logs ',
     src: 'https://thesvg.org/icons/gemini/default.svg',
   },
   {
-    name: 'Organize all your research and learning paths ',
+    name: 'Organize jobs into workspaces ',
     src: 'https://thesvg.org/icons/gemini/default.svg',
   },
   {
-    name: 'No more cluttered threads in chat history ',
+    name: 'Automatic retries with configurable delays ',
     src: 'https://thesvg.org/icons/gemini/default.svg',
   },
   {
-    name: 'Ask follow up questions from any node ',
+    name: 'Email alerts on job failure ',
     src: 'https://thesvg.org/icons/gemini/default.svg',
   },
   {
-    name: 'Visual nodes keep your ideas fully connected ',
+    name: 'Dashboard with real-time stats and analytics ',
     src: 'https://thesvg.org/icons/gemini/default.svg',
   },
   {
-    name: 'Explore endless possibilities with visual AI canvas ',
+    name: 'Self-hosted and fully open source ',
     src: 'https://thesvg.org/icons/gemini/default.svg',
   },
 ];

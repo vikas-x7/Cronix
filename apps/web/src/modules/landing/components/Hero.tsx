@@ -18,12 +18,12 @@ const Hero = () => {
               id="hero-heading"
               className="font-inter text-center  md:text-start text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-7px] leading-17 uppercase"
             >
-              THE ONLY ASYNC <br /> FOR MANAGER
+              THE STANDALONE ASYNC WORKFLOW
             </h1>
             <p className="tracking-[-0.75px] mt-4 text-black/80">
-              lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Temporelorem ipsum dolor sit amet consectetur adipisicing elit.
-              Tempore, voluptatibus!
+              Schedule HTTP requests with cron jobs, trigger them via webhooks,{' '}
+              <br />
+              and monitor every execution from a single dashboard.
             </p>
           </div>
           <div className="text-black max-w-4xl flex flex-col items-center md:items-start">
@@ -31,23 +31,21 @@ const Hero = () => {
               id="hero-heading"
               className="font-inter text-center  md:text-end text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-8px] leading-17 uppercase -mt-17"
             >
-              TO LET YOU SHIP CODE FAST
+              TO LET YOU <br /> SHIP CODE FAST
             </h1>
           </div>
         </div>
 
         <div className="flex w-full flex-col items-start justify-between gap-6 py-6 sm:py-8 md:flex-row md:items-end">
           <div className="flex flex-row gap-8 sm:gap-16">
-            <div className="bg-black flex items-center px-4 py-1  gap-1">
+            <div className="bg-black flex items-center   gap-1">
               <Link
                 href="/login"
-                className="text-[10px]  sm:text-[15px] uppercase tracking-[-0.05px] text-white bg-black"
+                className="text-[10px]  flex items-center px-4 py-1 gap-1 sm:text-[15px] uppercase tracking-[-0.5px] text-white bg-black"
               >
                 Get start
+                <TfiArrowTopRight size={15} className="mt-1" />
               </Link>
-              <p className="text-white">
-                <TfiArrowTopRight />
-              </p>
             </div>
           </div>
         </div>

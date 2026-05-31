@@ -1,0 +1,44 @@
+import React from 'react';
+import Image from 'next/image';
+
+const KnowCronix = () => {
+  return (
+    <div className=" relative text-[#EBEBEB] font-sans antialiased flex h-screen mb-40 px-5">
+      <div className="bg-[#ffffff] text-black  flex-1">
+        <div className="text-[12px] uppercase leading-tight flex-none mt-10">
+          BUILD: 01 <br /> CRONIX <br /> SYSTEM RUNNER
+        </div>
+
+        <div className="mt-auto ">
+          <div className="text-[18px] leading-normal tracking-[-1px]   text-[#000000] space-y-[2.5vh] mt-[370px] ml-1 ">
+            <p>
+              A robust platform driven by the passion to automate even when the
+              systems are scaling fast.
+            </p>
+            <p>
+              The smart feature to sync webhooks when running tasks <br /> seems
+              harder. Fully built for those who host first and
+              <br /> manage it all locally.
+            </p>
+          </div>
+          <h1 className=" absolute text-[12rem] ml-[-10px] font-black text-black leading-[0.8] tracking-[-20px] top-60 z-20">
+            Know cronix.
+          </h1>
+          <button className="mt-[128px] bg-[#040404] px-4 py-2 text-white rounded-[3px] tracking-[-0.75px] font-medium">
+            Getstart now{' '}
+          </button>
+        </div>
+      </div>
+
+      <div className="relative w-1/2 h-full flex-shrink-0">
+        <img
+          className="w-full h-full object-cover"
+          src="https://i.pinimg.com/736x/81/af/17/81af17b2a0fa6d169d42ee2f914d0f04.jpg"
+          alt="Cronix platform scene"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default KnowCronix;

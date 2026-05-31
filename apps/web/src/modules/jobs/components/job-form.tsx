@@ -164,7 +164,6 @@ export default function JobForm({
       )}
 
       <form onSubmit={handleSubmit(onFormSubmit)}>
-        {/* Step 1 — Basic Info */}
         {(step === 1 || editMode) && (
           <div className={step !== 1 ? 'block' : ''}>
             {step === 1 && (
@@ -239,7 +238,6 @@ export default function JobForm({
           </div>
         )}
 
-        {/* Step 2 — HTTP Config */}
         {(step === 2 || editMode) && (
           <div className={step !== 2 ? 'mt-6' : ''}>
             {step === 2 && (
@@ -341,7 +339,6 @@ export default function JobForm({
           </div>
         )}
 
-        {/* Step 3 — Settings */}
         {(step === 3 || editMode) && (
           <div className={step !== 3 ? 'mt-6' : ''}>
             {step === 3 && (
@@ -442,7 +439,6 @@ export default function JobForm({
           </div>
         )}
 
-        {/* Navigation buttons */}
         <div className="mt-8 flex justify-between">
           {step > 1 && !editMode ? (
             <button

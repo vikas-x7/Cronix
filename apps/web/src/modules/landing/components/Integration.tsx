@@ -63,12 +63,12 @@ const Integration = () => {
       id="integration"
       className="bg-transparent py-12 sm:py-16 md:py-20 px-4 sm:px-6 min-h-[60vh] md:min-h-screen flex items-center"
     >
-      <div className="container mx-auto max-w-7xl text-center">
+      <div className="container mx-auto max-w-8xl text-center">
         <h2 className="mt-4 text-xl sm:text-3xl md:text-4xl font-medium lg:text-[53px] -tracking-[0.5px] md:-tracking-[4px]">
-          Seamlessly Connect Your Workflows
+          Seamlessly Connect Your workflows
         </h2>
 
-        <p className="mx-auto mt-2 text-sm sm:text-base md:text-lg text-black/70 max-w-2xl -tracking-[0.5px]">
+        <p className="mx-auto mt-2 text-sm sm:text-base md:text-lg text-black/90 max-w-2xl -tracking-[0.75px]">
           Connect Cronix to your deployment platforms. Trigger automated
           deployments, send requests to Render or other cloud providers, and
           seamlessly integrate with any system via Webhooks for your cron jobs.

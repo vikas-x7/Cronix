@@ -57,8 +57,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-5   ">
       <div className="bg-[#F0F0F0] rounded-[2px] text-black w-full h-8 text-center flex items-center justify-center mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        <p className="tracking-[-1px] flex items-center gap-2">
-          Cronix version v2 is live now <MdArrowForward />
+        <p className="tracking-[-1px] flex items-center gap-2 font-medium">
+          <span className="text-[#DF5BCC]">Cronix.</span>version v2 is live now{' '}
+          <MdArrowForward />
         </p>
       </div>
       <div className="container mx-auto">
@@ -66,7 +67,7 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center gap-5 backdrop-blur-md px-3 py-2 rounded-[3px] transition-colors duration-300 bg-black/3">
             <Link href="/" className="flex items-center ">
               <BiSolidSquare size={25} className="text-[#DF5BCC]" />
-              <h1 className="text-[19px] font-bold tracking-[-1px]">Cronix</h1>
+              <h1 className="text-[19px] font-bold tracking-[-1px]">Cronix.</h1>
             </Link>
             {NAV_LINKS.map((link) => (
               <NavItem

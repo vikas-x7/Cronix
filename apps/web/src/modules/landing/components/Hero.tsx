@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TfiArrowTopRight } from 'react-icons/tfi';
 import { VscArrowLeft, VscArrowRight } from 'react-icons/vsc';
 import MovingHeading from './MovingHeading';
+import UseCases from './UseCases';
 
 const Hero = () => {
   return (
@@ -16,20 +17,19 @@ const Hero = () => {
           <div className="text-black max-w-4xl flex flex-col items-center md:items-start">
             <h1
               id="hero-heading"
-              className="font-inter text-center  md:text-start text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-7px] leading-17 uppercase"
+              className=" text-center  md:text-start text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-7px] leading-17 uppercase "
             >
               THE STANDALONE ASYNC WORKFLOW
             </h1>
             <p className="tracking-[-0.75px] mt-4 text-black/80">
-              Schedule HTTP requests with cron jobs, trigger them via webhooks,{' '}
-              <br />
-              and monitor every execution from a single dashboard.
+              Schedule HTTP requests with cron jobs, trigger them via webhooks
+              and monitor every execution from a single dashboard
             </p>
           </div>
           <div className="text-black max-w-4xl flex flex-col items-center md:items-start">
             <h1
               id="hero-heading"
-              className="font-inter text-center  md:text-end text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-8px] leading-17 uppercase -mt-17"
+              className=" text-center  md:text-end text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-8px] leading-17 uppercase -mt-17"
             >
               TO LET YOU <br /> SHIP CODE FAST
             </h1>
@@ -41,7 +41,7 @@ const Hero = () => {
             <div className="bg-black flex items-center   gap-1">
               <Link
                 href="/login"
-                className="text-[10px]  flex items-center px-4 py-1 gap-1 sm:text-[15px] uppercase tracking-[-0.5px] text-white bg-black"
+                className="text-[10px] font-semibold  flex items-center px-4 py-1 gap-1 sm:text-[15px] uppercase tracking-[-0.5px] text-white bg-black"
               >
                 Get start
                 <TfiArrowTopRight size={15} className="mt-1" />
@@ -52,30 +52,7 @@ const Hero = () => {
         <div>
           <div className="flex flex-col md:flex-row justify-between mt-34 gap-4 text-black/80 font-medium uppercase tracking-[-0.5px]"></div>
 
-          <div className="relative">
-            <img
-              className="h-full w-full object-cover object-[25%_center] "
-              src="https://res.cloudinary.com/dyv9kenuj/image/upload/v1782243146/bgimageforcronixc_jsovlx.avif"
-              alt="Erica AI data automation background"
-            />
-
-            <div className="absolute bottom-6 left-6 right-6 text-white">
-              <div className="flex items-center gap-1 mb-5">
-                <div className="bg-[#DF5BCC] w-4 h-4 "></div>
-                <h1 className="text-[20px] font-semibold tracking-[-1.5px]">
-                  Cronix
-                </h1>
-              </div>
-
-              <h2 className="max-w-5xl text-xl sm:text-2xl md:text-3xl lg:text-4xl md:tracking-[-3.25px] font-medium">
-                Enterprise grade background jobs for your application
-              </h2>
-
-              <h2 className="mt-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl md:tracking-[-3.25px] font-medium">
-                Reliable scheduling, seamless monitoring
-              </h2>
-            </div>
-          </div>
+          <UseCases />
         </div>
       </div>
     </section>

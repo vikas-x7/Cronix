@@ -52,13 +52,13 @@ export default function MovingHeading() {
         }
       `}</style>
 
-      <section className="w-full overflow-hidden  bg-[#1C1A16]  font-cabin">
+      <section className="w-full overflow-hidden  bg-[#1C1A16]  font-cabin ">
         <div className="relative w-full overflow-hidden ">
           <div className="animate-marquee-loop">
             {[0, 1].map((group) => (
               <div
                 key={group}
-                className="flex shrink-0 items-center gap-1 pr-16"
+                className="flex shrink-0 items-center  pr-16"
                 aria-hidden={group === 1}
               >
                 {marqueeItemsData.map((item, i) => (
@@ -70,7 +70,7 @@ export default function MovingHeading() {
                     <span className="text-white">
                       <PiDotOutlineFill size={45} />
                     </span>
-                    <span className="text-[13px]  text-white md:text-[15px] ">
+                    <span className="text-[13px]  text-white md:text-[14px] ">
                       {item.name}
                     </span>
                   </div>

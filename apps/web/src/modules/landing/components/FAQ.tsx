@@ -30,6 +30,11 @@ const faqs = [
     answer:
       'Our platform is built for scale and precision, easily handling over 20k+ jobs executed with 99.9% uptime guaranteed. Check out our pricing for specific tier limits.',
   },
+  {
+    question: 'What is Cronix?',
+    answer:
+      'Cronix is a fully managed job scheduler that lets you automate workflows, trigger APIs, and monitor job runs from one powerful dashboard.',
+  },
 ];
 
 export default function FAQ() {
@@ -38,24 +43,34 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="w-full py-12 sm:py-16 px-4 md:px-10 lg:px-10 mt-10"
+      className="w-full py-12 sm:py-16 px-4 md:px-10 lg:px-6 mt-10"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-start">
-        <div className="flex flex-col gap-1 w-full">
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] text-black -tracking-[1px] md:-tracking-[3px] mb-8 sm:mb-10">
-            Frequently Asked Questions
+        <div className="  w-full">
+          <h2 className="text-3xl sm:text-4xl font-medium lg:text-[44px] text-black -tracking-[1px] md:-tracking-[3px] mb-8 sm:mb-10">
+            Frequently Asked <br /> Questions
           </h2>
 
-          <div className="border-t border-gray-200 mt-2 w-full">
+          <p className="mt-65 tracking-[-0.75px]">
+            Everything you need to know about scheduling, monitoring, and
+            scaling your automated tasks with Cronix. Can't find an answer?
+          </p>
+          <button className="bg-black px-4 py-2 text-white mt-3">
+            Send query
+          </button>
+        </div>
+
+        <div className="relative rounded-[5px] overflow-hidden  w-full mt-8 lg:mt-0">
+          <div className="border border-black/10 border-dashed   w-full">
             {faqs.map((f, i) => (
               <div
                 key={i}
-                className="border-b border-gray-200 cursor-pointer"
+                className="border-b px-4 border-black/10 border-dashed  cursor-pointer py-2"
                 onClick={() => setActiveIndex(activeIndex === i ? null : i)}
               >
                 <div className="flex items-center justify-between py-4">
                   <span
-                    className={`font-normal text-base sm:text-[20px] pr-4 transition-colors duration-200 ${activeIndex === i ? 'text-black' : 'text-black/90'}`}
+                    className={`font-medium tracking-[-1px] text-base sm:text-[18px] transition-colors duration-200 ${activeIndex === i ? 'text-black' : 'text-black/90'}`}
                   >
                     {f.question}
                   </span>
@@ -65,21 +80,13 @@ export default function FAQ() {
                 <div
                   className={`overflow-hidden transition-all duration-300 ease-in-out ${activeIndex === i ? 'max-h-60 pb-4' : 'max-h-0'}`}
                 >
-                  <p className="text-gray-500 text-sm sm:text-[17px] leading-relaxed">
+                  <p className="text-black text-sm sm:text-[17px] tracking-[-0.75px] leading-relaxed">
                     {f.answer}
                   </p>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-
-        <div className="relative rounded-[5px] overflow-hidden h-64 sm:h-96 lg:h-130 w-full mt-8 lg:mt-0">
-          <img
-            src="https://cdn.prod.website-files.com/6812d02840d393aa2c663370/68f7be903d5e939249ef4dab_6ad532de28b288f9a07b16c9b42376ce_hyperline-pattern.svg"
-            alt="Erica AI data automation preview"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
         </div>
       </div>
     </section>

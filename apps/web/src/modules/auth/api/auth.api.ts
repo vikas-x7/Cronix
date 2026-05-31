@@ -4,7 +4,6 @@ import type { User } from '../types/auth.types';
 
 export async function getMe(): Promise<User> {
   const response = await api.get(API_ROUTES.AUTH.ME);
-  // The backend wraps responses in { success, statusCode, message, data }
   return response.data.data as User;
 }
 

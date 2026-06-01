@@ -19,7 +19,7 @@ export default function WorkspaceCard({
     <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
       <h3
         className="cursor-pointer text-lg font-semibold text-gray-900 hover:text-gray-600"
-        onClick={() => router.push(`/jobs?workspaceId=${workspace.id}`)}
+        onClick={() => router.push(`/jobs/new?workspaceId=${workspace.id}`)}
       >
         {workspace.name}
       </h3>
@@ -29,7 +29,7 @@ export default function WorkspaceCard({
       </p>
       <div className="mt-4 flex items-center gap-2">
         <button
-          onClick={() => router.push(`/jobs?workspaceId=${workspace.id}`)}
+          onClick={() => router.push(`/jobs/new?workspaceId=${workspace.id}`)}
           className="cursor-pointer rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
           Open

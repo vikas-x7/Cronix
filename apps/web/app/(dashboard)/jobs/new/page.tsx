@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCreateJob } from '@/modules/jobs';
+import { useWorkspaces } from '@/modules/workspaces';
 import { useUIStore } from '@/shared/stores/uiStore';
 import CronExpressionInput from '@/shared/components/cron-expression-input';
 import { FiChevronDown } from 'react-icons/fi';
@@ -27,8 +28,12 @@ const TIMEZONES = [
 
 export default function CreateJobs() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const createJob = useCreateJob();
   const addToast = useUIStore((s) => s.addToast);
+  const { data: workspaces } = useWorkspaces();
+
+  const preselectedWorkspaceId = searchParams.get('workspaceId') || '';
 
   const [activeTab, setActiveTab] = useState<Tab>('Schedule');
   const [formData, setFormData] = useState({
@@ -40,11 +45,18 @@ export default function CreateJobs() {
     schedule: '',
     timezone: 'UTC',
     type: 'CRON' as 'CRON' | 'EVENT',
+    workspaceId: preselectedWorkspaceId,
     retryCount: 0,
     retryDelay: 10,
     timeout: 30,
     failureEmail: false,
   });
+
+  useEffect(() => {
+    if (preselectedWorkspaceId) {
+      setFormData((prev) => ({ ...prev, workspaceId: preselectedWorkspaceId }));
+    }
+  }, [preselectedWorkspaceId]);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   function updateField(field: string, value: string) {
@@ -59,6 +71,11 @@ export default function CreateJobs() {
   }
 
   async function handleSubmit() {
+    if (!formData.workspaceId) {
+      setErrors({ workspaceId: 'Please select a workspace' });
+      addToast({ type: 'error', message: 'Please select a workspace' });
+      return;
+    }
     try {
       const headerObj: Record<string, string> = {};
       if (formData.headers) {
@@ -83,7 +100,7 @@ export default function CreateJobs() {
       const payload = {
         name: formData.name || 'Untitled job',
         type: formData.type,
-        workspaceId: 'default',
+        workspaceId: formData.workspaceId,
         endpoint: formData.endpoint,
         method: formData.method,
         headers: headerObj,
@@ -131,16 +148,45 @@ export default function CreateJobs() {
       </div>
       <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh] flex flex-col">
         <div className="flex items-center justify-between px-4 py-2 p-3">
-          <div className="flex items-center gap-2 flex-1">
+          <div className="flex items-center gap-3 flex-1">
             <input
               type="text"
               value={formData.name}
               onChange={(e) => updateField('name', e.target.value)}
               placeholder="Untitled job"
-              className="text-[14px] font-medium text-white outline-none placeholder:text-neutral-500 w-full border px-3 py-2 border-neutral-700 bg-neutral-900 focus:border-neutral-500 transition"
+              className="text-[14px] font-medium text-white outline-none placeholder:text-neutral-500 flex-1 border px-3 py-2 border-neutral-700 bg-neutral-900 focus:border-neutral-500 transition"
             />
-            {errors.name && (
-              <span className="text-[11px] text-red-400">{errors.name}</span>
+            <div className="relative">
+              <select
+                value={formData.workspaceId}
+                onChange={(e) => updateField('workspaceId', e.target.value)}
+                className={`appearance-none text-[13px] outline-none cursor-pointer border px-3 py-2 pr-8 bg-neutral-900 transition min-w-[160px] ${
+                  formData.workspaceId
+                    ? 'border-neutral-700 text-white'
+                    : errors.workspaceId
+                      ? 'border-red-500/50 text-neutral-500'
+                      : 'border-neutral-700 text-neutral-500'
+                }`}
+              >
+                <option value="" className="bg-neutral-900 text-neutral-500">
+                  Select workspace
+                </option>
+                {workspaces?.map((ws) => (
+                  <option
+                    key={ws.id}
+                    value={ws.id}
+                    className="bg-neutral-900 text-white"
+                  >
+                    {ws.name}
+                  </option>
+                ))}
+              </select>
+              <FiChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-neutral-500" />
+            </div>
+            {errors.workspaceId && (
+              <span className="text-[11px] text-red-400 whitespace-nowrap">
+                {errors.workspaceId}
+              </span>
             )}
           </div>
         </div>

@@ -22,12 +22,14 @@ import { BiSolidSquare, BiUnite } from 'react-icons/bi';
 
 const NAV_ITEMS = [
   { label: 'Overview', href: '/dashboard', icon: FiLayout },
+  { label: 'Workspaces', href: '/workspaces', icon: FiGrid },
   { label: 'Executions', href: '/executions', icon: FiActivity },
+
   { label: 'Cron Jobs', href: '/jobs', icon: FiClock },
   { label: 'Schedule', href: '/schedule', icon: FiCalendar },
 
   { label: 'Analytics', href: '/analytics', icon: FiTrendingUp },
-  { label: 'Workspaces', href: '/workspaces', icon: FiGrid },
+
   { label: 'Webhooks', href: '/webhooks', icon: FiLink },
   { label: 'Documentation', href: '/documentation', icon: FiBook },
   { label: 'Settings', href: '/settings', icon: FiSettings },
@@ -172,7 +174,7 @@ export default function Sidebar() {
                         />
                         <span>{item.label}</span>
                       </Link>
-                      {(idx === 2 || idx === 5 || idx === 7) && (
+                      {(idx === 1 || idx === 5 || idx === 7) && (
                         <div className=" border-b  border-white/20 border-dashed  mx-1 z-10" />
                       )}
                     </React.Fragment>

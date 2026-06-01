@@ -1,8 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { FiTrash2, FiClock, FiRefreshCw, FiPlus } from 'react-icons/fi';
 import type { Workspace } from '../types/workspace.types';
 import { formatDate } from '@/shared/lib/utils';
+import { useJobStore } from '@/shared/stores/jobStore';
 
 interface WorkspaceCardProps {
   workspace: Workspace;
@@ -15,30 +17,62 @@ export default function WorkspaceCard({
 }: WorkspaceCardProps) {
   const router = useRouter();
 
+  const handleOpen = () => {
+    useJobStore.setState({ workspaceFilter: workspace.id });
+    router.push('/jobs');
+  };
+
+  const handleNewJob = () => {
+    useJobStore.setState({ workspaceFilter: workspace.id });
+    router.push('/jobs/new');
+  };
+
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
-      <h3
-        className="cursor-pointer text-lg font-semibold text-gray-900 hover:text-gray-600"
-        onClick={() => router.push(`/schedule?workspaceId=${workspace.id}`)}
-      >
-        {workspace.name}
-      </h3>
-      <p className="mt-1 text-sm text-gray-500">{workspace.jobsCount} jobs</p>
-      <p className="mt-1 text-xs text-gray-400">
-        Created {formatDate(workspace.createdAt)}
-      </p>
+    <div className="rounded-[5px] border border-neutral-800 bg-[#2A2A2A] p-5 transition-colors hover:border-neutral-700">
+      <div className="flex items-start justify-between">
+        <h3
+          className="cursor-pointer text-[15px] font-medium text-white/90 hover:text-white transition-colors"
+          onClick={handleOpen}
+        >
+          {workspace.name}
+        </h3>
+        <span className="text-[11px] text-neutral-500 bg-neutral-800 px-2 py-0.5 rounded-[3px]">
+          {workspace.jobsCount} {workspace.jobsCount === 1 ? 'job' : 'jobs'}
+        </span>
+      </div>
+
+      <div className="mt-3 space-y-1.5">
+        <div className="flex items-center gap-1.5 text-[11px] text-neutral-500">
+          <FiClock size={11} />
+          <span>Created {formatDate(workspace.createdAt)}</span>
+        </div>
+        {workspace.updatedAt && workspace.updatedAt !== workspace.createdAt && (
+          <div className="flex items-center gap-1.5 text-[11px] text-neutral-500">
+            <FiRefreshCw size={11} />
+            <span>Updated {formatDate(workspace.updatedAt)}</span>
+          </div>
+        )}
+      </div>
+
       <div className="mt-4 flex items-center gap-2">
         <button
-          onClick={() => router.push(`/schedule?workspaceId=${workspace.id}`)}
-          className="cursor-pointer rounded-lg border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+          onClick={handleOpen}
+          className="cursor-pointer border border-[#393939] px-3 py-1.5 text-[12px] font-light text-white/90 rounded-[3px] transition-colors hover:bg-neutral-800"
         >
           Open
         </button>
         <button
-          onClick={() => onDelete(workspace.id)}
-          className="cursor-pointer rounded-lg border border-red-200 px-3 py-1.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
+          onClick={handleNewJob}
+          className="cursor-pointer border border-[#393939] px-3 py-1.5 text-[12px] font-light text-white/90 rounded-[3px] transition-colors hover:bg-neutral-800 flex items-center gap-1"
         >
-          Delete
+          <FiPlus size={12} />
+          New Job
+        </button>
+        <button
+          onClick={() => onDelete(workspace.id)}
+          className="cursor-pointer border border-[#393939] px-3 py-1.5 text-[12px] font-light text-neutral-400 rounded-[3px] transition-colors hover:bg-neutral-800 hover:text-red-400 hover:border-red-500/50"
+        >
+          <FiTrash2 size={12} />
         </button>
       </div>
     </div>

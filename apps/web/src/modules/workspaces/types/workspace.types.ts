@@ -3,6 +3,7 @@ export interface Workspace {
   name: string;
   jobsCount: number;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface CreateWorkspaceInput {

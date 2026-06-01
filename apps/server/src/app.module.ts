@@ -6,6 +6,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { ThrottlerStorageRedisService } from '@nest-lab/throttler-storage-redis';
 import Redis from 'ioredis';
+import { getRedisConfig } from './config/redis.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
@@ -27,23 +28,11 @@ import { ExecutionsModule } from './modules/executions/executions.module';
       envFilePath: '.env',
     }),
     BullModule.forRoot({
-      connection: {
-        host: process.env.UPSTASH_REDIS_HOST,
-        port: 6379,
-        password: process.env.UPSTASH_REDIS_TOKEN,
-        tls: {},
-      },
+      connection: getRedisConfig(),
     }),
     ThrottlerModule.forRoot({
       throttlers: [{ ttl: 60000, limit: 100 }],
-      storage: new ThrottlerStorageRedisService(
-        new Redis({
-          host: process.env.UPSTASH_REDIS_HOST,
-          port: 6379,
-          password: process.env.UPSTASH_REDIS_TOKEN,
-          tls: {},
-        }),
-      ),
+      storage: new ThrottlerStorageRedisService(new Redis(getRedisConfig())),
     }),
     ScheduleModule.forRoot(),
     PrismaModule,

@@ -14,6 +14,7 @@ import {
   FiActivity,
   FiTrendingUp,
   FiBook,
+  FiCalendar,
 } from 'react-icons/fi';
 import { cn } from '@/shared/lib/utils';
 import { useAuthStore } from '@/modules/auth';
@@ -22,6 +23,7 @@ import { BiSolidSquare, BiUnite } from 'react-icons/bi';
 const NAV_ITEMS = [
   { label: 'Overview', href: '/dashboard', icon: FiLayout },
   { label: 'Cron Jobs', href: '/jobs', icon: FiClock },
+  { label: 'Schedule', href: '/schedule', icon: FiCalendar },
   { label: 'Executions', href: '/executions', icon: FiActivity },
   { label: 'Analytics', href: '/analytics', icon: FiTrendingUp },
   { label: 'Workspaces', href: '/workspaces', icon: FiGrid },
@@ -90,7 +92,8 @@ export default function Sidebar() {
             const getSliderY = (index: number) => {
               let y = index * 40;
               if (index > 1) y += 4;
-              if (index > 4) y += 4;
+              if (index > 5) y += 4;
+              if (index > 7) y += 4;
               return y;
             };
 
@@ -142,7 +145,7 @@ export default function Sidebar() {
                         />
                         <span>{item.label}</span>
                       </Link>
-                      {(idx === 1 || idx === 4 || idx === 6) && (
+                      {(idx === 1 || idx === 5 || idx === 7) && (
                         <div className=" border-b  border-white/20 border-dashed  mx-1 z-10" />
                       )}
                     </React.Fragment>

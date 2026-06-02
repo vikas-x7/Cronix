@@ -2,7 +2,6 @@
 
 import React, { Suspense } from 'react';
 import Link from 'next/link';
-import { IoAdd } from 'react-icons/io5';
 import {
   FiPause,
   FiPlay,
@@ -117,12 +116,6 @@ function JobsPageContent() {
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
       <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
         <h1 className="text-[20px] -tracking-[1px] text-white">Cron Jobs</h1>
-        <Link href="/jobs/new">
-          <button className="bg-[#252525] border border-white/5 rounded-[2px] text-white/90 px-2 py-1.5 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-neutral-200 transition">
-            <IoAdd size={18} />
-            New Cron Job
-          </button>
-        </Link>
       </div>
       <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh]">
         <div className="px-6 py-6 pb-4 border-b border-neutral-800">
@@ -162,14 +155,8 @@ function JobsPageContent() {
               <FiClock className="text-neutral-600 mb-3" size={28} />
               <p className="text-[14px] text-neutral-500">No cron jobs found</p>
               <p className="text-[12px] text-neutral-600 mt-1">
-                Create your first job to get started
+                No cron jobs yet
               </p>
-              <Link href="/jobs/new">
-                <button className="mt-4 border border-white px-4 py-2 text-[12px] text-white hover:bg-white hover:text-black transition flex items-center gap-1">
-                  <IoAdd size={16} />
-                  Create job
-                </button>
-              </Link>
             </div>
           ) : (
             <div className="border border-neutral-800">

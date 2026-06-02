@@ -14,6 +14,7 @@ export default function SettingsPage() {
   const logout = useLogout();
   const { data: jobs } = useJobs();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const { theme, toggleTheme } = useThemeStore();
   const jobsCreatedCount = jobs?.length || 0;
 
@@ -28,15 +29,16 @@ export default function SettingsPage() {
             <div className="h-32 bg-neutral-900 w-full" />
             <div className="px-6 pb-6 relative">
               <div className="relative -mt-12 h-24 w-24">
-                {user?.avatar ? (
+                {user?.avatar && !imageError ? (
                   <img
-                    src={user.avatar}
-                    alt={user.name || 'User'}
+                    src={user!.avatar}
+                    alt={user!.name || 'User'}
                     className="h-24 w-24 rounded object-cover "
+                    onError={() => setImageError(true)}
                   />
                 ) : (
                   <div className="h-24 w-24 rounded-2xl bg-neutral-800  flex items-center justify-center text-4xl font-semibold text-neutral-400">
-                    {user?.name?.charAt(0).toUpperCase() || 'U'}
+                    {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                   </div>
                 )}
               </div>

@@ -129,7 +129,7 @@ export default function DashboardHome() {
           </div>
         </div>
 
-        <div className="px-6 py-4 flex flex-col h-[calc(100vh-400px)] min-h-[400px]">
+        <div className="px-6 py-4 flex flex-col h-[calc(100vh-400px)] min-h-[445px]">
           <h2 className="text-[14px] font-medium text-white mb-4">
             Recent Executions
           </h2>
@@ -145,8 +145,8 @@ export default function DashboardHome() {
               </p>
             </div>
           ) : (
-            <div className="border border-neutral-800 flex flex-col flex-1 overflow-hidden">
-              <div className="grid grid-cols-12 px-4 py-2.5 bg-[#171717] border-b border-neutral-800 text-[12px] font-medium text-neutral-400 sticky top-0 z-10">
+            <div className="border border-neutral-800 flex flex-col flex-1 overflow-hidden rounded-[5px]">
+              <div className="grid grid-cols-12 px-4 py-2.5 bg-[#2A2A2A] border-b border-neutral-800 text-[12px] font-medium text-white/90 sticky top-0 z-10">
                 <div className="col-span-3">Job</div>
                 <div className="col-span-3">Status</div>
                 <div className="col-span-2">Trigger</div>
@@ -166,7 +166,7 @@ export default function DashboardHome() {
                     className="grid grid-cols-12 items-center px-4 py-2.5 border-b border-neutral-800/50 last:border-0 hover:bg-neutral-900/30 transition"
                   >
                     <div className="col-span-3">
-                      <p className="text-[13px] font-medium text-white truncate">
+                      <p className="text-[13px] font-light   text-white/80 truncate">
                         {exec.jobName ?? '—'}
                       </p>
                     </div>
@@ -190,7 +190,7 @@ export default function DashboardHome() {
                 ))}
               </div>
 
-              <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-800 sticky bottom-0 z-10 bg-[#171717]">
+              <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-800 sticky bottom-0 z-10">
                 <p className="text-[12px] text-neutral-500">
                   Page <span className="text-white font-medium">{page}</span>
                 </p>

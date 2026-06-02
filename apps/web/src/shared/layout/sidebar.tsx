@@ -36,7 +36,19 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
+  const [imageError, setImageError] = useState(false);
   const user = useAuthStore((s) => s.user);
+
+  const getInitials = (name?: string) => {
+    if (!name) return 'U';
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) {
+      return (
+        ((parts[0]?.[0] ?? '') + (parts[1]?.[0] ?? '')).toUpperCase() || 'U'
+      );
+    }
+    return name.slice(0, 2).toUpperCase();
+  };
 
   return (
     <>
@@ -99,6 +111,20 @@ export default function Sidebar() {
 
             return (
               <>
+                <motion.div
+                  className="absolute left-2 right-2 h-[36px] bg-[#202020] rounded-[3px] z-0"
+                  initial={false}
+                  animate={{
+                    y: getSliderY(activeIndex),
+                  }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 400,
+                    damping: 35,
+                    mass: 0.8,
+                  }}
+                />
+
                 {hoveredIndex !== -1 && hoveredIndex !== activeIndex && (
                   <motion.div
                     className="absolute left-2 right-2 h-[36px] bg-white/5 rounded-[3px] z-0"
@@ -128,7 +154,7 @@ export default function Sidebar() {
                         className={cn(
                           'relative flex items-center h-[36px] gap-2 px-2 text-[13px] tracking-[-0.25px] transition-colors rounded-[3px] z-10 ',
                           isActive
-                            ? 'bg-[#202020] text-white'
+                            ? 'text-white'
                             : isHovered
                               ? 'text-white'
                               : 'text-white/90',
@@ -173,15 +199,16 @@ export default function Sidebar() {
 
         <div className=" space-y-1 p-2 ">
           <div className="flex items-center gap-2  p-1 rounded-[3px] transition-colors bg-[#1B1B1B] ">
-            {user?.avatar ? (
+            {user?.avatar && !imageError ? (
               <img
-                src={user.avatar}
-                alt={user.name || 'User'}
+                src={user!.avatar}
+                alt={user!.name || 'User'}
                 className="h-8 w-8 rounded-[2px] object-cover"
+                onError={() => setImageError(true)}
               />
             ) : (
-              <div className="h-7 w-7 rounded-full bg-neutral-700 flex items-center justify-center text-[12px] font-medium text-white shrink-0">
-                {user?.name?.charAt(0)?.toUpperCase() || 'U'}
+              <div className="h-8 w-8 rounded-[2px] bg-neutral-700 flex items-center justify-center text-[12px] font-medium text-white shrink-0">
+                {getInitials(user?.name)}
               </div>
             )}
             <div className="min-w-0 flex-1">

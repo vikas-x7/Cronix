@@ -7,6 +7,7 @@ import {
   FiChevronDown,
   FiPause,
   FiRefreshCw,
+  FiSearch,
 } from 'react-icons/fi';
 import { useExecutions } from '@/modules/executions';
 import StatusBadge from '@/shared/components/status-badge';
@@ -17,8 +18,17 @@ export default function ExecutionsList() {
   const [statusFilter, setStatusFilter] = useState<
     'all' | 'SUCCESS' | 'FAILED'
   >('all');
+  const [triggerFilter, setTriggerFilter] = useState<
+    'all' | 'SCHEDULED' | 'MANUAL' | 'WEBHOOK'
+  >('all');
+  const [timeFilter, setTimeFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
+  const [triggerDropdownOpen, setTriggerDropdownOpen] = useState(false);
+  const [timeDropdownOpen, setTimeDropdownOpen] = useState(false);
   const statusDropdownRef = useRef<HTMLDivElement>(null);
+  const triggerDropdownRef = useRef<HTMLDivElement>(null);
+  const timeDropdownRef = useRef<HTMLDivElement>(null);
   const limit = 20;
 
   useEffect(() => {
@@ -28,6 +38,16 @@ export default function ExecutionsList() {
         !statusDropdownRef.current.contains(e.target as Node)
       )
         setStatusDropdownOpen(false);
+      if (
+        triggerDropdownRef.current &&
+        !triggerDropdownRef.current.contains(e.target as Node)
+      )
+        setTriggerDropdownOpen(false);
+      if (
+        timeDropdownRef.current &&
+        !timeDropdownRef.current.contains(e.target as Node)
+      )
+        setTimeDropdownOpen(false);
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -35,7 +55,7 @@ export default function ExecutionsList() {
 
   useEffect(() => {
     setPage(1);
-  }, [statusFilter]);
+  }, [statusFilter, triggerFilter, timeFilter]);
 
   const apiStatus = statusFilter === 'all' ? undefined : statusFilter;
 
@@ -65,6 +85,30 @@ export default function ExecutionsList() {
   const meta = data?.meta;
   const totalPages = meta?.totalPages ?? 1;
   const total = meta?.total ?? 0;
+
+  const filteredExecs = allExecs.filter((exec) => {
+    if (triggerFilter !== 'all' && exec.trigger !== triggerFilter) return false;
+    if (
+      searchQuery &&
+      !exec.job?.name?.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+      return false;
+    if (timeFilter !== 'all') {
+      const now = Date.now();
+      const execTime = new Date(exec.startedAt).getTime();
+      const diff = now - execTime;
+      const limits: Record<string, number> = {
+        '1h': 60 * 60 * 1000,
+        '6h': 6 * 60 * 60 * 1000,
+        '12h': 12 * 60 * 60 * 1000,
+        '1d': 24 * 60 * 60 * 1000,
+        '7d': 7 * 24 * 60 * 60 * 1000,
+        '30d': 30 * 24 * 60 * 60 * 1000,
+      };
+      if (limits[timeFilter] && diff > limits[timeFilter]) return false;
+    }
+    return true;
+  });
 
   return (
     <div className="w-full h-screen flex flex-col bg-[#0D0D0D] overflow-hidden">
@@ -111,6 +155,81 @@ export default function ExecutionsList() {
                 </div>
               )}
             </div>
+            <div className="relative" ref={triggerDropdownRef}>
+              <button
+                onClick={() => setTriggerDropdownOpen(!triggerDropdownOpen)}
+                className="flex items-center gap-2 px-2 p-0.75 border border-[#393939] text-[13px] rounded-[3px] font-light text-white/90 hover:bg-neutral-800 transition-colors cursor-pointer outline-none min-w-[120px]"
+              >
+                {triggerFilter === 'all'
+                  ? 'All Triggers'
+                  : triggerFilter === 'SCHEDULED'
+                    ? 'Scheduled'
+                    : triggerFilter === 'MANUAL'
+                      ? 'Manual'
+                      : 'Webhook'}
+                <FiChevronDown
+                  size={14}
+                  className={`ml-auto transition-transform ${triggerDropdownOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              {triggerDropdownOpen && (
+                <div className="absolute top-full left-0 mt-1 w-full bg-neutral-900 border border-[#393939] rounded-[3px] z-50 overflow-hidden">
+                  {[
+                    { value: 'all', label: 'All Triggers' },
+                    { value: 'SCHEDULED', label: 'Scheduled' },
+                    { value: 'MANUAL', label: 'Manual' },
+                    { value: 'WEBHOOK', label: 'Webhook' },
+                  ].map((opt) => (
+                    <button
+                      key={opt.value}
+                      onClick={() => {
+                        setTriggerFilter(opt.value as any);
+                        setTriggerDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-1.5 text-[13px] font-light transition-colors cursor-pointer ${triggerFilter === opt.value ? 'bg-white/10 text-white' : 'text-white/70 hover:bg-neutral-800 hover:text-white'}`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="relative" ref={timeDropdownRef}>
+              <button
+                onClick={() => setTimeDropdownOpen(!timeDropdownOpen)}
+                className="flex items-center gap-2 px-2 p-0.75 border border-[#393939] text-[13px] rounded-[3px] font-light text-white/90 hover:bg-neutral-800 transition-colors cursor-pointer outline-none min-w-[120px]"
+              >
+                {timeFilter === 'all' ? 'All Time' : `Last ${timeFilter}`}
+                <FiChevronDown
+                  size={14}
+                  className={`ml-auto transition-transform ${timeDropdownOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              {timeDropdownOpen && (
+                <div className="absolute top-full left-0 mt-1 w-full bg-neutral-900 border border-[#393939] rounded-[3px] z-50 overflow-hidden">
+                  {[
+                    { value: 'all', label: 'All Time' },
+                    { value: '1h', label: 'Last 1 hour' },
+                    { value: '6h', label: 'Last 6 hours' },
+                    { value: '12h', label: 'Last 12 hours' },
+                    { value: '1d', label: 'Last 1 day' },
+                    { value: '7d', label: 'Last 7 days' },
+                    { value: '30d', label: 'Last 30 days' },
+                  ].map((opt) => (
+                    <button
+                      key={opt.value}
+                      onClick={() => {
+                        setTimeFilter(opt.value);
+                        setTimeDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-1.5 text-[13px] font-light transition-colors cursor-pointer ${timeFilter === opt.value ? 'bg-white/10 text-white' : 'text-white/70 hover:bg-neutral-800 hover:text-white'}`}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             <button
               onClick={() => refetch()}
               disabled={isFetching}
@@ -122,9 +241,19 @@ export default function ExecutionsList() {
               />
               Refresh
             </button>
+            <div className="flex items-center gap-2 border border-[#393939] rounded-[3px] px-2 p-0.75 ml-auto">
+              <FiSearch size={14} className="text-white/50" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search executions..."
+                className="text-[13px] font-light text-white/90 outline-none w-60 transition placeholder:text-neutral-500"
+              />
+            </div>
           </div>
         </div>
-        {!allExecs.length ? (
+        {!filteredExecs.length ? (
           <div className="border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center">
             <FiPause className="text-neutral-500 mb-2" size={24} />
             <p className="text-[16px] tracking-normal text-white">
@@ -147,7 +276,7 @@ export default function ExecutionsList() {
             </div>
             <div className="flex-1 overflow-y-auto slim-scrollbar min-h-0">
               {isFetching
-                ? Array.from({ length: 8 }).map((_, i) => (
+                ? Array.from({ length: limit }).map((_, i) => (
                     <div
                       key={`skeleton-${i}`}
                       className="grid grid-cols-12 items-center py-2.5 border-b border-neutral-800/50 px-4"
@@ -169,7 +298,7 @@ export default function ExecutionsList() {
                       </div>
                     </div>
                   ))
-                : allExecs.map((exec) => (
+                : filteredExecs.map((exec) => (
                     <div
                       key={exec.id}
                       className="grid grid-cols-12 items-center px-5 py-2.5 border-b border-neutral-800/50 last:border-0 cursor-pointer"

@@ -78,7 +78,7 @@ export default function ExecutionsPage() {
         ) : (
           <div className="p-6">
             <ExecutionTable
-              executions={executions ?? []}
+              executions={executions?.items ?? []}
               onSelect={setSelected}
             />
           </div>

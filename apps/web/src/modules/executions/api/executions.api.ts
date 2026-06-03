@@ -10,12 +10,17 @@ interface PaginatedResponse<T> {
 export async function getExecutions(params?: {
   jobId?: string;
   status?: string;
-}): Promise<Execution[]> {
+  page?: number;
+  limit?: number;
+}): Promise<{
+  items: Execution[];
+  meta: { total: number; page: number; limit: number; totalPages: number };
+}> {
   const response = await api.get<{ data: PaginatedResponse<Execution> }>(
     API_ROUTES.EXECUTIONS.BASE,
     { params },
   );
-  return response.data.data.items;
+  return response.data.data;
 }
 
 export async function getExecution(id: string): Promise<Execution> {

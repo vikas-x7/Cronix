@@ -93,7 +93,7 @@ export default function JobDetailPage() {
       </div>
     );
 
-  const jobExecutions = executions ?? [];
+  const jobExecutions = executions?.items ?? [];
 
   return (
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">

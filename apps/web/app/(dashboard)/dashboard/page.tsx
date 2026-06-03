@@ -33,7 +33,7 @@ export default function DashboardHome() {
     return (
       <div className="w-full h-screen bg-neutral-950">
         <div className="border-b px-4 py-3 border-neutral-800">
-          <h1 className="text-[20px] tracking-[-1px] text-white">Overview</h1>
+          <h1 className="text-[20px] tracking-[-1px] text-white"> Overview</h1>
         </div>
         <div className="flex items-center justify-center h-64">
           <p className="text-[13px] text-neutral-500">
@@ -49,11 +49,11 @@ export default function DashboardHome() {
   return (
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
       <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
-        <h1 className="text-[20px] -tracking-[1px] text-white">Overview</h1>
+        <h1 className="text-[20px] -tracking-[1px] text-white"> Overview</h1>
         <Link href="/jobs/new">
           <button className="bg-[#252525] border border-white/5 rounded-[2px] text-white/90 px-2 py-1.5 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-neutral-200 transition">
             <IoAdd size={18} />
-            Schedule New Job
+            Schedule New job
           </button>
         </Link>
       </div>
@@ -155,11 +155,6 @@ export default function DashboardHome() {
               </div>
 
               <div className="flex-1 overflow-y-auto slim-scrollbar relative">
-                {isFetching && (
-                  <div className="absolute inset-0 bg-neutral-950/60 backdrop-blur-[1px] flex items-center justify-center z-10">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  </div>
-                )}
                 {recentExecs.map((exec) => (
                   <div
                     key={exec.id}
@@ -198,7 +193,7 @@ export default function DashboardHome() {
                   <button
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                     disabled={page === 1}
-                    className="px-3 py-1 text-[12px] border border-neutral-700 bg-neutral-900 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
+                    className="px-3 py-1 text-[12px] rounded-[3px]  text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
                   >
                     <FiChevronLeft size={14} />
                     Previous
@@ -206,7 +201,7 @@ export default function DashboardHome() {
                   <button
                     onClick={() => setPage((p) => p + 1)}
                     disabled={!recentExecs.length || recentExecs.length < limit}
-                    className="px-3 py-1 text-[12px] border border-neutral-700 bg-neutral-900 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
+                    className="px-3 py-1 text-[12px] rounded-[3px]  text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-neutral-800 transition flex items-center gap-1 cursor-pointer"
                   >
                     Next
                     <FiChevronRight size={14} />

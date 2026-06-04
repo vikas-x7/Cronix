@@ -58,7 +58,6 @@ export class JobProcessor extends WorkerHost {
         data: {
           status: isSuccess ? 'SUCCESS' : 'FAILED',
           httpStatus: response.status,
-          response: isSuccess ? (response.data ?? null) : null,
           error: isSuccess
             ? null
             : `HTTP ${response.status}: ${JSON.stringify(response.data ?? '')}`,

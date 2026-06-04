@@ -12,6 +12,7 @@ import {
 import { useExecutions } from '@/modules/executions';
 import StatusBadge from '@/shared/components/status-badge';
 import PageLoader from '@/shared/components/page-loader';
+import ExecutionDetail from './execution-detail';
 
 export default function ExecutionsList() {
   const [page, setPage] = useState(1);
@@ -29,6 +30,9 @@ export default function ExecutionsList() {
   const statusDropdownRef = useRef<HTMLDivElement>(null);
   const triggerDropdownRef = useRef<HTMLDivElement>(null);
   const timeDropdownRef = useRef<HTMLDivElement>(null);
+  const [selectedExecution, setSelectedExecution] = useState<string | null>(
+    null,
+  );
   const limit = 20;
 
   useEffect(() => {
@@ -71,7 +75,7 @@ export default function ExecutionsList() {
     return (
       <div className="w-full h-screen bg-[#0D0D0D]">
         <div className="py-3 bg-[#0D0D0D]">
-          <h1 className="text-[20px] -tracking-[1px] text-white">Executions</h1>
+          <h1 className="text-[20px] tracking-[-1px] text-white">Executions</h1>
         </div>
         <div className="flex items-center justify-center h-64">
           <p className="text-[13px] text-neutral-500">
@@ -301,10 +305,11 @@ export default function ExecutionsList() {
                 : filteredExecs.map((exec) => (
                     <div
                       key={exec.id}
-                      className="grid grid-cols-12 items-center px-5 py-2.5 border-b border-neutral-800/50 last:border-0 cursor-pointer"
+                      onClick={() => setSelectedExecution(exec.id)}
+                      className="grid grid-cols-12 items-center px-5 py-2.5 border-b border-neutral-800/50 last:border-0 cursor-pointer hover:bg-white/5 transition-colors"
                     >
                       <div className="col-span-3">
-                        <p className="text-[13px] font-medium text-white/90 truncate">
+                        <p className="text-[13px] text-white/90 truncate">
                           {exec.job?.name ?? '—'}
                         </p>
                       </div>
@@ -361,7 +366,7 @@ export default function ExecutionsList() {
                     <button
                       key={p}
                       onClick={() => setPage(p as number)}
-                      className={`w-7 h-7 text-[12px] rounded-[4px] transition-colors cursor-pointer ${page === p ? 'bg-neutral-700 text-white font-medium border border-neutral-600' : 'text-neutral-400 hover:text-white hover:bg-neutral-800'}`}
+                      className={`w-6 h-6 text-[12px] rounded-[2px] transition-colors cursor-pointer ${page === p ? 'bg-neutral-700 text-white font-medium border border-neutral-600' : 'text-neutral-400 hover:text-white hover:bg-neutral-800'}`}
                     >
                       {p}
                     </button>
@@ -379,6 +384,10 @@ export default function ExecutionsList() {
           </div>
         )}
       </div>
+      <ExecutionDetail
+        executionId={selectedExecution}
+        onClose={() => setSelectedExecution(null)}
+      />
     </div>
   );
 }

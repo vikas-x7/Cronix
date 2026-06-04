@@ -13,7 +13,15 @@ export interface Execution {
   duration: number;
   startedAt: string;
   finishedAt?: string;
-  job: { id: string; name: string };
+  job: {
+    id: string;
+    name: string;
+    method?: string;
+    endpoint?: string;
+    body?: Record<string, unknown>;
+    headers?: Record<string, string>;
+    workspace?: { id: string; name: string };
+  };
 }
 
 export interface ExecutionLog {

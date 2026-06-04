@@ -75,7 +75,7 @@ export class ExecutionsService {
       include: {
         job: {
           include: {
-            space: { select: { userId: true } },
+            space: { select: { id: true, name: true, userId: true } },
           },
         },
       },
@@ -95,12 +95,22 @@ export class ExecutionsService {
       trigger: execution.trigger,
       attempt: execution.attempt,
       httpStatus: execution.httpStatus,
-      response: execution.response,
       error: execution.error,
       duration: execution.duration,
       startedAt: execution.startedAt,
       finishedAt: execution.finishedAt,
-      job: { id: execution.job.id, name: execution.job.name },
+      job: {
+        id: execution.job.id,
+        name: execution.job.name,
+        method: execution.job.method,
+        endpoint: execution.job.endpoint,
+        body: execution.job.body,
+        headers: execution.job.headers,
+        workspace: {
+          id: execution.job.space.id,
+          name: execution.job.space.name,
+        },
+      },
     };
   }
 

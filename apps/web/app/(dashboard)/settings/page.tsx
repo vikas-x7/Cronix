@@ -16,7 +16,7 @@ export default function SettingsPage() {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [imageError, setImageError] = useState(false);
   const { theme, toggleTheme } = useThemeStore();
-  const jobsCreatedCount = jobs?.length || 0;
+  const jobsCreatedCount = jobs?.items?.length || 0;
 
   return (
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2 slim-scrollbar">

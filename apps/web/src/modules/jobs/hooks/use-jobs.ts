@@ -19,6 +19,8 @@ export function useJobs(params?: {
   workspaceId?: string;
   status?: string;
   type?: string;
+  page?: number;
+  limit?: number;
 }) {
   return useQuery({
     queryKey: ['jobs', params],

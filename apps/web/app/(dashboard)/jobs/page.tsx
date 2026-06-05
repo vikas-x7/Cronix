@@ -15,7 +15,6 @@ import {
   FiChevronLeft,
   FiChevronRight,
 } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 import { useJobs, useDeleteJob, useUpdateJob } from '@/modules/jobs';
 import { useWorkspaces } from '@/modules/workspaces';
 import { useJobStore } from '@/shared/stores/jobStore';
@@ -25,7 +24,8 @@ import PageLoader from '@/shared/components/page-loader';
 import ConfirmationModal from '@/shared/components/confirmation-modal';
 
 function JobsPageContent() {
-  const { data: jobs, isLoading, isFetching, error, refetch } = useJobs();
+  const { data, isLoading, isFetching, error, refetch } = useJobs();
+  const jobs = data?.items;
   const { data: workspaces } = useWorkspaces();
   const deleteJob = useDeleteJob();
   const updateJob = useUpdateJob();
@@ -37,7 +37,8 @@ function JobsPageContent() {
   const [workspaceFilterOpen, setWorkspaceFilterOpen] = useState(false);
   const statusDropdownRef = useRef<HTMLDivElement>(null);
   const workspaceDropdownRef = useRef<HTMLDivElement>(null);
-  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+  const [page, setPage] = useState(1);
+  const limit = 20;
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -92,6 +93,18 @@ function JobsPageContent() {
       : (workspaces?.find((w) => w.id === workspaceFilter)?.name ??
         'All Workspaces');
 
+  useEffect(() => {
+    setPage(1);
+  }, [statusFilter, workspaceFilter, searchQuery]);
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil((filteredJobs?.length ?? 0) / limit),
+  );
+  const safePage = Math.min(page, totalPages);
+  const paginatedJobs =
+    filteredJobs?.slice((safePage - 1) * limit, safePage * limit) ?? [];
+
   async function handleToggle(id: string, currentStatus: string) {
     const newStatus = currentStatus === 'ACTIVE' ? 'PAUSED' : 'ACTIVE';
     setConfirmConfig({
@@ -99,7 +112,7 @@ function JobsPageContent() {
       title: currentStatus === 'ACTIVE' ? 'Pause Cron Job' : 'Resume Cron Job',
       message: `Are you sure you want to ${newStatus === 'ACTIVE' ? 'resume' : 'pause'} this job?`,
       confirmText: currentStatus === 'ACTIVE' ? 'Pause' : 'Resume',
-      confirmButtonClass: 'bg-white text-black hover:bg-neutral-200',
+      confirmButtonClass: 'bg- text-black hover:bg-neutral-200',
       action: async () => {
         try {
           await updateJob.mutateAsync({
@@ -266,14 +279,16 @@ function JobsPageContent() {
         </div>
 
         {!filteredJobs?.length ? (
-          <div className="border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center">
-            <FiClock className="text-neutral-500 mb-2" size={24} />
-            <p className="text-[16px] tracking-normal text-white">
-              No cron jobs found
-            </p>
-            <p className="text-[12px] text-neutral-500 mt-1">
-              Create a new job to get started
-            </p>
+          <div className="p-4">
+            <div className="border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center ">
+              <FiClock className="text-neutral-500 mb-2" size={24} />
+              <p className="text-[16px] tracking-normal text-white">
+                No cron jobs found
+              </p>
+              <p className="text-[12px] text-neutral-500 mt-1">
+                Create a new job to get started
+              </p>
+            </div>
           </div>
         ) : (
           <div className="flex flex-col flex-1 min-h-0">
@@ -285,13 +300,10 @@ function JobsPageContent() {
                 <div className="col-span-1">Method</div>
                 <div className="col-span-2">Schedule</div>
                 <div className="col-span-1">Status</div>
-                <div className="col-span-2 text-right">Actions</div>
+                <div className="col-span-2 ml-30">Actions</div>
               </div>
             </div>
-            <div
-              className="flex-1 overflow-y-auto slim-scrollbar min-h-0 relative"
-              onMouseLeave={() => setHoveredRow(null)}
-            >
+            <div className="flex-1 overflow-y-auto slim-scrollbar min-h-0 relative">
               {isFetching
                 ? Array.from({ length: 10 }).map((_, i) => (
                     <div
@@ -321,24 +333,11 @@ function JobsPageContent() {
                       </div>
                     </div>
                   ))
-                : filteredJobs.map((job, idx) => (
+                : paginatedJobs.map((job, idx) => (
                     <div
                       key={job.id}
-                      onMouseEnter={() => setHoveredRow(idx)}
-                      className="grid grid-cols-12 items-center px-5 py-3 border-b border-neutral-800/50 last:border-0 cursor-pointer relative z-10"
+                      className="grid grid-cols-12 items-center px-5 py-3 border-b border-neutral-800/50 last:border-0 cursor-pointer relative z-10 hover:bg-white/5 transition-colors duration-150"
                     >
-                      {hoveredRow === idx && (
-                        <motion.div
-                          layoutId="job-hover"
-                          className="absolute inset-0 bg-white/5 rounded-[3px] z-0"
-                          transition={{
-                            type: 'spring',
-                            stiffness: 400,
-                            damping: 35,
-                            mass: 0.8,
-                          }}
-                        />
-                      )}
                       <div className="col-span-2 relative z-10">
                         <Link href={`/jobs/${job.id}`}>
                           <p className="text-[13px] text-white/90 truncate hover:underline">
@@ -357,6 +356,8 @@ function JobsPageContent() {
                       <div className="col-span-2 relative z-10">
                         <a
                           href={job.endpoint}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="text-[11px] text-blue-400 truncate flex items-center gap-1"
                         >
                           {job.endpoint}
@@ -388,7 +389,7 @@ function JobsPageContent() {
                         <button
                           onClick={() => handleToggle(job.id, job.status)}
                           title={job.status === 'ACTIVE' ? 'Pause' : 'Resume'}
-                          className={`p-1.5 border transition ${job.status === 'ACTIVE' ? 'border-neutral-700 text-neutral-400 hover:text-amber-400 hover:border-amber-500/50' : 'border-neutral-700 text-neutral-400 hover:text-emerald-400 hover:border-emerald-500/50'}`}
+                          className={`p-1.5 border transition rounded-[3px] cursor-pointer ${job.status === 'ACTIVE' ? 'border-neutral-700 text-neutral-400 hover:text-amber-400 hover:border-amber-500/50' : 'border-neutral-700 text-neutral-400 hover:text-emerald-400 hover:border-emerald-500/50'}`}
                         >
                           {job.status === 'ACTIVE' ? (
                             <FiPause size={12} />
@@ -399,14 +400,14 @@ function JobsPageContent() {
                         <button
                           onClick={() => handleDelete(job.id)}
                           title="Delete"
-                          className="p-1.5 border border-neutral-700 text-neutral-400 hover:text-red-400 hover:border-red-500/50 transition"
+                          className="p-1.5 border cursor-pointer rounded-[3px] border-neutral-700 text-neutral-400 hover:text-red-400 hover:border-red-500/50 transition"
                         >
                           <FiTrash2 size={12} />
                         </button>
                         <Link href={`/jobs/${job.id}`}>
                           <button
                             title="Details"
-                            className="p-1.5 border border-neutral-700 text-neutral-400 hover:text-white hover:border-white/50 transition"
+                            className="p-1.5 rounded-[3px] cursor-pointer border border-neutral-700 text-neutral-400 hover:text-white hover:border-white/50 transition"
                           >
                             <FiMoreVertical size={12} />
                           </button>
@@ -415,6 +416,57 @@ function JobsPageContent() {
                     </div>
                   ))}
             </div>
+          </div>
+        )}
+
+        {filteredJobs && filteredJobs.length > 0 && (
+          <div className="flex items-center justify-center px-4 py-3 border-t border-neutral-800 shrink-0 gap-1">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={safePage === 1}
+              className="flex items-center gap-1 px-3 py-1.5 text-[12px] text-neutral-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+            >
+              <FiChevronLeft size={13} /> Previous
+            </button>
+            {(() => {
+              const pages: (number | '...')[] = [];
+              if (totalPages <= 7) {
+                for (let i = 1; i <= totalPages; i++) pages.push(i);
+              } else {
+                pages.push(1);
+                if (safePage > 3) pages.push('...');
+                const start = Math.max(2, safePage - 1);
+                const end = Math.min(totalPages - 1, safePage + 1);
+                for (let i = start; i <= end; i++) pages.push(i);
+                if (safePage < totalPages - 2) pages.push('...');
+                pages.push(totalPages);
+              }
+              return pages.map((p, i) =>
+                p === '...' ? (
+                  <span
+                    key={`ellipsis-${i}`}
+                    className="px-2 py-1.5 text-[12px] text-neutral-500"
+                  >
+                    ...
+                  </span>
+                ) : (
+                  <button
+                    key={p}
+                    onClick={() => setPage(p as number)}
+                    className={`w-6 h-6 text-[12px] rounded-[2px] transition-colors cursor-pointer ${safePage === p ? 'bg-neutral-700 text-white font-medium border border-neutral-600' : 'text-neutral-400 hover:text-white hover:bg-neutral-800'}`}
+                  >
+                    {p}
+                  </button>
+                ),
+              );
+            })()}
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              disabled={safePage >= totalPages}
+              className="flex items-center gap-1 px-3 py-1.5 text-[12px] text-neutral-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+            >
+              Next <FiChevronRight size={13} />
+            </button>
           </div>
         )}
       </div>

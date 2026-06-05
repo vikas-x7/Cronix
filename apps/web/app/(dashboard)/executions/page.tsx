@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
 import {
   FiChevronLeft,
   FiChevronRight,
@@ -34,7 +33,6 @@ export default function ExecutionsList() {
   const [selectedExecution, setSelectedExecution] = useState<string | null>(
     null,
   );
-  const [hoveredRow, setHoveredRow] = useState<number | null>(null);
   const limit = 20;
 
   useEffect(() => {
@@ -280,10 +278,7 @@ export default function ExecutionsList() {
                 <div className="col-span-2">Time</div>
               </div>
             </div>
-            <div
-              className="flex-1 overflow-y-auto slim-scrollbar min-h-0 relative"
-              onMouseLeave={() => setHoveredRow(null)}
-            >
+            <div className="flex-1 overflow-y-auto slim-scrollbar min-h-0 relative">
               {isFetching
                 ? Array.from({ length: limit }).map((_, i) => (
                     <div
@@ -310,22 +305,9 @@ export default function ExecutionsList() {
                 : filteredExecs.map((exec, idx) => (
                     <div
                       key={exec.id}
-                      onMouseEnter={() => setHoveredRow(idx)}
                       onClick={() => setSelectedExecution(exec.id)}
-                      className="grid grid-cols-12 items-center px-5 py-2.5 border-b border-neutral-800/50 last:border-0 cursor-pointer relative z-10"
+                      className="grid grid-cols-12 items-center px-5 py-2.5 border-b border-neutral-800/50 last:border-0 cursor-pointer relative z-10 hover:bg-white/5 transition-colors duration-150"
                     >
-                      {hoveredRow === idx && (
-                        <motion.div
-                          layoutId="exec-hover"
-                          className="absolute inset-0 bg-white/5 rounded-[3px] z-0"
-                          transition={{
-                            type: 'spring',
-                            stiffness: 400,
-                            damping: 35,
-                            mass: 0.8,
-                          }}
-                        />
-                      )}
                       <div className="col-span-3">
                         <p className="text-[13px] text-white/90 truncate">
                           {exec.job?.name ?? '—'}

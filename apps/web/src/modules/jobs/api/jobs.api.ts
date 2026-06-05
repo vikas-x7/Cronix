@@ -11,12 +11,17 @@ export async function getJobs(params?: {
   workspaceId?: string;
   status?: string;
   type?: string;
-}): Promise<Job[]> {
+  page?: number;
+  limit?: number;
+}): Promise<{
+  items: Job[];
+  meta: { total: number; page: number; limit: number; totalPages: number };
+}> {
   const response = await api.get<{ data: PaginatedResponse<Job> }>(
     API_ROUTES.JOBS.BASE,
     { params },
   );
-  return response.data.data.items;
+  return response.data.data;
 }
 
 export async function getJob(id: string): Promise<Job> {

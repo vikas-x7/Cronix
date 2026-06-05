@@ -18,7 +18,7 @@ export default function Analytics() {
   if (statsLoading || jobsLoading) return <PageLoader />;
 
   const jobsWithExecutions =
-    jobs?.filter((j: any) => (j._count?.executions ?? 0) > 0) ?? [];
+    jobs?.items?.filter((j: any) => (j._count?.executions ?? 0) > 0) ?? [];
 
   return (
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">

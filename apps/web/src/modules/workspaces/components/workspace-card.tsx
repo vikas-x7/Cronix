@@ -4,27 +4,22 @@ import { useRouter } from 'next/navigation';
 import { FiTrash2, FiClock, FiRefreshCw, FiPlus } from 'react-icons/fi';
 import type { Workspace } from '../types/workspace.types';
 import { formatDate } from '@/shared/lib/utils';
-import { useJobStore } from '@/shared/stores/jobStore';
 
 interface WorkspaceCardProps {
   workspace: Workspace;
   onDelete: (id: string) => void;
+  onOpen: (workspace: Workspace) => void;
 }
 
 export default function WorkspaceCard({
   workspace,
   onDelete,
+  onOpen,
 }: WorkspaceCardProps) {
   const router = useRouter();
 
-  const handleOpen = () => {
-    useJobStore.setState({ workspaceFilter: workspace.id });
-    router.push('/jobs');
-  };
-
   const handleNewJob = () => {
-    useJobStore.setState({ workspaceFilter: workspace.id });
-    router.push('/jobs/new');
+    router.push(`/schedule?workspaceId=${workspace.id}`);
   };
 
   return (
@@ -32,7 +27,7 @@ export default function WorkspaceCard({
       <div className="flex items-start justify-between">
         <h3
           className="cursor-pointer text-[15px] font-medium text-white/90 hover:text-white transition-colors"
-          onClick={handleOpen}
+          onClick={() => onOpen(workspace)}
         >
           {workspace.name}
         </h3>
@@ -56,7 +51,7 @@ export default function WorkspaceCard({
 
       <div className="mt-4 flex items-center gap-2">
         <button
-          onClick={handleOpen}
+          onClick={() => onOpen(workspace)}
           className="cursor-pointer border border-[#393939] px-3 py-1.5 text-[12px] font-light text-white/90 rounded-[3px] transition-colors hover:bg-neutral-800"
         >
           Open

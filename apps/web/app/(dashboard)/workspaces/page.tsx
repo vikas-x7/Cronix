@@ -9,15 +9,20 @@ import {
   WorkspaceCard,
   CreateWorkspaceModal,
 } from '@/modules/workspaces';
+import WorkspaceDetailModal from '@/modules/workspaces/components/workspace-detail-modal';
 import PageLoader from '@/shared/components/page-loader';
 import ConfirmationModal from '@/shared/components/confirmation-modal';
 import type { CreateWorkspaceFormData } from '@/modules/workspaces/schemas/workspace.schema';
+import type { Workspace } from '@/modules/workspaces/types/workspace.types';
 
 type SortOption = 'newest' | 'oldest' | 'most-jobs' | 'name';
 
 export default function WorkspacesPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [selectedWorkspace, setSelectedWorkspace] = useState<Workspace | null>(
+    null,
+  );
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<SortOption>('newest');
   const [sortOpen, setSortOpen] = useState(false);
@@ -169,6 +174,7 @@ export default function WorkspacesPage() {
                   key={ws.id}
                   workspace={ws}
                   onDelete={(id) => setConfirmDelete(id)}
+                  onOpen={(ws) => setSelectedWorkspace(ws)}
                 />
               ))}
             </div>
@@ -199,6 +205,11 @@ export default function WorkspacesPage() {
           onCancel={() => setConfirmDelete(null)}
         />
       )}
+
+      <WorkspaceDetailModal
+        workspace={selectedWorkspace}
+        onClose={() => setSelectedWorkspace(null)}
+      />
     </div>
   );
 }

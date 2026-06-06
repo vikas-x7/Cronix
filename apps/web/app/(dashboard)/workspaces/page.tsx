@@ -92,7 +92,7 @@ export default function WorkspacesPage() {
             <div className="relative">
               <button
                 onClick={() => setSortOpen(!sortOpen)}
-                className="flex items-center gap-2 px-2 p-0.75 border border-[#393939] text-[13px] rounded-[3px] font-light text-white/90 hover:bg-neutral-800 transition-colors cursor-pointer outline-none min-w-[130px]"
+                className="flex items-center gap-2 px-2 p-1 border border-[#393939] text-[13px] rounded-[3px] font-light text-white/90 hover:bg-neutral-800 transition-colors cursor-pointer outline-none min-w-[130px]"
               >
                 {sortLabels[sortBy]}
                 <FiChevronDown
@@ -126,7 +126,7 @@ export default function WorkspacesPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search workspaces..."
-                className="text-[13px] font-light text-white/90 outline-none w-60 transition placeholder:text-neutral-500"
+                className="text-[13px] font-light text-white/90 outline-none w-60 py-1 transition placeholder:text-neutral-500"
               />
             </div>
           </div>
@@ -155,15 +155,8 @@ export default function WorkspacesPage() {
             </div>
           </div>
         ) : (
-          <div className="flex-1 overflow-y-auto slim-scrollbar min-h-0">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 p-6">
-              {filteredWorkspaces.map((ws) => (
-                <WorkspaceCard
-                  key={ws.id}
-                  workspace={ws}
-                  onDelete={(id) => setConfirmDelete(id)}
-                />
-              ))}
+          <div className="flex-1 overflow-y-auto slim-scrollbar min-h-0 p-6">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <button
                 onClick={() => setModalOpen(true)}
                 className="rounded-[5px] border border-dashed border-neutral-700 bg-transparent p-5 flex flex-col items-center justify-center min-h-[140px] text-neutral-500 hover:border-neutral-600 hover:text-neutral-400 transition-colors cursor-pointer"
@@ -171,6 +164,13 @@ export default function WorkspacesPage() {
                 <span className="text-[24px] mb-1">+</span>
                 <span className="text-[12px] font-light">New Workspace</span>
               </button>
+              {filteredWorkspaces.map((ws) => (
+                <WorkspaceCard
+                  key={ws.id}
+                  workspace={ws}
+                  onDelete={(id) => setConfirmDelete(id)}
+                />
+              ))}
             </div>
           </div>
         )}

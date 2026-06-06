@@ -22,6 +22,7 @@ import { useUIStore } from '@/shared/stores/uiStore';
 import StatusBadge from '@/shared/components/status-badge';
 import PageLoader from '@/shared/components/page-loader';
 import ConfirmationModal from '@/shared/components/confirmation-modal';
+import { IoAddSharp } from 'react-icons/io5';
 
 function JobsPageContent() {
   const { data, isLoading, isFetching, error, refetch } = useJobs();
@@ -261,8 +262,8 @@ function JobsPageContent() {
               Refresh
             </button>
             <Link href="/jobs/new">
-              <button className="flex items-center gap-2 px-3 p-0.75 border border-[#393939] text-[13px] rounded-[3px] font-light text-white/90 hover:bg-neutral-800 transition-colors cursor-pointer">
-                + New Job
+              <button className="flex items-center gap-1  px-3 p-0.75 border border-[#393939] text-[13px] rounded-[3px] font-light text-white/90 hover:bg-neutral-800 transition-colors cursor-pointer">
+                <IoAddSharp className="mb-0.5" /> New Job
               </button>
             </Link>
             <div className="flex items-center gap-2 border border-[#393939] rounded-[3px] px-2 p-0.75 ml-auto">

@@ -166,7 +166,7 @@ function ChartCard({
         delay: index * 0.12,
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
-      className="bg-[#2A2A2A] border border-neutral-800/60 rounded-[8px] p-5 flex flex-col relative"
+      className="bg-[#2A2A2A] h-[27dvw] border border-neutral-800/60 rounded-[5px] p-5 flex flex-col relative"
       style={{ zIndex: hoveredPoint !== null ? 10 : 1 }}
     >
       <div className="flex items-start justify-between mb-1">
@@ -429,14 +429,14 @@ function ChartCard({
         )}
       </div>
 
-      <div className="flex items-center gap-2 mt-2">
-        <span
-          className="w-2 h-2 rounded-full"
-          style={{ backgroundColor: color }}
-        />
-        <span className="text-[11px] text-neutral-500 uppercase tracking-wider">
+      <div className="flex items-center gap-2 mt-2 ">
+        <div className="flex items-center gap-2 mt-2 bg-white/5 px-3 text-white text-[14px] rounded-[2px] ">
+          <div
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: color }}
+          />
           Total {title}
-        </span>
+        </div>
       </div>
     </motion.div>
   );

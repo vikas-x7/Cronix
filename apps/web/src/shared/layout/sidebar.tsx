@@ -19,14 +19,15 @@ import {
 import { cn } from '@/shared/lib/utils';
 import { useAuthStore } from '@/modules/auth';
 import { BiSolidSquare, BiUnite } from 'react-icons/bi';
+import { IoAddSharp } from 'react-icons/io5';
 
 const NAV_ITEMS = [
   { label: 'Overview', href: '/dashboard', icon: FiLayout },
+  { label: 'Schedule', href: '/schedule', icon: IoAddSharp },
   { label: 'Workspaces', href: '/workspaces', icon: FiGrid },
   { label: 'Executions', href: '/executions', icon: FiActivity },
 
   { label: 'Cron Jobs', href: '/jobs', icon: FiClock },
-  { label: 'Schedule', href: '/schedule', icon: FiCalendar },
 
   { label: 'Analytics', href: '/analytics', icon: FiTrendingUp },
 
@@ -75,7 +76,7 @@ export default function Sidebar() {
 
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-40 flex w-[210px] flex-col bg-[#0D0D0D]  lg:translate-x-0',
+          'fixed inset-y-0 left-0 z-40 flex w-52.5 flex-col bg-[#0D0D0D]  lg:translate-x-0',
           mobileOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >

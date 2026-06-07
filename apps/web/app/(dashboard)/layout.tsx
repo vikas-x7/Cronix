@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { BiSolidSquare } from 'react-icons/bi';
 import Sidebar from '@/shared/layout/sidebar';
 import { useAuth } from '@/modules/auth';
+import { div } from 'framer-motion/client';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();

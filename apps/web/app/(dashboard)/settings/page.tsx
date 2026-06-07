@@ -1,10 +1,12 @@
 'use client';
 
+import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { MdVerified } from 'react-icons/md';
 import { useState } from 'react';
 import { IoIosLogOut } from 'react-icons/io';
 import { FiSun, FiMoon } from 'react-icons/fi';
+import { IoAddSharp } from 'react-icons/io5';
 import { useAuthStore, useLogout } from '@/modules/auth';
 import { useJobs } from '@/modules/jobs';
 import { useThemeStore } from '@/shared/stores/themeStore';
@@ -22,6 +24,12 @@ export default function SettingsPage() {
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2 slim-scrollbar">
       <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
         <h1 className="text-[20px] tracking-[-1px] text-white">Settings</h1>
+        <Link href="/schedule">
+          <button className="bg-white text-black px-3 py-1.5 rounded-[3px] text-[12px] font-medium flex items-center gap-1.5 hover:bg-neutral-200 transition cursor-pointer">
+            <IoAddSharp size={14} />
+            Schedule New Job
+          </button>
+        </Link>
       </div>
       <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh] overflow-y-auto slim-scrollbar">
         <div className="">

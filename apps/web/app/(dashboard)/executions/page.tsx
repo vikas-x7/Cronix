@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import {
   FiChevronLeft,
@@ -9,6 +10,7 @@ import {
   FiRefreshCw,
   FiSearch,
 } from 'react-icons/fi';
+import { IoAddSharp } from 'react-icons/io5';
 import { useExecutions } from '@/modules/executions';
 import StatusBadge from '@/shared/components/status-badge';
 import PageLoader from '@/shared/components/page-loader';
@@ -116,8 +118,14 @@ export default function ExecutionsList() {
 
   return (
     <div className="w-full h-screen flex flex-col bg-[#0D0D0D] overflow-hidden">
-      <div className="py-3 px-0 bg-[#0D0D0D] shrink-0">
+      <div className="py-3 px-0 bg-[#0D0D0D] shrink-0 flex justify-between items-center">
         <h1 className="text-[20px] tracking-[-1px] text-white"> Executions</h1>
+        <Link href="/schedule">
+          <button className="bg-white text-black px-3 py-1.5 rounded-[3px] text-[12px] font-medium flex items-center gap-1.5 hover:bg-neutral-200 transition cursor-pointer mr-2">
+            <IoAddSharp size={14} />
+            Schedule New Job
+          </button>
+        </Link>
       </div>
 
       <div className="bg-[#1F1F1F] rounded-[10px] flex flex-col flex-1 min-h-0">

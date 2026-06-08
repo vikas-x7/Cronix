@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Query,
+  Body,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../../auth/decorators/current-user.decorator';
 import { ExecutionsService } from './executions.service';
@@ -7,6 +15,23 @@ import { ExecutionsService } from './executions.service';
 @UseGuards(JwtAuthGuard)
 export class ExecutionsController {
   constructor(private readonly executionsService: ExecutionsService) {}
+
+  @Post('store')
+  async store(
+    @CurrentUser('id') userId: string,
+    @Body()
+    body: {
+      jobId: string;
+      httpStatus: number;
+      status: 'SUCCESS' | 'FAILED';
+      duration: number;
+      response?: unknown;
+      error?: string;
+    },
+  ) {
+    const data = await this.executionsService.store(userId, body);
+    return { __message: 'Execution stored', ...data };
+  }
 
   @Get()
   async findAll(

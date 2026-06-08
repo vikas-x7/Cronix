@@ -9,6 +9,69 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class ExecutionsService {
   constructor(private prisma: PrismaService) {}
 
+  async store(
+    userId: string,
+    data: {
+      jobId: string;
+      httpStatus: number;
+      status: 'SUCCESS' | 'FAILED';
+      duration: number;
+      response?: unknown;
+      error?: string;
+    },
+  ) {
+    const job = await this.prisma.job.findUnique({
+      where: { id: data.jobId },
+      include: { space: { select: { userId: true } } },
+    });
+
+    if (!job) {
+      throw new NotFoundException('Job not found');
+    }
+
+    if (job.space.userId !== userId) {
+      throw new ForbiddenException("You don't have access to this job");
+    }
+
+    const execution = await this.prisma.execution.create({
+      data: {
+        jobId: data.jobId,
+        status: data.status,
+        trigger: 'MANUAL',
+        attempt: 1,
+        httpStatus: data.httpStatus,
+        response: data.response ?? undefined,
+        error: data.error ?? undefined,
+        duration: data.duration,
+        finishedAt: new Date(),
+      },
+    });
+
+    await this.prisma.log.create({
+      data: {
+        executionId: execution.id,
+        message:
+          data.status === 'SUCCESS'
+            ? 'Manual execution completed'
+            : `Manual execution failed: ${data.error || 'HTTP ' + data.httpStatus}`,
+        level: data.status === 'SUCCESS' ? 'INFO' : 'ERROR',
+      },
+    });
+
+    return {
+      id: execution.id,
+      status: execution.status,
+      trigger: execution.trigger,
+      attempt: execution.attempt,
+      httpStatus: execution.httpStatus,
+      error: execution.error,
+      duration: execution.duration,
+      startedAt: execution.startedAt,
+      finishedAt: execution.finishedAt,
+      job: { id: job.id, name: job.name },
+    };
+  }
+
   async findAll(
     userId: string,
     jobId?: string,

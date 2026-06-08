@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { IoAdd } from 'react-icons/io5';
 import {
   FiActivity,
   FiCheckCircle,
@@ -9,6 +8,7 @@ import {
   FiClock,
   FiRefreshCw,
 } from 'react-icons/fi';
+import { IoAddSharp } from 'react-icons/io5';
 import { useDashboard } from '@/modules/dashboard';
 import StatCard from '@/shared/components/stat-card';
 import PageLoader from '@/shared/components/page-loader';
@@ -41,20 +41,9 @@ export default function DashboardHome() {
       <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
         <h1 className="text-[20px] -tracking-[1px] text-white"> Overview</h1>
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => refetch()}
-            disabled={isFetching}
-            className="bg-[#252525] border border-white/5 rounded-[2px] text-white/90 px-2 py-1.5 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-neutral-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <FiRefreshCw
-              size={14}
-              className={isFetching ? 'animate-spin' : ''}
-            />
-            Refresh
-          </button>
-          <Link href="/jobs/new">
-            <button className="bg-[#252525] border border-white/5 rounded-[2px] text-white/90 px-2 py-1.5 text-[12px] font-medium flex items-center justify-center gap-1 hover:bg-neutral-700 transition">
-              <IoAdd size={18} />
+          <Link href="/schedule">
+            <button className="bg-white/90 text-black px-3 py-1.5 rounded-[3px] text-[12px] font-medium flex items-center gap-1.5 hover:bg-neutral-200 transition cursor-pointer">
+              <IoAddSharp size={14} />
               Schedule New Job
             </button>
           </Link>

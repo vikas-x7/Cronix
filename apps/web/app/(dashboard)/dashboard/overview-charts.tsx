@@ -166,7 +166,7 @@ function ChartCard({
         delay: index * 0.12,
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
-      className="bg-[#2A2A2A] h-[27dvw] border border-neutral-800/60 rounded-[5px] p-5 flex flex-col relative"
+      className="bg-[#2A2A2A] h-[27dvw] border border-white/5 rounded-[9px] p-5 flex flex-col relative"
       style={{ zIndex: hoveredPoint !== null ? 10 : 1 }}
     >
       <div className="flex items-start justify-between mb-1">

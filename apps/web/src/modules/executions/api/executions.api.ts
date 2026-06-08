@@ -36,3 +36,18 @@ export async function getExecutionLogs(id: string): Promise<ExecutionLog[]> {
   );
   return response.data.data.logs;
 }
+
+export async function storeExecution(data: {
+  jobId: string;
+  httpStatus: number;
+  status: 'SUCCESS' | 'FAILED';
+  duration: number;
+  response?: unknown;
+  error?: string;
+}): Promise<Execution> {
+  const response = await api.post<{ data: Execution }>(
+    API_ROUTES.EXECUTIONS.STORE,
+    data,
+  );
+  return response.data.data;
+}

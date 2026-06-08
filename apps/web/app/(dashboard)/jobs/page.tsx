@@ -167,8 +167,14 @@ function JobsPageContent() {
 
   return (
     <div className="w-full h-screen flex flex-col bg-[#0D0D0D] overflow-hidden">
-      <div className="py-3 px-0 bg-[#0D0D0D] shrink-0">
+      <div className="py-3 px-0 bg-[#0D0D0D] shrink-0 flex justify-between items-center">
         <h1 className="text-[20px] tracking-[-1px] text-white">Cron Jobs</h1>
+        <Link href="/schedule">
+          <button className="bg-white text-black px-3 py-1.5 rounded-[3px] text-[12px] font-medium flex items-center gap-1.5 hover:bg-neutral-200 transition cursor-pointer mr-2">
+            <IoAddSharp size={14} />
+            Schedule New Job
+          </button>
+        </Link>
       </div>
 
       <div className="bg-[#1F1F1F] rounded-[10px] flex flex-col flex-1 min-h-0">

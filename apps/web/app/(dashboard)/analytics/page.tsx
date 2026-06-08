@@ -1,11 +1,13 @@
 'use client';
 
+import Link from 'next/link';
 import {
   FiTrendingUp,
   FiCheckCircle,
   FiXCircle,
   FiClock,
 } from 'react-icons/fi';
+import { IoAddSharp } from 'react-icons/io5';
 import { useDashboard } from '@/modules/dashboard';
 import { useJobs } from '@/modules/jobs';
 import StatCard from '@/shared/components/stat-card';
@@ -24,6 +26,12 @@ export default function Analytics() {
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
       <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
         <h1 className="text-[20px] -tracking-[1px] text-white">Analytics</h1>
+        <Link href="/schedule">
+          <button className="bg-white text-black px-3 py-1.5 rounded-[3px] text-[12px] font-medium flex items-center gap-1.5 hover:bg-neutral-200 transition cursor-pointer">
+            <IoAddSharp size={14} />
+            Schedule New Job
+          </button>
+        </Link>
       </div>
       <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-6 py-6">

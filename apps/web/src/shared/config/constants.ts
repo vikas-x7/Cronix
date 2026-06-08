@@ -22,6 +22,7 @@ export const API_ROUTES = {
   },
   EXECUTIONS: {
     BASE: '/executions',
+    STORE: '/executions/store',
     DETAIL: (id: string) => `/executions/${id}`,
     LOGS: (id: string) => `/executions/${id}/logs`,
   },

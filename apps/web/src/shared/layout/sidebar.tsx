@@ -23,8 +23,9 @@ import { IoAddSharp } from 'react-icons/io5';
 
 const NAV_ITEMS = [
   { label: 'Overview', href: '/dashboard', icon: FiLayout },
-  { label: 'Schedule', href: '/schedule', icon: IoAddSharp },
   { label: 'Workspaces', href: '/workspaces', icon: FiGrid },
+  { label: 'Schedule', href: '/schedule', icon: IoAddSharp },
+
   { label: 'Executions', href: '/executions', icon: FiActivity },
 
   { label: 'Cron Jobs', href: '/jobs', icon: FiClock },

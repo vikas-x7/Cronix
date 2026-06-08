@@ -23,10 +23,10 @@ export default function WorkspaceCard({
   };
 
   return (
-    <div className="rounded-[5px] border border-neutral-800 bg-[#2A2A2A] p-3 transition-colors hover:border-neutral-700">
+    <div className="rounded-[5px] border border-white/7 bg-[#2c2c2c] p-3 transition-colors hover:border-neutral-700">
       <div className="flex items-start justify-between">
         <h3
-          className="cursor-pointer text-[15px] font-medium text-white/90 hover:text-white transition-colors"
+          className="cursor-pointer text-[18px]  text-white hover:text-white transition-colors"
           onClick={() => onOpen(workspace)}
         >
           {workspace.name}
@@ -49,7 +49,7 @@ export default function WorkspaceCard({
         )}
       </div>
 
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-10 flex items-center gap-2">
         <button
           onClick={() => onOpen(workspace)}
           className="cursor-pointer border border-[#393939] px-3 py-1.5 text-[12px] font-light text-white/90 rounded-[3px] transition-colors hover:bg-neutral-800"

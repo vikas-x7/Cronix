@@ -21,7 +21,10 @@ type SortOption = 'newest' | 'oldest' | 'most-jobs' | 'name';
 
 export default function WorkspacesPage() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [confirmDelete, setConfirmDelete] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
   const [selectedWorkspace, setSelectedWorkspace] = useState<Workspace | null>(
     null,
   );
@@ -68,11 +71,11 @@ export default function WorkspacesPage() {
 
   if (isError) {
     return (
-      <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
+      <div className="w-full h-full overflow-y-auto bg-[#0D0D0D] pr-2">
         <div className="py-3 bg-[#0D0D0D] flex justify-between items-center">
           <h1 className="text-[20px] -tracking-[1px] text-white">Workspaces</h1>
         </div>
-        <div className="bg-[#1F1F1F] rounded-[5px] h-[92vh] flex flex-col items-center justify-center">
+        <div className="bg-[#1F1F1F] rounded-[5px] flex-1 flex flex-col min-h-0">
           <p className="text-[13px] text-neutral-500">
             Failed to load workspaces
           </p>
@@ -88,7 +91,7 @@ export default function WorkspacesPage() {
   }
 
   return (
-    <div className="w-full h-screen flex flex-col bg-[#0D0D0D] overflow-hidden">
+    <div className="w-full h-full flex flex-col bg-[#0D0D0D]">
       <div className="py-3 px-0 bg-[#0D0D0D] shrink-0 flex justify-between items-center">
         <h1 className="text-[20px] tracking-[-1px] text-white">Workspaces</h1>
         <Link href="/schedule">
@@ -168,7 +171,7 @@ export default function WorkspacesPage() {
             </div>
           </div>
         ) : (
-          <div className="flex-1 overflow-y-auto slim-scrollbar min-h-0 p-6">
+          <div className="flex-1 min-h-0 p-6 overflow-y-auto slim-scrollbar">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               <button
                 onClick={() => setModalOpen(true)}
@@ -181,7 +184,7 @@ export default function WorkspacesPage() {
                 <WorkspaceCard
                   key={ws.id}
                   workspace={ws}
-                  onDelete={(id) => setConfirmDelete(id)}
+                  onDelete={(id, name) => setConfirmDelete({ id, name })}
                   onOpen={(ws) => setSelectedWorkspace(ws)}
                 />
               ))}
@@ -204,9 +207,10 @@ export default function WorkspacesPage() {
           message="This action cannot be undone. The workspace and all its jobs will be permanently deleted."
           confirmText="Delete"
           confirmButtonClass="bg-red-600 hover:bg-red-700"
+          confirmInput={confirmDelete.name}
           onConfirm={() => {
             if (confirmDelete) {
-              deleteMutation.mutate(confirmDelete);
+              deleteMutation.mutate(confirmDelete.id);
               setConfirmDelete(null);
             }
           }}

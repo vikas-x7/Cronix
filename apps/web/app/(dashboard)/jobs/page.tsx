@@ -143,6 +143,7 @@ function JobsPageContent() {
         try {
           await deleteJob.mutateAsync(id);
           addToast({ type: 'success', message: 'Job deleted' });
+          closeConfirm();
         } catch {
           addToast({ type: 'error', message: 'Failed to delete job' });
         }

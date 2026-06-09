@@ -7,7 +7,7 @@ import { formatDate } from '@/shared/lib/utils';
 
 interface WorkspaceCardProps {
   workspace: Workspace;
-  onDelete: (id: string) => void;
+  onDelete: (id: string, name: string) => void;
   onOpen: (workspace: Workspace) => void;
 }
 
@@ -64,7 +64,7 @@ export default function WorkspaceCard({
           New Job
         </button>
         <button
-          onClick={() => onDelete(workspace.id)}
+          onClick={() => onDelete(workspace.id, workspace.name)}
           className="cursor-pointer border border-[#393939] px-3 py-2 text-[12px] font-light text-neutral-400 rounded-[3px] transition-colors hover:bg-neutral-800 hover:text-red-400 hover:border-red-500/50"
         >
           <FiTrash2 size={12} />

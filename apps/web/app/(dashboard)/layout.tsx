@@ -40,13 +40,11 @@ export default function DashboardLayout({
 }) {
   return (
     <ProtectedRoute>
-      <div className="flex font-geist-sans">
+      <div className="flex h-screen font-geist-sans">
         <div className="w-[210px] shrink-0">
           <Sidebar />
         </div>
-        <main className="h-screen w-full overflow-y-auto slim-scrollbar">
-          {children}
-        </main>
+        <main className="flex-1 min-h-0 overflow-hidden">{children}</main>
       </div>
     </ProtectedRoute>
   );

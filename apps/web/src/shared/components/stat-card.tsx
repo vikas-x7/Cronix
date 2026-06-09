@@ -24,7 +24,7 @@ export default function StatCard({
   trendValue,
 }: StatCardProps) {
   return (
-    <div className="rounded-[9px] bg-[#2A2A2A] p-5 border border-white/7">
+    <div className="rounded-[5px] bg-[#2A2A2A] p-5 border border-white/7">
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <p className="text-[12px] font-medium uppercase text-white">

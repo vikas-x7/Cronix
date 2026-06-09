@@ -10,6 +10,7 @@ interface PaginatedResponse<T> {
 export async function getWorkspaces(): Promise<Workspace[]> {
   const response = await api.get<{ data: PaginatedResponse<Workspace> }>(
     API_ROUTES.WORKSPACES.BASE,
+    { params: { limit: 1000 } },
   );
   return response.data.data.items;
 }

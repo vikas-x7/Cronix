@@ -32,7 +32,7 @@ const NAV_ITEMS = [
 
   { label: 'Analytics', href: '/analytics', icon: FiTrendingUp },
 
-  { label: 'Webhooks', href: '/webhooks', icon: FiLink },
+  { label: 'SDK', href: '/sdk', icon: FiLink, upcoming: true },
   { label: 'Documentation', href: '/documentation', icon: FiBook },
   { label: 'Settings', href: '/settings', icon: FiSettings },
 ];
@@ -175,6 +175,11 @@ export default function Sidebar() {
                           )}
                         />
                         <span>{item.label}</span>
+                        {'upcoming' in item && item.upcoming && (
+                          <span className="ml-auto text-[9px] font-medium text-[#DF5BCC] bg-[#DF5BCC]/10 px-1.5 py-0.5 rounded-[2px] leading-none">
+                            Soon
+                          </span>
+                        )}
                       </Link>
                       {(idx === 1 || idx === 5 || idx === 7) && (
                         <div className=" border-b  border-white/20 border-dashed  mx-1 z-10" />

@@ -69,14 +69,14 @@ export default function CreateWorkspaceModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-1 text-[12px] rounded-[3px] text-white bg-neutral-800 hover:bg-neutral-700 transition cursor-pointer"
+              className="px-4 py-2 text-[12px] rounded-[3px] text-white bg-neutral-800 hover:bg-neutral-700 transition cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isPending}
-              className="px-4 py-1 text-[12px] rounded-[3px] text-black bg-white hover:bg-neutral-200 transition cursor-pointer disabled:opacity-50"
+              className="px-4 py-2 text-[12px] rounded-[3px] text-black bg-white/90 hover:bg-neutral-200 transition cursor-pointer disabled:opacity-50"
             >
               {isPending ? 'Creating...' : 'Create'}
             </button>

@@ -766,7 +766,7 @@ export default function DocumentationPage() {
           Documentation
         </h1>
         <Link href="/schedule">
-          <button className="bg-white text-black px-3 py-1.5 rounded-[3px] text-[12px] font-medium flex items-center gap-1.5 hover:bg-neutral-200 transition cursor-pointer">
+          <button className="bg-white/90 text-black px-3 py-1.5 rounded-[3px] text-[12px] font-medium flex items-center gap-1.5 hover:bg-neutral-200 transition cursor-pointer">
             <IoAddSharp size={14} />
             Schedule New Job
           </button>

@@ -1,11 +1,76 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createJobSchema, type CreateJobFormData } from '../schemas/job.schema';
 import { HiOutlinePlus, HiOutlineTrash } from 'react-icons/hi2';
+import { FiChevronDown } from 'react-icons/fi';
 import type { Job } from '../types/job.types';
+
+function DarkSelect({
+  value,
+  onChange,
+  options,
+  error,
+}: {
+  value: string | number;
+  onChange: (val: string) => void;
+  options: { label: string; value: string | number }[];
+  error?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node))
+        setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const selected = options.find((o) => o.value === value);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className={`w-full appearance-none text-[13px] cursor-pointer border rounded-[3px] px-3 py-2 pr-8 text-left transition ${
+          error
+            ? 'border-red-500/50 text-neutral-500'
+            : 'border-[#393939] text-white hover:border-neutral-500'
+        }`}
+      >
+        {selected?.label || 'Select...'}
+      </button>
+      <FiChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-neutral-500" />
+      {open && (
+        <div className="absolute z-50 top-full mt-1 left-0 w-full bg-[#1A1A1A] border border-[#393939] rounded-[3px] py-1 shadow-xl max-h-60 overflow-y-auto slim-scrollbar">
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => {
+                onChange(String(opt.value));
+                setOpen(false);
+              }}
+              className={`w-full text-left px-3 py-1.5 text-[13px] transition cursor-pointer hover:bg-[#2A2A2A] ${
+                opt.value === value
+                  ? 'text-white bg-[#2A2A2A]'
+                  : 'text-neutral-300'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 interface JobFormProps {
   workspaces: { id: string; name: string }[];
@@ -114,21 +179,21 @@ export default function JobForm({
 
   if (createdJob && createdJob.type === 'EVENT') {
     return (
-      <div className="mx-auto max-w-lg rounded-xl border border-gray-200 bg-white p-8 text-center shadow-sm">
-        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-lg font-bold text-green-600">
+      <div className="mx-auto max-w-lg rounded-[5px] border border-[#393939] bg-[#1F1F1F] p-8 text-center">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-lg font-bold text-green-400">
           ✓
         </div>
-        <h2 className="text-xl font-semibold text-gray-900">Job Created</h2>
-        <p className="mt-2 text-sm text-gray-500">Your webhook URL is:</p>
-        <div className="mt-4 flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3">
-          <code className="flex-1 break-all text-sm text-gray-700">
+        <h2 className="text-xl font-semibold text-white">Job Created</h2>
+        <p className="mt-2 text-sm text-neutral-400">Your webhook URL is:</p>
+        <div className="mt-4 flex items-center gap-2 rounded-[3px] border border-[#393939] bg-neutral-900 px-4 py-3">
+          <code className="flex-1 break-all text-sm text-neutral-300">
             {createdJob.webhookUrl}
           </code>
           <button
             onClick={() =>
               navigator.clipboard.writeText(createdJob.webhookUrl || '')
             }
-            className="shrink-0 cursor-pointer rounded-lg border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-100"
+            className="shrink-0 cursor-pointer rounded-[3px] border border-[#393939] px-3 py-1.5 text-xs font-medium text-neutral-300 transition-colors hover:bg-[#2A2A2A]"
           >
             Copy
           </button>
@@ -146,18 +211,18 @@ export default function JobForm({
               <div
                 className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium ${
                   s <= step
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-gray-100 text-gray-400'
+                    ? 'bg-white text-black'
+                    : 'bg-neutral-800 text-neutral-500'
                 }`}
               >
                 {s}
               </div>
               <span
-                className={`text-sm ${s <= step ? 'text-gray-900' : 'text-gray-400'}`}
+                className={`text-sm ${s <= step ? 'text-white' : 'text-neutral-500'}`}
               >
                 {s === 1 ? 'Basic Info' : s === 2 ? 'HTTP Config' : 'Settings'}
               </span>
-              {s < 3 && <div className="mx-2 h-px w-8 bg-gray-200" />}
+              {s < 3 && <div className="mx-2 h-px w-8 bg-[#393939]" />}
             </div>
           ))}
         </div>
@@ -167,23 +232,23 @@ export default function JobForm({
         {(step === 1 || editMode) && (
           <div className={step !== 1 ? 'block' : ''}>
             {step === 1 && (
-              <h3 className="mb-4 text-lg font-medium text-gray-900">
+              <h3 className="mb-4 text-lg font-medium text-white">
                 Basic Info
               </h3>
             )}
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-neutral-400">
                   Job Name
                 </label>
                 <input
                   {...register('name')}
                   placeholder="My Cron Job"
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm placeholder:text-gray-400 focus:border-gray-400 focus:outline-none"
+                  className="mt-1 block w-full rounded-[3px] border border-[#393939] bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-600 focus:border-neutral-500 focus:outline-none"
                 />
                 {errors.name && (
-                  <p className="mt-1 text-xs text-red-500">
+                  <p className="mt-1 text-xs text-red-400">
                     {errors.name.message}
                   </p>
                 )}
@@ -191,7 +256,7 @@ export default function JobForm({
 
               {!editMode && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-neutral-400">
                     Type
                   </label>
                   <div className="mt-1 flex gap-3">
@@ -200,10 +265,10 @@ export default function JobForm({
                         key={t}
                         type="button"
                         onClick={() => setValue('type', t)}
-                        className={`flex-1 cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium transition-colors ${
+                        className={`flex-1 cursor-pointer rounded-[3px] border px-4 py-2 text-sm font-medium transition-colors ${
                           jobType === t
-                            ? 'border-gray-900 bg-gray-900 text-white'
-                            : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                            ? 'border-white bg-white text-black'
+                            : 'border-[#393939] text-neutral-300 hover:border-neutral-500'
                         }`}
                       >
                         {t}
@@ -214,22 +279,23 @@ export default function JobForm({
               )}
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-neutral-400">
                   Workspace
                 </label>
-                <select
-                  {...register('workspaceId')}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-gray-400 focus:outline-none"
-                >
-                  <option value="">Select workspace</option>
-                  {workspaces.map((ws) => (
-                    <option key={ws.id} value={ws.id}>
-                      {ws.name}
-                    </option>
-                  ))}
-                </select>
+                <DarkSelect
+                  value={watch('workspaceId')}
+                  onChange={(val) => setValue('workspaceId', val)}
+                  options={[
+                    { label: 'Select workspace', value: '' },
+                    ...workspaces.map((ws) => ({
+                      label: ws.name,
+                      value: ws.id,
+                    })),
+                  ]}
+                  error={!!errors.workspaceId}
+                />
                 {errors.workspaceId && (
-                  <p className="mt-1 text-xs text-red-500">
+                  <p className="mt-1 text-xs text-red-400">
                     {errors.workspaceId.message}
                   </p>
                 )}
@@ -241,53 +307,53 @@ export default function JobForm({
         {(step === 2 || editMode) && (
           <div className={step !== 2 ? 'mt-6' : ''}>
             {step === 2 && (
-              <h3 className="mb-4 text-lg font-medium text-gray-900">
+              <h3 className="mb-4 text-lg font-medium text-white">
                 HTTP Config
               </h3>
             )}
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-neutral-400">
                   Endpoint URL
                 </label>
                 <input
                   {...register('endpoint')}
                   placeholder="https://api.example.com/webhook"
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm placeholder:text-gray-400 focus:border-gray-400 focus:outline-none"
+                  className="mt-1 block w-full rounded-[3px] border border-[#393939] bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-600 focus:border-neutral-500 focus:outline-none"
                 />
                 {errors.endpoint && (
-                  <p className="mt-1 text-xs text-red-500">
+                  <p className="mt-1 text-xs text-red-400">
                     {errors.endpoint.message}
                   </p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-neutral-400">
                   Method
                 </label>
-                <select
-                  {...register('method')}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-gray-400 focus:outline-none"
-                >
-                  {['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].map((m) => (
-                    <option key={m} value={m}>
-                      {m}
-                    </option>
-                  ))}
-                </select>
+                <DarkSelect
+                  value={watch('method')}
+                  onChange={(val) => setValue('method', val as any)}
+                  options={['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].map(
+                    (m) => ({
+                      label: m,
+                      value: m,
+                    }),
+                  )}
+                />
               </div>
 
               <div>
                 <div className="flex items-center justify-between">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-neutral-400">
                     Headers
                   </label>
                   <button
                     type="button"
                     onClick={addHeader}
-                    className="flex cursor-pointer items-center gap-1 text-sm text-gray-500 hover:text-gray-700"
+                    className="flex cursor-pointer items-center gap-1 text-sm text-neutral-500 hover:text-white transition"
                   >
                     <HiOutlinePlus className="h-4 w-4" /> Add
                   </button>
@@ -299,7 +365,7 @@ export default function JobForm({
                         value={h.key}
                         onChange={(e) => updateHeader(i, 'key', e.target.value)}
                         placeholder="Key"
-                        className="block flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm placeholder:text-gray-400 focus:border-gray-400 focus:outline-none"
+                        className="block flex-1 rounded-[3px] border border-[#393939] bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-600 focus:border-neutral-500 focus:outline-none"
                       />
                       <input
                         value={h.value}
@@ -307,12 +373,12 @@ export default function JobForm({
                           updateHeader(i, 'value', e.target.value)
                         }
                         placeholder="Value"
-                        className="block flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm placeholder:text-gray-400 focus:border-gray-400 focus:outline-none"
+                        className="block flex-1 rounded-[3px] border border-[#393939] bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-600 focus:border-neutral-500 focus:outline-none"
                       />
                       <button
                         type="button"
                         onClick={() => removeHeader(i)}
-                        className="cursor-pointer text-gray-400 hover:text-red-500"
+                        className="cursor-pointer text-neutral-500 hover:text-red-400 transition"
                       >
                         <HiOutlineTrash className="h-4 w-4" />
                       </button>
@@ -323,7 +389,7 @@ export default function JobForm({
 
               {['POST', 'PUT', 'PATCH'].includes(method) && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-neutral-400">
                     Body (JSON)
                   </label>
                   <textarea
@@ -331,7 +397,7 @@ export default function JobForm({
                     onChange={(e) => setBodyText(e.target.value)}
                     rows={5}
                     placeholder='{"key": "value"}'
-                    className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 font-mono text-sm shadow-sm placeholder:text-gray-400 focus:border-gray-400 focus:outline-none"
+                    className="mt-1 block w-full rounded-[3px] border border-[#393939] bg-neutral-900 px-3 py-2 font-mono text-sm text-white placeholder:text-neutral-600 focus:border-neutral-500 focus:outline-none resize-none"
                   />
                 </div>
               )}
@@ -342,25 +408,23 @@ export default function JobForm({
         {(step === 3 || editMode) && (
           <div className={step !== 3 ? 'mt-6' : ''}>
             {step === 3 && (
-              <h3 className="mb-4 text-lg font-medium text-gray-900">
-                Settings
-              </h3>
+              <h3 className="mb-4 text-lg font-medium text-white">Settings</h3>
             )}
 
             <div className="space-y-4">
               {(jobType === 'CRON' ||
                 (editMode && initialData?.type === 'CRON')) && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-neutral-400">
                     Schedule (Cron Expression)
                   </label>
                   <input
                     {...register('schedule')}
                     placeholder="*/5 * * * *"
-                    className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 font-mono text-sm shadow-sm placeholder:text-gray-400 focus:border-gray-400 focus:outline-none"
+                    className="mt-1 block w-full rounded-[3px] border border-[#393939] bg-neutral-900 px-3 py-2 font-mono text-sm text-white placeholder:text-neutral-600 focus:border-neutral-500 focus:outline-none"
                   />
                   {errors.schedule && (
-                    <p className="mt-1 text-xs text-red-500">
+                    <p className="mt-1 text-xs text-red-400">
                       {errors.schedule.message}
                     </p>
                   )}
@@ -370,7 +434,7 @@ export default function JobForm({
                         key={preset.value}
                         type="button"
                         onClick={() => setValue('schedule', preset.value)}
-                        className="cursor-pointer rounded-lg border border-gray-200 px-3 py-1 text-xs text-gray-600 transition-colors hover:bg-gray-50"
+                        className="cursor-pointer rounded-[3px] border border-[#393939] px-3 py-1 text-xs text-neutral-400 transition-colors hover:bg-[#2A2A2A] hover:text-white"
                       >
                         {preset.label}
                       </button>
@@ -381,38 +445,37 @@ export default function JobForm({
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-neutral-400">
                     Retry Count
                   </label>
-                  <select
-                    {...register('retryCount')}
-                    className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-400 focus:outline-none"
-                  >
-                    {[0, 1, 3, 5, 10].map((n) => (
-                      <option key={n} value={n}>
-                        {n}
-                      </option>
-                    ))}
-                  </select>
+                  <DarkSelect
+                    value={watch('retryCount')}
+                    onChange={(val) => setValue('retryCount', Number(val))}
+                    options={[0, 1, 3, 5, 10].map((n) => ({
+                      label: String(n),
+                      value: n,
+                    }))}
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-neutral-400">
                     Retry Delay
                   </label>
-                  <select
-                    {...register('retryDelay')}
-                    className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-gray-400 focus:outline-none"
-                  >
-                    <option value={10}>10s</option>
-                    <option value={30}>30s</option>
-                    <option value={60}>1min</option>
-                    <option value={300}>5min</option>
-                  </select>
+                  <DarkSelect
+                    value={watch('retryDelay')}
+                    onChange={(val) => setValue('retryDelay', Number(val))}
+                    options={[
+                      { label: '10s', value: 10 },
+                      { label: '30s', value: 30 },
+                      { label: '1min', value: 60 },
+                      { label: '5min', value: 300 },
+                    ]}
+                  />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-neutral-400">
                   Timeout (seconds)
                 </label>
                 <input
@@ -420,7 +483,7 @@ export default function JobForm({
                   {...register('timeout')}
                   min={5}
                   max={300}
-                  className="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-gray-400 focus:outline-none"
+                  className="mt-1 block w-full rounded-[3px] border border-[#393939] bg-neutral-900 px-3 py-2 text-sm text-white focus:border-neutral-500 focus:outline-none"
                 />
               </div>
 
@@ -429,9 +492,12 @@ export default function JobForm({
                   type="checkbox"
                   id="failureEmail"
                   {...register('failureEmail')}
-                  className="h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
+                  className="h-4 w-4 rounded border-[#393939] bg-neutral-900 accent-[#DF5BCC]"
                 />
-                <label htmlFor="failureEmail" className="text-sm text-gray-700">
+                <label
+                  htmlFor="failureEmail"
+                  className="text-sm text-neutral-300"
+                >
                   Send email on failure
                 </label>
               </div>
@@ -444,7 +510,7 @@ export default function JobForm({
             <button
               type="button"
               onClick={() => setStep(step - 1)}
-              className="cursor-pointer rounded-lg border border-gray-300 px-6 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+              className="cursor-pointer rounded-[3px] border border-[#393939] px-6 py-2 text-sm font-medium text-neutral-300 transition-colors hover:bg-[#2A2A2A]"
             >
               Back
             </button>
@@ -455,7 +521,7 @@ export default function JobForm({
             <button
               type="button"
               onClick={() => setStep(step + 1)}
-              className="cursor-pointer rounded-lg bg-gray-900 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+              className="cursor-pointer rounded-[3px] bg-white px-6 py-2 text-sm font-medium text-black transition-colors hover:bg-neutral-200"
             >
               Next
             </button>
@@ -463,7 +529,7 @@ export default function JobForm({
             <button
               type="submit"
               disabled={isPending}
-              className="cursor-pointer rounded-lg bg-gray-900 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 disabled:opacity-50"
+              className="cursor-pointer rounded-[3px] bg-white px-6 py-2 text-sm font-medium text-black transition-colors hover:bg-neutral-200 disabled:opacity-50"
             >
               {isPending ? 'Saving...' : editMode ? 'Update Job' : 'Create Job'}
             </button>

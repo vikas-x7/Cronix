@@ -86,6 +86,119 @@ function TableWrapper({
 
 const sections: DocSection[] = [
   {
+    id: 'updates',
+    title: "What's New in Cronix",
+    subSections: [
+      { id: 'upd-jul-25', title: 'July 2025' },
+      { id: 'upd-jun-25', title: 'June 2025' },
+    ],
+    content: (
+      <div className="space-y-8">
+        <p className="text-[15px] text-neutral-300 leading-relaxed">
+          Track all the latest features, improvements, and fixes shipped to
+          Cronix.
+        </p>
+
+        <div className="space-y-6">
+          <div className="border border-neutral-800 rounded-[5px] p-5">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-[12px] font-medium text-[#DF5BCC] bg-[#DF5BCC]/10 px-2 py-0.5 rounded-[3px]">
+                New
+              </span>
+              <h3
+                id="upd-jul-25"
+                className="text-[16px] font-semibold text-white"
+              >
+                July 2025
+              </h3>
+            </div>
+            <ul className="space-y-2.5 text-[14px] text-neutral-300">
+              <li className="flex gap-2">
+                <span className="text-[#DF5BCC] mt-1.5 shrink-0">•</span>
+                <span>
+                  <strong className="text-white">Manual Run</strong> Execute API
+                  requests directly from the Schedule page with instant response
+                  preview. No need to create a cron job first.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-[#DF5BCC] mt-1.5 shrink-0">•</span>
+                <span>
+                  <strong className="text-white">Response Tab</strong> View
+                  response body and headers in a dedicated tab after running a
+                  request manually.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-[#DF5BCC] mt-1.5 shrink-0">•</span>
+                <span>
+                  <strong className="text-white">SDK Page</strong> New SDK
+                  integration page added (coming soon).
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-[#DF5BCC] mt-1.5 shrink-0">•</span>
+                <span>
+                  <strong className="text-white">
+                    Workspace Delete Confirmation
+                  </strong>{' '}
+                  Type workspace name to confirm deletion for safety.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-[#DF5BCC] mt-1.5 shrink-0">•</span>
+                <span>
+                  <strong className="text-white">
+                    Workspace Pagination Fix
+                  </strong>{' '}
+                  All workspaces now load correctly regardless of count.
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="border border-neutral-800 rounded-[5px] p-5">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-[12px] font-medium text-green-400 bg-green-400/10 px-2 py-0.5 rounded-[3px]">
+                Improved
+              </span>
+              <h3
+                id="upd-jun-25"
+                className="text-[16px] font-semibold text-white"
+              >
+                June 2025
+              </h3>
+            </div>
+            <ul className="space-y-2.5 text-[14px] text-neutral-300">
+              <li className="flex gap-2">
+                <span className="text-green-400 mt-1.5 shrink-0">•</span>
+                <span>
+                  <strong className="text-white">Delete Modal Fix</strong>{' '}
+                  Confirmation modal now closes properly after deleting a cron
+                  job.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-green-400 mt-1.5 shrink-0">•</span>
+                <span>
+                  <strong className="text-white">Workspace Cards Scroll</strong>{' '}
+                  Fixed card overflow issue on the Workspaces page.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-green-400 mt-1.5 shrink-0">•</span>
+                <span>
+                  <strong className="text-white">Sidebar Updates</strong> Added
+                  "What's New" card and SDK navigation item.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
     id: 'dashboard',
     title: 'Understanding the Dashboard',
     subSections: [
@@ -748,7 +861,7 @@ const sections: DocSection[] = [
 ];
 
 export default function DocumentationPage() {
-  const [activeSection, setActiveSection] = useState('dashboard');
+  const [activeSection, setActiveSection] = useState('updates');
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const [hoveredSub, setHoveredSub] = useState<string | null>(null);
 

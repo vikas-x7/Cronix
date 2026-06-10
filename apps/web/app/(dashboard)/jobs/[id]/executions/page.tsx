@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import {
   useExecutions,
@@ -12,7 +12,66 @@ import {
 import { useJob } from '@/modules/jobs';
 import { formatDuration } from '@/shared/lib/utils';
 import { HiOutlineXMark } from 'react-icons/hi2';
+import { FiChevronDown } from 'react-icons/fi';
 import type { Execution } from '@/modules/executions';
+
+function DarkSelect({
+  value,
+  onChange,
+  options,
+}: {
+  value: string;
+  onChange: (val: string) => void;
+  options: { label: string; value: string }[];
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node))
+        setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const selected = options.find((o) => o.value === value);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="border border-[#393939] bg-neutral-900 px-3 py-2 text-[12px] text-white rounded-[3px] cursor-pointer flex items-center gap-2 hover:border-neutral-500 transition"
+      >
+        {selected?.label || 'Select...'}
+      </button>
+      <FiChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 pointer-events-none text-neutral-500" />
+      {open && (
+        <div className="absolute z-50 top-full mt-1 right-0 w-full bg-[#1A1A1A] border border-[#393939] rounded-[3px] py-1 shadow-xl">
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => {
+                onChange(opt.value);
+                setOpen(false);
+              }}
+              className={`w-full text-left px-3 py-1.5 text-[12px] transition cursor-pointer hover:bg-[#2A2A2A] ${
+                opt.value === value
+                  ? 'text-white bg-[#2A2A2A]'
+                  : 'text-neutral-300'
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function ExecutionsPage() {
   const params = useParams();
@@ -46,17 +105,17 @@ export default function ExecutionsPage() {
             Execution History
           </h1>
         </div>
-        <select
+        <DarkSelect
           value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          className="border border-neutral-700 bg-neutral-900 px-3 py-2 text-[12px] text-white focus:border-neutral-500 focus:outline-none appearance-none cursor-pointer"
-        >
-          <option value="">All Status</option>
-          <option value="SUCCESS">Success</option>
-          <option value="FAILED">Failed</option>
-          <option value="RUNNING">Running</option>
-          <option value="PENDING">Pending</option>
-        </select>
+          onChange={setStatusFilter}
+          options={[
+            { label: 'All Status', value: '' },
+            { label: 'Success', value: 'SUCCESS' },
+            { label: 'Failed', value: 'FAILED' },
+            { label: 'Running', value: 'RUNNING' },
+            { label: 'Pending', value: 'PENDING' },
+          ]}
+        />
       </div>
       <div className="bg-[#1F1F1F] rounded-[10px] h-[92vh] overflow-y-auto">
         {isLoading ? (

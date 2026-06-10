@@ -265,6 +265,21 @@ export default function SchedulePage() {
 
   return (
     <div className="w-full h-screen overflow-y-auto bg-[#0D0D0D] pr-2">
+      <style>{`
+        select {
+          color-scheme: dark;
+        }
+        select option,
+        select optgroup {
+          background-color: #1A1A1A;
+          color: #E5E5E5;
+          padding: 8px 12px;
+        }
+        select option:hover,
+        select option:checked {
+          background-color: #2A2A2A;
+        }
+      `}</style>
       <div className="py-3 bg-[#0D0D0D] shrink-0">
         <h1 className="text-[20px] tracking-[-1px] text-white">
           Schedule New Job

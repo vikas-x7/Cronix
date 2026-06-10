@@ -32,7 +32,7 @@ export class NotificationsService {
 
       if (!job || !job.space?.user?.email) {
         this.logger.warn(
-          `Cannot send failure email — job or user not found for jobId: ${jobId}`,
+          `Cannot send failure email job or user not found for jobId: ${jobId}`,
         );
         return;
       }
@@ -80,7 +80,7 @@ export class NotificationsService {
                 </tr>
               </table>
               <p style="color: #52525b; font-size: 12px; text-align: center; margin: 24px 0 0;">
-                Cronix — Job Monitoring Platform
+                Cronix Job Monitoring Platform
               </p>
             </div>
           </div>

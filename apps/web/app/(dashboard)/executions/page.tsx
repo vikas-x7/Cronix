@@ -253,14 +253,14 @@ export default function ExecutionsList() {
               />
               Refresh
             </button>
-            <div className="flex items-center gap-2 border border-[#393939] rounded-[3px] px-2 p-0.75 ml-auto">
+            <div className="flex items-center gap-2 border border-[#393939] rounded-[3px] px-2 p-1 ml-auto">
               <FiSearch size={14} className="text-white/50" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search executions..."
-                className="text-[13px] font-light text-white/90 outline-none w-60 transition placeholder:text-neutral-500"
+                className="text-[13px] font-light py-1 text-white/90 outline-none w-60 transition placeholder:text-neutral-500"
               />
             </div>
           </div>

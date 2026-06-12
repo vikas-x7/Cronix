@@ -32,15 +32,15 @@ const ICONS: Record<ToastType, string> = {
 };
 
 const STYLES: Record<ToastType, string> = {
-  success: 'bg-green-50 border-green-200 text-green-800',
-  error: 'bg-red-50 border-red-200 text-red-800',
-  info: 'bg-blue-50 border-blue-200 text-blue-800',
+  success: 'bg-[#1B1B1B] border-[#2A2A2A] text-white',
+  error: 'bg-[#1B1B1B] border-[#2A2A2A] text-white',
+  info: 'bg-[#1B1B1B] border-[#2A2A2A] text-white',
 };
 
 const ICON_STYLES: Record<ToastType, string> = {
-  success: 'bg-green-100 text-green-600',
-  error: 'bg-red-100 text-red-600',
-  info: 'bg-blue-100 text-blue-600',
+  success: 'bg-[#DF5BCC]/15 text-[#DF5BCC]',
+  error: 'bg-red-500/15 text-red-400',
+  info: 'bg-white/10 text-white/60',
 };
 
 export function ToastProvider({ children }: { children: ReactNode }) {
@@ -75,7 +75,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           <div
             key={toast.id}
             className={cn(
-              'flex items-start gap-3 rounded-xl border px-4 py-3 shadow-lg text-sm animate-in slide-in-from-right',
+              'flex items-start gap-3 rounded-[3px] border px-4 py-3 shadow-lg text-sm animate-in slide-in-from-right',
               STYLES[toast.type],
             )}
           >
@@ -90,7 +90,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
             <p className="flex-1 pt-0.5">{toast.message}</p>
             <button
               onClick={() => removeToast(toast.id)}
-              className="text-current opacity-50 hover:opacity-100 cursor-pointer"
+              className="text-white/40 hover:text-white/80 cursor-pointer transition-colors"
             >
               ✕
             </button>

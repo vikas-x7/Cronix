@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { HiOutlineXMark, HiBars3 } from 'react-icons/hi2';
 import {
   FiLayout,
   FiClock,
@@ -40,7 +39,6 @@ const NAV_ITEMS = [
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const [imageError, setImageError] = useState(false);
   const user = useAuthStore((s) => s.user);
@@ -58,30 +56,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <button
-        onClick={() => setMobileOpen(!mobileOpen)}
-        className="fixed top-4 left-4 z-50 block cursor-pointer border border-neutral-700 bg-neutral-900 p-2 lg:hidden"
-      >
-        {mobileOpen ? (
-          <HiOutlineXMark className="h-5 w-5 text-white" />
-        ) : (
-          <HiBars3 className="h-5 w-5 text-white" />
-        )}
-      </button>
-
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 z-30 bg-black/50 lg:hidden"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
-
-      <aside
-        className={cn(
-          'fixed inset-y-0 left-0 z-40 flex w-52.5 flex-col bg-[#0D0D0D]  lg:translate-x-0',
-          mobileOpen ? 'translate-x-0' : '-translate-x-full',
-        )}
-      >
+      <aside className="fixed inset-y-0 left-0 z-40 flex w-52.5 flex-col bg-[#0D0D0D]">
         <div className="flex h-14 items-center gap-1  px-2">
           <BiSolidSquare size={25} className="text-[#DF5BCC]" />
           <span className="text-[20px] font-semibold tracking-[-1px] text-white">
@@ -155,7 +130,6 @@ export default function Sidebar() {
                     <React.Fragment key={item.href}>
                       <Link
                         href={item.href}
-                        onClick={() => setMobileOpen(false)}
                         onMouseEnter={() => setHoveredPath(item.href)}
                         className={cn(
                           'relative flex items-center h-[36px] gap-2 px-2 text-[13px] tracking-[-0.25px] transition-colors rounded-[3px] z-10 ',

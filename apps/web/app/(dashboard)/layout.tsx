@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { BiSolidSquare } from 'react-icons/bi';
+import { TbDeviceLaptop } from 'react-icons/tb';
 import Sidebar from '@/shared/layout/sidebar';
 import { useAuth } from '@/modules/auth';
-import { div } from 'framer-motion/client';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();
@@ -38,14 +38,37 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+  useEffect(() => {
+    const check = () => setIsLargeScreen(window.innerWidth >= 769);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   return (
     <ProtectedRoute>
-      <div className="flex h-screen font-geist-sans">
-        <div className="w-[210px] shrink-0">
-          <Sidebar />
+      {isLargeScreen ? (
+        <div className="flex h-screen font-geist-sans">
+          <div className="w-[210px] shrink-0">
+            <Sidebar />
+          </div>
+          <main className="flex-1 min-h-0 overflow-y-auto">{children}</main>
         </div>
-        <main className="flex-1 min-h-0 overflow-y-auto">{children}</main>
-      </div>
+      ) : (
+        <div className="flex min-h-screen items-center justify-center bg-neutral-950 px-6">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <TbDeviceLaptop size={48} className="text-[#DF5BCC]" />
+            <h2 className="text-xl tracking-[-1px] text-white">
+              Dashboard is not available on smaller screens
+            </h2>
+            <p className="text-sm text-white/60">
+              Please access from a laptop or desktop browser
+            </p>
+          </div>
+        </div>
+      )}
     </ProtectedRoute>
   );
 }

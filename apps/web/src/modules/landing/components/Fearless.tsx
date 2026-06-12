@@ -1,10 +1,9 @@
 import React from 'react';
-import Image from 'next/image'; // Next.js image component
+import Image from 'next/image';
 
 const Fearless = () => {
   return (
     <div className=" relative text-[#EBEBEB] font-sans antialiased flex h-screen mb-40 px-5">
-      {/* --- Left Column --- */}
       <div className="bg-[#ffffff] text-black  flex-1">
         <div className="text-[12px] uppercase leading-tight flex-none mt-10">
           ISSUE: 83 <br /> VINTAGE <br /> POSTER SERIES
@@ -31,7 +30,6 @@ const Fearless = () => {
         </div>
       </div>
 
-      {/* --- Right Column (Image) --- */}
       <div className="relative w-1/2 h-full flex-shrink-0">
         <img
           className="w-full h-full object-cover"

@@ -48,8 +48,8 @@ export default function TrafficChart() {
         </div>
 
         <div className="relative z-10">
-          <div className="max-w-5xl bg-white">
-            <h2 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl -tracking-[1.5px] font-medium md:-tracking-[3.5px] text-black bg-transparent bg-white">
+          <div className="w-full sm:w-5xl bg-white">
+            <h2 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[-1.5px] font-medium md:tracking-[-3.5px] text-black  bg-white">
               Stay in sync with your traffic in real time every request is
               logged every decision is visible
             </h2>

@@ -30,9 +30,9 @@ export default function Feature() {
       <div className="">
         <div className="px-4 mb-12 mt-40">
           <h1 className="text-6xl text-start font-bold tracking-[-5px] ">
-            Cronixxxx
+            Cronix.
           </h1>
-          <p className="px-3 text-[17px] tracking-[-0.75px]">
+          <p className="px- text-[17px] tracking-[-0.75px]">
             Set up your first automated task today and let Cronix handle the
             heavy lifting for you.
           </p>
@@ -54,7 +54,7 @@ export default function Feature() {
                 <h3 className="ext-xl md:text-2xl font-medium tracking-[-1px]">
                   {card.title}
                 </h3>
-                <p className="mt-2 text-[15px] text-black/70  tracking-[-0.75px] ">
+                <p className="mt-2 text-[15px] text-black/80  tracking-[-0.5px] ">
                   {card.description}
                 </p>
               </div>

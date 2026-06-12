@@ -9,67 +9,73 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-white text-black pt-20 pb-10  border-t border-black/10 mt-30">
-      <div className="container mx-auto">
-        <div className="mb-20">
-          <div className="px-8">
-            <p className="text-sm text-black mb-2 tracking-[-0.75px] leading-0">
-              As we believe at Cronix,
-            </p>
-            <h2 className="text-xl md:text-2xl font-medium mb-10 tracking-[-1px]">
-              Anything less than seamless automation is a compromise.
-            </h2>
-          </div>
-          <h1 className="text-[20vw] text-[#010101] font-extrabold overflow-hidden tracking-[-30px]  ml-[-10px] leading-[300px]">
-            Cronixforyou
-          </h1>
-        </div>
-
-        <div className=" px-7 mx-auto">
-          <div className="flex flex-wrap items-center gap-6 mb-12">
+    <footer className="w-full bg-white text-black pt-12 sm:pt-16 md:pt-20 border-t border-black/15 mt-16 sm:mt-24 md:mt-30 overflow-hidden">
+      <div className="">
+        <div className="px-4 sm:px-6 md:px-7 mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
             <Link
               href="mailto:hey@cronix.com"
-              className="flex items-center gap-2 bg-[#101010] text-white px-4 py-1 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+              className="inline-flex text-[13px] sm:text-[14px] items-center ml-[-5] justify-center gap-2 bg-[#101010] text-white px-3 py-1 sm:py-1 rounded-[3px] font-medium hover:bg-gray-800 transition-colors w-fit"
             >
-              hey@cronix.com <FiArrowUpRight size={18} />
+              hey@cronix.com <FiArrowUpRight size={14} />
             </Link>
 
-            <div className="flex gap-4 text-white/30">
-              <Link href="#" className="hover:text-white transition-colors">
-                <FaXTwitter size={20} />
+            <div className="flex gap-4 text-black/60 sm:text-white/30">
+              <Link
+                href="#"
+                className="hover:text-black sm:hover:text-white transition-colors"
+              >
+                <FaXTwitter size={14} />
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
-                <FaLinkedinIn size={20} />
+              <Link
+                href="#"
+                className="hover:text-black sm:hover:text-white transition-colors"
+              >
+                <FaLinkedinIn size={14} />
               </Link>
             </div>
           </div>
 
-          <div className="flex justify-between items-start mb-12">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8 mb-12">
             <div className="flex items-center gap-3">
               <img
                 src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg"
-                alt=""
-                className="w-10"
+                alt="Flag of India"
+                className="w-8 sm:w-10"
               />
-              <div className="text-xs text-black">
+              <div className="text-[4px] sm:text-[10px] text-black">
                 <p>Based In The Beautiful</p>
                 <p>India & Online Worldwide</p>
               </div>
             </div>
 
-            <div className="flex flex-col items-end gap-3 text-sm text-black">
-              <Link href="#" className="hover:text-white transition-colors">
+            <div className="flex flex-row sm:flex-col items-start sm:items-end gap-6 sm:gap-3 text-sm text-black font-medium">
+              <Link href="#" className="hover:text-black/50 transition-colors">
                 Home
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
-                Set Cron now
+              <Link href="#" className="hover:text-black/50 transition-colors">
+                Get start
+              </Link>
+              <Link href="#" className="hover:text-black/50 transition-colors">
+                Working
               </Link>
             </div>
           </div>
+        </div>
 
-          <div className="text-xs text-black border-t border-white/10 pt-8">
-            <p>Cronix © {currentYear} All Rights Reserved</p>
+        <div>
+          <div className="px-4 sm:px-6 md:px-8">
+            <p className="text-sm text-black mb-2 tracking-[-0.75px] leading-none">
+              As we believe at Cronix,
+            </p>
+            <h2 className="text-xl md:text-2xl font-medium mb-8 sm:mb-10 tracking-[-1px]">
+              Anything less than seamless automation is a compromise.
+            </h2>
           </div>
+
+          <h1 className="text-[16vw] sm:text-[18vw] md:text-[20vw] text-[#010101] font-extrabold overflow-hidden tracking-tight sm:tracking-[-20px] md:tracking-[-30px] ml-[-4px] sm:ml-[-10px] leading-[0.8] sm:leading-[200px] md:leading-[250px] whitespace-nowrap select-none">
+            Cronixxxxxxxxxxxxxxxxxxxxxxxx
+          </h1>
         </div>
       </div>
     </footer>

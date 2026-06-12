@@ -11,7 +11,7 @@ const UseCases = () => {
         }}
       />
 
-      <div className="relative z-10 p-6 py-9 mx-auto">
+      <div className="relative z-10 px-2 py-3 sm:p-6 sm:py-9 mx-auto">
         <img
           src="https://res.cloudinary.com/dyv9kenuj/image/upload/v1784321301/Screenshot_from_2026-07-18_02-15-08_vxrzui.png"
           alt="Erica AI data automation dashboard"

@@ -2,10 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { HiMenuAlt3, HiOutlineX } from 'react-icons/hi';
-import { TbMenu } from 'react-icons/tb';
-import { MdArrowForward, MdOutlineMenu } from 'react-icons/md';
-import { FaCircle, FaGripLines } from 'react-icons/fa6';
+import { HiOutlineX } from 'react-icons/hi';
+import { MdArrowForward } from 'react-icons/md';
 import { LiaGripLinesSolid } from 'react-icons/lia';
 import { BiSolidSquare } from 'react-icons/bi';
 
@@ -55,17 +53,18 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-5   ">
-      <div className="bg-[#F0F0F0] rounded-[2px] text-black w-full h-8 text-center flex items-center justify-center mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        <p className="tracking-[-1px] flex items-center gap-2 font-medium">
+    <nav className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-5 ">
+      <div className="bg-[#F0F0F0] rounded-[2px] text-black w-full h-8 text-center flex items-center justify-center overflow-hidden px-4 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+        <p className="tracking-[-0.5px] sm:tracking-[-1px] flex items-center gap-2 font-medium text-xs sm:text-sm whitespace-nowrap">
           <span className="text-[#DF5BCC]">Cronix.</span>version v2 is live now{' '}
           <MdArrowForward />
         </p>
       </div>
+
       <div className="container mx-auto">
-        <div className="flex h-10 mt-2 items-center justify-between">
+        <div className="flex h-12  items-center justify-between">
           <div className="hidden lg:flex items-center gap-5 backdrop-blur-md px-3 py-2 rounded-[3px] transition-colors duration-300 bg-black/3">
-            <Link href="/" className="flex items-center ">
+            <Link href="/" className="flex items-center">
               <BiSolidSquare size={25} className="text-[#DF5BCC]" />
               <h1 className="text-[19px] font-bold tracking-[-1px]">Cronix.</h1>
             </Link>
@@ -78,50 +77,58 @@ const Navbar = () => {
             ))}
           </div>
 
+          <div className="flex lg:hidden items-center gap-2 bg-black/5 px-3 py-1.5 rounded-[3px] backdrop-blur-md">
+            <Link href="/" className="flex items-center gap-2">
+              <BiSolidSquare size={20} className="text-[#DF5BCC]" />
+              <h1 className="text-[16px] font-bold tracking-[-1px]">Cronix.</h1>
+            </Link>
+          </div>
+
           <div className="relative">
             <button
-              className="text-sm flex items-center gap-2  tracking-[-1px] cursor-pointer"
+              className="text-sm flex items-center gap-2 tracking-[-0.5px] sm:tracking-[-1px] cursor-pointer bg-black/5 px-3 py-1.5 rounded-[3px] backdrop-blur-md"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle Menu"
             >
-              Menu
+              <span>Menu</span>
               {isOpen ? (
-                <HiOutlineX size={30} />
+                <HiOutlineX size={24} />
               ) : (
-                <LiaGripLinesSolid size={30} />
+                <LiaGripLinesSolid size={24} />
               )}
             </button>
 
             <div
-              className={`absolute right-0 top-10 mt-2 w-94 bg-[#1F1F1F] text-white p-6 shadow-2xl rounded-[1px] border border-black/5 transition-transform duration-500 ease-out ${
+              className={`absolute right-0 top-12 mt-2 w-[calc(100vw-2.5rem)] sm:w-94 max-w-sm bg-[#1F1F1F] text-white p-6 shadow-2xl rounded-[4px] border border-black/5 transition-transform duration-500 ease-out z-50 ${
                 isOpen
                   ? 'translate-x-0 pointer-events-auto'
                   : 'translate-x-[200%] pointer-events-none'
               }`}
             >
-              <div className="flex flex-col gap-1 mb-1">
+              <div className="flex flex-col gap-2 mb-6">
                 {NAV_LINKS.map((link) => (
                   <button
                     key={link.id}
                     onClick={() => handleSmoothScroll(link.id)}
-                    className="text-[25px]   font-light tracking-[-1px] text-left text-white/80 hover:text-gray-400 transition-colors"
+                    className="text-[22px] sm:text-[25px] font-light tracking-[-1px] text-left text-white/80 hover:text-white transition-colors"
                   >
                     {link.name}
                   </button>
                 ))}
               </div>
 
-              <div className="border-t border-white/10 pt-4 flex justify-between text-[15px] text-white">
+              <div className="border-t border-white/10 pt-4 flex flex-col sm:flex-row justify-between gap-4 text-[14px] sm:text-[15px] text-white">
                 <div className="flex gap-4 font-light text-white/80">
-                  <Link href="#" className="hover:text-gray-400">
+                  <Link href="#" className="hover:text-white transition-colors">
                     LinkedIn
                   </Link>
-                  <Link href="#" className="hover:text-gray-400">
+                  <Link href="#" className="hover:text-white transition-colors">
                     Twitter
                   </Link>
                 </div>
                 <Link
                   href="#"
-                  className="hover:text-gray-400 font-light text-white/80"
+                  className="hover:text-white transition-colors font-light text-white/80"
                 >
                   Privacy policy
                 </Link>

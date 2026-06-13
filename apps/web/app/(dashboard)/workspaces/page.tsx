@@ -150,7 +150,7 @@ export default function WorkspacesPage() {
 
         {!filteredWorkspaces?.length ? (
           <div className="p-4 flex-1">
-            <div className="border border-dashed border-neutral-700 py-20 flex flex-col items-center justify-center">
+            <div className="border h-[97%] border-dashed border-neutral-700 py-20 flex flex-col items-center justify-center">
               <FiClock className="text-neutral-500 mb-2" size={24} />
               <p className="text-[16px] tracking-normal text-white">
                 {searchQuery ? 'No workspaces found' : 'No workspaces yet'}
@@ -163,7 +163,7 @@ export default function WorkspacesPage() {
               {!searchQuery && (
                 <button
                   onClick={() => setModalOpen(true)}
-                  className="mt-4 cursor-pointer border border-white px-4 py-2 text-[12px] font-medium text-white transition-colors hover:bg-white hover:text-black"
+                  className="mt-4 cursor-pointer border border-white/20 px-4 py-2 text-[12px] font-medium text-white transition-colors hover:bg-white hover:text-black rounded-[4px]"
                 >
                   Create your first workspace
                 </button>

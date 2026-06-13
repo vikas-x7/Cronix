@@ -15,6 +15,7 @@ import { useExecutions } from '@/modules/executions';
 import StatusBadge from '@/shared/components/status-badge';
 import PageLoader from '@/shared/components/page-loader';
 import ExecutionDetail from './execution-detail';
+import { div } from 'framer-motion/client';
 
 export default function ExecutionsList() {
   const [page, setPage] = useState(1);
@@ -266,14 +267,16 @@ export default function ExecutionsList() {
           </div>
         </div>
         {!filteredExecs.length ? (
-          <div className="border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center">
-            <FiPause className="text-neutral-500 mb-2" size={24} />
-            <p className="text-[16px] tracking-normal text-white">
-              No executions yet
-            </p>
-            <p className="text-[12px] text-neutral-500 mt-1">
-              Create a cron job and trigger it to see results here
-            </p>
+          <div className="px-4 h-full">
+            <div className="h-[95%] border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center">
+              <FiPause className="text-neutral-500 mb-2" size={24} />
+              <p className="text-[16px] tracking-normal text-white">
+                No executions yet
+              </p>
+              <p className="text-[12px] text-neutral-500 mt-1">
+                Create a cron job and trigger it to see results here
+              </p>
+            </div>
           </div>
         ) : (
           <div className="flex flex-col flex-1 min-h-0">

@@ -287,8 +287,8 @@ function JobsPageContent() {
         </div>
 
         {!filteredJobs?.length ? (
-          <div className="p-4">
-            <div className="border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center ">
+          <div className="p-4 h-full">
+            <div className=" h-[98%] border border-dashed border-neutral-700 flex-1 py-20 flex flex-col items-center justify-center ">
               <FiClock className="text-neutral-500 mb-2" size={24} />
               <p className="text-[16px] tracking-normal text-white">
                 No cron jobs found

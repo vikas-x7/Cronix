@@ -4,14 +4,13 @@ const UseCases = () => {
   return (
     <section id="use-cases" className="relative ">
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
+        className="absolute inset-0 z-0 bg-cover bg-center rounded-[6px]"
         style={{
-          backgroundImage:
-            "url('https://i.pinimg.com/1200x/c5/e9/80/c5e980929de782f76017591ca2d0126a.jpg')",
+          backgroundImage: "url('image/macbg.jpg')",
         }}
       />
 
-      <div className="relative z-10 px-2 py-3 sm:p-6 sm:py-9 mx-auto">
+      <div className="relative z-10 px-2 py-3 sm:px-9 sm:py-9 mx-auto ">
         <img
           src="https://res.cloudinary.com/dyv9kenuj/image/upload/v1784321301/Screenshot_from_2026-07-18_02-15-08_vxrzui.png"
           alt="Erica AI data automation dashboard"

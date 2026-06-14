@@ -63,7 +63,7 @@ const Navbar = () => {
 
       <div className="container mx-auto">
         <div className="flex h-12  items-center justify-between">
-          <div className="hidden lg:flex items-center gap-5 backdrop-blur-md px-3 py-2 rounded-[3px] transition-colors duration-300 bg-black/3">
+          <div className="hidden lg:flex items-center gap-5 px-3 py-2 rounded-[3px] transition-colors duration-300 bg-[#f7f7f7]">
             <Link href="/" className="flex items-center">
               <BiSolidSquare size={25} className="text-[#DF5BCC]" />
               <h1 className="text-[19px] font-bold tracking-[-1px]">Cronix.</h1>
@@ -77,7 +77,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="flex lg:hidden items-center gap-2 bg-black/5 px-3 py-1.5 rounded-[3px] backdrop-blur-md">
+          <div className="flex lg:hidden items-center gap-2  px-3 py-1.5 rounded-[3px] bg-[#f7f7f7]">
             <Link href="/" className="flex items-center gap-2">
               <BiSolidSquare size={20} className="text-[#DF5BCC]" />
               <h1 className="text-[16px] font-bold tracking-[-1px]">Cronix.</h1>
@@ -86,7 +86,7 @@ const Navbar = () => {
 
           <div className="relative">
             <button
-              className="text-sm flex items-center gap-2 tracking-[-0.5px] sm:tracking-[-1px] cursor-pointer bg-black/5 px-3 py-1.5 rounded-[3px] backdrop-blur-md"
+              className="text-sm flex items-center gap-2 tracking-[-0.5px] sm:tracking-[-1px] cursor-pointer  px-3 py-1.5 rounded-[3px] bg-[#f7f7f7]"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle Menu"
             >

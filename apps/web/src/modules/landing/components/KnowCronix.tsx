@@ -5,19 +5,19 @@ import Image from 'next/image';
 
 const KnowCronix = () => {
   return (
-    <div className="relative text-[#EBEBEB] font-sans antialiased flex flex-col lg:flex-row min-h-screen lg:h-screen mb-20 lg:mb-40 px-4 sm:px-6 lg:px-5 overflow-hidden">
-      <div className="bg-[#ffffff] text-black flex-1 flex flex-col justify-between py-10 lg:py-0 z-10">
+    <div className="relative text-[#EBEBEB] bg-[#1C1A16] font-sans antialiased flex flex-col lg:flex-row min-h-screen lg:h-screen  overflow-hidden mt-40">
+      <div className=" text-white flex-1 flex flex-col justify-between py-10 lg:py-0 z-10 px-6">
         <div>
           <div className="text-[12px] uppercase leading-tight font-mono mt-0 lg:mt-10 mb-20">
             BUILD: 01 <br /> CRONIX <br /> SYSTEM RUNNER
           </div>
         </div>
         <div className="my-10 lg:my-auto relative ">
-          <h1 className="relative lg:absolute text-[4.5rem] sm:text-[7rem] md:text-[9rem] lg:text-[12rem] lg:ml-[-10px] font-black text-black leading-[0.85] lg:leading-[0.8] tracking-[-5px] sm:tracking-[-10px] lg:tracking-[-20px] lg:top-[-120px] z-20 mb-8 lg:mb-0 select-none">
+          <h1 className="relative lg:absolute text-[4.5rem] sm:text-[7rem] md:text-[9rem] lg:text-[8rem] lg:ml-[-10px] font-black text-white leading-[0.85] lg:leading-[0.8] tracking-[-5px] sm:tracking-[-10px] lg:tracking-[-13px] lg:top-[-120px] z-20 mb-8 lg:mb-0 select-none">
             know cronix.
           </h1>
 
-          <div className="text-[16px] sm:text-[18px] leading-normal tracking-[-0.5px] sm:tracking-[-1px] text-[#000000] space-y-[2.5vh] lg:mt-[220px] ml-0 lg:ml-1 relative z-30">
+          <div className="text-[16px] sm:text-[18px] leading-normal tracking-[-0.5px] sm:tracking-[-1px] text-[#ffffff] space-y-[2.5vh] lg:mt-[220px] ml-0 lg:ml-1 relative z-30">
             <p>
               A robust platform driven by the passion to automate even when the
               systems are scaling fast.
@@ -30,7 +30,7 @@ const KnowCronix = () => {
             </p>
           </div>
 
-          <button className="mt-8 sm:mt-10 lg:mt-[60px] bg-[#040404] px-5 py-2.5 text-white rounded-[3px] tracking-[-0.75px] font-medium hover:bg-gray-800 transition-colors relative z-30">
+          <button className="mt-8 sm:mt-10 lg:mt-[60px] bg-[#ffffff] px-5 py-2.5 text-black rounded-[3px] tracking-[-0.75px] font-medium hover:bg-white/90 transition-colors relative z-30">
             Getstart now{' '}
           </button>
         </div>

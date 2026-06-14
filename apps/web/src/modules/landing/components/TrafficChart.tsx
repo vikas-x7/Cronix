@@ -37,7 +37,7 @@ export default function TrafficChart() {
       `}</style>
 
       <section id="observe" className="relative overflow-hidden mt-30 px-6">
-        <div className="absolute inset-0 pointer-events-none">
+        {/* <div className="inset-0 pointer-events-none">
           {Array.from({ length: 20 }).map((_, i) => (
             <div
               key={i}
@@ -45,19 +45,18 @@ export default function TrafficChart() {
               style={{ height: '4%' }}
             />
           ))}
-        </div>
+        </div> */}
 
         <div className="relative z-10">
           <div className="w-full sm:w-5xl bg-white">
             <h2 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[-1.5px] font-medium md:tracking-[-3.5px] text-black  bg-white">
-              Stay in sync with your traffic in real time every request is
-              logged every decision is visible
+              Stay in sync with your traffic in <br /> real time every request
+              is
             </h2>
             <p className="mt-5 tracking-[-0.75px]">
               Track every HTTP request, monitor job durations, and debug
               failures instantly. Cronix gives you full visibility into your
-              scheduled tasks and event-driven webhooks, ensuring your
-              automation never misses a beat.
+              scheduled tasks and
             </p>
           </div>
 

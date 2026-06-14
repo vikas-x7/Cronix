@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import MovingHeading from './components/MovingHeading';
 
 import KnowCronix from './components/KnowCronix';
+import Getstart from '@/modules/landing/components/Getstart';
 
 export default function Landing() {
   return (
@@ -20,9 +21,10 @@ export default function Landing() {
       <Hero />
       <Feature />
       <MovingHeading />
-      <KnowCronix />
       <TrafficChart />
       <Integration />
+      <KnowCronix />
+      <Getstart />
       <FAQ />
       <Footer />
     </>

@@ -47,7 +47,7 @@ const Integration = () => {
   };
 
   const Box = ({ logo, index }: { logo: Logo; index: number }) => (
-    <div className="flex h-12 w-30 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-20 lg:w-40 items-center justify-center border border-black/5 bg-transparent p-3 sm:p-4 md:p-6 shadow-sm hover:z-20 hover:shadow-md transition">
+    <div className="flex h-12 w-30 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-20 lg:w-40 items-center justify-center border border-black/15 border-dashed  bg-transparent p-3 sm:p-4 md:p-6  transition">
       {shouldShow(index, logo.src) && (
         <img
           src={logo.src}
@@ -70,12 +70,11 @@ const Integration = () => {
 
         <p className="mx-auto mt-2 text-sm sm:text-base md:text-lg text-black/90 max-w-2xl -tracking-[0.75px]">
           Connect Cronix to your deployment platforms. Trigger automated
-          deployments, send requests to Render or other cloud providers, and
-          seamlessly integrate with any system via Webhooks for your cron jobs.
+          deployments, send requests to any cloud providers
         </p>
 
         <div className="mt-10 sm:mt-14 md:mt-20 flex flex-col items-center justify-center gap-4 md:flex-row md:gap-0">
-          <div className="grid grid-cols-3  sm:gap-4">
+          <div className="grid grid-cols-3 ">
             {leftLogos.map((logo, index) => (
               <Box key={index} logo={logo} index={index} />
             ))}
@@ -87,7 +86,7 @@ const Integration = () => {
             </h3>
           </div>
 
-          <div className="grid grid-cols-3 sm:gap-4">
+          <div className="grid grid-cols-3 ">
             {rightLogos.map((logo, index) => (
               <Box key={index} logo={logo} index={index} />
             ))}

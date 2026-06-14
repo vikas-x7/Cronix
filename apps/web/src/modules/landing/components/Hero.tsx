@@ -17,23 +17,23 @@ const Hero = () => {
           <div className="text-black max-w-4xl flex flex-col items-start w-full">
             <h1
               id="hero-heading"
-              className="text-[13vw] leading-12 text-start font-bold tracking-[-3px] sm:text-3xl md:text-5xl lg:text-[87px] sm:font-semibold t sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-7px] sm:leading-17 uppercase"
+              className="text-[13vw] leading-12 text-start font-bold tracking-[-3px] sm:text-3xl md:text-5xl lg:text-[83px] sm:font-semibold t sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-7px] sm:leading-17 uppercase"
             >
-              THE STANDALONE WORKFLOW
+              SCHEDULE ANY HTTP WORKFLOW
             </h1>
-            <p className="tracking-[-0.5px] sm:tracking-[-0.75px] mt-4 text-[13px] sm:text-[17px] text-black/80">
-              Schedule HTTP requests with cron jobs, trigger them via webhooks
-              and monitor every execution from a single dashboard
+            <p className="tracking-[-0.5px] sm:tracking-[-0.75px] mt-4 text-[13px] sm:text-[18px] text-black/80">
+              Automate HTTP requests with cron jobs, webhooks, and real-time
+              monitoring.
             </p>
 
             <div className="flex w-full flex-col  items-start justify-between gap-6 py-6 sm:py-8 md:flex-row md:items-end">
               <div className="flex flex-row gap-8 sm:gap-16">
-                <div className="bg-black flex items-center   gap-1">
+                <div className="flex items-center   gap-1">
                   <Link
                     href="/login"
-                    className="text-[13px]  flex items-center px-4 py-1 gap-1 sm:text-[15px] uppercase sm:tracking-[-0.5px] text-white bg-black"
+                    className="text-[13px]  flex items-center px-4 py-1 gap-1 sm:text-[15px]  sm:tracking-[-0.5px] text-white bg-black rounded-[3px] font-medium"
                   >
-                    Get start
+                    Get start with cronix
                     <TfiArrowTopRight size={15} className="mt-1" />
                   </Link>
                 </div>
@@ -43,9 +43,9 @@ const Hero = () => {
           <div className="text-black hidden max-w-4xl sm:flex flex-col items-end w-full mt-20 sm:mt-0">
             <h1
               id="hero-heading"
-              className="text-end text-3xl sm:text-4xl md:text-5xl lg:text-[87px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-8px] sm:leading-17 uppercase md:-mt-17"
+              className="text-end mb-26 text-3xl sm:text-4xl md:text-5xl lg:text-[83px] font-semibold tracking-[-1px] sm:tracking-[-2px] md:tracking-[-3px] lg:tracking-[-8px] sm:leading-17 uppercase md:-mt-17"
             >
-              TO LET YOU <br /> SHIP CODE FAST
+              MOVE FASTER <br /> EVERY DAY
             </h1>
           </div>
         </div>

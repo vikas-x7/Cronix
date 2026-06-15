@@ -45,13 +45,15 @@ export class AuthController {
       secure: isProduction,
       sameSite: 'lax' as const,
       path: '/',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
     };
     res.cookie('access_token', tokens.accessToken, {
       ...cookieOptions,
       maxAge: 15 * 60 * 1000,
     });
-    res.cookie('refresh_token', tokens.refreshToken, cookieOptions);
+    res.cookie('refresh_token', tokens.refreshToken, {
+      ...cookieOptions,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
   }
 
   @Get('google')

@@ -104,7 +104,7 @@ describe('GlobalExceptionFilter', () => {
       filter.catch(exception, mockHost);
 
       expect(mockStatus).toHaveBeenCalledWith(HttpStatus.BAD_REQUEST);
-      expect(getJsonArg().message).toBe('Already exists duplicate entry');
+      expect(getJsonArg().message).toBe('Duplicate value for email');
     });
 
     it('should handle Prisma P2025 (record not found)', () => {

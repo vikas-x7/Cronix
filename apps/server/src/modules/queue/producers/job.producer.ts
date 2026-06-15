@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
 import { PrismaService } from '../../../prisma/prisma.service';
@@ -14,7 +14,7 @@ export class JobProducer {
     const job = await this.prisma.job.findUnique({ where: { id: jobId } });
 
     if (!job) {
-      throw new Error('Job not found');
+      throw new NotFoundException('Job not found');
     }
 
     await this.queue.add(

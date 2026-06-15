@@ -49,8 +49,12 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
   private handlePrismaError(exception: any): string {
     switch (exception.code) {
-      case 'P2002':
-        return 'Already exists duplicate entry';
+      case 'P2002': {
+        const fields = (exception.meta?.target as string[])?.join(', ');
+        return fields
+          ? `Duplicate value for ${fields}`
+          : 'Duplicate entry already exists';
+      }
       case 'P2025':
         return 'Record not found';
       case 'P2003':

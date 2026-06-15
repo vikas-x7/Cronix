@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { Processor, WorkerHost } from '@nestjs/bullmq';
 import { Job } from 'bullmq';
 import axios from 'axios';
@@ -20,7 +21,7 @@ export class JobProcessor extends WorkerHost {
     const attempt = job.attemptsMade + 1;
 
     const jobData = await this.prisma.job.findUnique({ where: { id: jobId } });
-    if (!jobData) throw new Error('Job not found');
+    if (!jobData) throw new NotFoundException('Job not found');
 
     const execution = await this.prisma.execution.create({
       data: {
@@ -118,6 +119,8 @@ export class JobProcessor extends WorkerHost {
       if (space) {
         await this.cache.del(`stats:${space.userId}`);
       }
-    } catch {}
+    } catch (error) {
+      console.error('Cache invalidation failed:', error);
+    }
   }
 }

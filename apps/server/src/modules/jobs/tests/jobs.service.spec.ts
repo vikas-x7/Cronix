@@ -20,6 +20,18 @@ const mockWorkspacesService = {
   checkOwnership: jest.fn(),
 };
 
+const mockJobProducer = { addJob: jest.fn() };
+const mockSchedulerService = {
+  addRepeatableJob: jest.fn(),
+  removeRepeatableJob: jest.fn(),
+};
+const mockCacheService = {
+  get: jest.fn(),
+  set: jest.fn(),
+  del: jest.fn(),
+  delByPattern: jest.fn(),
+};
+
 jest.mock('../../../prisma/prisma.service', () => ({
   PrismaService: jest.fn().mockImplementation(() => mockPrisma),
 }));
@@ -30,6 +42,9 @@ jest.mock('../../workspaces/workspaces.service', () => ({
 
 import { PrismaService } from '../../../prisma/prisma.service';
 import { WorkspacesService } from '../../workspaces/workspaces.service';
+import { JobProducer } from '../../queue/producers/job.producer';
+import { SchedulerService } from '../../scheduler/scheduler.service';
+import { CacheService } from '../../cache/cache.service';
 
 describe('JobsService', () => {
   let service: JobsService;
@@ -44,6 +59,9 @@ describe('JobsService', () => {
         JobsService,
         { provide: PrismaService, useValue: mockPrisma },
         { provide: WorkspacesService, useValue: mockWorkspacesService },
+        { provide: JobProducer, useValue: mockJobProducer },
+        { provide: SchedulerService, useValue: mockSchedulerService },
+        { provide: CacheService, useValue: mockCacheService },
       ],
     }).compile();
 
@@ -361,7 +379,7 @@ describe('JobsService', () => {
 
       const result = await service.runNow('job-1', 'user-1');
 
-      expect(result).toEqual({ message: 'Job queued' });
+      expect(result).toEqual({ __message: 'Job queued successfully' });
     });
 
     it('should throw ForbiddenException if not owner', async () => {

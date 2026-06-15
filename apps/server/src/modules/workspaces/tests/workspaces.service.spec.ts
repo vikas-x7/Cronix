@@ -18,11 +18,19 @@ const mockPrisma = {
   },
 };
 
+const mockCacheService = {
+  get: jest.fn(),
+  set: jest.fn(),
+  del: jest.fn(),
+  delByPattern: jest.fn(),
+};
+
 jest.mock('../../../prisma/prisma.service', () => ({
   PrismaService: jest.fn().mockImplementation(() => mockPrisma),
 }));
 
 import { PrismaService } from '../../../prisma/prisma.service';
+import { CacheService } from '../../cache/cache.service';
 
 describe('WorkspacesService', () => {
   let service: WorkspacesService;
@@ -35,6 +43,7 @@ describe('WorkspacesService', () => {
       providers: [
         WorkspacesService,
         { provide: PrismaService, useValue: mockPrisma },
+        { provide: CacheService, useValue: mockCacheService },
       ],
     }).compile();
 

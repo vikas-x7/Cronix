@@ -26,10 +26,14 @@ export const envSchema = z.object({
     .url()
     .default('http://localhost:3001/api/v1/auth/github/callback'),
 
+  REDIS_URL: z.string().optional(),
   REDIS_HOST: z.string().optional(),
   REDIS_PORT: z.string().optional(),
   UPSTASH_REDIS_HOST: z.string().optional(),
   UPSTASH_REDIS_TOKEN: z.string().optional(),
+
+  RESEND_API_KEY: z.string().min(1, 'RESEND_API_KEY required'),
+  FROM_EMAIL: z.string().default('Cronix <onboarding@resend.dev>'),
 });
 
 export type EnvSchema = z.infer<typeof envSchema>;

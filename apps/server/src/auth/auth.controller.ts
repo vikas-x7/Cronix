@@ -55,7 +55,7 @@ export class AuthController {
   }
 
   @Get('google')
-  @Throttle({ default: { ttl: 900000, limit: 10 } })
+  @Throttle({ default: { ttl: 900000, limit: 5 } })
   @UseGuards(GoogleAuthGuard)
   googleLogin(): void {}
 
@@ -74,7 +74,7 @@ export class AuthController {
   }
 
   @Get('github')
-  @Throttle({ default: { ttl: 900000, limit: 10 } })
+  @Throttle({ default: { ttl: 900000, limit: 5 } })
   @UseGuards(GitHubAuthGuard)
   githubLogin(): void {}
 

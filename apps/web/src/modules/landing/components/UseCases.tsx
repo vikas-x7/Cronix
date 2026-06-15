@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const UseCases = () => {
@@ -11,10 +12,12 @@ const UseCases = () => {
       />
 
       <div className="relative z-10 px-2 py-3 sm:px-9 sm:py-9 mx-auto ">
-        <img
-          src="https://res.cloudinary.com/dyv9kenuj/image/upload/v1784321301/Screenshot_from_2026-07-18_02-15-08_vxrzui.png"
+        <Image
+          src="/image/cronixdashboard.png"
           alt="Erica AI data automation dashboard"
           className="rounded-[5px] w-full shadow-3xl"
+          width={900}
+          height={900}
         />
       </div>
     </section>

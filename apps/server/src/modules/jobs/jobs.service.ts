@@ -66,6 +66,7 @@ export class JobsService {
     }
 
     await this.cache.del(`stats:${userId}`);
+    await this.cache.delByPattern(`jobs:list:${userId}:*`);
 
     return {
       id: job.id,
@@ -82,6 +83,11 @@ export class JobsService {
     page = 1,
     limit = 10,
   ): Promise<any> {
+    const cacheKey = `jobs:list:${userId}:${workspaceId || ''}:${status || ''}:${page}`;
+
+    const cached = await this.cache.get(cacheKey);
+    if (cached) return JSON.parse(cached);
+
     const skip = (page - 1) * limit;
 
     const where: any = {
@@ -111,7 +117,7 @@ export class JobsService {
       this.prisma.job.count({ where }),
     ]);
 
-    return {
+    const result = {
       items: items.map((j) => ({
         id: j.id,
         name: j.name,
@@ -135,9 +141,24 @@ export class JobsService {
         totalPages: Math.ceil(total / limit),
       },
     };
+
+    await this.cache.set(cacheKey, JSON.stringify(result), 30);
+
+    return result;
   }
 
   async findOne(id: string, userId: string): Promise<any> {
+    const cacheKey = `job:${id}`;
+
+    const cached = await this.cache.get(cacheKey);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (parsed._userId === userId) {
+        const { _userId, ...data } = parsed;
+        return data;
+      }
+    }
+
     const job = await this.prisma.job.findUnique({
       where: { id },
       include: {
@@ -153,7 +174,7 @@ export class JobsService {
       throw new ForbiddenException("You don't have access to this job");
     }
 
-    return {
+    const result = {
       id: job.id,
       name: job.name,
       type: job.type,
@@ -172,6 +193,14 @@ export class JobsService {
       createdAt: job.createdAt,
       updatedAt: job.updatedAt,
     };
+
+    await this.cache.set(
+      cacheKey,
+      JSON.stringify({ ...result, _userId: userId }),
+      60,
+    );
+
+    return result;
   }
 
   async update(id: string, dto: UpdateJobDto, userId: string) {
@@ -207,6 +236,8 @@ export class JobsService {
     }
 
     await this.cache.del(`stats:${userId}`);
+    await this.cache.del(`job:${id}`);
+    await this.cache.delByPattern(`jobs:list:${userId}:*`);
 
     return { id: updated.id, name: updated.name, status: updated.status };
   }
@@ -221,6 +252,8 @@ export class JobsService {
       await this.schedulerService.removeRepeatableJob(id);
     }
     await this.cache.del(`stats:${userId}`);
+    await this.cache.del(`job:${id}`);
+    await this.cache.delByPattern(`jobs:list:${userId}:*`);
     return { id: job.id, name: job.name, status: job.status };
   }
 
@@ -234,6 +267,8 @@ export class JobsService {
       await this.schedulerService.addRepeatableJob(id, jobData.schedule);
     }
     await this.cache.del(`stats:${userId}`);
+    await this.cache.del(`job:${id}`);
+    await this.cache.delByPattern(`jobs:list:${userId}:*`);
     return { id: job.id, name: job.name, status: job.status };
   }
 
@@ -247,6 +282,8 @@ export class JobsService {
       await this.schedulerService.removeRepeatableJob(id);
     }
     await this.cache.del(`stats:${userId}`);
+    await this.cache.del(`job:${id}`);
+    await this.cache.delByPattern(`jobs:list:${userId}:*`);
     return { id: job.id, name: job.name, status: job.status };
   }
 

@@ -5,12 +5,16 @@ import {
   ConflictException,
 } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { CacheService } from '../cache/cache.service';
 import { CreateWorkspaceDto } from './dto/create-workspace.dto';
 import { UpdateWorkspaceDto } from './dto/update-workspace.dto';
 
 @Injectable()
 export class WorkspacesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private cache: CacheService,
+  ) {}
 
   async create(dto: CreateWorkspaceDto, userId: string) {
     const existing = await this.prisma.space.findFirst({
@@ -27,10 +31,17 @@ export class WorkspacesService {
       data: { name: dto.name, userId },
     });
 
+    await this.cache.delByPattern(`workspaces:list:${userId}:*`);
+
     return { id: workspace.id, name: workspace.name };
   }
 
   async findAll(userId: string, page = 1, limit = 10) {
+    const cacheKey = `workspaces:list:${userId}:${page}`;
+
+    const cached = await this.cache.get(cacheKey);
+    if (cached) return JSON.parse(cached);
+
     const skip = (page - 1) * limit;
 
     const [items, total] = await Promise.all([
@@ -44,7 +55,7 @@ export class WorkspacesService {
       this.prisma.space.count({ where: { userId } }),
     ]);
 
-    return {
+    const result = {
       items: items.map((w) => ({
         id: w.id,
         name: w.name,
@@ -59,6 +70,10 @@ export class WorkspacesService {
         totalPages: Math.ceil(total / limit),
       },
     };
+
+    await this.cache.set(cacheKey, JSON.stringify(result), 60);
+
+    return result;
   }
 
   async findOne(id: string, userId: string) {
@@ -93,12 +108,17 @@ export class WorkspacesService {
       data: dto,
     });
 
+    await this.cache.delByPattern(`workspaces:list:${userId}:*`);
+
     return { id: workspace.id, name: workspace.name };
   }
 
   async delete(id: string, userId: string) {
     await this.checkOwnership(id, userId);
     await this.prisma.space.delete({ where: { id } });
+
+    await this.cache.delByPattern(`workspaces:list:${userId}:*`);
+
     return { id };
   }
 

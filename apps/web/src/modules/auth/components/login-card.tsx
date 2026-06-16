@@ -8,6 +8,8 @@ import { FcGoogle } from 'react-icons/fc';
 import { BiSolidSquare } from 'react-icons/bi';
 
 const authErrors: Record<string, string> = {
+  rate_limit:
+    'Too many sign-in attempts. Please wait a few minutes before trying again.',
   AccessDenied: 'Sign in was cancelled or access was denied.',
   Callback: 'OAuth callback could not be completed. Check provider settings.',
   OAuthAccountNotLinked:

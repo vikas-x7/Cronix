@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
+import { ThrottlerException } from '@nestjs/throttler';
 import { Request, Response } from 'express';
 
 @Catch()
@@ -13,6 +14,11 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
+
+    if (exception instanceof ThrottlerException) {
+      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+      return response.redirect(`${frontendUrl}/login?error=rate_limit`);
+    }
 
     let status = HttpStatus.INTERNAL_SERVER_ERROR;
     let message = 'Something went wrong';

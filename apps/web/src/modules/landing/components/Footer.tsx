@@ -2,83 +2,89 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
-import { FiArrowUpRight } from 'react-icons/fi';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-white text-black pt-12 sm:pt-16 md:pt-20 border-t border-black/15 mt-16 sm:mt-24 md:mt-30 overflow-hidden">
-      <div className="">
-        <div className="px-4 sm:px-6 md:px-7 mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12">
-            <Link
-              href="mailto:hey@cronix.com"
-              className="inline-flex text-[13px] sm:text-[14px] items-center ml-[-5] justify-center gap-2 bg-[#101010] text-white px-3 py-1 sm:py-1 rounded-[3px] font-medium hover:bg-gray-800 transition-colors w-fit"
-            >
-              hey@cronix.com <FiArrowUpRight size={14} />
-            </Link>
-
-            <div className="flex gap-4 text-black/60 sm:text-white/30">
-              <Link
-                href="#"
-                className="hover:text-black sm:hover:text-white transition-colors"
-              >
-                <FaXTwitter size={14} />
-              </Link>
-              <Link
-                href="#"
-                className="hover:text-black sm:hover:text-white transition-colors"
-              >
-                <FaLinkedinIn size={14} />
-              </Link>
+    <>
+      <footer className="w-full bg-white pt-10 lg:pt-20 overflow-hidden border-t border-black/5 px-5">
+        <div className="container mx-auto">
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-0">
+            <div className="relative mt-0 lg:mt-10 select-none">
+              <h1 className="text-[25vw] leading-none font-semibold tracking-tighter text-black text-start md:text-[20vw] lg:text-[5vw]">
+                Cronix
+              </h1>
+              <div className="absolute inset-0 bg-linear-to-t from-white/30 to-transparent pointer-events-none" />
             </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8 mb-12">
-            <div className="flex items-center gap-3">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg"
-                alt="Flag of India"
-                className="w-8 sm:w-10"
-              />
-              <div className="text-[4px] sm:text-[10px] text-black">
-                <p>Based In The Beautiful</p>
-                <p>India & Online Worldwide</p>
+            <div className="space-y-6 w-full lg:w-auto">
+              <div className="flex flex-wrap tracking-[-0.75px] items-center gap-x-6 gap-y-3 py-6 lg:py-8 border-t border-gray-100">
+                <Link
+                  href="#"
+                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
+                >
+                  Features
+                </Link>
+                <Link
+                  href="#"
+                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
+                >
+                  Documentation
+                </Link>
+                <Link
+                  href="#"
+                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
+                >
+                  API Reference
+                </Link>
+                <Link
+                  href="#"
+                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
+                >
+                  Changelog
+                </Link>
+                <Link
+                  href="#"
+                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
+                >
+                  Status
+                </Link>
               </div>
             </div>
+          </div>
 
-            <div className="flex flex-row sm:flex-col items-start sm:items-end gap-6 sm:gap-3 text-sm text-black font-medium">
-              <Link href="#" className="hover:text-black/50 transition-colors">
-                Home
+          <div className="flex flex-col md:flex-row justify-between items-center py-8 lg:py-10 gap-3 lg:gap-4">
+            <p className="text-[10px] sm:text-xs text-black/60">
+              © {currentYear} Cronix. All rights reserved.
+            </p>
+            <div className="flex gap-4 sm:gap-6">
+              <Link
+                href="#"
+                className="text-[10px] sm:text-xs text-black/60 hover:text-black transition-colors"
+              >
+                Terms of Service
               </Link>
-              <Link href="#" className="hover:text-black/50 transition-colors">
-                Get start
-              </Link>
-              <Link href="#" className="hover:text-black/50 transition-colors">
-                Working
+              <Link
+                href="#"
+                className="text-[10px] sm:text-xs text-black/60 hover:text-black transition-colors"
+              >
+                Privacy Policy
               </Link>
             </div>
           </div>
         </div>
+      </footer>
 
-        <div>
-          <div className="px-4 sm:px-6 md:px-8">
-            <p className="text-sm text-black mb-2 tracking-[-0.75px] leading-none">
-              As we believe at Cronix,
-            </p>
-            <h2 className="text-xl md:text-2xl font-medium mb-8 sm:mb-10 tracking-[-1px]">
-              Anything less than seamless automation is a compromise.
-            </h2>
-          </div>
-
-          <h1 className="text-[16vw] sm:text-[18vw] md:text-[20vw] text-[#010101] font-extrabold overflow-hidden tracking-tight sm:tracking-[-20px] md:tracking-[-30px] ml-[-4px] sm:ml-[-10px] leading-[0.8] sm:leading-[200px] md:leading-[250px] whitespace-nowrap select-none">
-            Cronixxxxxxxxxxxxxxxxxxxxxxxx
-          </h1>
-        </div>
+      <div className="relative flex justify-center items-center w-full">
+        {/* Top to bottom white gradient overlay */}
+        <div className="absolute z-222 inset-0 bg-gradient-to-b from-white via-white/5 to-transparent pointer-events-none w-full h-full"></div>
+        <img
+          src="https://i.pinimg.com/originals/73/e9/91/73e991010ec134fbd0ab475172bd13f6.gif"
+          alt=""
+          className="w-full h-[70vh] object-cover  object-top grayscale"
+        />
       </div>
-    </footer>
+    </>
   );
 };
 

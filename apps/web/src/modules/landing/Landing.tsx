@@ -21,10 +21,12 @@ export default function Landing() {
       <Hero />
       <Feature />
       <MovingHeading />
+
       <TrafficChart />
-      <Integration />
-      <KnowCronix />
       <Getstart />
+
+      <KnowCronix />
+      <Integration />
       <FAQ />
       <Footer />
     </>

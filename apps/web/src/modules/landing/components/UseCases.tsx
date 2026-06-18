@@ -18,6 +18,7 @@ const UseCases = () => {
           className="rounded-[5px] w-full shadow-3xl"
           width={900}
           height={900}
+          preload
         />
       </div>
     </section>

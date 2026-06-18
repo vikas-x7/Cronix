@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const KnowCronix = () => {
   return (
-    <div className="relative text-[#EBEBEB] bg-[#1C1A16] font-sans antialiased flex flex-col lg:flex-row min-h-screen lg:h-screen  overflow-hidden mt-40">
+    <div className="relative text-[#EBEBEB] bg-[#070707] font-sans antialiased flex flex-col lg:flex-row min-h-screen lg:h-screen  overflow-hidden mt-40">
       <div className=" text-white flex-1 flex flex-col justify-between py-10 lg:py-0 z-10 px-6">
         <div>
           <div className="text-[12px] uppercase leading-tight font-mono mt-0 lg:mt-10 mb-20">

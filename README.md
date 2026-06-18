@@ -6,10 +6,14 @@
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs)](https://nextjs.org)
 [![NestJS](https://img.shields.io/badge/NestJS-11-E0234E?logo=nestjs&logoColor=white)](https://nestjs.com)
-[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![Prisma](https://img.shields.io/badge/Prisma-7-2D3748?logo=prisma)](https://www.prisma.io)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Redis](https://img.shields.io/badge/Redis-7-FF4438?logo=redis&logoColor=white)](https://redis.io)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org)
+[![BullMQ](https://img.shields.io/badge/BullMQ-5-FE7A16?logo=bullmq&logoColor=white)](https://docs.bullmq.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#license)
 
 </div>
@@ -20,20 +24,19 @@
 
 **Cronix** is a self-hosted automation platform for scheduling and monitoring HTTP requests via cron jobs or webhook triggers. Built as a Turborepo monorepo with a Next.js frontend and NestJS backend, it provides a clean dashboard to manage workspaces, configure jobs, track execution history, and receive failure notifications via email.
 
-Designed for **developers and DevOps** who need a lightweight, self-hostable alternative to services like cron-job.org or EasyCron — with full control over their data and infrastructure.
+Designed for **developers and DevOps** who need a lightweight, self-hostable services .
 
 ## Features
 
 - **Cron-based scheduling** with validated cron expressions and quick presets (minute, hourly, daily, weekly, monthly).
 - **Webhook-triggered jobs** with unique tokens and URLs for on-demand execution.
-- **Workspace organization** — group jobs into workspaces with per-user ownership isolation.
+- **Workspace organization** - group jobs into workspaces with per-user ownership isolation.
 - **Execution tracking** with detailed logs, HTTP status codes, duration, retry attempts, and trigger types.
-- **Dashboard & analytics** — total/active/paused job counts, 24-hour success rate, upcoming jobs, and recent executions.
+- **Dashboard & analytics** - total/active/paused job counts, 24-hour success rate, upcoming jobs, and recent executions.
 - **Email notifications** on job failure via Resend, configurable per job.
-- **OAuth authentication** — login with Google or GitHub (JWT access + refresh tokens in httpOnly cookies).
-- **Rate limiting & security** — Helmet.js headers, CORS, Redis-backed rate limiting, input validation.
-- **Automatic cleanup** — nightly purge of old logs (7 days) and executions (30 days).
-- **Dark-themed UI** with responsive sidebar, animated transitions, and toast notifications.
+- **OAuth authentication** - login with Google or GitHub (JWT access + refresh tokens in httpOnly cookies).
+- **Rate limiting & security** - Helmet.js headers, CORS, Redis-backed rate limiting, input validation.
+- **Automatic cleanup** - nightly purge of old logs (7 days) and executions (30 days).
 
 ## Tech Stack
 
@@ -58,21 +61,24 @@ Designed for **developers and DevOps** who need a lightweight, self-hostable alt
 
 ### Backend (`apps/server`)
 
-| Layer          | Technology                                                                 |
-| -------------- | -------------------------------------------------------------------------- |
-| Framework      | [NestJS 11](https://nestjs.com) (Express)                                  |
-| ORM            | [Prisma 7](https://www.prisma.io) (PostgreSQL driver adapter)              |
-| Queue          | [BullMQ](https://docs.bullmq.io) (Redis-backed)                            |
-| Authentication | [Passport.js](http://www.passportjs.org) (JWT, Google OAuth, GitHub OAuth) |
-| Email          | [Resend](https://resend.com)                                               |
-| Security       | [Helmet](https://helmetjs.github.io) · Redis-backed rate limiting          |
+| Layer              | Technology                                                                                                |
+| ------------------ | --------------------------------------------------------------------------------------------------------- |
+| Framework          | [NestJS 11](https://nestjs.com) (Express)                                                                 |
+| ORM                | [Prisma 7](https://www.prisma.io) (PostgreSQL)                                                            |
+| Queue / Jobs       | [BullMQ 5](https://docs.bullmq.io) (Redis-backed)                                                         |
+| Cache / Rate Limit | [Redis 7](https://redis.io) via [ioredis](https://github.com/redis/ioredis)                               |
+| Authentication     | [Passport.js](http://www.passportjs.org) (JWT, Google OAuth, GitHub OAuth)                                |
+| Email              | [Resend](https://resend.com)                                                                              |
+| Security           | [Helmet](https://helmetjs.github.io) · [NestJS Throttler](https://docs.nestjs.com/security/rate-limiting) |
 
-### Database
+### Database & Queue
 
-| Layer    | Technology                               |
-| -------- | ---------------------------------------- |
-| Database | [PostgreSQL](https://www.postgresql.org) |
-| ORM      | [Prisma 7](https://www.prisma.io)        |
+| Layer     | Technology                                                        |
+| --------- | ----------------------------------------------------------------- |
+| Database  | [PostgreSQL 16](https://www.postgresql.org)                       |
+| ORM       | [Prisma 7](https://www.prisma.io)                                 |
+| Queue     | [BullMQ 5](https://docs.bullmq.io) on [Redis 7](https://redis.io) |
+| In-Memory | [Redis 7](https://redis.io) (rate limiting, session cache)        |
 
 ## Getting Started
 
@@ -114,27 +120,45 @@ The frontend runs on [http://localhost:3000](http://localhost:3000) and the API 
 
 #### Server (`apps/server/.env`)
 
-| Variable               | Required | Description                              |
-| ---------------------- | -------- | ---------------------------------------- |
-| `NODE_ENV`             | No       | `development`, `production`, or `test`   |
-| `PORT`                 | No       | Server port (default: `3001`)            |
-| `ALLOWED_ORIGINS`      | **Yes**  | Comma-separated CORS origins             |
-| `JWT_SECRET`           | **Yes**  | Min 32 chars, used for JWT signing       |
-| `GOOGLE_CLIENT_ID`     | **Yes**  | Google OAuth client ID                   |
-| `GOOGLE_CLIENT_SECRET` | **Yes**  | Google OAuth client secret               |
-| `GITHUB_CLIENT_ID`     | **Yes**  | GitHub OAuth client ID                   |
-| `GITHUB_CLIENT_SECRET` | **Yes**  | GitHub OAuth client secret               |
-| `UPSTASH_REDIS_HOST`   | **Yes**  | Redis host (Upstash)                     |
-| `UPSTASH_REDIS_TOKEN`  | **Yes**  | Redis password/token                     |
-| `RESEND_API_KEY`       | No       | Resend API key for failure notifications |
+| Variable                 | Required | Description                                                   |
+| ------------------------ | -------- | ------------------------------------------------------------- |
+| `NODE_ENV`               | No       | `development`, `production`, or `test`                        |
+| `PORT`                   | No       | Server port (default: `3001`)                                 |
+| `ALLOWED_ORIGINS`        | **Yes**  | Comma-separated CORS origins                                  |
+| `FRONTEND_URL`           | No       | Frontend URL for redirects (default: `http://localhost:3000`) |
+| `JWT_SECRET`             | **Yes**  | Min 32 chars, JWT signing key                                 |
+| `JWT_EXPIRES_IN`         | No       | Access token expiry (default: `15m`)                          |
+| `REFRESH_TOKEN_SECRET`   | **Yes**  | Min 32 chars, refresh token signing key                       |
+| `JWT_REFRESH_EXPIRES_IN` | No       | Refresh token expiry (default: `7d`)                          |
+| `GOOGLE_CLIENT_ID`       | **Yes**  | Google OAuth client ID                                        |
+| `GOOGLE_CLIENT_SECRET`   | **Yes**  | Google OAuth client secret                                    |
+| `GOOGLE_CALLBACK_URL`    | No       | Google OAuth callback (has default)                           |
+| `GITHUB_CLIENT_ID`       | **Yes**  | GitHub OAuth client ID                                        |
+| `GITHUB_CLIENT_SECRET`   | **Yes**  | GitHub OAuth client secret                                    |
+| `GITHUB_CALLBACK_URL`    | No       | GitHub OAuth callback (has default)                           |
+| `DATABASE_URL`           | **Yes**  | PostgreSQL connection string (Prisma)                         |
+| `REDIS_URL`              | No       | Full Redis URL (`redis://...` or `rediss://...`)              |
+| `REDIS_HOST`             | No       | Redis host (fallback if no `REDIS_URL`)                       |
+| `REDIS_PORT`             | No       | Redis port (fallback if no `REDIS_URL`)                       |
+| `UPSTASH_REDIS_HOST`     | No       | Upstash Redis host (alternative to above)                     |
+| `UPSTASH_REDIS_TOKEN`    | No       | Upstash Redis token                                           |
+| `RESEND_API_KEY`         | **Yes**  | Resend API key for failure notifications                      |
+| `FROM_EMAIL`             | No       | Sender email (default: `Cronix <onboarding@resend.dev>`)      |
 
 #### Database (`packages/database/.env`)
 
-| Variable            | Required | Description                          |
-| ------------------- | -------- | ------------------------------------ |
-| `DATABASE_URL`      | **Yes**  | PostgreSQL connection string         |
-| `DATABASE_POOL_MIN` | No       | Min pool connections (default: `0`)  |
-| `DATABASE_POOL_MAX` | No       | Max pool connections (default: `10`) |
+| Variable                           | Required | Description                                |
+| ---------------------------------- | -------- | ------------------------------------------ |
+| `DATABASE_URL`                     | **Yes**  | PostgreSQL connection string               |
+| `DATABASE_POOL_MIN`                | No       | Min pool connections (default: `0`)        |
+| `DATABASE_POOL_MAX`                | No       | Max pool connections (default: `10`)       |
+| `DATABASE_IDLE_TIMEOUT_MS`         | No       | Idle connection timeout (default: `30000`) |
+| `DATABASE_CONNECTION_TIMEOUT_MS`   | No       | Connection timeout (default: `10000`)      |
+| `DATABASE_STATEMENT_TIMEOUT_MS`    | No       | Statement timeout (default: `30000`)       |
+| `DATABASE_QUERY_TIMEOUT_MS`        | No       | Query timeout (default: `30000`)           |
+| `DATABASE_TRANSACTION_MAX_WAIT_MS` | No       | Max transaction wait (default: `5000`)     |
+| `DATABASE_TRANSACTION_TIMEOUT_MS`  | No       | Transaction timeout (default: `10000`)     |
+| `DATABASE_LOG_QUERIES`             | No       | Enable query logging (default: `false`)    |
 
 #### Frontend (`apps/web/.env`)
 
@@ -187,59 +211,6 @@ See [example.env](apps/server/example.env) and [.env.example](packages/database/
 | `pnpm db:studio`         | Open Prisma Studio GUI             |
 | `pnpm db:seed`           | Run seed script                    |
 
-## Project Structure
-
-```
-cronix/
-├── apps/
-│   ├── web/                              # Next.js 16 frontend
-│   │   ├── app/                          # App Router pages
-│   │   │   ├── (dashboard)/              # Protected dashboard routes
-│   │   │   │   ├── dashboard/            # Overview stats
-│   │   │   │   ├── jobs/                 # Job management
-│   │   │   │   ├── executions/           # Execution history
-│   │   │   │   ├── workspaces/           # Workspace management
-│   │   │   │   ├── webhooks/             # Webhook info
-│   │   │   │   └── settings/             # User settings
-│   │   │   ├── auth/callback/            # OAuth callback handler
-│   │   │   ├── login/                    # Login page
-│   │   │   └── page.tsx                  # Landing page
-│   │   └── src/
-│   │       ├── modules/                  # Feature modules
-│   │       │   ├── auth/                 # Auth store, hook, API
-│   │       │   ├── dashboard/            # Stats, recent executions
-│   │       │   ├── jobs/                 # Job table, form, actions
-│   │       │   ├── executions/           # Execution table, log viewer
-│   │       │   ├── workspaces/           # Workspace cards, modal
-│   │       │   └── landing/              # Landing page sections
-│   │       └── shared/                   # Shared components & utils
-│   │
-│   └── server/                           # NestJS 11 backend
-│       └── src/
-│           ├── auth/                     # JWT, Google, GitHub strategies
-│           ├── modules/
-│           │   ├── jobs/                 # CRUD, pause/resume, run now
-│           │   ├── executions/           # List, detail, logs
-│           │   ├── workspaces/           # CRUD with ownership
-│           │   ├── scheduler/            # Cron scheduling + cleanup
-│           │   ├── queue/                # BullMQ producer + processor
-│           │   ├── dashboard/            # Stats endpoint
-│           │   ├── notifications/        # Email via Resend
-│           │   └── webhooks/             # Webhook trigger endpoint
-│           ├── common/                   # Filters, interceptors
-│           └── config/                   # Env validation, security
-│
-├── packages/
-│   ├── database/                         # Shared Prisma package
-│   │   ├── prisma/schema.prisma          # Data model
-│   │   └── src/                          # Env validation, client
-│   ├── eslint-config/                    # Shared ESLint configs
-│   └── typescript-config/                # Shared TS configs
-│
-├── turbo.json                            # Turborepo pipeline
-└── package.json                          # Root scripts
-```
-
 ## Deployment
 
 The application is designed to be deployed as two separate services (frontend + backend) with a shared PostgreSQL and Redis instance.
@@ -249,17 +220,6 @@ The application is designed to be deployed as two separate services (frontend + 
 3. Configure all environment variables for production.
 4. Run `pnpm --filter database db:migrate:deploy` to apply migrations.
 5. Build and deploy the backend (`apps/server`) and frontend (`apps/web`) separately.
-
-### Database Models
-
-| Model       | Description                                   |
-| ----------- | --------------------------------------------- |
-| `User`      | User accounts with OAuth profile data         |
-| `Account`   | OAuth provider links (Google, GitHub)         |
-| `Space`     | Workspaces that contain jobs                  |
-| `Job`       | Scheduled (cron) or event (webhook) jobs      |
-| `Execution` | Job execution records with status and metrics |
-| `Log`       | Detailed log entries per execution            |
 
 ## Contributing
 

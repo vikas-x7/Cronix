@@ -89,8 +89,8 @@ const sections: DocSection[] = [
     id: 'updates',
     title: "What's New in Cronix",
     subSections: [
-      { id: 'upd-jul-25', title: 'July 2025' },
-      { id: 'upd-jun-25', title: 'June 2025' },
+      { id: 'upd-jul-25', title: 'July 2026' },
+      { id: 'upd-jun-25', title: 'June 2026' },
     ],
     content: (
       <div className="space-y-8">
@@ -109,7 +109,7 @@ const sections: DocSection[] = [
                 id="upd-jul-25"
                 className="text-[16px] font-semibold text-white"
               >
-                July 2025
+                July 2026
               </h3>
             </div>
             <ul className="space-y-2.5 text-[14px] text-neutral-300">
@@ -166,7 +166,7 @@ const sections: DocSection[] = [
                 id="upd-jun-25"
                 className="text-[16px] font-semibold text-white"
               >
-                June 2025
+                June 2026
               </h3>
             </div>
             <ul className="space-y-2.5 text-[14px] text-neutral-300">

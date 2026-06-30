@@ -6,7 +6,11 @@ import { PrismaService } from '../../../prisma/prisma.service';
 import { CacheService } from '../../cache/cache.service';
 import { NotificationsService } from '../../notifications/notifications.service';
 
-@Processor('job-execution')
+@Processor('job-execution', {
+  drainDelay: 60000,
+  stalledInterval: 300000,
+  maxStalledCount: 1,
+})
 export class JobProcessor extends WorkerHost {
   constructor(
     private prisma: PrismaService,

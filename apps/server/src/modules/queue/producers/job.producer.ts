@@ -26,8 +26,8 @@ export class JobProducer {
       {
         attempts: job.retryCount,
         backoff: { type: 'fixed', delay: job.retryDelay * 1000 },
-        removeOnComplete: false,
-        removeOnFail: false,
+        removeOnComplete: true,
+        removeOnFail: 100,
       },
     );
   }

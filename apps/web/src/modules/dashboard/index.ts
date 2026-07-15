@@ -1,5 +1,6 @@
 export { useDashboard } from './hooks/use-dashboard';
 export { default as StatsCard } from './components/stats-card';
+export { default as StatCard } from './components/stat-card';
 export { default as RecentExecutionsTable } from './components/recent-executions-table';
 export { default as UpcomingJobsList } from './components/upcoming-jobs-list';
 export { default as OverviewCharts } from './components/overview-charts';

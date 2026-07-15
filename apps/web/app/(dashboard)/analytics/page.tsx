@@ -10,7 +10,7 @@ import {
 import { IoAddSharp } from 'react-icons/io5';
 import { useDashboard } from '@/modules/dashboard';
 import { useJobs } from '@/modules/jobs';
-import StatCard from '@/shared/components/stat-card';
+import StatCard from '@/modules/dashboard/components/stat-card';
 import PageLoader from '@/shared/components/page-loader';
 
 export default function Analytics() {

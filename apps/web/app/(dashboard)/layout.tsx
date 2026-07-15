@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { BiSolidSquare } from 'react-icons/bi';
 import { TbDeviceLaptop } from 'react-icons/tb';
-import Sidebar from '@/shared/layout/sidebar';
+import Sidebar from '@/modules/dashboard/components/sidebar';
 import { useAuth } from '@/modules/auth';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {

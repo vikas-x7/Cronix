@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fi';
 import { IoAddSharp } from 'react-icons/io5';
 import { useDashboard } from '@/modules/dashboard';
-import StatCard from '@/shared/components/stat-card';
+import StatCard from '@/modules/dashboard/components/stat-card';
 import PageLoader from '@/shared/components/page-loader';
 import OverviewCharts from '@/modules/dashboard/components/overview-charts';
 

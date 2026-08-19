@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fi';
 import { useJob, useUpdateJob, useDeleteJob } from '@/modules/jobs';
 import { useExecutions } from '@/modules/executions';
-import { useUIStore } from '@/shared/stores/uiStore';
+import { useUIStore } from '@/store/uiStore';
 import StatusBadge from '@/shared/components/status-badge';
 import PageLoader from '@/shared/components/page-loader';
 import ConfirmationModal from '@/shared/components/confirmation-modal';

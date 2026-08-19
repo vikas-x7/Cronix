@@ -5,6 +5,7 @@ export {
 } from './hooks/use-executions';
 export { default as ExecutionTable } from './components/execution-table';
 export { default as ExecutionStatusBadge } from './components/execution-status-badge';
+export { default as ExecutionDetail } from './components/execution-detail';
 export { default as LogViewer } from './components/log-viewer';
 export type {
   Execution,

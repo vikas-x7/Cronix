@@ -9,7 +9,6 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 import { IoAddSharp } from 'react-icons/io5';
 import { useAuthStore, useLogout } from '@/modules/auth';
 import { useJobs } from '@/modules/jobs';
-import { useThemeStore } from '@/shared/stores/themeStore';
 
 export default function SettingsPage() {
   const user = useAuthStore((s) => s.user);
@@ -17,7 +16,6 @@ export default function SettingsPage() {
   const { data: jobs } = useJobs();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const { theme, toggleTheme } = useThemeStore();
   const jobsCreatedCount = jobs?.items?.length || 0;
 
   return (

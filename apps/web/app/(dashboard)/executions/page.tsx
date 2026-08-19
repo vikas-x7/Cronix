@@ -14,7 +14,7 @@ import { IoAddSharp } from 'react-icons/io5';
 import { useExecutions } from '@/modules/executions';
 import StatusBadge from '@/shared/components/status-badge';
 import PageLoader from '@/shared/components/page-loader';
-import ExecutionDetail from './execution-detail';
+import ExecutionDetail from '@/modules/executions/components/execution-detail';
 import { div } from 'framer-motion/client';
 
 export default function ExecutionsList() {

@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Inter } from 'next/font/google';
 import { GeistSans } from 'geist/font/sans';
-import QueryProvider from '@/shared/providers/query-provider';
-import ThemeProvider from '@/shared/providers/theme-provider';
+import QueryProvider from '@/lib/react-query/query-provider';
 import { ToastProvider } from '@/shared/lib/toast';
 import './globals.css';
 
@@ -31,11 +30,9 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${inter.variable} ${GeistSans.variable} antialiased`}
       >
-        <ThemeProvider>
-          <QueryProvider>
-            <ToastProvider>{children}</ToastProvider>
-          </QueryProvider>
-        </ThemeProvider>
+        <QueryProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </QueryProvider>
       </body>
     </html>
   );

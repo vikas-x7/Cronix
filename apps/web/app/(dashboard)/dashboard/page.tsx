@@ -12,7 +12,7 @@ import { IoAddSharp } from 'react-icons/io5';
 import { useDashboard } from '@/modules/dashboard';
 import StatCard from '@/shared/components/stat-card';
 import PageLoader from '@/shared/components/page-loader';
-import OverviewCharts from './overview-charts';
+import OverviewCharts from '@/modules/dashboard/components/overview-charts';
 
 export default function DashboardHome() {
   const { data: stats, isLoading, isFetching, error, refetch } = useDashboard();

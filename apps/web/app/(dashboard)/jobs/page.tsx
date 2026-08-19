@@ -17,8 +17,8 @@ import {
 } from 'react-icons/fi';
 import { useJobs, useDeleteJob, useUpdateJob } from '@/modules/jobs';
 import { useWorkspaces } from '@/modules/workspaces';
-import { useJobStore } from '@/shared/stores/jobStore';
-import { useUIStore } from '@/shared/stores/uiStore';
+import { useJobStore } from '@/store/jobStore';
+import { useUIStore } from '@/store/uiStore';
 import StatusBadge from '@/shared/components/status-badge';
 import PageLoader from '@/shared/components/page-loader';
 import ConfirmationModal from '@/shared/components/confirmation-modal';

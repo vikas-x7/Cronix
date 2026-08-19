@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useCreateJob } from '@/modules/jobs';
 import { storeExecution } from '@/modules/executions/api/executions.api';
 import { useWorkspaces } from '@/modules/workspaces';
-import { useUIStore } from '@/shared/stores/uiStore';
+import { useUIStore } from '@/store/uiStore';
 import CronExpressionInput from '@/shared/components/cron-expression-input';
 import { FiChevronDown } from 'react-icons/fi';
 

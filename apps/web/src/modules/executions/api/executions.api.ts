@@ -1,4 +1,4 @@
-import api from '@/shared/lib/axios';
+import api from '@/lib/api/axios';
 import { API_ROUTES } from '@/shared/config/constants';
 import type { Execution, ExecutionLog } from '../types/execution.types';
 

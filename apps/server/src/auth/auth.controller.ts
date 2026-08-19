@@ -68,7 +68,7 @@ export class AuthController {
     try {
       const tokens = await this.authService.login(req.user);
       this.setAuthCookies(res, tokens);
-      res.redirect(`${this.frontendUrl}/auth/callback?status=success`);
+      res.redirect(`${this.frontendUrl}/login?status=success`);
     } catch (error) {
       this.logger.error('Google OAuth callback failed', error);
       res.redirect(`${this.frontendUrl}/login?error=auth_failed`);
@@ -87,7 +87,7 @@ export class AuthController {
     try {
       const tokens = await this.authService.login(req.user);
       this.setAuthCookies(res, tokens);
-      res.redirect(`${this.frontendUrl}/auth/callback?status=success`);
+      res.redirect(`${this.frontendUrl}/login?status=success`);
     } catch (error) {
       this.logger.error('GitHub OAuth callback failed', error);
       res.redirect(`${this.frontendUrl}/login?error=auth_failed`);

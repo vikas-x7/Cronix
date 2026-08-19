@@ -6,51 +6,26 @@ import { HiOutlineX } from 'react-icons/hi';
 import { MdArrowForward } from 'react-icons/md';
 import { LiaGripLinesSolid } from 'react-icons/lia';
 import { BiSolidSquare } from 'react-icons/bi';
+import { FiGithub } from 'react-icons/fi';
 
 const NAV_LINKS = [
-  { name: 'Works', id: 'works' },
-  { name: 'About', id: 'about' },
-  { name: 'Labs', id: 'labs' },
-  { name: 'Contact', id: 'contact' },
+  { name: 'Features', id: 'features' },
+  { name: 'FAQ', id: 'faq' },
+  { name: 'Docs', href: '/dashboard' },
+  {
+    name: 'GitHub',
+    href: 'https://github.com/vikas-x7/cronix',
+    external: true,
+  },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isOverFooter, setIsOverFooter] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > window.innerHeight - 50);
-      const footer = document.getElementById('footer');
-      if (!footer) return setIsOverFooter(false);
-
-      const footerBounds = footer.getBoundingClientRect();
-      setIsOverFooter(footerBounds.top <= 72 && footerBounds.bottom > 0);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleSmoothScroll = (id: string) => {
     setIsOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  const NavItem = ({
-    name,
-    id,
-    className,
-  }: {
-    name: string;
-    id: string;
-    className?: string;
-  }) => (
-    <button onClick={() => handleSmoothScroll(id)} className={className}>
-      {name}
-    </button>
-  );
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-5 ">
@@ -68,13 +43,31 @@ const Navbar = () => {
               <BiSolidSquare size={25} className="text-[#DF5BCC]" />
               <h1 className="text-[19px] font-bold tracking-[-1px]">Cronix.</h1>
             </Link>
-            {NAV_LINKS.map((link) => (
-              <NavItem
-                key={link.id}
-                {...link}
-                className="text-[14px] hover:opacity-70 font-medium mt-1 transition-opacity tracking-[-0.75px]"
-              />
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.href ? (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  {...('external' in link && link.external
+                    ? { target: '_blank', rel: 'noopener noreferrer' }
+                    : {})}
+                  className="text-[14px] hover:opacity-70 font-medium mt-1 transition-opacity tracking-[-0.75px] flex items-center gap-1"
+                >
+                  {'external' in link && link.external ? (
+                    <FiGithub size={14} />
+                  ) : null}
+                  {link.name}
+                </Link>
+              ) : (
+                <button
+                  key={link.name}
+                  onClick={() => handleSmoothScroll(link.id!)}
+                  className="text-[14px] hover:opacity-70 font-medium mt-1 transition-opacity tracking-[-0.75px] cursor-pointer"
+                >
+                  {link.name}
+                </button>
+              ),
+            )}
           </div>
 
           <div className="flex lg:hidden items-center gap-2  px-3 py-1.5 rounded-[3px] bg-[#f7f7f7]">
@@ -106,26 +99,36 @@ const Navbar = () => {
               }`}
             >
               <div className="flex flex-col gap-2 mb-6">
-                {NAV_LINKS.map((link) => (
-                  <button
-                    key={link.id}
-                    onClick={() => handleSmoothScroll(link.id)}
-                    className="text-[22px] sm:text-[25px] font-light tracking-[-1px] text-left text-white/80 hover:text-white transition-colors"
-                  >
-                    {link.name}
-                  </button>
-                ))}
+                {NAV_LINKS.map((link) =>
+                  link.href ? (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      {...('external' in link && link.external
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
+                      onClick={() => setIsOpen(false)}
+                      className="text-[22px] sm:text-[25px] font-light tracking-[-1px] text-left text-white/80 hover:text-white transition-colors flex items-center gap-2"
+                    >
+                      {'external' in link && link.external ? (
+                        <FiGithub size={20} />
+                      ) : null}
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <button
+                      key={link.name}
+                      onClick={() => handleSmoothScroll(link.id!)}
+                      className="text-[22px] sm:text-[25px] font-light tracking-[-1px] text-left text-white/80 hover:text-white transition-colors"
+                    >
+                      {link.name}
+                    </button>
+                  ),
+                )}
               </div>
 
               <div className="border-t border-white/10 pt-4 flex flex-col sm:flex-row justify-between gap-4 text-[14px] sm:text-[15px] text-white">
-                <div className="flex gap-4 font-light text-white/80">
-                  <Link href="#" className="hover:text-white transition-colors">
-                    LinkedIn
-                  </Link>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    Twitter
-                  </Link>
-                </div>
+                <div className="flex gap-4 font-light text-white/80"></div>
                 <Link
                   href="#"
                   className="hover:text-white transition-colors font-light text-white/80"

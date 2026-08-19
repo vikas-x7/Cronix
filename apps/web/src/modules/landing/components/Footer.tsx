@@ -2,9 +2,14 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { FiGithub } from 'react-icons/fi';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const handleSmoothScroll = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -19,35 +24,32 @@ const Footer = () => {
             </div>
             <div className="space-y-6 w-full lg:w-auto">
               <div className="flex flex-wrap tracking-[-0.75px] items-center gap-x-6 gap-y-3 py-6 lg:py-8 border-t border-gray-100">
-                <Link
-                  href="#"
-                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
+                <button
+                  onClick={() => handleSmoothScroll('features')}
+                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors cursor-pointer"
                 >
                   Features
-                </Link>
+                </button>
                 <Link
-                  href="#"
+                  href="/dashboard"
                   className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
                 >
                   Documentation
                 </Link>
-                <Link
-                  href="#"
-                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
+                <button
+                  onClick={() => handleSmoothScroll('faq')}
+                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors cursor-pointer"
                 >
-                  API Reference
-                </Link>
+                  FAQ
+                </button>
                 <Link
-                  href="#"
-                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
+                  href="https://github.com/vikas-x7/cronix"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors flex items-center gap-1"
                 >
-                  Changelog
-                </Link>
-                <Link
-                  href="#"
-                  className="text-xs sm:text-sm font-medium hover:text-black transition-colors"
-                >
-                  Status
+                  <FiGithub size={14} />
+                  GitHub
                 </Link>
               </div>
             </div>
@@ -76,12 +78,11 @@ const Footer = () => {
       </footer>
 
       <div className="relative flex justify-center items-center w-full">
-        {/* Top to bottom white gradient overlay */}
-        <div className="absolute z-222 inset-0 bg-gradient-to-b from-white via-white/5 to-transparent pointer-events-none w-full h-full"></div>
+        {/* <div className="absolute z-10 inset-0 bg-gradient-to-b from-white via-white/10 to-transparent pointer-events-none w-full h-full"></div> */}
         <img
-          src="https://i.pinimg.com/originals/73/e9/91/73e991010ec134fbd0ab475172bd13f6.gif"
+          src="https://i.pinimg.com/1200x/29/e8/96/29e896a1be149f343c8016c8577ab85a.jpg"
           alt=""
-          className="w-full h-[70vh] object-cover  object-top grayscale"
+          className="w-full h object-cover object-top grayscale"
         />
       </div>
     </>

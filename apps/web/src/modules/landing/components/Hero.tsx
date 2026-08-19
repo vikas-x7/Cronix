@@ -31,7 +31,7 @@ const Hero = () => {
                 <div className="flex items-center   gap-1">
                   <Link
                     href="/login"
-                    className="text-[13px]  flex items-center px-4 py-1 gap-1 sm:text-[15px]  sm:tracking-[-0.5px] text-white bg-black rounded-[3px] font-medium"
+                    className="text-[13px]  flex items-center px-4 py-1.5 gap-1 sm:text-[15px]  sm:tracking-[-0.5px] text-white bg-black rounded-[3px] font-medium"
                   >
                     Get start with cronix
                     <TfiArrowTopRight size={15} className="mt-1" />

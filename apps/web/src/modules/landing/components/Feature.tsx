@@ -37,7 +37,7 @@ const CARDS_DATA = [
 
 export default function Feature() {
   return (
-    <section className="bg-transparent">
+    <section id="features" className="bg-transparent">
       <div className="grid grid-cols-1 border-t-0 border border-zinc-200 md:grid-cols-3">
         {CARDS_DATA.map((card, index) => (
           <div

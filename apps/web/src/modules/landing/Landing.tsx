@@ -15,12 +15,13 @@ export default function Landing() {
     <>
       <Navbar />
       <Hero />
+      <Integration />
       <Feature />
       <MovingHeading />
       <TrafficChart />
       <Getstart />
       <KnowCronix />
-      <Integration />
+
       <FAQ />
       <Footer />
     </>

@@ -14,7 +14,7 @@ const NAV_LINKS = [
   { name: 'Docs', href: '/dashboard' },
   {
     name: 'GitHub',
-    href: 'https://github.com/vikas-x7/cronix',
+    // href: 'https://github.com/vikas-x7/cronix',
     external: true,
   },
 ];

@@ -20,6 +20,14 @@
 
 ---
 
+<div align="center">
+
+![Dashboard Preview 2](apps/web/public/image/dashboard-preview-2.png)
+
+</div>
+
+---
+
 ## About the Project
 
 **Cronix** is a self-hosted automation platform for scheduling and monitoring HTTP requests via cron jobs or webhook triggers. Built as a Turborepo monorepo with a Next.js frontend and NestJS backend, it provides a clean dashboard to manage workspaces, configure jobs, track execution history, and receive failure notifications via email.
@@ -239,6 +247,10 @@ Distributed under the **MIT** license. See `LICENSE` for more information.
 
 <div align="center">
 
-_"Cronix" is not affiliated with any third-party cron service. Built with ❤️ using Next.js, NestJS, and Prisma._
+"Cronix" is not affiliated with any third-party cron service.
 
 </div>
+
+<p align="center">
+  <img src="https://i.pinimg.com/1200x/29/e8/96/29e896a1be149f343c8016c8577ab85a.jpg" alt="Cronix Footer" width="100%" style="filter: grayscale(100%);" />
+</p>

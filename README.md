@@ -251,5 +251,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 </div>
 
 <p align="center">
-  <img src="https://i.pinimg.com/originals/e6/00/d1/e600d1f3745b0283bf5ce564fc24b076.gif" alt="Cronix Footer" width="100%" />
+  <img src="https://i.pinimg.com/1200x/4a/b7/6c/4ab76cb16f30a434c423074eec0929c8.jpg" alt="Cronix Footer" width="100%" />
 </p>

@@ -230,26 +230,26 @@ The application is designed to be deployed as two separate services (frontend + 
 
 ## Contributing
 
-Contributions are welcome! Please follow the existing code conventions and commit style (conventional commits via commitlint).
+We welcome contributions! Please see our [Contributing Guide](.github/CONTRIBUTING.md) for details.
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feat/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feat/amazing-feature`)
-5. Open a Pull Request
+## Code of Conduct
+
+This project follows the [Contributor Covenant Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+
+## Security
+
+Please see our [Security Policy](.github/SECURITY.md) for reporting vulnerabilities.
 
 ## License
 
-Distributed under the **MIT** license. See `LICENSE` for more information.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 <div align="center">
 
-"Cronix" is not affiliated with any third-party cron service.
-
 </div>
 
 <p align="center">
-  <img src="https://i.pinimg.com/1200x/29/e8/96/29e896a1be149f343c8016c8577ab85a.jpg" alt="Cronix Footer" width="100%" style="filter: grayscale(100%);" />
+  <img src="https://i.pinimg.com/originals/e6/00/d1/e600d1f3745b0283bf5ce564fc24b076.gif" alt="Cronix Footer" width="100%" />
 </p>

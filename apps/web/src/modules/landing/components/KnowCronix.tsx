@@ -30,7 +30,10 @@ const KnowCronix = () => {
             </p>
           </div>
 
-          <button className="mt-8 sm:mt-10 lg:mt-[60px] bg-[#ffffff] px-5 py-2.5 text-black rounded-[3px] tracking-[-0.75px] font-medium hover:bg-white/90 transition-colors relative z-30">
+          <button
+            onClick={() => (window.location.href = '/dashboard')}
+            className="mt-8 sm:mt-10 lg:mt-[60px] bg-[#ffffff] px-5 py-2.5 text-black rounded-[3px] tracking-[-0.75px] font-medium hover:bg-white/90 transition-colors relative z-30 cursor-pointer"
+          >
             Getstart now{' '}
           </button>
         </div>

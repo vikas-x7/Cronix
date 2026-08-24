@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { HiOutlineX } from 'react-icons/hi';
 import { MdArrowForward } from 'react-icons/md';
@@ -10,13 +10,16 @@ import { FiGithub } from 'react-icons/fi';
 
 const NAV_LINKS = [
   { name: 'Features', id: 'features' },
-  { name: 'FAQ', id: 'faq' },
+
   { name: 'Docs', href: '/dashboard' },
   {
     name: 'GitHub',
-    // href: 'https://github.com/vikas-x7/cronix',
+    href: 'https://github.com/vikas-x7/cronix',
     external: true,
   },
+
+  { name: 'Get start', href: '/dashboard' },
+  { name: 'FAQ', id: 'faq' },
 ];
 
 const Navbar = () => {
@@ -29,16 +32,18 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-5 ">
-      <div className="bg-[#F0F0F0] rounded-[2px] text-black w-full h-8 text-center flex items-center justify-center overflow-hidden px-4 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        <p className="tracking-[-0.5px] sm:tracking-[-1px] flex items-center gap-2 font-medium text-xs sm:text-sm whitespace-nowrap">
-          <span className="text-[#DF5BCC]">Cronix.</span>version v2 is live now{' '}
-          <MdArrowForward />
-        </p>
-      </div>
+      <Link href="/dashboard" className="block">
+        <div className="bg-[#F0F0F0] rounded-[2px] text-black w-full h-8 text-center flex items-center justify-center overflow-hidden px-4 [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] cursor-pointer hover:bg-[#e5e5e5] transition-colors">
+          <p className="tracking-[-0.5px] sm:tracking-[-1px] flex items-center gap-2 font-medium text-xs sm:text-sm whitespace-nowrap">
+            <span className="text-[#DF5BCC]">Cronix.</span>version v2 is live
+            now <MdArrowForward />
+          </p>
+        </div>
+      </Link>
 
       <div className="container mx-auto">
         <div className="flex h-12  items-center justify-between">
-          <div className="hidden lg:flex items-center gap-5 px-3 py-2 rounded-[3px] transition-colors duration-300 bg-[#f7f7f7]">
+          <div className="flex items-center gap-5 px-3 py-2 rounded-[3px] transition-colors duration-300 bg-[#f7f7f7]">
             <Link href="/" className="flex items-center">
               <BiSolidSquare size={25} className="text-[#DF5BCC]" />
               <h1 className="text-[19px] font-bold tracking-[-1px]">Cronix.</h1>
@@ -53,9 +58,6 @@ const Navbar = () => {
                     : {})}
                   className="text-[14px] hover:opacity-70 font-medium mt-1 transition-opacity tracking-[-0.75px] flex items-center gap-1"
                 >
-                  {'external' in link && link.external ? (
-                    <FiGithub size={14} />
-                  ) : null}
                   {link.name}
                 </Link>
               ) : (
@@ -127,15 +129,7 @@ const Navbar = () => {
                 )}
               </div>
 
-              <div className="border-t border-white/10 pt-4 flex flex-col sm:flex-row justify-between gap-4 text-[14px] sm:text-[15px] text-white">
-                <div className="flex gap-4 font-light text-white/80"></div>
-                <Link
-                  href="#"
-                  className="hover:text-white transition-colors font-light text-white/80"
-                >
-                  Privacy policy
-                </Link>
-              </div>
+              <div className="border-t border-white/10 pt-4"></div>
             </div>
           </div>
         </div>

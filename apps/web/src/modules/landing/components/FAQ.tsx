@@ -53,11 +53,8 @@ export default function FAQ() {
 
           <p className="mt-65 tracking-[-0.75px]">
             Everything you need to know about scheduling, monitoring, and
-            scaling your automated tasks with Cronix. Can't find an answer?
+            scaling your automated tasks with Cronix.
           </p>
-          <button className="bg-black px-4 py-2 text-white mt-3">
-            Send query
-          </button>
         </div>
 
         <div className="relative rounded-[5px] overflow-hidden  w-full mt-8 lg:mt-0">

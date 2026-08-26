@@ -35,6 +35,135 @@ const marqueeItemsData = [
     name: 'Self-hosted and fully open source ',
     src: 'https://thesvg.org/icons/gemini/default.svg',
   },
+
+  {
+    name: 'Schedule HTTP requests with cron expressions  ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Trigger jobs instantly via webhook URLs ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Track every execution with detailed logs ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Organize jobs into workspaces ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Automatic retries with configurable delays ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Email alerts on job failure ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Dashboard with real-time stats and analytics ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Self-hosted and fully open source ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Schedule HTTP requests with cron expressions  ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Trigger jobs instantly via webhook URLs ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Track every execution with detailed logs ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Organize jobs into workspaces ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Automatic retries with configurable delays ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Email alerts on job failure ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Dashboard with real-time stats and analytics ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Self-hosted and fully open source ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Schedule HTTP requests with cron expressions  ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Trigger jobs instantly via webhook URLs ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Track every execution with detailed logs ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Organize jobs into workspaces ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Automatic retries with configurable delays ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Email alerts on job failure ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Dashboard with real-time stats and analytics ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Self-hosted and fully open source ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Schedule HTTP requests with cron expressions  ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Trigger jobs instantly via webhook URLs ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Track every execution with detailed logs ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Organize jobs into workspaces ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Automatic retries with configurable delays ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Email alerts on job failure ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Dashboard with real-time stats and analytics ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
+  {
+    name: 'Self-hosted and fully open source ',
+    src: 'https://thesvg.org/icons/gemini/default.svg',
+  },
 ];
 
 export default function MovingHeading() {

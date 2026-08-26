@@ -48,15 +48,15 @@ export default function TrafficChart() {
         </div> */}
 
         <div className="relative z-10">
-          <div className="w-full sm:w-5xl bg-white">
-            <h2 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[-1.5px] font-medium md:tracking-[-3.5px] text-black  bg-white">
+          <div className="w-full  bg-white flex flex-col items-end justify-center text-end">
+            <h2 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[-1.5px] font-medium md:tracking-[-3.5px] text-black">
               Stay in sync with your traffic in <br /> real time every request
               is
             </h2>
             <p className="mt-5 tracking-[-0.75px]">
               Track every HTTP request, monitor job durations, and debug
-              failures instantly. Cronix gives you full visibility into your
-              scheduled tasks and
+              failures instantly. <br /> Cronix gives you full visibility into
+              your scheduled tasks and
             </p>
           </div>
 

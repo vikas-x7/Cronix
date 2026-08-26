@@ -20,7 +20,7 @@ const styles = `
 
 export default function Getstart() {
   return (
-    <div className="relative min-h-screen mt-40 overflow-hidden bg-white text-black font-cabin">
+    <div className="relative  h-[70vh] mt-40 overflow-hidden bg-white text-black font-cabin">
       <style>{styles}</style>
       <div className="absolute inset-0 z-10 flex flex-col  items-center justify-center px-4 text-center">
         <div className="relative inline-block p-2 sm:p-3 md:p-4">

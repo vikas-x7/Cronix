@@ -14,7 +14,7 @@ const Footer = () => {
   return (
     <>
       <footer className="w-full bg-white pt-10 lg:pt-20 overflow-hidden border-t border-black/5 px-5">
-        <div className="container mx-auto">
+        <div className="w-full">
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-0">
             <div className="relative mt-0 lg:mt-10 select-none">
               <h1 className="text-[25vw] leading-none font-semibold tracking-tighter text-black text-start md:text-[20vw] lg:text-[5vw]">
@@ -80,9 +80,9 @@ const Footer = () => {
       <div className="relative flex justify-center items-center w-full">
         {/* <div className="absolute z-10 inset-0 bg-gradient-to-b from-white via-white/10 to-transparent pointer-events-none w-full h-full"></div> */}
         <img
-          src="https://i.pinimg.com/1200x/29/e8/96/29e896a1be149f343c8016c8577ab85a.jpg"
+          src="https://i.pinimg.com/originals/e0/7d/42/e07d42fb8a190a63ea353096ccae059c.gif"
           alt=""
-          className="w-full h object-cover object-top grayscale"
+          className="w-50 h object-cover object-top "
         />
       </div>
     </>

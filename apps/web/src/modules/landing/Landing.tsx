@@ -13,17 +13,18 @@ import Getstart from '@/modules/landing/components/Getstart';
 export default function Landing() {
   return (
     <>
-      <Navbar />
-      <Hero />
-      <Integration />
-      <Feature />
-      <MovingHeading />
-      <TrafficChart />
-      <Getstart />
-      <KnowCronix />
-
-      <FAQ />
-      <Footer />
+      <div>
+        <Navbar />
+        <Hero />
+        <Integration />
+        <Feature />
+        <MovingHeading />
+        <TrafficChart />
+        <Getstart />
+        <KnowCronix />
+        <FAQ />
+        <Footer />
+      </div>
     </>
   );
 }
